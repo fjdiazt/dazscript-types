@@ -1,0 +1,56 @@
+declare class DzComboEdit extends DzWidget {
+    addItem(p0: string): any;
+    addItem(p0: string, p1: boolean): any;
+    addItems(p0: string[]): any;
+    addItems(p0: string[], p1: boolean): any;
+    backspace(): any;
+    clear(): any;
+    clearText(): any;
+    copy(): any;
+    cursorBackward(): any;
+    cursorBackward(p0: boolean): any;
+    cursorBackward(p0: boolean, p1: number): any;
+    cursorForward(): any;
+    cursorForward(p0: boolean): any;
+    cursorForward(p0: boolean, p1: number): any;
+    cursorWordBackward(): any;
+    cursorWordBackward(p0: boolean): any;
+    cursorWordForward(): any;
+    cursorWordForward(p0: boolean): any;
+    cut(): any;
+    del(): any;
+    deselect(): any;
+    end(): any;
+    end(p0: boolean): any;
+    findItem(p0: string): any;
+    getValidatorSettings(): any;
+    hasSelectedText(): any;
+    home(): any;
+    home(p0: boolean): any;
+    insertItem(p0: number, p1: string): any;
+    insertItem(p0: number, p1: string, p2: boolean): any;
+    insertItems(p0: number, p1: string[]): any;
+    insertItems(p0: number, p1: string[], p2: boolean): any;
+    items(): any;
+    paste(): any;
+    redo(): any;
+    removeItem(p0: string): any;
+    selectAll(): any;
+    selectedText(): any;
+    selectionStart(): any;
+    setDoubleValidator(p0: number, p1: number, p2: number): any;
+    setDoubleValidator(p0: number, p1: number, p2: number, p3: boolean): any;
+    setIntValidator(p0: number, p1: number): any;
+    setRegExValidator(p0: string): any;
+    setRegExValidator(p0: string, p1: boolean): any;
+    setSelection(p0: number, p1: number): any;
+    setValidator(p0: DzSettings): any;
+    undo(): any;
+
+    // Signals
+    textEdited(p0: string): any;
+    itemChanged(p0: string): any;
+    textChanged(p0: string): any;
+    cursorPositionChanged(p0: number, p1: number): any;
+    selectionChanged(): any;
+}

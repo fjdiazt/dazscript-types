@@ -1,0 +1,1 @@
+declare enum ScriptFileMode { UseExtension, TextScriptFile, DAZScriptFile, EncDAZScriptFile }

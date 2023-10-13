@@ -1,0 +1,1 @@
+declare class DzUniversalRotateTool extends DzUniversalTool {}

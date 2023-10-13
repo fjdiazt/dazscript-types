@@ -1,0 +1,1 @@
+declare class DzStyledButton extends QPushButton { }

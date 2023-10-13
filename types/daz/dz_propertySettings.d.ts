@@ -1,0 +1,1 @@
+declare class DzPropertySettings extends DzSettings { }

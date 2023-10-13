@@ -1,0 +1,1 @@
+declare class DzCustomData extends DzBase { }

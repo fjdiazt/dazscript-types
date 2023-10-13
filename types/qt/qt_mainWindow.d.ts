@@ -1,0 +1,70 @@
+declare class QMainWindow extends QWidget {
+
+    /* Properties */
+
+    /* Methods */
+    constructor(parent: QWidget, name: string, flags: number);
+    //QMainWindow(parent: QWidget, name: string, flags: number): any_CONSTRUCTOR;
+    addDockWidget(area: number, dockwidget: QDockWidget): void;
+    addDockWidget(area: number, dockwidget: QDockWidget): void;
+    addDockWidget(area: number, dockwidget: QDockWidget): void;
+    addDockWidget(area: number, dockwidget: QDockWidget): void;
+    addToolBar(title: QString): QToolBar;
+    addToolBar(toolbar: QToolBar): void;
+    addToolBar(area: number, toolbar: QToolBar): void;
+    addToolBar(title: QString): QToolBar;
+    addToolBar(toolbar: QToolBar): void;
+    addToolBar(area: number, toolbar: QToolBar): void;
+    addToolBar(title: QString): QToolBar;
+    addToolBar(toolbar: QToolBar): void;
+    addToolBar(area: number, toolbar: QToolBar): void;
+    addToolBarBreak(area: number): void;
+    centralWidget(): QWidget;
+    contextMenuEvent(event: QContextMenuEvent): void;
+    corner(corner: number): number;
+    createPopupMenu(): QMenu;
+    dockOptions(): number;
+    dockWidgetArea(dockwidget: QDockWidget): number;
+    documentMode(): boolean;
+    event(event: QEvent): boolean;
+    iconSize(): QSize;
+    iconSizeChanged(iconSize: QSize): void;
+    insertToolBar(before: QToolBar, toolbar: QToolBar): void;
+    insertToolBarBreak(before: QToolBar): void;
+    isAnimated(): boolean;
+    isDockNestingEnabled(): boolean;
+    isSeparator(pos: QPoint): boolean;
+    menuBar(): QMenuBar;
+    menuWidget(): QWidget;
+    removeDockWidget(dockwidget: QDockWidget): void;
+    removeToolBar(toolbar: QToolBar): void;
+    removeToolBarBreak(before: QToolBar): void;
+    restoreDockWidget(dockwidget: QDockWidget): boolean;
+    restoreState(state: number[], version: number): boolean;
+    saveState(version: number): number[];
+    setAnimated(enabled: boolean): void;
+    setCentralWidget(widget: QWidget): void;
+    setCorner(corner: number, area: number): void;
+    setDockNestingEnabled(enabled: boolean): void;
+    setDockOptions(options: number): void;
+    setDocumentMode(enabled: boolean): void;
+    setIconSize(iconSize: QSize): void;
+    setMenuBar(menubar: QMenuBar): void;
+    setMenuWidget(menubar: QWidget): void;
+    setStatusBar(statusbar: QStatusBar): void;
+    setTabPosition(areas: number, tabPosition: number): void;
+    setTabShape(tabShape: number): void;
+    setToolButtonStyle(toolButtonStyle: number): void;
+    setUnifiedTitleAndToolBarOnMac(set: boolean): void;
+    splitDockWidget(after: QDockWidget, dockwidget: QDockWidget): void;
+    statusBar(): QStatusBar;
+    tabPosition(area: number): number;
+    tabShape(): number;
+    tabifiedDockWidgets(dockwidget: QDockWidget): QDockWidget[];
+    tabifyDockWidget(first: QDockWidget, second: QDockWidget): void;
+    toolBarArea(toolbar: QToolBar): number;
+    toolBarBreak(toolbar: QToolBar): boolean;
+    toolButtonStyle(): number;
+    toolButtonStyleChanged(toolButtonStyle: number): void;
+    unifiedTitleAndToolBarOnMac(): boolean;
+}

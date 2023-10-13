@@ -1,0 +1,1 @@
+declare class QT3_SUPPORT { }

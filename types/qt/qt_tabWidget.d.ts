@@ -1,0 +1,72 @@
+declare class QTabWidget extends QWidget {
+
+    /* Properties */
+
+    /* Methods */
+    constructor(parent: QWidget, name: string, f: number);
+    addTab(widget: QWidget, icon: QIcon, label: QString): number;
+    addTab(widget: QWidget, obj: QString): number;
+    addTab(widget: QWidget, icon: QIcon, label: QString): number;
+    addTab(widget: QWidget, obj: QString): number;
+    changeEvent(obj: QEvent): void;
+    clear(): void;
+    cornerWidget(corner: number): QWidget;
+    count(): number;
+    currentChanged(obj: QWidget): void;
+    currentChanged(index: number): void;
+    currentChanged(obj: QWidget): void;
+    currentChanged(index: number): void;
+    currentIndex(): number;
+    currentWidget(): QWidget;
+    documentMode(): boolean;
+    elideMode(): number;
+    event(obj: QEvent): boolean;
+    heightForWidth(width: number): number;
+    iconSize(): QSize;
+    indexOf(widget: QWidget): number;
+    initStyleOption(option: QStyleOptionTabWidgetFrame): void;
+    insertTab(index: number, widget: QWidget, icon: QIcon, label: QString): number;
+    insertTab(index: number, widget: QWidget, obj: QString): number;
+    insertTab(index: number, widget: QWidget, icon: QIcon, label: QString): number;
+    insertTab(index: number, widget: QWidget, obj: QString): number;
+    isMovable(): boolean;
+    isTabEnabled(index: number): boolean;
+    keyPressEvent(obj: QKeyEvent): void;
+    paintEvent(obj: QPaintEvent): void;
+    removeTab(index: number): void;
+    resizeEvent(obj: QResizeEvent): void;
+    selected(obj: QString): void;
+    setCornerWidget(w: QWidget, corner: number): void;
+    setCurrentIndex(index: number): void;
+    setCurrentWidget(widget: QWidget): void;
+    setDocumentMode(set: boolean): void;
+    setElideMode(obj: number): void;
+    setIconSize(size: QSize): void;
+    setMovable(movable: boolean): void;
+    setTabBar(obj: QTabBar): void;
+    setTabEnabled(index: number, obj: boolean): void;
+    setTabIcon(index: number, icon: QIcon): void;
+    setTabPosition(obj: number): void;
+    setTabShape(s: number): void;
+    setTabText(index: number, obj: QString): void;
+    setTabToolTip(index: number, tip: QString): void;
+    setTabWhatsThis(index: number, text: QString): void;
+    setTabsClosable(closeable: boolean): void;
+    setUpLayout(flag: boolean): void;
+    setUsesScrollButtons(useButtons: boolean): void;
+    showEvent(obj: QShowEvent): void;
+    sizeHint(): QSize;
+    tabBar(): QTabBar;
+    tabCloseRequested(index: number): void;
+    tabIcon(index: number): QIcon;
+    tabInserted(index: number): void;
+    tabPosition(): number;
+    tabRemoved(index: number): void;
+    tabShape(): number;
+    tabText(index: number): QString;
+    tabToolTip(index: number): QString;
+    tabWhatsThis(index: number): QString;
+    tabsClosable(): boolean;
+    usesScrollButtons(): boolean;
+    widget(index: number): QWidget;
+}

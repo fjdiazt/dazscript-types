@@ -1,0 +1,1 @@
+declare class QHBoxLayout extends QBoxLayout { }

@@ -1,0 +1,1 @@
+declare class Q_DECL_DEPRECATED { }

@@ -1,0 +1,1 @@
+declare class QT_DEPRECATED { }

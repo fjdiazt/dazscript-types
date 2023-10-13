@@ -1,0 +1,1 @@
+declare enum ScriptLanguage { Unknown, DAZScript1, DAZScript2 }

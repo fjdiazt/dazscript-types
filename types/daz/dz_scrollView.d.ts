@@ -1,0 +1,1 @@
+declare class DzScrollView extends DzWidget { }

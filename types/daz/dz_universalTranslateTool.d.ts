@@ -1,0 +1,1 @@
+declare class  DzUniversalTranslateTool  extends DzUniversalTool {}
