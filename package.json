@@ -1,7 +1,9 @@
 {
   "name": "dazscript-types",
   "version": "0.1.0",
-  "description": "",
+  "author": "Freddy Diaz",
+  "license": "MPL-2.0",
+  "description": "Daz Studio Scripting Types",
   "types": "types/",
   "keywords": [
     "daz3d",
@@ -11,6 +13,8 @@
     "dsa",
     "dse"
   ],
-  "author": "Freddy Diaz",
-  "license": "MPL-2.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fjdiazt/dazscript-types"
+  }
 }
