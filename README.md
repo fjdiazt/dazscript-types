@@ -8,9 +8,9 @@ This project aims to provide TypeScript typings for Daz Script, making it easier
 
 From [Daz Script Documentation](http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/start):
 
->Daz Script 2 is a dynamically-typed, interpreted, object-oriented scripting language that is tightly integrated with the Daz Studio API. It is an extension of Qt Script, >which is an extension of ECMAScript as defined in the ECMAScript Language Specification (ECMA-262), 5.1 Edition.
+>Daz Script 2 is a dynamically-typed, interpreted, object-oriented scripting language that is tightly integrated with the Daz Studio API. It is an extension of Qt Script, which is an extension of ECMAScript as defined in the ECMAScript Language Specification (ECMA-262), 5.1 Edition.
 
->Syntactically Daz Script is very similar to JavaScript, JScript, and ActionScript. If you have any familiarity with these languages, chances are you will find the transition >to Daz Script quite comfortable. However, it may be a little unintuitive at first for developers more familiar with strongly typed, compiled languages.
+>Syntactically Daz Script is very similar to JavaScript, JScript, and ActionScript.
 
 ## Usage
 
