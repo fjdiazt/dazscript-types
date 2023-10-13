@@ -4,7 +4,7 @@ This project provides TypeScript typings for [Daz Studio](https://www.daz3d.com/
 
 ## Overview
 
-This project aims to provide TypeScript typings for Daz Script, making it easier to use in a TypeScript or modern JavaScript environment.
+This project aims to provide TypeScript typings for Daz Script, making it easier to use in a TypeScript environment.
 
 From [Daz Script Documentation](http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/start):
 
