@@ -1,6 +1,6 @@
 # DazScript Types
 
-This project provides TypeScript typings for [Daz Studio](https://www.daz3d.com/), a 3D software with an SDK that uses an ECMAScript compliant language.
+This project provides TypeScript typings for [Daz Studio](https://www.daz3d.com/).
 
 ## Overview
 
@@ -16,13 +16,20 @@ From [Daz Script Documentation](http://docs.daz3d.com/doku.php/public/software/d
 
 To use these typings in your project, install the package from npm:
 
+```
 npm install dazscript-types
+```
 
-Then, you can import the types into your TypeScript files:
+Then make sure you update your tsconfig.json to include the typings like so:
 
-import { MyType } from 'dazscript-types';
-
-Replace `MyType` with the actual type you want to use.
+```
+{
+  "compilerOptions": {
+    ...
+  },
+  "include": ["node_modules/dazscript-types/**/*"]
+}
+```
 
 ## Contributing
 
@@ -30,6 +37,4 @@ Contributions are welcome! If you find a bug or think of a feature that should b
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
-Remember to replace `dazscript-types` and `MyType` with the actual name of your npm package and the types you're providing. Also, adjust any other details as necessary to fit your project.
+This project is licensed under the Mozilla version 2.0 License. See the LICENSE file for more details.
