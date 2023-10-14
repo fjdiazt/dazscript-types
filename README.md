@@ -4,7 +4,13 @@ This project provides TypeScript typings for [Daz Studio](https://www.daz3d.com/
 
 ## Overview
 
-Daz Studio is a powerful 3D software used for creating high-quality 3D models. It has an SDK that uses a language compliant with ECMAScript. This project aims to provide TypeScript typings for this language, making it easier to use in a TypeScript or modern JavaScript environment.
+This project aims to provide TypeScript typings for Daz Script, making it easier to use in a TypeScript environment.
+
+From [Daz Script Documentation](http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/start):
+
+> Daz Script 2 is a dynamically-typed, interpreted, object-oriented scripting language that is tightly integrated with the Daz Studio API. It is an extension of Qt Script, which is an extension of ECMAScript as defined in the ECMAScript Language Specification (ECMA-262), 5.1 Edition.
+
+> Syntactically Daz Script is very similar to JavaScript, JScript, and ActionScript.
 
 ## Usage
 
