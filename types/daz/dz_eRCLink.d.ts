@@ -1,4 +1,4 @@
-declare class DzERCLink extends DzController {
+declare class DzERCLink extends DzNumericController {
 
     // Enumerations
     ERCDeltaAdd: number; // 0
@@ -13,23 +13,16 @@ declare class DzERCLink extends DzController {
     TCB_INTERP: number; // 2
 
     // Properties
-    objectName: string; //
-    name: string; //
-    description: string; // ERC [DeltaAdd] > Invalid Link
-    slaveDescription: string; // ERC [DeltaAdd] > Invalid Link
-    effect: number; // 1
     active: boolean; // true
+    addend: number; // 0
     autoOverride: boolean; // true
     isUserLink: boolean; // true
-    scalar: number; // 1
-    addend: number; // 0
-    type: number; // 0
     keyInterpolation: number; // 2
     saveWithOutput: boolean; // true
+    scalar: number; // 1
+    type: number; // 0
 
     // Methods
-    _clone: any;
-    _getMethodsNames: any;
     addKeyValue(p0: number, p1: number): any;
     addKeyValue(p0: number, p1: number, p2: number, p3: number, p4: number): any;
     // apply(p0:double, p1:DzTime, p2:boolean): any;

@@ -1,4 +1,4 @@
-declare class DzMorph {
+declare class DzMorph extends DzModifier {
 
     // Enumerations
     NoNameEdit: number; // 0
@@ -10,7 +10,6 @@ declare class DzMorph {
     name: string; // PHMMouthRealism_HD_div2
     elementID: number; // 9852
     assetUri: object; // /data/DAZ%203D/Genesis%208/Female/Morphs/DAZ%203D/Base/PHMMouthRealism_HD_div2.dsf#PHMMouthRealism_HD_div2
-    assetNeedSave: boolean; // false
     assetSource: object; //
     assetId: string; // PHMMouthRealism_HD_div2
     assetAuthor: object; // ["Daz 3D","","www.daz3d.com"]
@@ -18,8 +17,6 @@ declare class DzMorph {
     assetModifiedDate: object; // Tue Aug 16 2022 22:04:35 GMT-0400 (Pacific SA Standard Time)
 
     // Methods
-    _clone: any;
-    _getMethodsNames: any;
     aboutToBeRemoved(): any;
     addDataItem(p0: DzElementData): any;
     addPrivateProperty(p0: DzProperty): any;
@@ -91,7 +88,7 @@ declare class DzMorph {
     getPrivatePropertyList(): any;
     getProperty(p0: number): any;
     getPropertyGroups(): any;
-    getPropertyList(): any;
+    getPropertyList(): DzProperty[];
     getTypeLabel(): any;
     getUniqueDataItemName(p0: string): any;
     getUniquePrivatePropertyName(p0: string): any;

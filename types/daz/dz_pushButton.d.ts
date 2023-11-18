@@ -24,7 +24,7 @@ declare class DzPushButton extends DzButton {
     iconMetricChanged(metric: QString): ISignal;
     downArrowMetricChanged(metric: QString): ISignal;
     setToggleButton(state: boolean): ISignal;
-    setCheckable(checkable: boolean): ISignal;
+    setCheckable(checkable: boolean): void;
 
     static BCommand: number; // 0
     static BTool: number; // 1

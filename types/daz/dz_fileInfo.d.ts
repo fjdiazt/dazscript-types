@@ -16,7 +16,7 @@ declare class DzFileInfo extends QObject {
     name: string;	//
     objectName: string;	//
     absFileName(): string;
-    absoluteDir(): string;
+    absoluteDir(): DzDir;
     absoluteFilePath(): string;
     absolutePath(): string;
     baseName(): string;

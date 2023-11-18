@@ -23,8 +23,8 @@ declare class DzScript extends QObject {
     getName(): any;
     executeScript(script: DzScript, ...list: string[]): any;
     checkSyntax(): any;
-    execute(): any;
-    execute(...list: any[]): any;
+    execute(): boolean;
+    execute(...list: any[]): boolean;
     call(funcname: String, ...args: any[]): any;
     loadFromFile(filename: String, b: boolean): any;
     loadFromFile(filename: String): any;

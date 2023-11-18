@@ -80,7 +80,8 @@ declare class DzListView extends DzScrollView {
     clicked(p0: DzListViewItem): any;
     clicked(p0: DzListViewItem, p1: number, p2: number): any;
     collapsed(item: DzListViewItem): void;
-    contextMenuRequested: ISignal; // contextMenuRequested( DzListViewItem item, Point pos, Number col )
+    // contextMenuRequested: ISignal; // contextMenuRequested( DzListViewItem item, Point pos, Number col )
+    contextMenuRequested: ISignalT<DzListViewItem, Point>
     currentChanged: ISignalT<DzListViewItem>; // currentChanged(p0:DzListViewItem): any;
     doubleClicked: ISignalT<DzListViewItem>; // doubleClicked(p0:DzListViewItem, p1:number, p2:number): any;
     expanded(item: DzListViewItem): void;

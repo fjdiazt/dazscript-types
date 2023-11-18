@@ -6,7 +6,7 @@ declare class DzPopupMenu extends DzWidget /*QMenu*/ {
     constructor(parent: DzWidget);
 
     // Signals
-    activated: ISignal; // void	activated ( Number id )
+    activated: ISignalT<number>; // void	activated ( Number id )
 
     // Methods
     clear(): any;

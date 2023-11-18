@@ -1,4 +1,4 @@
-declare class Point extends QObject {
+declare class Point extends QPoint {
 
     // Properties
     objectName: string; //

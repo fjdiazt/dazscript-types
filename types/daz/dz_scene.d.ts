@@ -115,7 +115,7 @@ declare class DzScene extends DzBase {
     getBoundingBox(flags: number): DzBox3;
     getAudio(): DzAudioClip;
     getAudioStartFrame(): number;
-    getFilename(savedTo?: boolean): QString;
+    getFilename(savedTo?: boolean): String;
     getNumNodes(): number;
     getNumSkeletons(): number;
     getNumLights(): number;
