@@ -43,5 +43,5 @@ declare class DzListViewItem extends QObject {
     sort(): any;
     sortChildItems(p0: number, p1: boolean): any;
     startRename(p0: number): any;
-    text(p0: number): String;
+    text(p0: number): string;
 }
