@@ -11,12 +11,12 @@ declare class DzComboBox extends DzWidget {
 
     //activated(index: number): ISignal;
     //activated(item: QString): ISignal;
-    activated: ISignal;
+    activated: ISignalT<number>;
     /** currentIndexChanged(index: number): ISignal;
      * currentIndexChanged(item: QString): ISignal;
      */
-    currentIndexChanged: ISignal;
-    textChanged: ISignal;
+    currentIndexChanged: ISignalT<number>;
+    textChanged: ISignalT<string>;
 
     addItem(text: QString): void;
     addItem(text: QString, userData: QString): void;
