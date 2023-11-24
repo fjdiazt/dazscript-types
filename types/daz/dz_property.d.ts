@@ -38,6 +38,7 @@ declare class DzProperty extends DzBase {
     createAlias(): DzProperty;
     currentValueChanged(): void;
     currentValueIsDefaultValue(): boolean;
+    currentValueIsDefinitionValue(): boolean;
     definitionLoadFromDAZ(): boolean;
     deleteAllKeys(): void;
     deleteKeys(interval: DzTimeRange): number;

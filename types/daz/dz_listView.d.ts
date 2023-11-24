@@ -53,7 +53,7 @@ declare class DzListView extends DzScrollView {
     findItem(p0: string, p1: number): DzListViewItem;
     findItem(p0: string, p1: number, eComparisonFlags: any): DzListViewItem;
 
-    firstChild(): any;
+    firstChild(): DzListViewItem;
     getItems(eItemsMode: number): Array<DzListViewItem>;
     header(): any;
     hideColumn(p0: number): any;
