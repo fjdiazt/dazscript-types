@@ -45,7 +45,7 @@ declare class DzElement extends DzBase {
     getElementChild(which: number): DzElement;
     getElementParent(): DzElement;
     getIsPropertyTreeOwnedByParent(): boolean;
-    getLabel(): QString;
+    getLabel(): string;
     getLoadScript(): DzScript;
     getNumDataItems(): number;
     getNumElementChildren(): number;

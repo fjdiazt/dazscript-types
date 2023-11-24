@@ -16,7 +16,7 @@ declare class DzSceneHelper extends QObject {
     isLegacyProperty(property: DzProperty): any;
     isAtDefaultValue(property: DzProperty): any;
     getLabel(property: DzProperty): any;
-    getInternalName(property: DzProperty): any;
+    getInternalName(property: DzProperty): string;
     getNodeName(property: DzProperty): any;
     getNodeType(property: DzProperty): any;
     getNode(property: DzProperty): any;
@@ -25,7 +25,7 @@ declare class DzSceneHelper extends QObject {
     getMin(property: DzProperty): any;
     getMax(property: DzProperty): any;
     getPropertiesOnElement(element: DzElement): any;
-    getPropertiesOnNode(property: DzProperty, includeModifiers?: boolean): any;
+    getPropertiesOnNode(property: DzProperty, includeModifiers?: boolean): DzProperty[];
     getPropertiesOnNode(node: DzNode, includeModifiers?: boolean): DzProperty[];
     getPrivatePropertiesOnNode(property: DzProperty): any;
     getPrivatePropertiesOnNode(node: DzNode): any;
