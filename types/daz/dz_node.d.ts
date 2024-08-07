@@ -60,6 +60,9 @@ declare class DzNode extends DzElement {
     select(onOff: boolean): void;
     setSelectable(onOff: boolean): void;
     setVisible(onOff: boolean): void;
+    setVisibileInRender(onOff: boolean): void;
+    setVisibleInSimulation(onOff: boolean): void;
+    setVisibleInViewport(onOff: boolean): void;
     setRotationOrder(order: DzRotationOrder): void;
     setObject(object: DzObject): void;
     addNodeChild(child: DzNode, inPlace: boolean): DzError;
@@ -187,6 +190,8 @@ declare class DzNode extends DzElement {
     isSelectable(): boolean;
     isVisible(): boolean;
     isVisibileInRender(): boolean;
+    isVisibleInSimulation(): boolean;
+    isVisibleInViewport(): boolean;
     castsShadow(): boolean;
     getObject(): DzObject;
     getNumNodeChildren(): number;
