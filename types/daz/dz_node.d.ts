@@ -108,8 +108,9 @@ declare class DzNode extends DzElement {
     setLocalTransform(pos: DzVec3, rot: DzQuat): void;
     setLocalTransform(tm: DzTime, pos: DzVec3, rot: DzQuat): void;
     setLocalTransform(pos: DzVec3, rot: DzQuat): void;
-    setToolLocalTransform(): any; // TODO ;
-    setToolLocalTransform(): any; // TODO ;
+
+    setToolLocalTransform(posLocal: DzVec3, rotLocal: DzQuat, scaleLocal: DzMatrix3, generalScale: number): void;
+
     setLocalPos(tm: DzTime, pos: DzVec3): void;
     setLocalPos(pos: DzVec3): void;
     setLocalPos(tm: DzTime, pos: DzVec3): void;
@@ -224,8 +225,20 @@ declare class DzNode extends DzElement {
     getWSTransform(): DzMatrix3;
     getWSTransform(tm: DzTime, pos: DzVec3, rot: DzQuat, scale: DzMatrix3, defaults: boolean): void;
     getWSTransform(pos: DzVec3, rot: DzQuat, scale: DzMatrix3): void;
-    getToolWSTransform(): any; // TODO ;
-    getToolWSTransform(): any; // TODO ;
+
+    /**
+     * Get the world-space transformation data for this node at the current time, in the context of the current tool.
+     * @returns A matrix representing the composed world-space transform for this node.
+     */
+    getToolWSTransform(): DzMatrix3;
+
+    /**
+     * Get the world-space transformation data for this node at the current time, in the context of the current tool.
+     * @param tm The scene time at which to get the transform.
+     * @param defaultVal Whether or not to use the default version of the origin, end point, and orientation instead of the current position.
+     * @returns A matrix representing the composed world-space transform for this node.
+     */
+    getToolWSTransform(tm: DzTime, defaultVal?: Boolean): DzMatrix3;
 
     /**
      * The world-space position of the node at the current time.
@@ -337,9 +350,9 @@ declare class DzNode extends DzElement {
     getWeightMapHandler(): any; // TODO ;
     doObjectDuplicateAndSet(): any; // TODO ;
     isEditorNode(): any; // TODO ;
-    getToolXRotControl(): any; // TODO ;
-    getToolYRotControl(): any; // TODO ;
-    getToolZRotControl(): any; // TODO ;
+    getToolXRotControl(): DzFloatProperty;
+    getToolYRotControl(): DzFloatProperty;
+    getToolZRotControl(): DzFloatProperty;
     invalidateCache(): void;
     selectionMapModified(): void;
     updateTransform(): void;

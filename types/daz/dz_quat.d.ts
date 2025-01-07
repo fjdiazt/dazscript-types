@@ -45,7 +45,7 @@ declare class DzQuat {
     setValue(vec: DzVec3): void;
     setValue(xAxis: DzVec3, yAxis: DzVec3): void;
     setValue(vec: number[], normalize: boolean): void;
-    setValue(q: number, q1: number, q2: number, q3: number, normalize: boolean): void;
+    setValue(x: number, y: number, z: number, w: number, normalize: boolean): void;
     setValue(axis: number, radians: number): void;
     setValue(order: DzRotationOrder, angles: DzVec3): void;
     setValue(mtx: DzMatrix3): void;

@@ -97,12 +97,13 @@ declare class DzFloatProperty extends DzNumericProperty {
      *
      * @param time
      * @param val
-     * @param interp
      * @deprecated
      */
     setValue(time: number, val: number, interp?: number): void;
 
-    setValue(time: DzTime, val: number, interp?: number): void;
+    setValue(time: DzTime, val: number, interp: number): void;
+
+    setValue(time: DzTime, val: number): void;
 
     setDefaultValue(val: number): void;
     setKeyValue(i: number, val: number): void;

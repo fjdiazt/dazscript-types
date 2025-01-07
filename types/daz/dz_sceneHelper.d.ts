@@ -4,7 +4,7 @@ declare class DzSceneHelper extends QObject {
     getUniqueMorphName(node: DzNode, name: string): any;
     collectNodes(flag1: boolean, flag2: boolean, flag3: boolean): any;
     findPropertyInGroup(name: string, group: DzPropertyGroup, flag1: boolean, flag2: boolean, flag3?: boolean): any;
-    findControlProperty(name: string, node: DzNode, flag1: boolean, flag2?: boolean): any;
+    findControlProperty(name: string, node: DzNode, recurse: boolean, nameLabelMatch?: boolean): DzProperty;
     createMorph(node: DzNode, name: string, list: QVariant[], flag: boolean): any;
     createLink(node: DzNode, s1: string, node2: DzNode, s2: string, n: number, d1: number, d2: number): any;
     isMorphProperty(property: DzProperty): any;
@@ -31,6 +31,7 @@ declare class DzSceneHelper extends QObject {
     getPrivatePropertiesOnNode(node: DzNode): any;
     getRegionPropertiesOnNode(node: DzNode): any;
     getRegionPropertiesRecurse(region: DzGeometryRegion): any;
+    findProperty()
     findPropertyOnNode(name: string, node: DzNode): DzProperty;
     findPropertyOnNodeByLabel(label: string, node: DzNode): DzProperty;
     findPropertyOnNodeByInternalName(name: string, node: DzNode): DzProperty;

@@ -10,7 +10,14 @@ declare class DzPropertySideNavHierarchy {
     jumpToProperty(property: DzProperty): void;
 
     // TODO:
-    getCurrentEditor(): QObject;
-    getPrimaryNode(): QObject;
+    getDisplayMode(): any;
+    getFilterNavigationBar(): any;
+    getGuidePage(): any;
+    getNavDivider(): any;
+    getRecurseChildrenGroups(): boolean;
+    getSideNavigationView(): any;
+
+    // getCurrentEditor(): QObject;
+    // getPrimaryNode(): QObject;
 
 }

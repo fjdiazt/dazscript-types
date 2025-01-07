@@ -46,6 +46,7 @@ declare class DzElement extends DzBase {
     getElementParent(): DzElement;
     getIsPropertyTreeOwnedByParent(): boolean;
     getLabel(): string;
+    getTypeLabel(): string;
     getLoadScript(): DzScript;
     getNumDataItems(): number;
     getNumElementChildren(): number;
@@ -57,6 +58,7 @@ declare class DzElement extends DzBase {
     getProperty(index: number): DzProperty;
     getPropertyGroups(): DzPropertyGroupTree;
     getPropertyList(): DzProperty[];
+    getUniqueDataItemName(): string;
     inEdit(): boolean;
     insertPrivateProperty(index: number, prop: DzProperty): DzError;
     insertPrivatePropertyInList(index: number, prop: DzProperty): DzError;
