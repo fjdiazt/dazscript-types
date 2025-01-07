@@ -25,8 +25,9 @@ declare class DzMatrix3 {
     toString(): any; // TODO ;
     inverse(): DzMatrix3;
     orthogonal(): boolean;
-    multMatrixVec(): any; // TODO ;
-    multiply(): any; // TODO ;
+    multVec(vec: DzVec3): DzVec3;
+    multMatrixVec(vec: DzVec3): DzVec3;
+    multiply(mat: DzMatrix3): DzMatrix3;
     makeIdentity(): void;
     noTrans(): void;
     noRot(): void;
@@ -38,6 +39,7 @@ declare class DzMatrix3 {
     rotateX(radians: number): void;
     rotateY(radians: number): void;
     rotateZ(radians: number): void;
+    row(i: number): DzVec3;
     rotate(rot: DzQuat): void;
     preRotateX(radians: number): void;
     preRotateY(radians: number): void;
@@ -49,4 +51,5 @@ declare class DzMatrix3 {
     scale(vec: DzVec3, affectTrans: boolean): void;
     scale(scale: number, affectTrans: boolean): void;
     scale(scale: number, direction: DzVec3, affectTrans: boolean): void;
+    translate(vec: DzVec3): DzVec3
 }

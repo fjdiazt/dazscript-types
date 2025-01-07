@@ -22,8 +22,9 @@ declare class DzPopupMenu extends DzWidget /*QMenu*/ {
      * Executes this menu synchronously. Opens the popup menu so that the item number indexAtPoint will be at the specified global position pos.
      * @param pos The global position to popup the menu.
      * @param indexAtPoint The index of the menu item to position at pos.
+     * @returns The identifier of the menu item clicked, or -1 if a menu item was not clicked.
      */
-    exec(pos: number, indexAtPoint: number): any;
+    exec(pos: number, indexAtPoint: number): number;
 
     findChildOfWidget(p0: string): any;
     getChildrenOfWidget(): any;
@@ -65,7 +66,7 @@ declare class DzPopupMenu extends DzWidget /*QMenu*/ {
     insertSubmenuItem(p0: QPixmap, p1: string, p2: QMenu, p3: number, p4: number): any;
     insertTextItem(p0: string): any;
     insertTextItem(p0: string, p1: number): any;
-    insertTextItem(p0: string, p1: number, p2: number): any;
+    insertTextItem(text: string, id: number, index: number): any;
     insertTextSubmenuItem(p0: string, p1: QMenu): any;
     insertTextSubmenuItem(p0: string, p1: QMenu, p2: number): any;
     insertTextSubmenuItem(p0: string, p1: QMenu, p2: number, p3: number): any;
@@ -91,4 +92,6 @@ declare class DzPopupMenu extends DzWidget /*QMenu*/ {
     text(p0: number): any;
     updateItem(p0: number): any;
     // whatsThis(p0:number): any; // DzWidget as a property with the same name. Can this be made compatible?
+
+    connectItem(id: number, thisObject: Object, func: Function): boolean;
 }

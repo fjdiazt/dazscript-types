@@ -126,7 +126,7 @@ declare class DzScene extends DzBase {
     getSkeleton(which: number): DzSkeleton;
     getSkeletonList(): QObject[];
     getLight(which: number): DzLight;
-    getLightList(): QObject[];
+    getLightList(): DzLight[];
     getCamera(which: number): DzCamera;
     getCameraList(): DzCamera[];
     getWSModifier(which: number): DzWSModifier;

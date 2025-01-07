@@ -4,7 +4,7 @@ declare class DzSceneHelper extends QObject {
     getUniqueMorphName(node: DzNode, name: string): any;
     collectNodes(flag1: boolean, flag2: boolean, flag3: boolean): any;
     findPropertyInGroup(name: string, group: DzPropertyGroup, flag1: boolean, flag2: boolean, flag3?: boolean): any;
-    findControlProperty(name: string, node: DzNode, flag1: boolean, flag2?: boolean): any;
+    findControlProperty(name: string, node: DzNode, recurse: boolean, nameLabelMatch?: boolean): DzProperty;
     createMorph(node: DzNode, name: string, list: QVariant[], flag: boolean): any;
     createLink(node: DzNode, s1: string, node2: DzNode, s2: string, n: number, d1: number, d2: number): any;
     isMorphProperty(property: DzProperty): any;
@@ -16,7 +16,7 @@ declare class DzSceneHelper extends QObject {
     isLegacyProperty(property: DzProperty): any;
     isAtDefaultValue(property: DzProperty): any;
     getLabel(property: DzProperty): any;
-    getInternalName(property: DzProperty): any;
+    getInternalName(property: DzProperty): string;
     getNodeName(property: DzProperty): any;
     getNodeType(property: DzProperty): any;
     getNode(property: DzProperty): any;
@@ -25,12 +25,13 @@ declare class DzSceneHelper extends QObject {
     getMin(property: DzProperty): any;
     getMax(property: DzProperty): any;
     getPropertiesOnElement(element: DzElement): any;
-    getPropertiesOnNode(property: DzProperty, includeModifiers?: boolean): any;
+    getPropertiesOnNode(property: DzProperty, includeModifiers?: boolean): DzProperty[];
     getPropertiesOnNode(node: DzNode, includeModifiers?: boolean): DzProperty[];
     getPrivatePropertiesOnNode(property: DzProperty): any;
     getPrivatePropertiesOnNode(node: DzNode): any;
     getRegionPropertiesOnNode(node: DzNode): any;
     getRegionPropertiesRecurse(region: DzGeometryRegion): any;
+    findProperty()
     findPropertyOnNode(name: string, node: DzNode): DzProperty;
     findPropertyOnNodeByLabel(label: string, node: DzNode): DzProperty;
     findPropertyOnNodeByInternalName(name: string, node: DzNode): DzProperty;

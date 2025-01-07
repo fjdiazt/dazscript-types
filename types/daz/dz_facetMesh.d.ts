@@ -111,7 +111,7 @@ declare class DzFacetMesh {
     insertUVSet(p0: number, p1: DzUVSet): any;
     invalidateVBOs(p0: boolean): any;
     invalidateVBOs(p0: boolean, p1: boolean, p2: boolean): any;
-    isSubDivisionEnabled(): void;
+    isSubDivisionEnabled(): boolean;
     isVertexSelected(p0: number): void;
     iskindof(p0: QString): any;
     lodsChanged(): void;

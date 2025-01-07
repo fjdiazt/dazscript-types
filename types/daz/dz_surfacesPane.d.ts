@@ -74,7 +74,7 @@ declare class DzSurfacesPane extends DzPane {
     expandAllSelected(): any;
     getAutoBake(): any;
     getBakerOption(): any;
-    getContentTab(): any;
+    getContentTab(): DzFilteredFileContentTab;
     getDefaultSkin(): any;
     getDisplayMode(): any;
     getEditorGuidePage(): any;
@@ -86,6 +86,7 @@ declare class DzSurfacesPane extends DzPane {
     getOverrideSkin(): any;
     getPaneGroup(): any;
     getPresetGuidePage(): any;
+
     getUseBake(): any;
     hide(): any;
     hidePane(): any;

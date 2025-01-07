@@ -45,7 +45,7 @@ declare class DzObject extends DzElement {
     getAttributes(p0: DzSettings): any;
     getBoundingBox(): any;
     getCachedGeom(): any;
-    getCurrentShape(): any;
+    getCurrentShape(): DzShape;
     getDataItem(p0: number): any;
     getDataItemList(): any;
     getElementChild(p0: number): any;
@@ -70,7 +70,7 @@ declare class DzObject extends DzElement {
     getProperty(p0: number): any;
     getPropertyGroups(): any;
     getPropertyList(): any;
-    getShape(p0: number): any;
+    getShape(p0: number): DzShape;
     getTypeLabel(): any;
     getUniqueDataItemName(p0: string): any;
     getUniquePrivatePropertyName(p0: string): any;

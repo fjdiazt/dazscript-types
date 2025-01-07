@@ -66,6 +66,7 @@ declare class DzShape extends DzElement {
     insertMaterial(newmat: DzMaterial, index: number): DzError;
     invalidateGeomCaches(): void;
     invalidateWorkingMesh(): void;
+    isSubDivisionEnabled(): any;
     materialAdded(mat: DzMaterial): void;
     materialChanged(): void;
     materialListChanged(): void;
