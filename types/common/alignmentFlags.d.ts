@@ -1,4 +1,4 @@
-declare enum AlignmentFlags {
+export enum AlignmentFlags {
     AlignLeft, // Aligns horizontally with the left edge.
     AlignLeading, // TODO: Add description.
     AlignRight, // Aligns horizontally with the right edge.
