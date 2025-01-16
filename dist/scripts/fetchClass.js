@@ -16,12 +16,11 @@ const baseUrl = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/refe
 //url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/boxlayout_dz';
 //url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/gridlayout_dz'
 //url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/slider_dz'
-const types2 = [
-    'dz_boxlayout',
-    'floatslider_dz',
-    'dz_slider',
-    'dz_label',
-];
+var DzTypes;
+(function (DzTypes) {
+    DzTypes["SceneHelper"] = "scenehelper_dz";
+    DzTypes["FloatSlider"] = "floatslider_dz";
+})(DzTypes || (DzTypes = {}));
 class ClassDefinition {
     constructor() {
         this.className = '';
@@ -80,7 +79,7 @@ function getProperties($) {
         if (columns.length === 2) {
             const key = $(columns[1]).find('a').text().trim();
             const value = $(columns[0]).find('a').text().trim();
-            data[key] = typeToLowerCase(value);
+            data[key] = getValidType(value);
         }
     });
     return Object.keys(data).map(key => ({
@@ -123,7 +122,7 @@ function getMethods($) {
         .each((_, row) => {
         getMethodSignature($, row).forEach((signature) => {
             let returnType = $(row).find('td').first().text().trim();
-            data.push(Object.assign(Object.assign({}, signature), { return: returnType }));
+            data.push(Object.assign(Object.assign({}, signature), { return: getValidType(returnType) }));
         });
     });
     return data;
@@ -137,7 +136,7 @@ function getSignals($) {
         .each((_, row) => {
         getMethodSignature($, row).forEach((signature) => {
             let returnType = $(row).find('td').first().text().trim();
-            data.push(Object.assign(Object.assign({}, signature), { return: typeToLowerCase(returnType) }));
+            data.push(Object.assign(Object.assign({}, signature), { return: getValidType(returnType) }));
         });
     });
     return data;
@@ -153,7 +152,7 @@ function getMethodSignature($, element) {
         let params = element.type === 'text'
             ? element.data.replace('(', '').replace(')', '').trim()
             : $(element).text().replace('(', '').replace(')', '').trim();
-        result.push(typeToLowerCase(params));
+        result.push(getValidType(params));
     });
     // Group them in pairs (type, param)
     const params = result.reduce((acc, _, index, arr) => {
@@ -205,7 +204,7 @@ function generateClassDeclaration(classDef) {
         classDeclaration += '\n  /* Constructors */\n';
     classDef.constructors.forEach(constructor => {
         const params = constructor.params.map(p => mapParameter(p)).join(', ');
-        classDeclaration += `  cheerio.constructor(${params}); \n`;
+        classDeclaration += `  constructor(${params}); \n`;
     });
     // Add methods
     if (classDef.methods.length > 0)
@@ -225,14 +224,16 @@ function generateClassDeclaration(classDef) {
     classDeclaration += '}\n';
     return classDeclaration;
 }
-function typeToLowerCase(type) {
+function getValidType(type) {
     switch (type) {
         case 'Number':
         case 'String':
         case 'Boolean':
             return type.toLowerCase();
+        case 'Array':
+            return 'any[]';
         default:
             return type;
     }
 }
-fetchDzType('boxlayout_dz');
+fetchDzType(DzTypes.SceneHelper);
