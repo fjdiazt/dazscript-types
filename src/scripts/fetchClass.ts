@@ -1,17 +1,12 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-// Replace with the actual URL containing the HTML
 const baseUrl = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/';
-//url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/boxlayout_dz';
-//url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/gridlayout_dz'
-//url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/slider_dz'
 
 enum DzTypes {
   SceneHelper = 'scenehelper_dz',
   FloatSlider = 'floatslider_dz',
 }
-
 
 class ClassDefinition {
   className: string = '';
