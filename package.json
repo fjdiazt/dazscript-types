@@ -5,6 +5,10 @@
   "license": "MPL-2.0",
   "description": "Daz Studio Scripting Types",
   "types": "types/",
+  "files": [
+    "types/"
+  ],
+  "main": "types/",
   "keywords": [
     "daz3d",
     "daz studio",

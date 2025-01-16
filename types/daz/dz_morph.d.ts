@@ -90,7 +90,6 @@ declare class DzMorph extends DzModifier {
     getPropertyGroups(): any;
     getPropertyList(): DzProperty[];
     getTypeLabel(): any;
-    getUniqueDataItemName(p0: string): any;
     getUniquePrivatePropertyName(p0: string): any;
     getUniquePropertyName(p0: string): any;
     getUnknownModifierStackSectionID(): any;
