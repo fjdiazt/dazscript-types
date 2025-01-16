@@ -7,12 +7,11 @@ const baseUrl = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/refe
 //url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/gridlayout_dz'
 //url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/slider_dz'
 
-const types2 = [
-  'dz_boxlayout',
-  'floatslider_dz',
-  'dz_slider',
-  'dz_label',
-]
+enum DzTypes {
+  SceneHelper = 'scenehelper_dz',
+  FloatSlider = 'floatslider_dz',
+}
+
 
 class ClassDefinition {
   className: string = '';
@@ -76,8 +75,8 @@ function getProperties($: cheerio.Root): { name: string; type: string }[] {
 
     if (columns.length === 2) {
       const key = $(columns[1]).find('a').text().trim();
-      const value = $(columns[0]).find('a').text().trim()
-      data[key] = typeToLowerCase(value);
+      const value = $(columns[0]).find('a').text().trim();
+      data[key] = getValidType(value);
     }
   });
 
@@ -132,7 +131,7 @@ function getMethods($: cheerio.Root): { name: string, return: string, params: { 
         let returnType = $(row).find('td').first().text().trim();
         data.push({
           ...signature,
-          return: returnType
+          return: getValidType(returnType)
         });
       });
     });
@@ -152,7 +151,7 @@ function getSignals($: cheerio.Root): { name: string, return: string, params: { 
         let returnType = $(row).find('td').first().text().trim();
         data.push({
           ...signature,
-          return: typeToLowerCase(returnType)
+          return: getValidType(returnType)
         });
       });
     });
@@ -175,7 +174,7 @@ function getMethodSignature($: cheerio.Root, element: cheerio.Element): { name: 
         ? element.data!.replace('(', '').replace(')', '').trim()
         : $(element).text().replace('(', '').replace(')', '').trim()
 
-      result.push(typeToLowerCase(params));
+      result.push(getValidType(params));
     });
 
   // Group them in pairs (type, param)
@@ -240,7 +239,7 @@ function generateClassDeclaration(classDef: ClassDefinition): string {
     classDeclaration += '\n  /* Constructors */\n';
   classDef.constructors.forEach(constructor => {
     const params = constructor.params.map(p => mapParameter(p)).join(', ');
-    classDeclaration += `  cheerio.constructor(${params}); \n`;
+    classDeclaration += `  constructor(${params}); \n`;
   });
 
   // Add methods
@@ -265,15 +264,17 @@ function generateClassDeclaration(classDef: ClassDefinition): string {
   return classDeclaration;
 }
 
-function typeToLowerCase(type: string): string {
+function getValidType(type: string): string {
   switch (type) {
     case 'Number':
     case 'String':
     case 'Boolean':
       return type.toLowerCase();
+    case 'Array':
+      return 'any[]';
     default:
       return type;
   }
 }
 
-fetchDzType('boxlayout_dz');
+fetchDzType(DzTypes.SceneHelper);

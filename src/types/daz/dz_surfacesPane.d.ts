@@ -105,7 +105,7 @@ declare class DzSurfacesPane extends DzPane {
     repanumber(): any;
     // restoreSettings(p0:DzPaneSettings): any;
     // restoreSettings(p0:DzPaneSettings): any;
-    saveSettings(DzPaneSettings): any;
+    // saveSettings(DzPaneSettings): any;
     // saveSettings(p0:DzPaneSettings): any;
     setAutoBake(p0: boolean): any;
     setCurrentTab(p0: number): any;

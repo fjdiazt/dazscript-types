@@ -72,7 +72,6 @@ declare class DzObject extends DzElement {
     getPropertyList(): any;
     getShape(p0: number): DzShape;
     getTypeLabel(): any;
-    getUniqueDataItemName(p0: string): any;
     getUniquePrivatePropertyName(p0: string): any;
     getUniquePropertyName(p0: string): any;
     inEdit(): any;

@@ -149,7 +149,6 @@ declare class DzGraftingFigureShape extends DzFacetShape {
     getSubDLevelControl(): any;
     getSubDRenderLevel(): any;
     getSubDRenderLevelControl(): any;
-    getUniqueDataItemName(p0: string): any;
     getUniquePrivatePropertyName(p0: string): any;
     getUniquePropertyName(p0: string): any;
     getVertexSelectionGroup(p0: number): any;

@@ -90,7 +90,6 @@ declare class DzFacetShape extends DzShape {
     getRigidityGroup(p0: number): any;
     getSelectedMaterial(p0: number): any;
     //getShapeInstance(p0: number): any;
-    getUniqueDataItemName(p0: QString): any;
     getUniquePrivatePropertyName(p0: QString): any;
     getUniquePropertyName(p0: QString): any;
     getVertexSelectionGroup(p0: number): any;

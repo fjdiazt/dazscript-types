@@ -17,8 +17,8 @@ declare class QPixmap {
     fill(p0: QColor): any;
     fromImage(p0: QImage): any;
     load(p0: QString): any;
-    loadFromData(p0: QByteArray): boolean;
-    loadFromData(p0: QByteArray, p1: QString): boolean;
+    // loadFromData(p0: QByteArray): boolean;
+    // loadFromData(p0: QByteArray, p1: QString): boolean;
     resize(p0: QSize): void;
     resize(p0: number, p1: number): any;
     save(p0: QString): any;

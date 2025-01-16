@@ -1,0 +1,63 @@
+declare class DzSceneHelper extends QObject {
+    /* Constructors */
+    constructor();
+
+    /* Methods */
+    collectNodes(selectedOnly: boolean, boneTopSelected: boolean, boneSkeleton: boolean): DzNode[];
+    createLink(bone: DzNode, propertyName: string, controlBone: DzNode, controllerName: string, type: number, scalar: number, addend: number): DzERCLink;
+    createMorph(bone: DzNode, name: string, deltas: any[], overwrite: boolean): DzMorph;
+    findControlProperty(propertyName: string, node: DzNode, recurse: boolean, nameLabelMatch?: boolean): DzProperty;
+    findProperty(propName: string, elem: DzElement): DzProperty;
+    findPropertyByInternalName(internalName: string, elem: DzElement): DzProperty;
+    findPropertyByLabel(label: string, elem: DzElement): DzProperty;
+    findPropertyInGroup(propertyName: string, group: DzPropertyGroup, traverse: boolean, recurse: boolean, nameLabelMatch?: boolean): DzProperty;
+    findPropertyOnMaterial(propName: string, material: DzMaterial): DzProperty;
+    findPropertyOnMaterialByInternalName(internalName: string, material: DzMaterial): DzProperty;
+    findPropertyOnMaterialByLabel(label: string, material: DzMaterial): DzProperty;
+    findPropertyOnNode(propName: string, node: DzNode): DzProperty;
+    findPropertyOnNodeByInternalName(internalName: string, node: DzNode): DzProperty;
+    findPropertyOnNodeByLabel(label: string, node: DzNode): DzProperty;
+    getDisplayMaterial(prop: DzProperty): DzMaterial;
+    getDisplayNode(prop: DzProperty): DzNode;
+    getErcController(controlledProp: DzProperty, controllingProp: DzProperty): DzERCLink;
+    getInternalName(prop: DzProperty): String;
+    getLabel(prop: DzProperty): String;
+    getMaterial(prop: DzProperty): DzMaterial;
+    getMaterialName(prop: DzProperty): String;
+    getMaterialType(prop: DzProperty): String;
+    getMax(prop: DzProperty): Number;
+    getMin(prop: DzProperty): Number;
+    getNode(prop: DzProperty): DzNode;
+    getNodeName(prop: DzProperty): String;
+    getNodeType(prop: DzProperty): String;
+    getPrivatePropertiesOnNode(prop: DzProperty): DzProperty[];
+    getPrivatePropertiesOnNode(node: DzNode): DzProperty[];
+    getPropertiesOnElement(elem: DzElement): DzProperty[];
+    getPropertiesOnMaterial(prop: DzProperty, includeProviders?: boolean): DzProperty[];
+    getPropertiesOnMaterial(material: DzMaterial, includeProviders?: boolean): DzProperty[];
+    getPropertiesOnNode(prop: DzProperty, includeModifiers?: boolean): DzProperty[];
+    getPropertiesOnNode(node: DzNode, includeModifiers?: boolean): DzProperty[];
+    getRegionPropertiesOnNode(node: DzNode): DzProperty[];
+    // getRegionPropertiesRecurse (region: geometryregion_dz ): Array;
+    getUniqueMorphName(node: DzNode, name: string): String;
+    helperCanRemove(prop: DzProperty): Boolean;
+    helperRemoveProperty(prop: DzProperty): Boolean;
+    isAtDefaultValue(prop: DzProperty): Boolean;
+    isControlledByTransform(prop: DzProperty, recurse?: boolean): Boolean;
+    isDFormModProperty(prop: DzProperty): DzProperty;
+    isLegacyJointProperty(prop: DzProperty): DzProperty;
+    isLegacyProperty(prop: DzProperty): Boolean;
+    isMaterialProperty(prop: DzProperty): DzProperty;
+    isModifierProperty(prop: DzProperty): DzProperty;
+    isMorphProperty(prop: DzProperty): DzProperty;
+    isNodeProperty(prop: DzProperty): DzProperty;
+    isSimulationSettingsProviderProperty(prop: DzProperty): DzProperty;
+    isTransform(prop: DzProperty): Boolean;
+    isTransformProperty(prop: DzProperty): DzProperty;
+    setInternalName(prop: DzProperty, name: string): Boolean;
+    setMax(prop: DzProperty, max: number): void;
+    setMin(prop: DzProperty, min: number): void;
+    setMinMax(prop: DzProperty, min: number, max: number): void;
+    setPropertyPath(prop: DzProperty, inPath: string): void;
+    setUniqueName(node: DzNode, name: string): void;
+}
