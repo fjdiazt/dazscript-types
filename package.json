@@ -5,6 +5,10 @@
   "license": "MPL-2.0",
   "description": "Daz Studio Scripting Types",
   "types": "types/",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
   "files": [
     "types/"
   ],
