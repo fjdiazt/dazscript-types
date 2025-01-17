@@ -60,7 +60,7 @@ declare function decodeURIComponent(encodedURIComponent: String): String;
 declare function encodeURI(uri: String): String;
 declare function encodeURIComponent(uriComponent: String): String;
 declare function escape(text: String): String;
-declare function eval(str: String): Object;
+// declare function eval(str: String): Object;
 declare function isFinite(expression: String): Boolean;
 declare function isNaN(expression: String): Boolean;
 declare function parseFloat(str: String): Number;

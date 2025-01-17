@@ -12,7 +12,6 @@ declare class DzExtendedTabWidget extends QTabWidget {
     rect: QObject;
     childrenRect: QObject;
     childrenRegion: QObject;
-    sizePolicy: QObject;
     minimumSize: QObject;
     maximumSize: QObject;
     minimumWidth: number;

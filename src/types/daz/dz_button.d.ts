@@ -10,10 +10,9 @@ declare class DzButton extends DzWidget {
   minWidth: number; // 0
   maxHeight: number; // 16777215
   maxWidth: number; // 16777215
-  palette: QPalette; // [object Object]
   paletteForegroundColor: QColor; // [object Object]
   paletteBackgroundColor: QColor; // [object Object]
-  paletteBackgroundPixmap: QPixmap; // [object Object]
+  // paletteBackgroundPixmap: QPixmap; // [object Object]
   enabled: boolean; // true
   autoExclusive: boolean; // false
   autoRepeat: boolean; // false

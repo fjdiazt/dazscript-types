@@ -18,7 +18,6 @@ declare class DzTimePane extends DzPane {
     rect: object; // [object Object]
     childrenRect: object; // [object Object]
     childrenRegion: object; // QVariant(QRegion)
-    sizePolicy: object; // QVariant(QSizePolicy)
     minimumSize: object; // [object Object]
     maximumSize: object; // [object Object]
     minimumWidth: number; // 577
@@ -61,23 +60,23 @@ declare class DzTimePane extends DzPane {
     // Methods
     _clone: any;
     _getMethodsNames: any;
-    buildOptionsMenu(p0:DzActionMenu): any;
+    buildOptionsMenu(p0: DzActionMenu): any;
     className: any;
     close(): any;
     collapseAll(): any;
     copySelectedKeys(): any;
     createFilteredKeys(): any;
-    createFilteredKeys(p0:number): any;
+    createFilteredKeys(p0: number): any;
     createKeys(): any;
     // customContextMenuRequested(p0:QPonumber): any;
     deleteKeys(): any;
     deleteLater(): any;
     deleteSelectedKeys(): any;
     destroyed(): any;
-    destroyed(p0:QObject): any;
+    destroyed(p0: QObject): any;
     expandAll(): any;
     frameKeyGraph(): any;
-    frameKeyGraph(p0:boolean): any;
+    frameKeyGraph(p0: boolean): any;
     getCurrentFrame(): any;
     getDefaultSkin(): any;
     getFilterText(): any;
@@ -108,18 +107,18 @@ declare class DzTimePane extends DzPane {
     makeGroupDockable(): any;
     makeGroupUndockable(): any;
     makeUndockable(): any;
-    makeUndockable(p0:QSize): any;
+    makeUndockable(p0: QSize): any;
     moveRootNodeDown(): any;
     moveRootNodeToBottom(): any;
     moveRootNodeToTop(): any;
     moveRootNodeUp(): any;
-    moveToGroup(p0:DzPaneGroup): any;
+    moveToGroup(p0: DzPaneGroup): any;
     pasteKeys(): any;
     raise(): any;
     refresh(): any;
     refreshDopesheet(): any;
     refreshStyleSheet(): any;
-    refreshStyleSheet(p0:boolean): any;
+    refreshStyleSheet(p0: boolean): any;
     repanumber(): any;
     // restoreSettings(p0:DzPaneSettings): any;
     // restoreSettings(p0:DzPaneSettings): any;
@@ -127,32 +126,32 @@ declare class DzTimePane extends DzPane {
     // saveSettings(p0:DzPaneSettings): any;
     searchDopesheetNext(): any;
     searchDopesheetPrevious(): any;
-    setCurrentFrame(p0:number): any;
-    setDefaultSkin(p0:DzSkin): any;
-    setDisabled(p0:boolean): any;
-    setEnabled(p0:boolean): any;
-    setFilterText(p0:string): any;
+    setCurrentFrame(p0: number): any;
+    setDefaultSkin(p0: DzSkin): any;
+    setDisabled(p0: boolean): any;
+    setEnabled(p0: boolean): any;
+    setFilterText(p0: string): any;
     // setFilteredKeyCreationScope(p0:KeyScope): any;
     // setFilteredPropertyTypes(p0:PropertyTypes): any;
     setFocus(): any;
-    setFramesPerSecond(p0:number): any;
-    setHidden(p0:boolean): any;
-    setInterpType(p0:number): any;
-    setKeyGraphOpen(p0:boolean): any;
-    setLabel(p0:string): any;
-    setMonitorParametersPane(p0:boolean): any;
-    setOverrideSkin(p0:DzSkin): any;
-    setOverrideSkin(p0:DzSkin, p1:boolean): any;
-    setPlayAllFrames(p0:boolean): any;
-    setPlayRangeEnd(p0:number): any;
-    setPlayRangeStart(p0:number): any;
-    setShown(p0:boolean): any;
-    setStyleSheet(p0:string): any;
-    setTotalFrames(p0:number): any;
+    setFramesPerSecond(p0: number): any;
+    setHidden(p0: boolean): any;
+    setInterpType(p0: number): any;
+    setKeyGraphOpen(p0: boolean): any;
+    setLabel(p0: string): any;
+    setMonitorParametersPane(p0: boolean): any;
+    setOverrideSkin(p0: DzSkin): any;
+    setOverrideSkin(p0: DzSkin, p1: boolean): any;
+    setPlayAllFrames(p0: boolean): any;
+    setPlayRangeEnd(p0: number): any;
+    setPlayRangeStart(p0: number): any;
+    setShown(p0: boolean): any;
+    setStyleSheet(p0: string): any;
+    setTotalFrames(p0: number): any;
     // setViewMode(p0:ViewMode): any;
-    setVisible(p0:boolean): any;
-    setWindowModified(p0:boolean): any;
-    setWindowTitle(p0:string): any;
+    setVisible(p0: boolean): any;
+    setWindowModified(p0: boolean): any;
+    setWindowTitle(p0: string): any;
     show(): any;
     showFullScreen(): any;
     showMaximized(): any;
@@ -179,14 +178,14 @@ declare class DzTimePane extends DzPane {
     updateMicroFocus(): any;
 
     // Signals
-    visibilityChanged(p0:boolean): any;
+    visibilityChanged(p0: boolean): any;
     menuChanged(): any;
-    labelChanged(p0:string): any;
-    tabBarHiddenChanged(p0:boolean): any;
+    labelChanged(p0: string): any;
+    tabBarHiddenChanged(p0: boolean): any;
     // paneGroupChanged(p0:DzPaneGroup, p1:DzPaneGroup*): any;
     // viewModeChanged(p0:ViewMode): any;
-    monitorParametersPaneChanged(p0:boolean): any;
-    playAllFramesChanged(p0:boolean): any;
+    monitorParametersPaneChanged(p0: boolean): any;
+    playAllFramesChanged(p0: boolean): any;
     // dopesheetPropertyListChanged(QVector<DzProperty>, p0:boolean): any;
     // graphChannelListChanged(QVector<DzProperty>): any;
 }

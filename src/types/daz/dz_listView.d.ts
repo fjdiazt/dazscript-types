@@ -48,7 +48,6 @@ declare class DzListView extends DzScrollView {
     currentItem(): DzListViewItem;
     deleteItem(p0: DzListViewItem): any;
     ensureItemVisible(p0: DzListViewItem): any;
-    findChildOfWidget(p0: string): any;
 
     findItem(p0: string, p1: number): DzListViewItem;
     findItem(p0: string, p1: number, eComparisonFlags: any): DzListViewItem;

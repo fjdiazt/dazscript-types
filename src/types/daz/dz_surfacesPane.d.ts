@@ -18,7 +18,6 @@ declare class DzSurfacesPane extends DzPane {
     rect: object; // [object Object]
     childrenRect: object; // [object Object]
     childrenRegion: object; // QVariant(QRegion)
-    sizePolicy: object; // QVariant(QSizePolicy)
     minimumSize: object; // [object Object]
     maximumSize: object; // [object Object]
     minimumWidth: number; // 157

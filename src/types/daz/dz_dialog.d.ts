@@ -1,9 +1,10 @@
 declare class DzDialog extends DzWidget {
-
     /* Properties */
     caption: String;
     orientation: number;
     sizeGripEnabled: boolean;
+
+    constructor();
 
     /* Methods */
     close(): boolean;

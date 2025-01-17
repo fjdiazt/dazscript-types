@@ -50,7 +50,6 @@ declare class Q3ListView extends Q3ScrollView {
     showToolTips: boolean;	// true
     size: QObject;	// [object Object]
     sizeIncrement: QObject;	// [object Object]
-    sizePolicy: QObject;	// QVariant(QSizePolicy)
     statusTip: string;	//
     styleSheet: string;	//
     toolTip: string;	//

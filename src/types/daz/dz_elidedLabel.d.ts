@@ -47,7 +47,6 @@ declare class DzElidedLabel extends DzLabel {
     normalGeometry: QRect;	// [object Object]
     objectName: string;	// ElidedLbl
     openExternalLinks: boolean;	// false
-    palette: QPalette;	// [object Object]
     pixmap: QPixmap;	// [object Object]
     pos: QPoint;	// [object Object]
     rect: QRect;	// [object Object]

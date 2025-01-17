@@ -61,9 +61,8 @@ declare class DzUiWidget extends DzWidget {
     minWidth: number;	// 0
     name: string;	// Dialog
     objectName: string;	// Dialog
-    palette: QPalette;	// [object Object]
     paletteBackgroundColor: QColor;	// [object Object]
-    paletteBackgroundPixmap: QPixmap;	// [object Object]
+    // paletteBackgroundPixmap: QPixmap;	// [object Object]
     paletteForegroundColor: QColor;	// [object Object]
     physicalDpiX: number;	// 96
     physicalDpiY: number;	// 96
@@ -76,16 +75,11 @@ declare class DzUiWidget extends DzWidget {
     y: number;	// 0
     destroyed(): void;
     destroyed(p0: QObject): void;
-    findChildOfWidget(p0: QString): any;
     getChildrenOfWidget(p0?: QString): any;
-    mapFrom(p0: DzWidget, p1: QPoint): any;
     mapFromGlobal(p0: QPoint): any;
     mapFromParent(p0: QPoint): any;
-    mapTo(p0: DzWidget, p1: QPoint): any;
     mapToGlobal(p0: QPoint): any;
     mapToParent(p0: QPoint): any;
-    reparent(p0: DzWidget, p1: QPoint): any;
-    reparent(p0: DzWidget, p1: QPoint, p2: boolean): any;
     setFixedHeight(p0: number): any;
     setFixedSize(p0: number, p1: number): any;
     setFixedWidth(p0: number): any;

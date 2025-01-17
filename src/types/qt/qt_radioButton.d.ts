@@ -12,7 +12,6 @@ declare class QRadioButton extends QAbstractButton {
     rect: QObject;
     childrenRect: QObject;
     childrenRegion: QObject;
-    sizePolicy: QObject;
     minimumSize: QObject;
     maximumSize: QObject;
     minimumWidth: number;

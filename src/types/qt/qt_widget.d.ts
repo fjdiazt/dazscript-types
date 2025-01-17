@@ -427,6 +427,10 @@ declare class QWidget extends QPaintDevice {
     static Key_unknown: number; // 33554431
     //#endregion
 
+    //Properties
+    focusPolicy: QtFocusPolicy;
+    sizePolicy: QSizePolicy;
+
     constructor(parent?: QWidget)
 
     // Methods
@@ -452,7 +456,6 @@ declare class QWidget extends QPaintDevice {
     paletteBackgroundColor: QColor;
     paletteBackgroundPixmap: QPixmap;
     font: QObject;
-    focusPolicy: number; // Qt::FocusPolicy
     enabled: boolean;
     statusTip: String;
     toolTip: String;

@@ -25,7 +25,6 @@ declare class DzComboEdit extends DzWidget {
     modified: boolean; // false
     name: string; // uuid-18beeab09da4adfa3
     objectName: string; // uuid-18beeab09da4adfa3
-    palette: object; // [object Object]
     physicalDpiX: number; // 96
     physicalDpiY: number; // 96
     placeholderText: string; //
@@ -60,7 +59,6 @@ declare class DzComboEdit extends DzWidget {
     del(): any;
     end(): any;
     end(p0: boolean): any;
-    findChildOfWidget(p0: string): any;
     findItem(p0: string): any;
     getChildrenOfWidget(): any;
     getChildrenOfWidget(p0: string): any;

@@ -26,7 +26,6 @@ declare class DzPopupMenu extends DzWidget /*QMenu*/ {
      */
     exec(pos: number, indexAtPoint: number): number;
 
-    findChildOfWidget(p0: string): any;
     getChildrenOfWidget(): any;
     getChildrenOfWidget(p0: string): any;
     getLayout(): any;

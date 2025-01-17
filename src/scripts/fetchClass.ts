@@ -3,11 +3,6 @@ import * as cheerio from 'cheerio';
 
 const baseUrl = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/';
 
-enum DzTypes {
-  SceneHelper = 'scenehelper_dz',
-  FloatSlider = 'floatslider_dz',
-}
-
 class ClassDefinition {
   className: string = '';
   enumerations: { name: string, values: string[] }[] = [];
@@ -37,13 +32,13 @@ async function fetchDzType(type: string): Promise<void> {
     classDefinition.constructors = getConstructors($);
     classDefinition.inherits = getInherits($);
     classDefinition.properties = getProperties($);
-    classDefinition.methods = getMethods($);
     classDefinition.signals = getSignals($);
+    classDefinition.methods = getMethods($);
 
     let enumDeclaration = generateEnumDeclaration(classDefinition.enumerations);
-    console.log(enumDeclaration);
-
     let classDeclaration = generateClassDeclaration(classDefinition);
+
+    console.log(enumDeclaration);
     console.log(classDeclaration);
   } catch (error) {
     console.error('Error fetching or parsing HTML:', error);
@@ -160,30 +155,37 @@ function getMethodSignature($: cheerio.Root, element: cheerio.Element): { name: 
   const result: string[] = [];
   const name = $(element).find('strong').first().text().trim();
 
-  // Gather all relevant text and <a> values from the row
-  $(element).find('em').contents()
-    .filter((_, element) => element.type === 'text' ? element.data!.trim() !== "(" && element.data!.trim() !== ")" : true)
-    .each((_, element) => {
+  try {
 
-      let params = element.type === 'text'
-        ? element.data!.replace('(', '').replace(')', '').trim()
-        : $(element).text().replace('(', '').replace(')', '').trim()
+    // Gather all relevant text and <a> values from the row
+    $(element).find('em').contents()
+      .filter((_, element) => element.type === 'text' ? element.data?.trim() !== "(" && element.data?.trim() !== ")" : true)
+      .each((_, element) => {
 
-      result.push(getValidType(params));
-    });
+        let params = element.type === 'text'
+          ? element.data!.replace('(', '').replace(')', '').trim()
+          : $(element).text().replace('(', '').replace(')', '').trim()
 
-  // Group them in pairs (type, param)
-  const params = result.reduce<{ type: string, name: string, default: string | null }[]>((acc, _, index, arr) => {
-    if (index % 2 === 0 && arr[index] !== '') {
-      let [name, def] = arr[index + 1].split('=');
-      acc.push({ type: arr[index], name: name.replace(',', '').trim(), default: def?.trim() || null });
-    }
-    return acc;
-  }, []);
+        result.push(getValidType(params));
+      });
 
-  signature.push({ name, params });
+    // Group them in pairs (type, param)
+    const params = result.reduce<{ type: string, name: string, default: string | null }[]>((acc, _, index, arr) => {
+      if (index % 2 === 0 && arr[index] !== '') {
+        let [name, def] = arr[index + 1].split('=');
+        acc.push({ type: arr[index], name: name.replace(',', '').trim(), default: def?.trim() || null });
+      }
+      return acc;
+    }, []);
 
-  return signature;
+    signature.push({ name, params });
+
+    return signature;
+  }
+  catch (error) {
+    console.error(`Error parsing method signature: ${name}`);
+    return [{ name: name, params: [{ name: 'p', type: 'any', default: null }] }];
+  }
 }
 
 function extractLastNestedListItem(element: cheerio.Cheerio) {
@@ -197,9 +199,9 @@ function generateEnumDeclaration(enums: { name: string, values: string[] }[]): s
   enums.forEach((enumDef) => {
     enumDeclaration += `export enum ${enumDef.name} {\n`;
     enumDef.values.forEach((value, index) => {
-      enumDeclaration += `  ${value}: ${index}\n`;
+      enumDeclaration += `  ${value} = ${index},\n`;
     });
-    enumDeclaration += '}\n';
+    enumDeclaration += '}\n\n';
   });
 
   return enumDeclaration;
@@ -233,7 +235,7 @@ function generateClassDeclaration(classDef: ClassDefinition): string {
   if (classDef.constructors.length > 0)
     classDeclaration += '\n  /* Constructors */\n';
   classDef.constructors.forEach(constructor => {
-    const params = constructor.params.map(p => mapParameter(p)).join(', ');
+    const params = constructor.params.map(p => mapParameter(p)).join(',');
     classDeclaration += `  constructor(${params}); \n`;
   });
 
@@ -241,7 +243,7 @@ function generateClassDeclaration(classDef: ClassDefinition): string {
   if (classDef.methods.length > 0)
     classDeclaration += '\n  /* Methods */\n';
   classDef.methods.forEach(method => {
-    const params = method.params.map(p => mapParameter(p)).join(', ');
+    const params = method.params.map(p => mapParameter(p)).join(',');
     classDeclaration += `  ${method.name} (${params}): ${method.return}; \n`;
   });
 
@@ -249,7 +251,7 @@ function generateClassDeclaration(classDef: ClassDefinition): string {
   if (classDef.signals.length > 0)
     classDeclaration += '\n  /* Signals */\n';
   classDef.signals.forEach(signal => {
-    const params = signal.params.map(p => mapParameter(p)).join(', ');
+    const params = signal.params.map(p => mapParameter(p)).join(',');
     classDeclaration += `  ${signal.name} (${params}): ${signal.return}; \n`;
   });
 
@@ -272,4 +274,15 @@ function getValidType(type: string): string {
   }
 }
 
-fetchDzType(DzTypes.SceneHelper);
+enum DzTypes {
+  SceneHelper = 'scenehelper_dz',
+  FloatSlider = 'floatslider_dz',
+  ItnSlider = 'intslider_dz',
+  Widget = 'widget_dz',
+  ColorWidget = 'colorwgt_dz',
+  Style = 'style_dz',
+  Rect = 'rect',
+  Palette = 'palette',
+}
+
+fetchDzType(DzTypes.Style);

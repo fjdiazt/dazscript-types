@@ -12,7 +12,6 @@ declare class DzPaneMgr extends QWidget {
     rect: QObject;
     childrenRect: QObject;
     childrenRegion: QObject;
-    sizePolicy: QObject;
     minimumSize: QObject;
     maximumSize: QObject;
     minimumWidth: number;

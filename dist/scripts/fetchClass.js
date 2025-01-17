@@ -11,16 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 const cheerio = require("cheerio");
-// Replace with the actual URL containing the HTML
 const baseUrl = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/';
-//url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/boxlayout_dz';
-//url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/gridlayout_dz'
-//url = 'http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/slider_dz'
-var DzTypes;
-(function (DzTypes) {
-    DzTypes["SceneHelper"] = "scenehelper_dz";
-    DzTypes["FloatSlider"] = "floatslider_dz";
-})(DzTypes || (DzTypes = {}));
 class ClassDefinition {
     constructor() {
         this.className = '';
@@ -49,11 +40,11 @@ function fetchDzType(type) {
             classDefinition.constructors = getConstructors($);
             classDefinition.inherits = getInherits($);
             classDefinition.properties = getProperties($);
-            classDefinition.methods = getMethods($);
             classDefinition.signals = getSignals($);
+            classDefinition.methods = getMethods($);
             let enumDeclaration = generateEnumDeclaration(classDefinition.enumerations);
-            console.log(enumDeclaration);
             let classDeclaration = generateClassDeclaration(classDefinition);
+            console.log(enumDeclaration);
             console.log(classDeclaration);
         }
         catch (error) {
@@ -145,25 +136,31 @@ function getMethodSignature($, element) {
     const signature = [];
     const result = [];
     const name = $(element).find('strong').first().text().trim();
-    // Gather all relevant text and <a> values from the row
-    $(element).find('em').contents()
-        .filter((_, element) => element.type === 'text' ? element.data.trim() !== "(" && element.data.trim() !== ")" : true)
-        .each((_, element) => {
-        let params = element.type === 'text'
-            ? element.data.replace('(', '').replace(')', '').trim()
-            : $(element).text().replace('(', '').replace(')', '').trim();
-        result.push(getValidType(params));
-    });
-    // Group them in pairs (type, param)
-    const params = result.reduce((acc, _, index, arr) => {
-        if (index % 2 === 0 && arr[index] !== '') {
-            let [name, def] = arr[index + 1].split('=');
-            acc.push({ type: arr[index], name: name.replace(',', '').trim(), default: (def === null || def === void 0 ? void 0 : def.trim()) || null });
-        }
-        return acc;
-    }, []);
-    signature.push({ name, params });
-    return signature;
+    try {
+        // Gather all relevant text and <a> values from the row
+        $(element).find('em').contents()
+            .filter((_, element) => { var _a, _b; return element.type === 'text' ? ((_a = element.data) === null || _a === void 0 ? void 0 : _a.trim()) !== "(" && ((_b = element.data) === null || _b === void 0 ? void 0 : _b.trim()) !== ")" : true; })
+            .each((_, element) => {
+            let params = element.type === 'text'
+                ? element.data.replace('(', '').replace(')', '').trim()
+                : $(element).text().replace('(', '').replace(')', '').trim();
+            result.push(getValidType(params));
+        });
+        // Group them in pairs (type, param)
+        const params = result.reduce((acc, _, index, arr) => {
+            if (index % 2 === 0 && arr[index] !== '') {
+                let [name, def] = arr[index + 1].split('=');
+                acc.push({ type: arr[index], name: name.replace(',', '').trim(), default: (def === null || def === void 0 ? void 0 : def.trim()) || null });
+            }
+            return acc;
+        }, []);
+        signature.push({ name, params });
+        return signature;
+    }
+    catch (error) {
+        console.error(`Error parsing method signature: ${name}`);
+        return [{ name: name, params: [{ name: 'p', type: 'any', default: null }] }];
+    }
 }
 function extractLastNestedListItem(element) {
     const lastItem = element.find('ul li').last().find('a').text().trim();
@@ -174,9 +171,9 @@ function generateEnumDeclaration(enums) {
     enums.forEach((enumDef) => {
         enumDeclaration += `export enum ${enumDef.name} {\n`;
         enumDef.values.forEach((value, index) => {
-            enumDeclaration += `  ${value}: ${index}\n`;
+            enumDeclaration += `  ${value} = ${index},\n`;
         });
-        enumDeclaration += '}\n';
+        enumDeclaration += '}\n\n';
     });
     return enumDeclaration;
 }
@@ -203,21 +200,21 @@ function generateClassDeclaration(classDef) {
     if (classDef.constructors.length > 0)
         classDeclaration += '\n  /* Constructors */\n';
     classDef.constructors.forEach(constructor => {
-        const params = constructor.params.map(p => mapParameter(p)).join(', ');
+        const params = constructor.params.map(p => mapParameter(p)).join(',');
         classDeclaration += `  constructor(${params}); \n`;
     });
     // Add methods
     if (classDef.methods.length > 0)
         classDeclaration += '\n  /* Methods */\n';
     classDef.methods.forEach(method => {
-        const params = method.params.map(p => mapParameter(p)).join(', ');
+        const params = method.params.map(p => mapParameter(p)).join(',');
         classDeclaration += `  ${method.name} (${params}): ${method.return}; \n`;
     });
     // Add signals (if applicable)
     if (classDef.signals.length > 0)
         classDeclaration += '\n  /* Signals */\n';
     classDef.signals.forEach(signal => {
-        const params = signal.params.map(p => mapParameter(p)).join(', ');
+        const params = signal.params.map(p => mapParameter(p)).join(',');
         classDeclaration += `  ${signal.name} (${params}): ${signal.return}; \n`;
     });
     // Close the class declaration
@@ -236,4 +233,15 @@ function getValidType(type) {
             return type;
     }
 }
-fetchDzType(DzTypes.SceneHelper);
+var DzTypes;
+(function (DzTypes) {
+    DzTypes["SceneHelper"] = "scenehelper_dz";
+    DzTypes["FloatSlider"] = "floatslider_dz";
+    DzTypes["ItnSlider"] = "intslider_dz";
+    DzTypes["Widget"] = "widget_dz";
+    DzTypes["ColorWidget"] = "colorwgt_dz";
+    DzTypes["Style"] = "style_dz";
+    DzTypes["Rect"] = "rect";
+    DzTypes["Palette"] = "palette";
+})(DzTypes || (DzTypes = {}));
+fetchDzType(DzTypes.Style);

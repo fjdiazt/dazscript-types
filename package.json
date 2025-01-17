@@ -1,18 +1,19 @@
 {
   "name": "dazscript-types",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Freddy Diaz",
   "license": "MPL-2.0",
   "description": "Daz Studio Scripting Types",
-  "types": "types/",
+  "types": "src/types/",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "fetch": "node dist/scripts/fetchClass.js"
   },
   "files": [
-    "types/"
+    "src/types/"
   ],
-  "main": "types/",
+  "main": "src/types/",
   "keywords": [
     "daz3d",
     "daz studio",
