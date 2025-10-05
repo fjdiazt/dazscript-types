@@ -1,3 +1,4 @@
+
 declare class DzProperty extends DzBase {
     static InterpLinear: number;	// 0
     static InterpConstant: number;	// 1
@@ -187,18 +188,15 @@ declare class DzProperty extends DzBase {
     setIsUserProperty(yesNo: boolean): void;
 
     /**
-     * NOT WORKING
      * Sets the interpolation method for the i'th key.
      * @param i The index of the key to change.
      * @param interp The type of interpolation to perform between this keyframe and the next.
-     * @deprecated use setKeyInterpolation
      */
     setKeyInterpolationType(i: number, interp: number): void;
     /**
-     * NOT WORKING
+     * Sets the interpolation method for the i'th key.
      * @param i The index of the key to change.
      * @return The type of interpolation to perform between this keyframe and the next.
-     * @deprecated use setKeyInterpolation
      */
     getKeyInterpolationType(i: number): number;
 
@@ -206,7 +204,11 @@ declare class DzProperty extends DzBase {
     setNew(onOff: boolean): void;
     setOverrideControllers(onOff: boolean): void;
     setOwner(owner: DzElement): void;
-    //setPath(path: string): void; // Use DzSceneHelper.setPropertyPath instead
+    /**
+     * @param path
+     * @deprecated Use DzSceneHelper.setPropertyPath instead
+     */
+    setPath(path: string): void; // Use DzSceneHelper.setPropertyPath instead
     setPresentation(pres: DzPresentation): void;
     setRegion(reg: DzGeometryRegion): void;
     setSelected(onOff: boolean): void;

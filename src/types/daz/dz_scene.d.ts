@@ -131,7 +131,7 @@ declare class DzScene extends DzBase {
     getCameraList(): DzCamera[];
     getWSModifier(which: number): DzWSModifier;
     getWSModifierList(): QObject[];
-    findNode(name: QString): DzNode;
+    findNode(name: string): DzNode;
     findNodeByLabel(label: QString): DzNode;
     findSkeleton(name: QString): DzSkeleton;
     findSkeletonByLabel(label: QString): DzSkeleton;

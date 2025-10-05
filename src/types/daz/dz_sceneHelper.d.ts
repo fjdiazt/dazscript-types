@@ -35,7 +35,9 @@ declare class DzSceneHelper extends QObject {
     getPropertiesOnElement(elem: DzElement): DzProperty[];
     getPropertiesOnMaterial(prop: DzProperty, includeProviders?: boolean): DzProperty[];
     getPropertiesOnMaterial(material: DzMaterial, includeProviders?: boolean): DzProperty[];
+    getPropertiesOnNode(prop: DzProperty): DzProperty[];
     getPropertiesOnNode(prop: DzProperty, includeModifiers?: boolean): DzProperty[];
+    getPropertiesOnNode(node: DzNode): DzProperty[];
     getPropertiesOnNode(node: DzNode, includeModifiers?: boolean): DzProperty[];
     getRegionPropertiesOnNode(node: DzNode): DzProperty[];
     // getRegionPropertiesRecurse (region: geometryregion_dz ): Array;

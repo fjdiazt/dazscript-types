@@ -44,7 +44,7 @@ declare class DzListBox extends DzScrollView {
     text(index: number): string;
 
     // Signals
-    currentChanged: ISignal;
+    currentChanged: ISignalT<number>;
 
     // TODO:
     getWidget(): any; // TODO ;

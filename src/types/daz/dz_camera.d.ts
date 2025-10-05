@@ -18,6 +18,9 @@ declare class DzCamera extends DzNode {
      */
     type: number;
 
+    focalLength: number;
+    focalDistance: number;
+
     /* Methods */
     accFrustum(left: number, right: number, bottom: number): void;
     accPerspective(fovy: number, aspect: number): void;
@@ -31,8 +34,8 @@ declare class DzCamera extends DzNode {
     getAspectRatio(): number;
     getFarClippingPlane(): number;
     getFieldOfView(): number;
-    getFocalDistance(): number;
-    getFocalLength(): number;
+    // getFocalDistance(): number;
+    // getFocalLength(): number;
     getFocalPoint(): DzVec3;
     getHeadlight(): DzLight;
     getIcon(): QIcon;
@@ -42,8 +45,8 @@ declare class DzCamera extends DzNode {
     projectionChanged(): void;
     reset(): void;
     setAspectRatio(aspect: number): void;
-    setFocalDistance(dist: number): void;
-    setFocalLength(dist: number): void;
+    // setFocalDistance(dist: number): void;
+    // setFocalLength(dist: number): void;
     setGL(width: number, height: number, view: QRect, pass: number, totalPasses: number): void;
     setProjection(settings: DzRenderSettings, width: number, height: number): void;
     setRenderGlobals(settings: DzRenderSettings): void;
