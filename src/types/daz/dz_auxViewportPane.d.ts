@@ -72,7 +72,6 @@ declare class DzAuxViewportPane extends DzPane {
     showMaximized(): any;
     showMinimized(): any;
     showNormal(): any;
-    showPane(): any;
     startIPRRender(): any;
     stopIPRRender(): any;
     subPanesBuildFinished(): any;

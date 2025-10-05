@@ -129,7 +129,6 @@ declare class DzSurfacesPane extends DzPane {
     showMaximized(): any;
     showMinimized(): any;
     showNormal(): any;
-    showPane(): any;
     showingHidden(): any;
     toggleShowHidden(): any;
     undock(): any;
