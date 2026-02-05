@@ -57,7 +57,6 @@ declare class DzNode extends DzElement {
     finalize(isRender: boolean, allowResChange: boolean): void;
     finalize(isRender: boolean, allowResChange: boolean): void;
     select(onOff: boolean): void;
-    select(onOff: boolean): void;
     setSelectable(onOff: boolean): void;
     setVisible(onOff: boolean): void;
     setVisibileInRender(onOff: boolean): void;

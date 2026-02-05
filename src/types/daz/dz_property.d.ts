@@ -336,7 +336,7 @@ declare class DzProperty extends DzBase {
     paint(painter: QPainter, option: QStyleOptionViewItem, index: QModelIndex): void;
     setCardMode(onOff: boolean): void;
     setEditorData(editor: QWidget, index: QModelIndex): void;
-    sizeHint(option: QStyleOptionViewItem, index: QModelIndex): QSize;
+    sizeHint(option: QStyleOptionViewItem, index: QModelIndex): Size;
     updateControlOnlySettings(): void;
     updateEditorGeometry(editor: QWidget, option: QStyleOptionViewItem, index: QModelIndex): void;
     addProperty(prop: DzProperty): void;

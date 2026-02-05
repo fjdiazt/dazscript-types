@@ -1,13 +1,13 @@
-declare class QSize extends QObject {
+declare class Size extends QObject {
     constructor();
-    constructor(size: QSize);
+    constructor(size: Size);
     constructor(w: number, h: number);
 
     width: number;
     height: number;
 
-    boundedTo(size: QSize): QSize;
-    expandedTo(size: QSize): QSize;
+    boundedTo(size: Size): Size;
+    expandedTo(size: Size): Size;
 
     isEmpty(): boolean;
     isNull(): boolean;
@@ -21,7 +21,7 @@ declare class QSize extends QObject {
      * 1 = Scaled to a rectangle as large as possible inside size , preserving aspect ratio.
      * 2 = Scaled to a rectangle as small as possible outside size , preserving aspect ratio.
      */
-    scale(size: QSize, aspectRatioMode: number): void;
+    // scale(size: Size, aspectRatioMode: number): void;
     /**
      * Scales the size to the specified width and height while respecting the aspect ratio.
      * @param width The width to scale to
@@ -31,7 +31,7 @@ declare class QSize extends QObject {
      * 1 = Scaled to a rectangle as large as possible inside size , preserving aspect ratio.
      * 2 = Scaled to a rectangle as small as possible outside size , preserving aspect ratio.
      */
-    scale(width: number, height: number, aspectRatioMode: number): void;
+    // scale(width: number, height: number, aspectRatioMode: number): void;
 
     translate(): void;
     transpose(): void;

@@ -13,5 +13,5 @@ declare class DzIntSlider extends DzSlider {
 
     /* Signals */
     editCancelled(): void;
-    valueChanged(value: number): void;
+    valueChanged: ISignalT<number>;
 }

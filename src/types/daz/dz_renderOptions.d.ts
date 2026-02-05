@@ -31,7 +31,7 @@ declare class DzRenderOptions extends QObject {
     aspect: number;
     aspectWidth: number;
     aspectHeight: number;
-    imageSize: QObject;
+    imageSize: Size;
     renderType: number;
     renderStyle: number;
     rayTraceDepth: number;

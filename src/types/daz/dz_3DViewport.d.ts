@@ -125,10 +125,7 @@ declare class Dz3DViewport extends QGLWidget {
     activeCameraProjectionChanged(): any; // TODO ;
     currentDimensionsChanged(): any; // TODO ;
     setDrawStyle(style: DzDrawStyle): void;
-    setCamera(cam: DzCamera): void;
-    setCamera(cam: QString): void;
-    setCamera(cam: DzCamera): void;
-    setCamera(cam: QString): void;
+    setCamera(cam: string | DzCamera): void;
     aimCamera(): void;
     aimCameraAtPrimaryNode(): void;
     aimCameraAtBox(box: DzBox3): void;
