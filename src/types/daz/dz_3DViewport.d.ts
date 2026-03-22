@@ -160,4 +160,10 @@ declare class Dz3DViewport extends QGLWidget {
     mouseIsDown(): any; // TODO ;
     updateView(): void;
     removeCamera(cam: DzNode): void;
+
+    resetCamera(): void;
+    setCamera(cam: string): void;
+    setCamera(cam: DzCamera): void;
+    setDrawStyle(style: DzDrawStyle): void;
+    setUserDrawStyle(description: string): boolean;
 }
