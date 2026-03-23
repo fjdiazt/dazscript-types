@@ -27,7 +27,7 @@ export interface AncestorMembers {
 
 const METHOD_RE  = /^(\w+)\s*\(([^)]*)\)\s*:\s*[\w\[\]<>,.\s|]+;?\s*(?:\/\/.*)?$/;
 const PROP_RE    = /^(\w+)\??\s*:\s*[\w\[\]<>,.\s|]+;?\s*(?:\/\/.*)?$/;
-const ISSUES_BLOCK_START = '/* @enricher-issues';
+const ISSUES_BLOCK_START = '/* @syncer-issues';
 
 /**
  * Parse a single `.d.ts` file content into a ClassInfo.
@@ -131,7 +131,7 @@ export function resolveAncestorMembers(className: string, registry: ClassRegistr
  * Documentation status on either side is irrelevant.
  *
  * Rules:
- *  - Skipped entirely if the file has an `@enricher-issues` block.
+ *  - Skipped entirely if the file has an `@syncer-issues` block.
  *  - The JSDoc block immediately preceding a removed declaration is also removed.
  *  - All duplicate occurrences of the same member are removed.
  *  - Consecutive blank lines left by removal are collapsed to at most one.

@@ -288,8 +288,8 @@ declare class DzChild extends QObject {
         expect(result).not.toContain('deleteLater(): void;');
     });
 
-    it('returns content unchanged when @enricher-issues block is present', () => {
-        const content = `/* @enricher-issues\n * ⚠ Issues found\n * - Mismatch\n */\n${DZELEMENT_CONTENT}`;
+    it('returns content unchanged when @syncer-issues block is present', () => {
+        const content = `/* @syncer-issues\n * ⚠ Issues found\n * - Mismatch\n */\n${DZELEMENT_CONTENT}`;
         const result = removeInheritedMembers(content, registry);
         expect(result).toBe(content);
     });

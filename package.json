@@ -9,7 +9,7 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "fetch": "node dist/scripts/fetchClass.js",
-    "enrich": "ts-node src/scripts/enrichFromDocs.ts",
+    "sync": "ts-node src/scripts/sync.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },

@@ -87,11 +87,11 @@ describe('properties', () => {
         expect(docs.properties.get('priority')?.type).toBe('number');
     });
 
-    it('enriches property description from Detailed Description section', () => {
+    it('populates property description from Detailed Description section', () => {
         expect(docs.properties.get('label')?.description).toBe('The display label for the object.');
     });
 
-    it('enriches property since from Detailed Description section', () => {
+    it('populates property since from Detailed Description section', () => {
         expect(docs.properties.get('label')?.since).toBe('4.5.0.0');
     });
 });
@@ -133,19 +133,19 @@ describe('methods', () => {
         expect(docs.methods.get('overloaded')).toHaveLength(2);
     });
 
-    it('enriches method description', () => {
+    it('populates method description', () => {
         expect(docs.methods.get('setLabel')?.[0].description).toBe('Sets the label of the object.');
     });
 
-    it('enriches return description', () => {
+    it('populates return description', () => {
         expect(docs.methods.get('getLabel')?.[0].returnDescription).toBe('The current label string.');
     });
 
-    it('enriches since version', () => {
+    it('populates since version', () => {
         expect(docs.methods.get('setLabel')?.[0].since).toBe('4.6.0.0');
     });
 
-    it('enriches param descriptions', () => {
+    it('populates param descriptions', () => {
         const params = docs.methods.get('setLabel')?.[0].params ?? [];
         expect(params[0].description).toBe('The new label to assign.');
     });
@@ -172,7 +172,7 @@ describe('signals', () => {
         expect(params[0]).toMatchObject({ name: 'newLabel', type: 'string' });
     });
 
-    it('enriches signal description', () => {
+    it('populates signal description', () => {
         expect(docs.signals.get('labelChanged')?.[0].description).toBe('Emitted when the label changes.');
     });
 });

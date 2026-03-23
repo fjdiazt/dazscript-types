@@ -57,8 +57,8 @@ export async function parseDocsFromUrl(docUrl: string): Promise<DocumentationDat
         const methods = extractMethods($);
         const properties = extractProperties($);
         const signals = extractSignals($);
-        // Enrich from the Detailed Description section (updates in place)
-        const descriptions = enrichFromDetailedSection($, methods, properties, signals);
+        // Parse the Detailed Description section (updates in place)
+        const descriptions = parseDetailedSection($, methods, properties, signals);
 
         return { className, classSummary, inherits, methods, properties, signals, descriptions };
     } catch (error) {
@@ -314,7 +314,7 @@ function parseDetailBlock($: any, elements: any[]): DetailedEntry | null {
 }
 
 /**
- * Parse the Detailed Description section and enrich methods/properties/signals
+ * Parse the Detailed Description section and populate methods/properties/signals
  * in-place with descriptions, return descriptions, param descriptions, and versions.
  *
  * The detailed section is structured as:
@@ -329,7 +329,7 @@ function parseDetailBlock($: any, elements: any[]): DetailedEntry | null {
  *     ...
  *   </div>
  */
-function enrichFromDetailedSection(
+function parseDetailedSection(
     $: any,
     methods: Map<string, DocMethod[]>,
     properties: Map<string, DocProperty>,

@@ -6,6 +6,8 @@ import { buildClassRegistry, ClassRegistry, removeInheritedMembers } from './inh
 interface Options {
     /** When true, issues are only printed to console and not written into the file. */
     noFileIssues: boolean;
+    /** When true, declarations not found in docs are removed instead of marked @undocumented. */
+    removeUndocumented: boolean;
 }
 
 interface FileToProcess {
@@ -17,13 +19,14 @@ async function main() {
     const args = process.argv.slice(2);
 
     if (args.length === 0) {
-        console.error('Usage: ts-node enrichFromDocs.ts <file.d.ts|folder> [--no-backup] [--no-file-issues]');
+        console.error('Usage: ts-node sync.ts <file.d.ts|folder> [--no-file-issues] [--remove-undocumented]');
         process.exit(1);
     }
 
     const targetPath = args[0];
     const options: Options = {
         noFileIssues: args.includes('--no-file-issues'),
+        removeUndocumented: args.includes('--remove-undocumented'),
     };
 
     let filesToProcess: FileToProcess[] = [];
@@ -140,12 +143,12 @@ async function processFile(filePath: string, docUrl: string, options: Options, r
         }
     }
 
-    // Enrich content
-    const enrichedContent = enrichFileContent(originalContent, docs, issues, options.noFileIssues);
+    // Sync content
+    const syncedContent = syncFileContent(originalContent, docs, issues, options.noFileIssues, options.removeUndocumented);
 
     // Remove members already documented in ancestor classes (only when no
     // inheritance mismatch — removeInheritedMembers skips files with issues block)
-    const finalContent = removeInheritedMembers(enrichedContent, registry);
+    const finalContent = removeInheritedMembers(syncedContent, registry);
 
     // Write back
     fs.writeFileSync(filePath, finalContent, 'utf-8');
@@ -313,12 +316,12 @@ export function extractDeclaredInherits(content: string): string {
     return m ? m[1] : '';
 }
 
-const ISSUES_BLOCK_START = '/* @enricher-issues';
+const ISSUES_BLOCK_START = '/* @syncer-issues';
 
 /** Build the issues comment block written at the top of the file. */
 function buildIssuesBlock(issues: string[]): string {
     const lines = issues.map(i => ` * - ${i}`).join('\n');
-    return `/* @enricher-issues\n * ⚠ Issues found by enricher — fix manually or re-run after correcting source:\n${lines}\n */`;
+    return `/* @syncer-issues\n * ⚠ Issues found during sync — fix manually or re-run after correcting source:\n${lines}\n */`;
 }
 
 /** Strip an existing issues block from the top of the content (for idempotency). */
@@ -330,7 +333,7 @@ function stripIssuesBlock(content: string): string {
 }
 
 /**
- * Core enrichment logic.
+ * Core sync logic.
  *
  * Strategy (per declaration):
  *  - If existing JSDoc already has a description → keep it (idempotent).
@@ -342,7 +345,7 @@ function stripIssuesBlock(content: string): string {
  * Duplicate signatures (identical name + params) are only documented once;
  * subsequent copies keep whatever JSDoc they already carry (or none).
  */
-export function enrichFileContent(content: string, docs: DocumentationData, issues: string[] = [], noFileIssues = false): string {
+export function syncFileContent(content: string, docs: DocumentationData, issues: string[] = [], noFileIssues = false, removeUndocumented = false): string {
     // Strip any stale issues block so we don't duplicate it
     content = stripIssuesBlock(content);
 
@@ -487,7 +490,7 @@ export function enrichFileContent(content: string, docs: DocumentationData, issu
                             output.push('');
                         }
                         output.push(applyIndent(jsDoc, indent));
-                    } else {
+                    } else if (!removeUndocumented) {
                         if (output.length > 0 && output[output.length - 1].trim() !== '') {
                             output.push('');
                         }
@@ -498,7 +501,9 @@ export function enrichFileContent(content: string, docs: DocumentationData, issu
                 // ── Fix declaration types from doc data ───────────────────────
                 resolvedOverloads.set(signatureKey, overload);
                 pendingJSDoc = null;
-                output.push(buildFixedDeclaration(line, indent, name, overload, docs));
+                if (isDocumented || keepExisting || !removeUndocumented) {
+                    output.push(buildFixedDeclaration(line, indent, name, overload, docs));
+                }
             } else {
                 // Duplicate signature — apply same type fix as the first occurrence
                 if (pendingJSDoc !== null) {

@@ -4,8 +4,8 @@ import {
     countParams,
     buildFixedDeclaration,
     extractDeclaredInherits,
-    enrichFileContent,
-} from '../scripts/enrichFromDocs';
+    syncFileContent,
+} from '../scripts/sync';
 import { DocumentationData, DocMethod, DocProperty, DocSignal } from '../scripts/docParser';
 
 // ── Test helpers ──────────────────────────────────────────────────────────────
@@ -163,9 +163,9 @@ describe('buildFixedDeclaration', () => {
     });
 });
 
-// ── enrichFileContent ─────────────────────────────────────────────────────────
+// ── syncFileContent ─────────────────────────────────────────────────────────
 
-describe('enrichFileContent', () => {
+describe('syncFileContent', () => {
     const methodDocs = makeDocs({
         classSummary: 'A test class.',
         methods: new Map([
@@ -181,7 +181,7 @@ describe('enrichFileContent', () => {
 
     it('adds JSDoc to undocumented methods', () => {
         const content = `declare class Foo {\n    getLabel(): string;\n}\n`;
-        const result = enrichFileContent(content, methodDocs);
+        const result = syncFileContent(content, methodDocs);
         expect(result).toContain('/**');
         expect(result).toContain('Returns the label.');
         expect(result).toContain('getLabel(): string;');
@@ -189,20 +189,20 @@ describe('enrichFileContent', () => {
 
     it('injects classSummary into class JSDoc', () => {
         const content = `/**\n * @docurl https://example.com\n */\ndeclare class Foo {\n    getLabel(): string;\n}\n`;
-        const result = enrichFileContent(content, methodDocs);
+        const result = syncFileContent(content, methodDocs);
         expect(result).toContain('A test class.');
     });
 
     it('adds @undocumented for methods not in docs', () => {
         const content = `declare class Foo {\n    unknownMethod(): void;\n}\n`;
-        const result = enrichFileContent(content, methodDocs);
+        const result = syncFileContent(content, methodDocs);
         expect(result).toContain('@undocumented');
     });
 
     it('does not duplicate JSDoc on second run (idempotent)', () => {
         const content = `declare class Foo {\n    getLabel(): string;\n}\n`;
-        const run1 = enrichFileContent(content, methodDocs);
-        const run2 = enrichFileContent(run1, methodDocs);
+        const run1 = syncFileContent(content, methodDocs);
+        const run2 = syncFileContent(run1, methodDocs);
         // Count occurrences of 'Returns the label.'
         const count = (run2.match(/Returns the label\./g) ?? []).length;
         expect(count).toBe(1);
@@ -210,21 +210,21 @@ describe('enrichFileContent', () => {
 
     it('fixes return type from docs', () => {
         const content = `declare class Foo {\n    getLabel(): QString;\n}\n`;
-        const result = enrichFileContent(content, methodDocs);
+        const result = syncFileContent(content, methodDocs);
         expect(result).toContain('getLabel(): string;');
         expect(result).not.toContain('getLabel(): QString;');
     });
 
     it('inserts blank line before each JSDoc block', () => {
         const content = `declare class Foo {\n    getLabel(): string;\n    setLabel(label: string): void;\n}\n`;
-        const result = enrichFileContent(content, methodDocs);
+        const result = syncFileContent(content, methodDocs);
         // There should be a blank line between the first declaration and the next JSDoc
         expect(result).toMatch(/getLabel\(\): string;\n\n\s+\/\*\*/);
     });
 
     it('applies type fix to duplicate identical signatures and deduplicates them', () => {
         const content = `declare class Foo {\n    getLabel(): QString;\n    getLabel(): QString;\n}\n`;
-        const result = enrichFileContent(content, methodDocs);
+        const result = syncFileContent(content, methodDocs);
         expect(result).not.toContain('getLabel(): QString;');
         // Duplicate identical declarations are removed — only one should remain
         const matches = result.match(/getLabel\(\): string;/g) ?? [];
@@ -233,23 +233,23 @@ describe('enrichFileContent', () => {
 
     it('prepends issues block to file when issues provided', () => {
         const content = `declare class Foo {\n}\n`;
-        const result = enrichFileContent(content, methodDocs, ['Something is wrong.']);
-        expect(result.startsWith('/* @enricher-issues')).toBe(true);
+        const result = syncFileContent(content, methodDocs, ['Something is wrong.']);
+        expect(result.startsWith('/* @syncer-issues')).toBe(true);
         expect(result).toContain('Something is wrong.');
     });
 
     it('strips stale issues block before re-adding', () => {
         const content = `declare class Foo {\n}\n`;
-        const run1 = enrichFileContent(content, methodDocs, ['Issue A.']);
-        const run2 = enrichFileContent(run1, methodDocs, ['Issue A.']);
-        const count = (run2.match(/@enricher-issues/g) ?? []).length;
+        const run1 = syncFileContent(content, methodDocs, ['Issue A.']);
+        const run2 = syncFileContent(run1, methodDocs, ['Issue A.']);
+        const count = (run2.match(/@syncer-issues/g) ?? []).length;
         expect(count).toBe(1);
     });
 
     it('suppresses file issues block when noFileIssues=true', () => {
         const content = `declare class Foo {\n}\n`;
-        const result = enrichFileContent(content, methodDocs, ['Issue.'], true);
-        expect(result).not.toContain('@enricher-issues');
+        const result = syncFileContent(content, methodDocs, ['Issue.'], true);
+        expect(result).not.toContain('@syncer-issues');
     });
 
     it('converts a method-format signal to ISignalT<T> property (1 param)', () => {
@@ -261,7 +261,7 @@ describe('enrichFileContent', () => {
         };
         const docs = makeDocs({ signals: new Map([['labelChanged', [signal]]]) });
         const content = `declare class Foo {\n    labelChanged(newLabel: QString): void;\n}\n`;
-        const result = enrichFileContent(content, docs);
+        const result = syncFileContent(content, docs);
         expect(result).toContain('labelChanged: ISignalT<string>;');
         expect(result).not.toContain('labelChanged(');
     });
@@ -275,7 +275,7 @@ describe('enrichFileContent', () => {
         };
         const docs = makeDocs({ signals: new Map([['clicked', [signal]]]) });
         const content = `declare class Foo {\n    clicked(): void;\n}\n`;
-        const result = enrichFileContent(content, docs);
+        const result = syncFileContent(content, docs);
         expect(result).toContain('clicked: ISignalT<void>;');
         expect(result).not.toContain('clicked(');
     });
@@ -292,7 +292,7 @@ describe('enrichFileContent', () => {
         };
         const docs = makeDocs({ signals: new Map([['selected', [signal]]]) });
         const content = `declare class Foo {\n    selected(node: DzNode, onOff: boolean): void;\n}\n`;
-        const result = enrichFileContent(content, docs);
+        const result = syncFileContent(content, docs);
         expect(result).toContain('selected: ISignalT<DzNode, boolean>;');
     });
 
@@ -305,7 +305,7 @@ describe('enrichFileContent', () => {
         };
         const docs = makeDocs({ signals: new Map([['labelChanged', [signal]]]) });
         const content = `declare class Foo {\n    labelChanged(newLabel: QString): void;\n}\n`;
-        const result = enrichFileContent(content, docs);
+        const result = syncFileContent(content, docs);
         expect(result).toContain('Emitted when the label changes.');
         expect(result).not.toContain('@param');
     });
@@ -319,23 +319,43 @@ describe('enrichFileContent', () => {
         };
         const docs = makeDocs({ signals: new Map([['labelChanged', [signal]]]) });
         const content = `declare class Foo {\n    labelChanged: ISignalT<string>;\n}\n`;
-        const result = enrichFileContent(content, docs);
+        const result = syncFileContent(content, docs);
         expect(result).toContain('labelChanged: ISignalT<string>;');
         expect(result).toContain('Emitted when the label changes.');
     });
 
     it('recognises a property with a trailing // comment as a declaration', () => {
         const content = `declare class Foo {\n    getLabel(): string; // SomeAnnotation\n}\n`;
-        const result = enrichFileContent(content, methodDocs);
+        const result = syncFileContent(content, methodDocs);
         expect(result).toContain('Returns the label.');
         expect(result).toContain('getLabel(): string; // SomeAnnotation');
     });
 
     it('recognises a method with a trailing // comment as a declaration', () => {
         const content = `declare class Foo {\n    setLabel(label: string): void; // SomeEnum\n}\n`;
-        const result = enrichFileContent(content, methodDocs);
+        const result = syncFileContent(content, methodDocs);
         expect(result).toContain('Sets the label.');
         expect(result).toContain('setLabel(label: string): void; // SomeEnum');
+    });
+
+    it('removes undocumented declarations when removeUndocumented=true', () => {
+        const content = `declare class Foo {\n    unknownMethod(): void;\n}\n`;
+        const result = syncFileContent(content, methodDocs, [], false, true);
+        expect(result).not.toContain('unknownMethod');
+    });
+
+    it('keeps documented declarations when removeUndocumented=true', () => {
+        const content = `declare class Foo {\n    getLabel(): string;\n    unknownMethod(): void;\n}\n`;
+        const result = syncFileContent(content, methodDocs, [], false, true);
+        expect(result).toContain('getLabel');
+        expect(result).not.toContain('unknownMethod');
+    });
+
+    it('keeps manually-described undocumented items when removeUndocumented=true', () => {
+        // A declaration with a hand-written JSDoc (not @undocumented) should be kept
+        const content = `declare class Foo {\n    /**\n     * Custom description.\n     */\n    unknownMethod(): void;\n}\n`;
+        const result = syncFileContent(content, methodDocs, [], false, true);
+        expect(result).toContain('unknownMethod');
     });
 
     it('reorders properties to match docs order', () => {
@@ -348,7 +368,7 @@ describe('enrichFileContent', () => {
         });
         // File has label before count; docs say count comes first
         const content = `declare class Foo {\n    label: string;\n    count: number;\n}\n`;
-        const result = enrichFileContent(content, docs);
+        const result = syncFileContent(content, docs);
         expect(result.indexOf('count:')).toBeLessThan(result.indexOf('label:'));
     });
 
@@ -362,7 +382,7 @@ describe('enrichFileContent', () => {
         });
         // File has getLabel before setLabel; docs say setLabel comes first
         const content = `declare class Foo {\n    getLabel(): string;\n    setLabel(label: string): void;\n}\n`;
-        const result = enrichFileContent(content, docs);
+        const result = syncFileContent(content, docs);
         expect(result.indexOf('setLabel(')).toBeLessThan(result.indexOf('getLabel('));
     });
 
@@ -381,7 +401,7 @@ describe('enrichFileContent', () => {
         });
         // File has methods before properties, with signal in wrong place
         const content = `declare class Foo {\n    getLabel(): string;\n    clicked(): void;\n    label: string;\n}\n`;
-        const result = enrichFileContent(content, docs);
+        const result = syncFileContent(content, docs);
         const propIdx = result.indexOf('label:');
         const methodIdx = result.indexOf('getLabel(');
         const signalIdx = result.indexOf('clicked:');
@@ -396,7 +416,7 @@ describe('enrichFileContent', () => {
             descriptions: new Map([['label', 'The label.']]),
         });
         const content = `declare class Foo {\n    label: string;\n    label: string;\n}\n`;
-        const result = enrichFileContent(content, docs);
+        const result = syncFileContent(content, docs);
         const matches = result.match(/^\s+label: string;/gm) ?? [];
         expect(matches.length).toBe(1);
     });
@@ -410,8 +430,8 @@ describe('enrichFileContent', () => {
             descriptions: new Map([['count', 'The count.'], ['label', 'The label.']]),
         });
         const content = `declare class Foo {\n    label: string;\n    count: number;\n}\n`;
-        const run1 = enrichFileContent(content, docs);
-        const run2 = enrichFileContent(run1, docs);
+        const run1 = syncFileContent(content, docs);
+        const run2 = syncFileContent(run1, docs);
         expect(run2).toBe(run1);
     });
 });
