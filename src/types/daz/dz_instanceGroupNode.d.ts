@@ -312,7 +312,7 @@ declare class DzInstanceGroupNode extends DzNode {
     setPresentation(p0: DzPresentation): any;
     setPreviewBox(p0: DzOrientedBox3): any;
     setPromoteSelection(p0: boolean): any;
-    setRenderPriority(p0: DzRenderMgr::RenderPriority): any;
+    setRenderPriority(p0: number): any; // DzRenderMgr::RenderPriority
     setRenderPriority(p0: number): any;
     setRotationOrder(p0: DzRotationOrder): any;
     setSelectable(p0: boolean): any;
