@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1 id="dztestclass">DzTestClass</h1>
+  <div class="level1">
+    <p>Base class for testing the doc parser pipeline.</p>
+    <p><strong>Inherits :</strong></p>
+    <ul>
+      <li>QObject
+        <ul>
+          <li>DzBase
+            <ul>
+              <li><a href="#">DzElement</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <h2>Properties</h2>
+  <div class="level2">
+    <table>
+      <tbody>
+        <tr><td>String</td><td><strong>label</strong></td></tr>
+        <tr><td>Number</td><td><strong>count</strong></td></tr>
+        <tr><td>Boolean</td><td><strong>visible</strong></td></tr>
+        <tr><td>Array</td><td><strong>items</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Methods</h2>
+  <div class="level2">
+    <table>
+      <tbody>
+        <tr>
+          <td>void</td>
+          <td><strong>setLabel</strong>( <em>String</em> label )</td>
+        </tr>
+        <tr>
+          <td>String</td>
+          <td><strong>getLabel</strong>()</td>
+        </tr>
+        <tr>
+          <td>Boolean</td>
+          <td><strong>findChild</strong>( <em>String</em> name,  <em>Boolean</em> recursive=false )</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td><strong>overloaded</strong>( <em>String</em> name )</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td><strong>overloaded</strong>( <em>Number</em> index,  <em>Boolean</em> flag=false )</td>
+        </tr>
+        <tr>
+          <td>String</td>
+          <td><strong>className</strong>()</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Signals</h2>
+  <div class="level2">
+    <table>
+      <tbody>
+        <tr>
+          <td>void</td>
+          <td><strong>labelChanged</strong>( <em>String</em> newLabel )</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Detailed Description</h2>
+  <div class="level2"></div>
+
+  <h3>Methods</h3>
+  <div class="level3">
+    <hr/>
+    <p>void : <strong><a name="setLabel">setLabel</a></strong>( String label )</p>
+    <p>Sets the label of the object.</p>
+    <p><strong>Parameter(s):</strong></p>
+    <ul>
+      <li><em>label</em> - The new label to assign.</li>
+    </ul>
+    <p><strong>Since:</strong></p>
+    <ul><li>4.6.0.0</li></ul>
+    <hr/>
+    <p>String : <strong><a name="getLabel">getLabel</a></strong>()</p>
+    <p>Returns the label of the object.</p>
+    <p><strong>Return Value:</strong></p>
+    <ul><li>The current label string.</li></ul>
+    <p><strong>Since:</strong></p>
+    <ul><li>4.6.0.0</li></ul>
+    <hr/>
+    <p>Boolean : <strong><a name="findChild">findChild</a></strong>( String name, Boolean recursive )</p>
+    <p>Searches for a child with the given name.</p>
+    <p><strong>Parameter(s):</strong></p>
+    <ul>
+      <li><em>name</em> - The name to search for.</li>
+      <li><em>recursive</em> - Whether to search recursively.</li>
+    </ul>
+    <p><strong>Return Value:</strong></p>
+    <ul><li>true if the child was found, otherwise false.</li></ul>
+    <hr/>
+    <p>void : <strong><a name="overloaded">overloaded</a></strong>( String name )</p>
+    <p>Overload taking a name string.</p>
+    <hr/>
+    <p>void : <strong><a name="overloaded">overloaded</a></strong>( Number index, Boolean flag )</p>
+    <p>Overload taking an index and flag.</p>
+    <hr/>
+    <p>String : <strong><a name="className">className</a></strong>()</p>
+    <p>Returns the class name of the object.</p>
+    <p><strong>Return Value:</strong></p>
+    <ul><li>A string representation of the class name.</li></ul>
+    <hr/>
+  </div>
+
+  <h3>Properties</h3>
+  <div class="level3">
+    <hr/>
+    <p>String : <strong><a name="label">label</a></strong></p>
+    <p>The display label for the object.</p>
+    <p><strong>Since:</strong></p>
+    <ul><li>4.5.0.0</li></ul>
+    <hr/>
+  </div>
+
+  <h3>Signals</h3>
+  <div class="level3">
+    <hr/>
+    <p>void : <strong><a name="labelChanged">labelChanged</a></strong>( String newLabel )</p>
+    <p>Emitted when the label changes.</p>
+    <hr/>
+  </div>
+</div>
+</body>
+</html>

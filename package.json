@@ -9,7 +9,9 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "fetch": "node dist/scripts/fetchClass.js",
-    "enrich": "ts-node src/scripts/enrichFromDocs.ts"
+    "enrich": "ts-node src/scripts/enrichFromDocs.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "files": [
     "src/types/"
@@ -32,6 +34,7 @@
     "@types/cheerio": "^0.22.35",
     "@types/node": "^22.10.7",
     "axios": "^1.7.9",
-    "cheerio": "^1.0.0"
+    "cheerio": "^1.0.0",
+    "vitest": "^4.1.0"
   }
 }

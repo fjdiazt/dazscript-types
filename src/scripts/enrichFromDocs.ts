@@ -141,7 +141,7 @@ async function processFile(filePath: string, docUrl: string, options: Options): 
  * Returns true if the JSDoc block lines contain a description (not just @tags).
  * An auto-generated stub only has @param/@returns lines with no leading description.
  */
-function hasDescriptionInJSDoc(jsDocLines: string[]): boolean {
+export function hasDescriptionInJSDoc(jsDocLines: string[]): boolean {
     for (const line of jsDocLines) {
         const trimmed = line.trim();
 
@@ -167,7 +167,7 @@ function hasDescriptionInJSDoc(jsDocLines: string[]): boolean {
 /**
  * Count the number of parameters in a method/function signature string.
  */
-function countParams(signature: string): number {
+export function countParams(signature: string): number {
     const match = signature.match(/\(([^)]*)\)/);
     if (!match || !match[1].trim()) return 0;
     return match[1].split(',').length;
@@ -235,13 +235,14 @@ function emitJSDoc(output: string[], lines: string[]): void {
 
 /**
  * Rebuild a declaration line using authoritative types from the docs.
+ * @internal exported for testing
  *
  * For methods: reconstructs `name(param: Type, ...): ReturnType;` using doc param
  *   names, types, and optional markers. Never downgrades a specific type to `any[]`.
  * For properties: replaces the type token in-place.
  * Returns the original line unchanged when no doc data is available.
  */
-function buildFixedDeclaration(
+export function buildFixedDeclaration(
     line: string,
     indent: string,
     name: string,
@@ -277,7 +278,7 @@ function buildFixedDeclaration(
 }
 
 /** Extract the class name after `extends` in a `declare class` statement. */
-function extractDeclaredInherits(content: string): string {
+export function extractDeclaredInherits(content: string): string {
     const m = content.match(/declare class \w+ extends (\w+)/);
     return m ? m[1] : '';
 }
@@ -311,7 +312,7 @@ function stripIssuesBlock(content: string): string {
  * Duplicate signatures (identical name + params) are only documented once;
  * subsequent copies keep whatever JSDoc they already carry (or none).
  */
-function enrichFileContent(content: string, docs: DocumentationData, issues: string[] = [], noFileIssues = false): string {
+export function enrichFileContent(content: string, docs: DocumentationData, issues: string[] = [], noFileIssues = false): string {
     // Strip any stale issues block so we don't duplicate it
     content = stripIssuesBlock(content);
 
