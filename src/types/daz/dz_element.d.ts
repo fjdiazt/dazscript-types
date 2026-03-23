@@ -4,7 +4,6 @@
  * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/element_dz
  */
 declare class DzElement extends DzBase {
-
     /* Properties */
 
     /**
@@ -21,9 +20,6 @@ declare class DzElement extends DzBase {
      */
     addDataItem(item: DzElementData): DzError;
 
-    /** @undocumented */
-    addElementChild(child: DzElement): void;
-
     /**
      * Adds a new private property to this element that will be available for connections or direct editing.
      * @param prop DzProperty - The property to add to the element.
@@ -31,24 +27,12 @@ declare class DzElement extends DzBase {
      */
     addPrivateProperty(prop: DzProperty): DzError;
 
-    /** @undocumented */
-    addPrivatePropertyInternal(newprop: DzProperty): void;
-
-    /** @undocumented */
-    addPrivatePropertyToList(prop: DzProperty): DzError;
-
     /**
      * Adds a new property to this element that will be available for connections or direct editing.
      * @param prop DzProperty - The property to add to the element.
      * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
      */
     addProperty(prop: DzProperty): DzError;
-
-    /** @undocumented */
-    addPropertyInternal(newprop: DzProperty): void;
-
-    /** @undocumented */
-    addPropertyToList(prop: DzProperty): DzError;
 
     /**
      * Begins an editing operation for this element - DzProperty::beginEdit() will be called for all properties belonging to this element.
@@ -82,10 +66,7 @@ declare class DzElement extends DzBase {
      * @param contentTypes any[] - A list of the contentTypes that should be included in the copy. An empty list will copy all property values.
      * @returns elementclipboard_dz The 'clipboard' which holds a copy of the current element's property values. These values are a snapshot of the current state of the element, and will remain unchanged even if the element is changed or deleted. The caller is responsible for deleting this element.
      */
-    copyToClipboard(contentTypes?: any[]): any;
-
-    /** @undocumented */
-    defaultPropertyGroupTree(): DzPropertyGroupTree;
+    copyToClipboard(contentTypes?: any[]): any; //elementclipboard_dz;
 
     /**
      * Remove the data item from this element and deletes it.
@@ -93,18 +74,6 @@ declare class DzElement extends DzBase {
      * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
      */
     deleteDataItem(item: DzElementData): DzError;
-
-    /** @undocumented */
-    duplicateMissingCustomData(tgt: DzElement): void;
-
-    /** @undocumented */
-    duplicateMissingPrivateProperties(tgt: DzElement): void;
-
-    /** @undocumented */
-    duplicateMissingProperties(tgt: DzElement): void;
-
-    /** @undocumented */
-    elementChildIterator(): DzElementListIterator;
 
     /**
      * @param dataName string - The name of the user data item to find.
@@ -129,8 +98,6 @@ declare class DzElement extends DzBase {
      * @param caseSensitive boolean - Whether or not the search should be case sensitive.
      * @returns DzProperty The private property with the given name (if any), otherwise null.
      */
-    findPrivateProperty(name: string, caseSensitive: boolean): DzProperty;
-    findPrivateProperty(name: string): DzProperty;
     findPrivateProperty(name: string, caseSensitive: boolean): DzProperty;
 
     /**
@@ -208,19 +175,10 @@ declare class DzElement extends DzBase {
      */
     getElementParent(): DzElement;
 
-    /** @undocumented */
-    getIsPropertyTreeOwnedByParent(): boolean;
-
     /**
      * @returns string The user-facing label for this element.
      */
     getLabel(): string;
-
-    /**
-     * @returns string The user-facing label for this type of element.
-     * @since 4.12.1.103
-     */
-    getTypeLabel(): string;
 
     /**
      * @returns DzScript The script that is executed when this element is loaded from a file (if any), otherwise null.
@@ -280,6 +238,12 @@ declare class DzElement extends DzBase {
     getPropertyList(): DzProperty[];
 
     /**
+     * @returns string The user-facing label for this type of element.
+     * @since 4.12.1.103
+     */
+    getTypeLabel(): string;
+
+    /**
      * @param dataName string - The name of the data item to make unique.
      * @returns string The original value if dataName is already unique, otherwise a unique name.
      * @since 4.9.3.117
@@ -300,9 +264,6 @@ declare class DzElement extends DzBase {
      */
     insertPrivateProperty(index: number, prop: DzProperty): DzError;
 
-    /** @undocumented */
-    insertPrivatePropertyInList(index: number, prop: DzProperty): DzError;
-
     /**
      * Adds a new property to this element that will be available for connections or direct editing.
      * @param index number - The index in the properties list to insert the property.
@@ -310,24 +271,6 @@ declare class DzElement extends DzBase {
      * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
      */
     insertProperty(index: number, prop: DzProperty): DzError;
-
-    /** @undocumented */
-    insertPropertyInList(index: number, prop: DzProperty): DzError;
-
-    /** @undocumented */
-    isDataItemNameUnique(dataName: QString, makeUnique: boolean): boolean;
-
-    /** @undocumented */
-    isPrivatePropertyNameUnique(name: QString, makeUnique: boolean): boolean;
-
-    /** @undocumented */
-    isPropertyNameUnique(name: QString, makeUnique: boolean): boolean;
-
-    /**
-     * Emitted when this element's label is changed.
-     * @param newLabel string - The new label of the element.
-     */
-    labelChanged(newLabel: QString): void;
 
     /**
      * Moves the given property from this element to newElement, if it can be removed. Properties can be specified as non-removable (i.e., DzProperty::isUserProperty()). Doing so makes it impossible to move that property to another element.
@@ -346,76 +289,12 @@ declare class DzElement extends DzBase {
     moveProperty(prop: DzProperty, element: DzElement): DzError;
 
     /**
-     * Emitted when this element's parent is changed.
-     */
-    parentChanged(): void;
-
-    /**
-     * Emitted when a private property is added to this element.
-     * @param prop DzProperty - The property just added.
-     */
-    privatePropertyAdded(prop: DzProperty): void;
-
-    /**
-     * Emitted when a private property is added to or removed from this element.
-     */
-    privatePropertyListChanged(): void;
-
-    /** @undocumented */
-    privatePropertyListIterator(): DzPropertyListIterator;
-
-    /**
-     * Emitted when a private property is removed from this element.
-     * @param prop DzProperty - The property just removed.
-     */
-    privatePropertyRemoved(prop: DzProperty): void;
-
-    /**
-     * Emitted when the private property tree has changed.
-     */
-    privatePropertyTreeChanged(): void;
-
-    /**
-     * Emitted when a property is added to this element.
-     * @param prop DzProperty - The property just added.
-     */
-    propertyAdded(prop: DzProperty): void;
-
-    /**
-     * Emitted when a property is added to or removed from this element.
-     */
-    propertyListChanged(): void;
-
-    /** @undocumented */
-    propertyListIterator(): DzPropertyListIterator;
-
-    /**
-     * Emitted when a property is removed from this element.
-     * @param prop DzProperty - The property just removed.
-     */
-    propertyRemoved(prop: DzProperty): void;
-
-    /**
-     * Emitted when the property tree has changed.
-     */
-    propertyTreeChanged(): void;
-
-    /** @undocumented */
-    regroupPrivateProperties(tree: DzPropertyGroupTree): void;
-
-    /** @undocumented */
-    regroupProperties(tree: DzPropertyGroupTree): void;
-
-    /**
      * Remove the data item from this element.
      * @param item DzElementData - The data item to remove.
      * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
      */
     removeDataItem(item: DzElementData): DzError;
 
-    /** @undocumented */
-    removeElementChild(child: DzElement): void;
-
     /**
      * Removes the given private property, if it can be removed. Properties can be specified as non-removable (i.e., DzProperty::isUserProperty() - e.g. the rotation channels of the DzNode class). Doing so makes it impossible to remove that property from this element.
      * @param prop DzProperty - The property to remove from the element.
@@ -428,8 +307,6 @@ declare class DzElement extends DzBase {
      * @param name string - The name of the property to search for and remove if it is found.
      * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
      */
-    removePrivateProperty(name: string): DzError;
-    removePrivateProperty(prop: DzProperty): DzError;
     removePrivateProperty(name: string): DzError;
 
     /**
@@ -444,8 +321,6 @@ declare class DzElement extends DzBase {
      * @param prop DzProperty - The property to remove from the element.
      * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
      */
-    removeProperty(prop: DzProperty): DzError;
-    removeProperty(name: string): DzError;
     removeProperty(prop: DzProperty): DzError;
 
     /**
@@ -454,12 +329,6 @@ declare class DzElement extends DzBase {
      * @returns DzElement A new element, or this element if no changes were made. The caller is responsible for cleaning up the memory of the return element if it is not this.
      */
     setAttributes(settings: DzSettings): DzElement;
-
-    /** @undocumented */
-    setElementParent(elem: DzElement, regroup: boolean): void;
-
-    /** @undocumented */
-    setIsPropertyTreeOwnedByParent(onoff: boolean): void;
 
     /**
      * Sets the user-facing label (i.e., displayed in the interface) for this element.
@@ -478,6 +347,75 @@ declare class DzElement extends DzBase {
      * @returns boolean true if this element should have its property groups and properties sorted after being created on load, otherwise false.
      */
     shouldSortOnLoad(): boolean;
+
+    /** @undocumented */
+    addElementChild(child: DzElement): void;
+
+    /** @undocumented */
+    addPrivatePropertyInternal(newprop: DzProperty): void;
+
+    /** @undocumented */
+    addPrivatePropertyToList(prop: DzProperty): DzError;
+
+    /** @undocumented */
+    addPropertyInternal(newprop: DzProperty): void;
+
+    /** @undocumented */
+    addPropertyToList(prop: DzProperty): DzError;
+
+    /** @undocumented */
+    defaultPropertyGroupTree(): DzPropertyGroupTree;
+
+    /** @undocumented */
+    duplicateMissingCustomData(tgt: DzElement): void;
+
+    /** @undocumented */
+    duplicateMissingPrivateProperties(tgt: DzElement): void;
+
+    /** @undocumented */
+    duplicateMissingProperties(tgt: DzElement): void;
+
+    /** @undocumented */
+    elementChildIterator(): DzElementListIterator;
+
+    /** @undocumented */
+    getIsPropertyTreeOwnedByParent(): boolean;
+
+    /** @undocumented */
+    insertPrivatePropertyInList(index: number, prop: DzProperty): DzError;
+
+    /** @undocumented */
+    insertPropertyInList(index: number, prop: DzProperty): DzError;
+
+    /** @undocumented */
+    isDataItemNameUnique(dataName: QString, makeUnique: boolean): boolean;
+
+    /** @undocumented */
+    isPrivatePropertyNameUnique(name: QString, makeUnique: boolean): boolean;
+
+    /** @undocumented */
+    isPropertyNameUnique(name: QString, makeUnique: boolean): boolean;
+
+    /** @undocumented */
+    privatePropertyListIterator(): DzPropertyListIterator;
+
+    /** @undocumented */
+    propertyListIterator(): DzPropertyListIterator;
+
+    /** @undocumented */
+    regroupPrivateProperties(tree: DzPropertyGroupTree): void;
+
+    /** @undocumented */
+    regroupProperties(tree: DzPropertyGroupTree): void;
+
+    /** @undocumented */
+    removeElementChild(child: DzElement): void;
+
+    /** @undocumented */
+    setElementParent(elem: DzElement, regroup: boolean): void;
+
+    /** @undocumented */
+    setIsPropertyTreeOwnedByParent(onoff: boolean): void;
 
     /** @undocumented */
     getElementName(): QString;
@@ -520,4 +458,56 @@ declare class DzElement extends DzBase {
 
     /** @undocumented */
     writeProperties(file: DzAssetOutFile, io: any, propIt: DzPropertyListIterator, filter: DzElementPropertyIOFilter): boolean;
+
+    /* Signals */
+
+    /**
+     * Emitted when this element's label is changed.
+     */
+    labelChanged: ISignalT<string>;
+
+    /**
+     * Emitted when this element's parent is changed.
+     */
+    parentChanged: ISignalT<void>;
+
+    /**
+     * Emitted when a private property is added to this element.
+     */
+    privatePropertyAdded: ISignalT<DzProperty>;
+
+    /**
+     * Emitted when a private property is added to or removed from this element.
+     */
+    privatePropertyListChanged: ISignalT<void>;
+
+    /**
+     * Emitted when a private property is removed from this element.
+     */
+    privatePropertyRemoved: ISignalT<DzProperty>;
+
+    /**
+     * Emitted when the private property tree has changed.
+     */
+    privatePropertyTreeChanged: ISignalT<void>;
+
+    /**
+     * Emitted when a property is added to this element.
+     */
+    propertyAdded: ISignalT<DzProperty>;
+
+    /**
+     * Emitted when a property is added to or removed from this element.
+     */
+    propertyListChanged: ISignalT<void>;
+
+    /**
+     * Emitted when a property is removed from this element.
+     */
+    propertyRemoved: ISignalT<DzProperty>;
+
+    /**
+     * Emitted when the property tree has changed.
+     */
+    propertyTreeChanged: ISignalT<void>;
 }

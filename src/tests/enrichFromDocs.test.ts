@@ -6,7 +6,7 @@ import {
     extractDeclaredInherits,
     enrichFileContent,
 } from '../scripts/enrichFromDocs';
-import { DocumentationData, DocMethod, DocProperty } from '../scripts/docParser';
+import { DocumentationData, DocMethod, DocProperty, DocSignal } from '../scripts/docParser';
 
 // ── Test helpers ──────────────────────────────────────────────────────────────
 
@@ -222,13 +222,13 @@ describe('enrichFileContent', () => {
         expect(result).toMatch(/getLabel\(\): string;\n\n\s+\/\*\*/);
     });
 
-    it('applies type fix to duplicate identical signatures', () => {
+    it('applies type fix to duplicate identical signatures and deduplicates them', () => {
         const content = `declare class Foo {\n    getLabel(): QString;\n    getLabel(): QString;\n}\n`;
         const result = enrichFileContent(content, methodDocs);
         expect(result).not.toContain('getLabel(): QString;');
-        // Both occurrences should be fixed
+        // Duplicate identical declarations are removed — only one should remain
         const matches = result.match(/getLabel\(\): string;/g) ?? [];
-        expect(matches.length).toBe(2);
+        expect(matches.length).toBe(1);
     });
 
     it('prepends issues block to file when issues provided', () => {
@@ -252,6 +252,78 @@ describe('enrichFileContent', () => {
         expect(result).not.toContain('@enricher-issues');
     });
 
+    it('converts a method-format signal to ISignalT<T> property (1 param)', () => {
+        const signal: DocSignal = {
+            name: 'labelChanged',
+            return: 'void',
+            params: [{ name: 'newLabel', type: 'string', default: null }],
+            description: 'Emitted when the label changes.',
+        };
+        const docs = makeDocs({ signals: new Map([['labelChanged', [signal]]]) });
+        const content = `declare class Foo {\n    labelChanged(newLabel: QString): void;\n}\n`;
+        const result = enrichFileContent(content, docs);
+        expect(result).toContain('labelChanged: ISignalT<string>;');
+        expect(result).not.toContain('labelChanged(');
+    });
+
+    it('converts a 0-param method-format signal to ISignalT<void>', () => {
+        const signal: DocSignal = {
+            name: 'clicked',
+            return: 'void',
+            params: [],
+            description: 'Emitted when clicked.',
+        };
+        const docs = makeDocs({ signals: new Map([['clicked', [signal]]]) });
+        const content = `declare class Foo {\n    clicked(): void;\n}\n`;
+        const result = enrichFileContent(content, docs);
+        expect(result).toContain('clicked: ISignalT<void>;');
+        expect(result).not.toContain('clicked(');
+    });
+
+    it('converts a 2-param method-format signal to ISignalT<T1, T2>', () => {
+        const signal: DocSignal = {
+            name: 'selected',
+            return: 'void',
+            params: [
+                { name: 'node', type: 'DzNode', default: null },
+                { name: 'onOff', type: 'boolean', default: null },
+            ],
+            description: 'Emitted when selection changes.',
+        };
+        const docs = makeDocs({ signals: new Map([['selected', [signal]]]) });
+        const content = `declare class Foo {\n    selected(node: DzNode, onOff: boolean): void;\n}\n`;
+        const result = enrichFileContent(content, docs);
+        expect(result).toContain('selected: ISignalT<DzNode, boolean>;');
+    });
+
+    it('generates description-only JSDoc for a converted signal (no @param)', () => {
+        const signal: DocSignal = {
+            name: 'labelChanged',
+            return: 'void',
+            params: [{ name: 'newLabel', type: 'string', default: null }],
+            description: 'Emitted when the label changes.',
+        };
+        const docs = makeDocs({ signals: new Map([['labelChanged', [signal]]]) });
+        const content = `declare class Foo {\n    labelChanged(newLabel: QString): void;\n}\n`;
+        const result = enrichFileContent(content, docs);
+        expect(result).toContain('Emitted when the label changes.');
+        expect(result).not.toContain('@param');
+    });
+
+    it('preserves existing ISignalT property format and only updates JSDoc', () => {
+        const signal: DocSignal = {
+            name: 'labelChanged',
+            return: 'void',
+            params: [{ name: 'newLabel', type: 'string', default: null }],
+            description: 'Emitted when the label changes.',
+        };
+        const docs = makeDocs({ signals: new Map([['labelChanged', [signal]]]) });
+        const content = `declare class Foo {\n    labelChanged: ISignalT<string>;\n}\n`;
+        const result = enrichFileContent(content, docs);
+        expect(result).toContain('labelChanged: ISignalT<string>;');
+        expect(result).toContain('Emitted when the label changes.');
+    });
+
     it('recognises a property with a trailing // comment as a declaration', () => {
         const content = `declare class Foo {\n    getLabel(): string; // SomeAnnotation\n}\n`;
         const result = enrichFileContent(content, methodDocs);
@@ -264,5 +336,82 @@ describe('enrichFileContent', () => {
         const result = enrichFileContent(content, methodDocs);
         expect(result).toContain('Sets the label.');
         expect(result).toContain('setLabel(label: string): void; // SomeEnum');
+    });
+
+    it('reorders properties to match docs order', () => {
+        const docs = makeDocs({
+            properties: new Map([
+                ['count', { name: 'count', type: 'number', description: 'The count.' }],
+                ['label', { name: 'label', type: 'string', description: 'The label.' }],
+            ]),
+            descriptions: new Map([['count', 'The count.'], ['label', 'The label.']]),
+        });
+        // File has label before count; docs say count comes first
+        const content = `declare class Foo {\n    label: string;\n    count: number;\n}\n`;
+        const result = enrichFileContent(content, docs);
+        expect(result.indexOf('count:')).toBeLessThan(result.indexOf('label:'));
+    });
+
+    it('reorders methods to match docs order', () => {
+        const docs = makeDocs({
+            methods: new Map([
+                ['setLabel', [makeMethod({ name: 'setLabel', return: 'void', params: [{ name: 'label', type: 'string', default: null }], description: 'Sets.' })]],
+                ['getLabel', [makeMethod({ name: 'getLabel', return: 'string', params: [], description: 'Gets.' })]],
+            ]),
+            descriptions: new Map([['setLabel', 'Sets.'], ['getLabel', 'Gets.']]),
+        });
+        // File has getLabel before setLabel; docs say setLabel comes first
+        const content = `declare class Foo {\n    getLabel(): string;\n    setLabel(label: string): void;\n}\n`;
+        const result = enrichFileContent(content, docs);
+        expect(result.indexOf('setLabel(')).toBeLessThan(result.indexOf('getLabel('));
+    });
+
+    it('keeps properties before methods before signals after reordering', () => {
+        const signal: DocSignal = {
+            name: 'clicked',
+            return: 'void',
+            params: [],
+            description: 'Emitted when clicked.',
+        };
+        const docs = makeDocs({
+            properties: new Map([['label', { name: 'label', type: 'string', description: 'The label.' }]]),
+            signals: new Map([['clicked', [signal]]]),
+            methods: new Map([['getLabel', [makeMethod({ name: 'getLabel', return: 'string', params: [], description: 'Gets.' })]]]),
+            descriptions: new Map([['label', 'The label.'], ['clicked', 'Emitted when clicked.'], ['getLabel', 'Gets.']]),
+        });
+        // File has methods before properties, with signal in wrong place
+        const content = `declare class Foo {\n    getLabel(): string;\n    clicked(): void;\n    label: string;\n}\n`;
+        const result = enrichFileContent(content, docs);
+        const propIdx = result.indexOf('label:');
+        const methodIdx = result.indexOf('getLabel(');
+        const signalIdx = result.indexOf('clicked:');
+        // properties → methods → signals
+        expect(propIdx).toBeLessThan(methodIdx);
+        expect(methodIdx).toBeLessThan(signalIdx);
+    });
+
+    it('deduplicates identical declarations after reordering', () => {
+        const docs = makeDocs({
+            properties: new Map([['label', { name: 'label', type: 'string', description: 'The label.' }]]),
+            descriptions: new Map([['label', 'The label.']]),
+        });
+        const content = `declare class Foo {\n    label: string;\n    label: string;\n}\n`;
+        const result = enrichFileContent(content, docs);
+        const matches = result.match(/^\s+label: string;/gm) ?? [];
+        expect(matches.length).toBe(1);
+    });
+
+    it('reordering is idempotent (second run produces same output)', () => {
+        const docs = makeDocs({
+            properties: new Map([
+                ['count', { name: 'count', type: 'number', description: 'The count.' }],
+                ['label', { name: 'label', type: 'string', description: 'The label.' }],
+            ]),
+            descriptions: new Map([['count', 'The count.'], ['label', 'The label.']]),
+        });
+        const content = `declare class Foo {\n    label: string;\n    count: number;\n}\n`;
+        const run1 = enrichFileContent(content, docs);
+        const run2 = enrichFileContent(run1, docs);
+        expect(run2).toBe(run1);
     });
 });

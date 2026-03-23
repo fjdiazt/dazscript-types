@@ -4,7 +4,6 @@ import { DocMethod, DocumentationData, generateJSDocComment, parseDocsFromUrl } 
 import { buildClassRegistry, ClassRegistry, removeInheritedMembers } from './inheritanceFilter';
 
 interface Options {
-    noBackup: boolean;
     /** When true, issues are only printed to console and not written into the file. */
     noFileIssues: boolean;
 }
@@ -24,7 +23,6 @@ async function main() {
 
     const targetPath = args[0];
     const options: Options = {
-        noBackup: args.includes('--no-backup'),
         noFileIssues: args.includes('--no-file-issues'),
     };
 
@@ -121,13 +119,6 @@ function extractDocUrlFromFile(filePath: string): string | null {
 async function processFile(filePath: string, docUrl: string, options: Options, registry: ClassRegistry): Promise<void> {
     console.log(`\n📄 Processing: ${path.basename(filePath)}`);
     console.log(`   URL: ${docUrl}`);
-
-    // Create backup
-    if (!options.noBackup) {
-        const backupPath = filePath + '.bak';
-        fs.copyFileSync(filePath, backupPath);
-        console.log(`   Backup: ${path.basename(backupPath)}`);
-    }
 
     // Read current file
     const originalContent = fs.readFileSync(filePath, 'utf-8');
@@ -274,6 +265,19 @@ export function buildFixedDeclaration(
     docs: DocumentationData
 ): string {
     if (overload) {
+        // Signal: convert to ISignalT<T> / ISignalT<void> property format
+        if (docs.signals.has(name)) {
+            const typeArgs = overload.params.length === 0
+                ? 'void'
+                : overload.params.map(p => p.type).join(', ');
+            const signalType = `ISignalT<${typeArgs}>`;
+            // If already in property format, update type; otherwise rebuild as property
+            if (!line.includes('(')) {
+                return line.replace(/(:\s*)[\w\[\]<>.,\s|]+(\s*;)/, `$1${signalType}$2`);
+            }
+            return `${indent}${name}: ${signalType};`;
+        }
+
         const paramStrs = overload.params.map(p => {
             const opt = p.default !== null ? '?' : '';
             return `${p.name}${opt}: ${p.type}`;
@@ -430,6 +434,8 @@ export function enrichFileContent(content: string, docs: DocumentationData, issu
                 // Must happen before the keepExisting check so usedOverloads is always updated.
                 const overload = docs.methods.has(name)
                     ? findMatchingDocOverload(name, trimmed, docs, usedOverloads)
+                    : docs.signals.has(name)
+                    ? (docs.signals.get(name)![0] as DocMethod)
                     : null;
 
                 const keepExisting =
@@ -443,7 +449,17 @@ export function enrichFileContent(content: string, docs: DocumentationData, issu
                     if (isDocumented) {
                         let jsDoc: string;
 
-                        if (overload) {
+                        if (docs.signals.has(name)) {
+                            const sig = docs.signals.get(name)![0];
+                            const description =
+                                docs.descriptions.get(name) ||
+                                sig.description ||
+                                '';
+                            // Signals become ISignalT<T> properties — description only, no @param
+                            jsDoc = description
+                                ? `/**\n * ${description}\n */\n`
+                                : `/**\n */\n`;
+                        } else if (overload) {
                             const description =
                                 docs.descriptions.get(name) ||
                                 overload.description ||
@@ -454,18 +470,6 @@ export function enrichFileContent(content: string, docs: DocumentationData, issu
                                 overload.return,
                                 overload.since,
                                 overload.returnDescription
-                            );
-                        } else if (docs.signals.has(name)) {
-                            const sigOverloads = docs.signals.get(name)!;
-                            const sig = sigOverloads[0];
-                            const description =
-                                docs.descriptions.get(name) ||
-                                sig.description ||
-                                '';
-                            jsDoc = generateJSDocComment(
-                                description,
-                                sig.params ?? [],
-                                sig.return ?? 'void'
                             );
                         } else {
                             // Property
@@ -519,7 +523,7 @@ export function enrichFileContent(content: string, docs: DocumentationData, issu
         output.push(...pendingJSDoc);
     }
 
-    let result = output.join('\n');
+    let result = reorderByDocsOrder(output.join('\n'), docs);
 
     // Prepend issues block if there are any and the caller wants it in the file
     if (issues.length > 0 && !noFileIssues) {
@@ -527,6 +531,124 @@ export function enrichFileContent(content: string, docs: DocumentationData, issu
     }
 
     return result;
+}
+
+// ── Docs-order reordering ─────────────────────────────────────────────────────
+
+const REORDER_METHOD_RE = /^\s*(\w+)\s*\([^)]*\)\s*:\s*[\w\[\]<>,.\s|]+;?\s*(?:\/\/.*)?$/;
+const REORDER_PROP_RE   = /^\s*(\w+)\??\s*:\s*[\w\[\]<>,.\s|]+;?\s*(?:\/\/.*)?$/;
+
+interface MemberBlock {
+    name: string;
+    category: 'property' | 'signal' | 'method';
+    jsdoc: string[];
+    decl: string;
+}
+
+/**
+ * Reorder the members of a class declaration to match the order in `docs`:
+ * properties first, then signals, then methods — each section sorted by docs order.
+ * Section header comments (`/* Properties *\/`, etc.) are regenerated.
+ */
+function reorderByDocsOrder(content: string, docs: DocumentationData): string {
+    const openBrace = content.indexOf('{');
+    if (openBrace === -1) return content;
+
+    const header = content.slice(0, openBrace + 1);
+    const rest   = content.slice(openBrace + 1);
+
+    // Find the last `\n}` — the closing brace of the class
+    const lastBraceIdx = rest.lastIndexOf('\n}');
+    if (lastBraceIdx === -1) return content;
+
+    const body   = rest.slice(0, lastBraceIdx + 1); // up to and including `\n`
+    const trailer = rest.slice(lastBraceIdx + 1);    // `}` + optional trailing newline
+
+    // ── Parse body into member blocks ──────────────────────────────────────
+    const blocks: MemberBlock[] = [];
+    const seen = new Set<string>(); // deduplicate by trimmed declaration text
+    let jsdocBuf: string[] = [];
+    let inJSDoc = false;
+
+    for (const line of body.split('\n')) {
+        const trimmed = line.trim();
+
+        if (trimmed.startsWith('/**')) {
+            jsdocBuf = [line];
+            inJSDoc  = !trimmed.endsWith('*/');
+            continue;
+        }
+        if (inJSDoc) {
+            jsdocBuf.push(line);
+            if (trimmed.endsWith('*/')) inJSDoc = false;
+            continue;
+        }
+
+        const methodMatch = REORDER_METHOD_RE.exec(line);
+        const propMatch   = methodMatch ? null : REORDER_PROP_RE.exec(line);
+
+        if (methodMatch || propMatch) {
+            const name = methodMatch ? methodMatch[1] : propMatch![1];
+            let category: MemberBlock['category'];
+            if (docs.signals.has(name))         category = 'signal';
+            else if (docs.methods.has(name))    category = 'method';
+            else if (line.includes('ISignalT')) category = 'signal';
+            else if (line.includes('('))        category = 'method';
+            else                                category = 'property';
+
+            // Skip exact duplicate declarations (same trimmed text already seen)
+            if (!seen.has(trimmed)) {
+                seen.add(trimmed);
+                blocks.push({ name, category, jsdoc: jsdocBuf, decl: line });
+            }
+            jsdocBuf = [];
+        } else if (trimmed !== '') {
+            // Section comment, closing brace, etc. — reset pending JSDoc
+            jsdocBuf = [];
+        }
+        // Blank lines: leave jsdocBuf untouched (blank appears before JSDoc, not after)
+    }
+
+    // ── Determine docs order ───────────────────────────────────────────────
+    const propOrder   = [...docs.properties.keys()];
+    const signalOrder = [...docs.signals.keys()];
+    const methodOrder = [...docs.methods.keys()];
+
+    function docsIndex(name: string, order: string[]): number {
+        const i = order.indexOf(name);
+        return i === -1 ? order.length : i;
+    }
+
+    const props   = blocks.filter(b => b.category === 'property');
+    const signals = blocks.filter(b => b.category === 'signal');
+    const methods = blocks.filter(b => b.category === 'method');
+
+    // Stable sort: items not in docs stay at the end in their original relative order
+    props.sort((a, b)   => docsIndex(a.name, propOrder)   - docsIndex(b.name, propOrder));
+    signals.sort((a, b) => docsIndex(a.name, signalOrder) - docsIndex(b.name, signalOrder));
+    methods.sort((a, b) => docsIndex(a.name, methodOrder) - docsIndex(b.name, methodOrder));
+
+    // ── Emit ───────────────────────────────────────────────────────────────
+    const indent = blocks[0]?.decl.match(/^(\s+)/)?.[1] ?? '    ';
+    const out: string[] = [];
+
+    function emitSection(sectionBlocks: MemberBlock[], title: string) {
+        if (sectionBlocks.length === 0) return;
+        out.push('', `${indent}/* ${title} */`);
+        for (const block of sectionBlocks) {
+            out.push('');
+            out.push(...block.jsdoc);
+            out.push(block.decl);
+        }
+    }
+
+    emitSection(props,   'Properties');
+    emitSection(methods, 'Methods');
+    emitSection(signals, 'Signals');
+
+    out.push('');
+
+    return header + out.join('\n') + trailer;
 }
 
 main().catch(console.error);

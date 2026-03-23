@@ -3,10 +3,12 @@
  * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/base_dz
  */
 declare class DzBase extends QObject {
-
-    /* Properties */
-
     /* Methods */
+
+    /**
+     * Provides scripts a way to make objects persistent; i.e., so that Qt will not delete them when they are no longer referenced by the script. This allows object instances to be created in script, then passed into the core and remain after the script has finished execution.
+     */
+    makePersistent(): void;
 
     /** @undocumented */
     assertCast(className: string): DzBase;
@@ -26,22 +28,6 @@ declare class DzBase extends QObject {
     /** @undocumented */
     loadSection(file: DzInFile, sectionID: number): void;
 
-    /**
-     * Provides scripts a way to make objects persistent; i.e., so that Qt will not delete them when they are no longer referenced by the script. This allows object instances to be created in script, then passed into the core and remain after the script has finished execution.
-     */
-    makePersistent(): void;
-
-    /**
-     * Provides scripts a way to make objects persistent; i.e., so that Qt will not delete them when they are no longer referenced by the script. This allows object instances to be created in script, then passed into the core and remain after the script has finished execution.
-     */
-    makePersistent(): void;
-
-    /**
-     * Emitted when the internal name of the object has changed.
-     * @param name string - The new name of the object.
-     */
-    nameChanged(name: QString): void;
-
     /** @undocumented */
     postLoadFile(file: DzInFile): void;
 
@@ -59,4 +45,11 @@ declare class DzBase extends QObject {
 
     /** @undocumented */
     startLoad(file: DzInFile): void;
+
+    /* Signals */
+
+    /**
+     * Emitted when the internal name of the object has changed.
+     */
+    nameChanged: ISignalT<string>;
 }
