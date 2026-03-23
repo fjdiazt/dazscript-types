@@ -420,6 +420,8 @@ function getValidType(type: string): string {
         case 'Array':
             return 'any[]';
         default:
+            // C++ scope resolution (e.g. DzRenderMgr::RenderPriority) → number
+            if (/\w+::\w+/.test(type.trim())) return 'number';
             return type.trim();
     }
 }

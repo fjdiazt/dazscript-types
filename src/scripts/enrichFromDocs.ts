@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { DocMethod, DocumentationData, generateJSDocComment, parseDocsFromUrl } from './docParser';
+import { buildClassRegistry, ClassRegistry, removeInheritedMembers } from './inheritanceFilter';
 
 interface Options {
     noBackup: boolean;
@@ -50,9 +51,14 @@ async function main() {
 
     console.log(`Found ${filesToProcess.length} file(s) to process\n`);
 
+    // Build a registry of all .d.ts files in the types directory so that
+    // removeInheritedMembers can resolve the full ancestor chain.
+    const typesDir = path.join(path.dirname(filesToProcess[0].filePath), '..', '..', 'types');
+    const registry = buildRegistryFromDir(typesDir);
+
     for (const file of filesToProcess) {
         try {
-            await processFile(file.filePath, file.docUrl, options);
+            await processFile(file.filePath, file.docUrl, options, registry);
         } catch (error) {
             console.error(`Error processing ${file.filePath}:`, error);
         }
@@ -80,6 +86,20 @@ function scanFolderForDocs(folderPath: string): FileToProcess[] {
     return files;
 }
 
+function buildRegistryFromDir(dir: string): ClassRegistry {
+    const contents: string[] = [];
+    const collect = (d: string) => {
+        if (!fs.existsSync(d)) return;
+        for (const entry of fs.readdirSync(d, { withFileTypes: true })) {
+            const full = path.join(d, entry.name);
+            if (entry.isDirectory()) collect(full);
+            else if (entry.name.endsWith('.d.ts')) contents.push(fs.readFileSync(full, 'utf-8'));
+        }
+    };
+    collect(dir);
+    return buildClassRegistry(contents);
+}
+
 function extractDocUrlFromFile(filePath: string): string | null {
     const content = fs.readFileSync(filePath, 'utf-8');
 
@@ -98,7 +118,7 @@ function extractDocUrlFromFile(filePath: string): string | null {
     return null;
 }
 
-async function processFile(filePath: string, docUrl: string, options: Options): Promise<void> {
+async function processFile(filePath: string, docUrl: string, options: Options, registry: ClassRegistry): Promise<void> {
     console.log(`\n📄 Processing: ${path.basename(filePath)}`);
     console.log(`   URL: ${docUrl}`);
 
@@ -132,8 +152,12 @@ async function processFile(filePath: string, docUrl: string, options: Options): 
     // Enrich content
     const enrichedContent = enrichFileContent(originalContent, docs, issues, options.noFileIssues);
 
+    // Remove members already documented in ancestor classes (only when no
+    // inheritance mismatch — removeInheritedMembers skips files with issues block)
+    const finalContent = removeInheritedMembers(enrichedContent, registry);
+
     // Write back
-    fs.writeFileSync(filePath, enrichedContent, 'utf-8');
+    fs.writeFileSync(filePath, finalContent, 'utf-8');
     console.log(`   ✓ Updated`);
 }
 
@@ -264,7 +288,9 @@ export function buildFixedDeclaration(
                 ? existingReturn
                 : newReturn;
 
-        return `${indent}${name}(${paramStrs.join(', ')}): ${finalReturn};`;
+        const trailingComment = line.match(/\/\/.*$/)?.[0];
+        const suffix = trailingComment ? ' ' + trailingComment : '';
+        return `${indent}${name}(${paramStrs.join(', ')}): ${finalReturn};${suffix}`;
     }
 
     if (docs.properties.has(name)) {
@@ -376,10 +402,10 @@ export function enrichFileContent(content: string, docs: DocumentationData, issu
         }
 
         // ── Try to match a TypeScript declaration ─────────────────────────────
-        // Method:   name(...): ReturnType;
-        const methodMatch = trimmed.match(/^(\w+)\s*\([^)]*\)\s*:\s*[\w\[\]<>,.\s|]+;?\s*$/);
-        // Property: name: Type; or name?: Type;
-        const propertyMatch = methodMatch ? null : trimmed.match(/^(\w+)\??\s*:\s*[\w\[\]<>,.\s|]+;?\s*$/);
+        // Method:   name(...): ReturnType;  (optional trailing // comment)
+        const methodMatch = trimmed.match(/^(\w+)\s*\([^)]*\)\s*:\s*[\w\[\]<>,.\s|]+;?\s*(?:\/\/.*)?$/);
+        // Property: name: Type; or name?: Type;  (optional trailing // comment)
+        const propertyMatch = methodMatch ? null : trimmed.match(/^(\w+)\??\s*:\s*[\w\[\]<>,.\s|]+;?\s*(?:\/\/.*)?$/);
 
         if (methodMatch || propertyMatch) {
             const name = methodMatch ? methodMatch[1] : propertyMatch![1];

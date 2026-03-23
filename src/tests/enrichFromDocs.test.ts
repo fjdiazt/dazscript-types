@@ -138,6 +138,29 @@ describe('buildFixedDeclaration', () => {
         const result = buildFixedDeclaration('    unknown(): void;', '    ', 'unknown', null, makeDocs());
         expect(result).toBe('    unknown(): void;');
     });
+
+    it('preserves trailing // comment when rebuilding a method signature', () => {
+        const overload = makeMethod({
+            name: 'setLabel',
+            return: 'void',
+            params: [{ name: 'label', type: 'string', default: null }],
+        });
+        const result = buildFixedDeclaration(
+            '    setLabel(p0: QString): void; // SomeEnum',
+            '    ', 'setLabel', overload, makeDocs()
+        );
+        expect(result).toBe('    setLabel(label: string): void; // SomeEnum');
+    });
+
+    it('preserves trailing // comment when fixing a property type', () => {
+        const prop: DocProperty = { name: 'priority', type: 'number', description: '' };
+        const docs = makeDocs({ properties: new Map([['priority', prop]]) });
+        const result = buildFixedDeclaration(
+            '    priority: number; // DzRenderMgr::RenderPriority',
+            '    ', 'priority', null, docs
+        );
+        expect(result).toBe('    priority: number; // DzRenderMgr::RenderPriority');
+    });
 });
 
 // ── enrichFileContent ─────────────────────────────────────────────────────────
@@ -227,5 +250,19 @@ describe('enrichFileContent', () => {
         const content = `declare class Foo {\n}\n`;
         const result = enrichFileContent(content, methodDocs, ['Issue.'], true);
         expect(result).not.toContain('@enricher-issues');
+    });
+
+    it('recognises a property with a trailing // comment as a declaration', () => {
+        const content = `declare class Foo {\n    getLabel(): string; // SomeAnnotation\n}\n`;
+        const result = enrichFileContent(content, methodDocs);
+        expect(result).toContain('Returns the label.');
+        expect(result).toContain('getLabel(): string; // SomeAnnotation');
+    });
+
+    it('recognises a method with a trailing // comment as a declaration', () => {
+        const content = `declare class Foo {\n    setLabel(label: string): void; // SomeEnum\n}\n`;
+        const result = enrichFileContent(content, methodDocs);
+        expect(result).toContain('Sets the label.');
+        expect(result).toContain('setLabel(label: string): void; // SomeEnum');
     });
 });

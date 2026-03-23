@@ -64,7 +64,7 @@ describe('class metadata', () => {
 
 describe('properties', () => {
     it('parses all properties', () => {
-        expect(docs.properties.size).toBe(4);
+        expect(docs.properties.size).toBe(5);
     });
 
     it('normalises String type to string', () => {
@@ -81,6 +81,10 @@ describe('properties', () => {
 
     it('normalises Array type to any[]', () => {
         expect(docs.properties.get('items')?.type).toBe('any[]');
+    });
+
+    it('converts C++ X::Y enum type to number', () => {
+        expect(docs.properties.get('priority')?.type).toBe('number');
     });
 
     it('enriches property description from Detailed Description section', () => {

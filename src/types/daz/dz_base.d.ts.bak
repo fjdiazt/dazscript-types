@@ -34,7 +34,7 @@ declare class DzBase extends QObject {
     /**
      * Provides scripts a way to make objects persistent; i.e., so that Qt will not delete them when they are no longer referenced by the script. This allows object instances to be created in script, then passed into the core and remain after the script has finished execution.
      */
-    makePersistent(): void;
+    makePersistent(obj: QObject): void;
 
     /**
      * Emitted when the internal name of the object has changed.

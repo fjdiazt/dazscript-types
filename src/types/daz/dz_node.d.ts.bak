@@ -9,6 +9,7 @@ declare class DzNode extends DzElement {
     /**
      * Holds the render priority for this node. Render priority controls the order in which nodes are rendered. The higher the priority, the earlier the node will be rendered. If several nodes have the same render priority, those nodes will be rendered in an arbitrary order.
 
+
      The default render priority is RENDER_PRIORITY_NORMAL.
      */
     renderPriority: number; // DzRenderMgr::RenderPriority
@@ -29,6 +30,21 @@ declare class DzNode extends DzElement {
     assetId: string;
 
     /* Methods */
+    propertyListInTreeChanged(): any; // TODO ;
+    privatePropertyListInTreeChanged(): any; // TODO ;
+    mergeElementSignal(): any; // TODO ;
+    duplicateElementSignal(): any; // TODO ;
+    createElementCopySignal(): any; // TODO ;
+    moveDataItemToIndex(): any; // TODO ;
+    findDataItemIndex(): any; // TODO ;
+    duplicateMissingCustomDataWithContext(): any; // TODO ;
+    duplicateMissingPropertiesWithContext(): any; // TODO ;
+    duplicateMissingPrivatePropertiesWithContext(): any; // TODO ;
+    doMergeElement(): any; // TODO ;
+    doDuplicateElement(): any; // TODO ;
+    mergeElement(): any; // TODO ;
+    duplicateElement(): any; // TODO ;
+    createElementCopy(): any; // TODO ;
 
     /**
      * Emitted when transformation properties of this node change.
@@ -153,27 +169,12 @@ declare class DzNode extends DzElement {
      * Emitted when the state of this node's scale inheritance has changed.
      */
     inheritScaleChanged(): void;
-
-    /**
-     * Emitted when the material selection sets for this node has changed.
-     */
-    materialSelectionSetsChanged(): any;
-
-    /**
-     * Emitted after the order of this node's children has changed.
-     */
-    childListOrderChanged(): any;
-
-    /**
-     * Emitted when this node's selection promotion has changed.
-     * @param promoteSelection boolean - true if selection is promoted, false if selection is not promoted.
-     */
-    promoteSelectionChanged(): any;
-
-    /**
-     * Emitted when the topology for this node has changed.
-     */
-    topologyChanged(): any;
+    materialSelectionSetsChanged(): any; // TODO ;
+    childListOrderChanged(): any; // TODO ;
+    promoteSelectionChanged(): any; // TODO ;
+    topologyChanged(): any; // TODO ;
+    objectDuplicateAndSetSignal(): any; // TODO ;
+    modifierDuplicateFinished(): any; // TODO ;
 
     /**
      * Sets the override color to be used to draw the node while using manipulation draw styles.
@@ -201,11 +202,10 @@ declare class DzNode extends DzElement {
     finalize(isRender?: boolean, allowResChange?: boolean): void;
 
     /**
-     * Finalizes the node's geometry cache.
-     * @param isRender boolean - If true, the node should prepare itself for a render quality presentation. This is typically only set true when performing an “offline” render, otherwise it should be set false (default) to prevent thrashing of the geometry cache.
-     * @param allowResChange boolean - If true, the geometry is allowed to change resolution in the finalize, otherwise the geometry will stay at its current resolution.
+     * @param isRender boolean
+     * @param allowResChange boolean
      */
-    finalize(isRender?: boolean, allowResChange?: boolean): void;
+    finalize(isRender: boolean, allowResChange: boolean): void;
 
     /**
      * Sets the selection state of this node.
@@ -224,6 +224,9 @@ declare class DzNode extends DzElement {
      * @param onOff boolean - If true, the node will be visible (the default). If false, the node will not be drawn in the viewport, will not be rendered and will not be simulated.
      */
     setVisible(onOff: boolean): void;
+
+    /** @undocumented */
+    setVisibileInRender(onOff: boolean): void;
 
     /**
      * Sets whether or not this node is visible during a simulation.
@@ -271,20 +274,9 @@ declare class DzNode extends DzElement {
      * Removes all of the child nodes of this node.
      */
     removeAllNodeChildren(): void;
-
-    /**
-     * @param childIndex number - The index for the child to move.
-     * @param newChildIndex number - The index to put the node at, -1 for end of list, 0 for beginning.
-     * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
-     */
-    moveNodeChildToIndex(childIndex: number, newChildIndex: number): DzError;
-    moveNodeChildToIndex(childIndex: number, newChildIndex: number): DzError;
-
-    /**
-     * @param node DzNode - The node to find the index of.
-     * @returns number The index of node as a child of this node (if any), otherwise -1.
-     */
-    findChildIndex(node: DzNode): number;
+    moveNodeChildToIndex(): any; // TODO ;
+    moveNodeChildToIndex(): any; // TODO ;
+    findChildIndex(): any; // TODO ;
 
     /**
      * Sets the world-space transform values for this node at the current time.
@@ -328,6 +320,7 @@ declare class DzNode extends DzElement {
      * @param rotWS DzQuat - The world-space rotation for this node.
      */
     setWSRot(tm: DzTime, rotWS: DzQuat): void;
+
 
     /**
      * Sets the world-space scale for this node.
@@ -393,22 +386,14 @@ declare class DzNode extends DzElement {
     setLocalTransform(tm: DzTime, posLocal: DzVec3, rotLocal: DzQuat, scaleLocal: DzMatrix3, generalScale: number): void;
 
     /**
-     * Calculates the local transform matrix for this node at the current time.
-     * @param posLocal DzVec3 - The local-space position offset for this node.
-     * @param rotLocal DzQuat - The local-space rotation for this node.
-     * @param scaleLocal DzMatrix3 - The local-space scale for this node.
+     * @param posLocal DzVec3
+     * @param rotLocal DzQuat
+     * @param scaleLocal DzMatrix3
      */
-    setLocalTransform(posLocal: DzVec3, rotLocal: DzQuat, scaleLocal: DzMatrix3): void;
-
-    /**
-     * Calculates the local transform matrix for this node at the current time.
-     * @param posLocal DzVec3 - The local-space position offset for this node.
-     * @param rotLocal DzQuat - The local-space rotation for this node.
-     * @param scaleLocal DzMatrix3 - The local-space scale for this node.
-     */
-    setLocalTransform(posLocal: DzVec3, rotLocal: DzQuat, scaleLocal: DzMatrix3): void;
-    setLocalTransform(posLocal: DzVec3, rotLocal: DzQuat, scaleLocal: DzMatrix3): void;
-    setLocalTransform(posLocal: DzVec3, rotLocal: DzQuat, scaleLocal: DzMatrix3): void;
+    setLocalTransform(tm: DzTime, pos: DzVec3, rot: DzQuat): void;
+    setLocalTransform(pos: DzVec3, rot: DzQuat): void;
+    setLocalTransform(tm: DzTime, pos: DzVec3, rot: DzQuat): void;
+    setLocalTransform(pos: DzVec3, rot: DzQuat): void;
 
     /**
      * Calculates the local transform matrix for this node at the current time, in the context of the current tool.
@@ -469,14 +454,8 @@ declare class DzNode extends DzElement {
      * @param rotLocal DzQuat - The local-space rotation for this node.
      */
     setLocalRot(rotLocal: DzQuat): void;
-
-    /**
-     * Sets the local-space rotation for this node, in the context of the current tool, at the current time.
-     * @param tm DzTime - The scene time at which to set the transform for this node.
-     * @param rotLocal DzQuat - The local-space rotation for this node.
-     */
-    setToolLocalRot(tm: DzTime, rotLocal: DzQuat): void;
-    setToolLocalRot(tm: DzTime, rotLocal: DzQuat): void;
+    setToolLocalRot(): any; // TODO ;
+    setToolLocalRot(): any; // TODO ;
 
     /**
      * Sets local-space scale for this node.
@@ -535,36 +514,17 @@ declare class DzNode extends DzElement {
     setLocalScale(tm: DzTime, scaleLocal: DzMatrix3): void;
 
     /**
-     * Sets local-space scale for this node.
-     * @param tm DzTime - The scene time at which to set the transform for this node.
-     * @param scaleLocal DzMatrix3 - The local-space scale for this node.
+     * @param tm DzTime
+     * @param scaleLocal DzMatrix3
      */
-    setLocalScale(tm: DzTime, scaleLocal: DzMatrix3): void;
-
-    /**
-     * Sets local-space scale for this node.
-     * @param tm DzTime - The scene time at which to set the transform for this node.
-     * @param scaleLocal DzMatrix3 - The local-space scale for this node.
-     */
-    setLocalScale(tm: DzTime, scaleLocal: DzMatrix3): void;
-
-    /**
-     * Sets local-space scale for this node.
-     * @param tm DzTime - The scene time at which to set the transform for this node.
-     * @param scaleLocal DzMatrix3 - The local-space scale for this node.
-     */
-    setLocalScale(tm: DzTime, scaleLocal: DzMatrix3): void;
-
-    /**
-     * Sets local-space scale for this node.
-     * @param tm DzTime - The scene time at which to set the transform for this node.
-     * @param scaleLocal DzMatrix3 - The local-space scale for this node.
-     */
-    setLocalScale(tm: DzTime, scaleLocal: DzMatrix3): void;
-    setLocalScale(tm: DzTime, scaleLocal: DzMatrix3): void;
-    setLocalScale(tm: DzTime, scaleLocal: DzMatrix3): void;
-    setLocalScale(tm: DzTime, scaleLocal: DzMatrix3): void;
-    setLocalScale(tm: DzTime, scaleLocal: DzMatrix3): void;
+    setLocalScale(tm: DzTime, scale: DzMatrix3): void;
+    setLocalScale(tm: DzTime, scale: DzMatrix3, generalScale: number): void;
+    setLocalScale(scale: DzMatrix3): void;
+    setLocalScale(scale: DzMatrix3, generalScale: number): void;
+    setLocalScale(tm: DzTime, scale: DzMatrix3): void;
+    setLocalScale(tm: DzTime, scale: DzMatrix3, generalScale: number): void;
+    setLocalScale(scale: DzMatrix3): void;
+    setLocalScale(scale: DzMatrix3, generalScale: number): void;
 
     /**
      * Sets the orientation for this node.
@@ -580,13 +540,8 @@ declare class DzNode extends DzElement {
      */
     setOrientation(orientation: DzQuat, makeDefault?: boolean): void;
 
-    /**
-     * Sets the orientation for this node.
-     * @param angles DzVec3 - The orientation for this node in degrees. This defines the space in which node rotations occur.
-     * @param makeDefault boolean - Whether or not to set the default value as well as the current value.
-     */
-    setOrientationAngles(angles: DzVec3, makeDefault?: boolean): void;
-    setOrientationAngles(angles: DzVec3, makeDefault?: boolean): void;
+    setOrientationAngles(): any; // TODO ;
+    setOrientationAngles(): any; // TODO ;
 
     /**
      * Sets the origin for this node.
@@ -602,29 +557,15 @@ declare class DzNode extends DzElement {
      */
     setEndPoint(endPnt: DzVec3, makeDefault?: boolean): void;
 
-    /**
-     * Sets the orientation for this node adjusting for controllers.
-     * @param orientation DzQuat - The orientation for this node. This defines the space in which node rotations occur.
-     */
-    adjustOrientation(orientation: DzQuat): void;
-
-    /**
-     * Sets the orientation for this node adjusting for controllers.
-     * @param angles DzVec3 - The orientation for this node in degrees. This defines the space in which node rotations occur.
-     */
-    adjustOrientationAngles(angles: DzVec3): void;
+    adjustOrientation(): any; // TODO ;
+    adjustOrientationAngles(): any; // TODO ;
 
     /**
      * Sets the origin for this node adjusting for controllers.
      * @param origin DzVec3 - The origin for this node. This is the node's center point in relation to its geometry.
      */
     adjustOrigin(origin: DzVec3): void;
-
-    /**
-     * Sets the end point for this node, adjusting for controllers.
-     * @param endPnt DzVec3 - The end point for this node. This is the node's end point in relation to its geometry.
-     */
-    adjustEndPoint(endPnt: DzVec3): void;
+    adjustEndPoint(): any; // TODO ;
 
     /**
      * Removes local transform data.
@@ -660,12 +601,19 @@ declare class DzNode extends DzElement {
      * @param onOff boolean - If true, the node will not appear in the scene hierarchy. If false, the node will be displayed in the scene hierarchy.
      */
     setHidden(onOff: boolean): void;
+    setPromoteSelection(): any; // TODO ;
 
-    /**
-     * Sets whether or not to redirect selection.
-     * @param onOff boolean - If true, the node will redirect its selection to its parent.
-     */
-    setPromoteSelection(onOff: boolean): void;
+    /** @undocumented */
+    setRenderPriority(priority: number): void;
+
+    /** @undocumented */
+    setRenderPriority(priority: number): void;
+
+    /** @undocumented */
+    setRenderPriority(priority: number): void;
+
+    /** @undocumented */
+    setRenderPriority(priority: number): void;
 
     /**
      * Sets whether or not this node is visible during a render.
@@ -731,6 +679,9 @@ declare class DzNode extends DzElement {
      * @returns boolean true if the node is visible, otherwise false.
      */
     isVisible(): boolean;
+
+    /** @undocumented */
+    isVisibileInRender(): boolean;
 
     /**
      * Get the current simulation visibility status of this node.
@@ -824,16 +775,8 @@ declare class DzNode extends DzElement {
      * @returns DzNode A child node having a matching asset ID (if any), otherwise NULL.
      */
     findNodeChildByAssetID(assetID: string, recurse?: boolean, checkSource?: boolean): DzNode;
-
-    /**
-     * Get a child from this node by name (or alias).
-     * @param name string - The name (or alias) of the child to find.
-     * @param aliases boolean - If true, consider name aliases.
-     * @param recurse boolean - If true, this will be called recursively until a child with a matching name (or alias) is found.
-     * @returns DzNode A child node having a matching name or alias (if any), otherwise NULL.
-     */
-    findNodeChildByNameOrAlias(name: string, aliases: boolean, recurse?: boolean): DzNode;
-    findNodeChildByNameOrAlias(name: string, aliases: boolean, recurse?: boolean): DzNode;
+    findNodeChildByNameOrAlias(): any; // TODO ;
+    findNodeChildByNameOrAlias(): any; // TODO ;
 
     /**
      * Get the parent of this node.
@@ -927,23 +870,12 @@ declare class DzNode extends DzElement {
     getWSTransform(): DzMatrix3;
 
     /**
-     * Get the world-space transformation data for this node at the current time.
-     * @returns DzMatrix3 A matrix representing the composed world-space transform for this node.
+     * @returns DzMatrix3
      */
+    getWSTransform(tm: DzTime, defaultVal: boolean): DzMatrix3;
     getWSTransform(): DzMatrix3;
-    getWSTransform(): DzMatrix3;
-
-    /**
-     * Get the world-space transformation data for this node at the current time.
-     * @returns DzMatrix3 A matrix representing the composed world-space transform for this node.
-     */
-    getWSTransform(): DzMatrix3;
-
-    /**
-     * Get the world-space transformation data for this node at the current time.
-     * @returns DzMatrix3 A matrix representing the composed world-space transform for this node.
-     */
-    getWSTransform(): DzMatrix3;
+    getWSTransform(tm: DzTime, pos: DzVec3, rot: DzQuat, scale: DzMatrix3, defaults: boolean): void;
+    getWSTransform(pos: DzVec3, rot: DzQuat, scale: DzMatrix3): void;
 
     /**
      * Get the world-space transformation data for this node at the current time, in the context of the current tool.
@@ -985,11 +917,7 @@ declare class DzNode extends DzElement {
      */
     getWSRot(tm: DzTime, defaultVal?: boolean): DzQuat;
 
-    /**
-     * @returns DzQuat The world-space rotation of the node at the current time, in the context of the current tool.
-     * @since 4.9.3.16
-     */
-    getToolWSRot(): DzQuat;
+    getToolWSRot(): any; // TODO ;
 
     /**
      * @returns DzMatrix3 The world-space scale of the node at the current time.
@@ -1053,23 +981,12 @@ declare class DzNode extends DzElement {
     getLocalTransform(): DzMatrix3;
 
     /**
-     * Get the composed local transform info for this node at the current time.
-     * @returns DzMatrix3 A matrix representing the composed local transform for this node.
+     * @returns DzMatrix3
      */
+    getLocalTransform(tm: DzTime, defaultVal: boolean): DzMatrix3;
     getLocalTransform(): DzMatrix3;
-    getLocalTransform(): DzMatrix3;
-
-    /**
-     * Get the composed local transform info for this node at the current time.
-     * @returns DzMatrix3 A matrix representing the composed local transform for this node.
-     */
-    getLocalTransform(): DzMatrix3;
-
-    /**
-     * Get the composed local transform info for this node at the current time.
-     * @returns DzMatrix3 A matrix representing the composed local transform for this node.
-     */
-    getLocalTransform(): DzMatrix3;
+    getLocalTransform(tm: DzTime, pos: DzVec3, rot: DzQuat, scale: DzMatrix3, defaults: boolean): void;
+    getLocalTransform(pos: DzVec3, rot: DzQuat, scale: DzMatrix3): void;
 
     /**
      * @param tm DzTime - The scene time at which to get the transform.
@@ -1094,13 +1011,8 @@ declare class DzNode extends DzElement {
      * @returns DzQuat The local-space rotation of the node at the current time.
      */
     getLocalRot(): DzQuat;
-
-    /**
-     * @returns DzQuat The local-space rotation of the node at the current time, in the context of the current tool.
-     * @since 4.9.3.16
-     */
-    getToolLocalRot(): DzQuat;
-    getToolLocalRot(): DzQuat;
+    getToolLocalRot(): any; // TODO ;
+    getToolLocalRot(): any; // TODO ;
 
     /**
      * @param tm DzTime - The scene time at which to get the transform.
@@ -1125,9 +1037,9 @@ declare class DzNode extends DzElement {
     getLocalScale(): DzMatrix3;
 
     /**
-     * @returns DzMatrix3 The local-space scale of the node at the time.
+     * @returns DzMatrix3
      */
-    getLocalScale(): DzMatrix3;
+    getLocalScale(tm: DzTime, defaultVal: boolean): DzMatrix3;
     getLocalScale(): DzMatrix3;
 
     /**
@@ -1298,32 +1210,18 @@ declare class DzNode extends DzElement {
      * @returns boolean true if this node should not be shown in the interface, otherwise false.
      */
     isHidden(): boolean;
+    isInScene(): any; // TODO ;
+    isSelectionPromoted(): any; // TODO ;
 
-    /**
-     * @returns boolean true if the node is in the scene, otherwise false.
-     * @since 4.6.4.67
-     */
-    isInScene(): boolean;
-
-    /**
-     * @returns boolean true if this node should redirect its viewport selection to its parent, otherwise false.
-     */
-    isSelectionPromoted(): boolean;
+    /** @undocumented */
+    getRenderPriority(): number;
 
     /**
      * @returns DzPresentation The presentation for this property or NULL if there is none.
      */
     getPresentation(): DzPresentation;
-
-    /**
-     * @returns DzNode The node to be selected if selection is promoted, otherwise this node.
-     */
-    getSelectionNode(): DzNode;
-
-    /**
-     * @returns boolean true if the parent of this node, or any of its ancestors, is a DzBone and this node or any of its ancestors should redirect their viewport selection to their ancestors.
-     */
-    isBoneSelectingNode(): boolean;
+    getSelectionNode(): any; // TODO ;
+    isBoneSelectingNode(): any; // TODO ;
 
     /**
      * Sets whether this nodes visibility is controlled by a DzGroupNode.
@@ -1346,11 +1244,9 @@ declare class DzNode extends DzElement {
      * @returns boolean true if this node is set unselectable by a group node, otherwise false.
      */
     unselectableByGroup(): boolean;
-
-    /**
-     * @returns boolean true if this node is considered an editor node, otherwise false.
-     */
-    isEditorNode(): boolean;
+    getWeightMapHandler(): any; // TODO ;
+    doObjectDuplicateAndSet(): any; // TODO ;
+    isEditorNode(): any; // TODO ;
 
     /**
      * @returns DzFloatProperty The float property that tools should use to control local rotation of the node around the x axis.
@@ -1366,4 +1262,22 @@ declare class DzNode extends DzElement {
      * @returns DzFloatProperty The float property that tools should use to control local rotation of the node around the z axis.
      */
     getToolZRotControl(): DzFloatProperty;
+
+    /** @undocumented */
+    invalidateCache(): void;
+
+    /** @undocumented */
+    selectionMapModified(): void;
+
+    /** @undocumented */
+    updateTransform(): void;
+
+    /** @undocumented */
+    updateVis(): void;
+
+    /** @undocumented */
+    updateRenderable(): void;
+    invalidateOrientation(): any; // TODO ;
+    objectDuplicateAndSet(): any; // TODO ;
+    handleRendererModeChanged(): any; // TODO ;
 }
