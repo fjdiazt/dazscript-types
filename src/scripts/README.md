@@ -18,6 +18,15 @@ Main script that synchronises `.d.ts` type definition files with the official Da
 - Supports single file or recursive folder scanning
 - Handles multiple method overloads
 
+### `scaffold.ts`
+Bootstrap script that reads the official Daz Studio object index page and creates stub `.d.ts` files for any missing classes, or adds a `@docurl` JSDoc to existing files that lack one.
+
+**Features:**
+- Fetches the Daz object index page to discover all scripting classes
+- Creates a minimal stub file for any `Dz*` class not yet present locally
+- Prepends a `@docurl` JSDoc to existing files that have no doc URL yet
+- Skips files that already have `@docurl`
+
 ### `docParser.ts`
 Utility module that handles HTML parsing and documentation extraction from Daz Studio official documentation.
 
@@ -40,7 +49,23 @@ npm install
 
 ## Usage
 
-### Adding `@docurl` Tags
+### Bootstrapping stubs from the object index
+
+Run `scaffold` once to create stub files for all known Daz classes and populate their `@docurl` tags:
+
+```bash
+# Default target dir (src/types/daz)
+npm run scaffold
+
+# Custom target dir
+npm run scaffold -- path/to/types
+```
+
+After scaffolding, run `npm run sync -- src/types/daz` to populate each stub with full JSDoc from the docs.
+
+---
+
+### Adding `@docurl` Tags manually
 
 Add a JSDoc `@docurl` tag at the top of your `.d.ts` file:
 

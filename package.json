@@ -10,6 +10,7 @@
     "watch": "tsc --watch",
     "fetch": "node dist/scripts/fetchClass.js",
     "sync": "ts-node src/scripts/sync.ts",
+    "scaffold": "ts-node src/scripts/scaffold.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
