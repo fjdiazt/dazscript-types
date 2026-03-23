@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { DocMethod, DocumentationData, generateJSDocComment, parseDocsFromUrl } from './docParser';
-import { buildClassRegistry, ClassRegistry, removeInheritedMembers } from './inheritanceFilter';
+import { buildClassRegistry, ClassRegistry, parseClassInfo, removeInheritedMembers } from './inheritanceFilter';
 
 interface Options {
     /** When true, issues are only printed to console and not written into the file. */
@@ -56,6 +56,10 @@ async function main() {
     // removeInheritedMembers can resolve the full ancestor chain.
     const typesDir = path.join(path.dirname(filesToProcess[0].filePath), '..', '..', 'types');
     const registry = buildRegistryFromDir(typesDir);
+
+    // Process ancestors before descendants so the registry is up-to-date
+    // when a child class is processed (one run always fully converges).
+    filesToProcess = sortByAncestry(filesToProcess, registry);
 
     for (const file of filesToProcess) {
         try {
@@ -153,6 +157,10 @@ async function processFile(filePath: string, docUrl: string, options: Options, r
     // Write back
     fs.writeFileSync(filePath, finalContent, 'utf-8');
     console.log(`   ✓ Updated`);
+
+    // Update registry so later-processed descendants see the post-sync parent state
+    const updatedInfo = parseClassInfo(finalContent);
+    if (updatedInfo) registry.set(updatedInfo.className, updatedInfo);
 }
 
 /**
@@ -438,8 +446,8 @@ export function syncFileContent(content: string, docs: DocumentationData, issues
                 const overload = docs.methods.has(name)
                     ? findMatchingDocOverload(name, trimmed, docs, usedOverloads)
                     : docs.signals.has(name)
-                    ? (docs.signals.get(name)![0] as DocMethod)
-                    : null;
+                        ? (docs.signals.get(name)![0] as DocMethod)
+                        : null;
 
                 const keepExisting =
                     (existingComplete && !isDocumented) ||       // manually written for undocumented item
@@ -528,7 +536,7 @@ export function syncFileContent(content: string, docs: DocumentationData, issues
         output.push(...pendingJSDoc);
     }
 
-    let result = reorderByDocsOrder(output.join('\n'), docs);
+    let result = sortByDocumentation(output.join('\n'), docs);
 
     // Prepend issues block if there are any and the caller wants it in the file
     if (issues.length > 0 && !noFileIssues) {
@@ -541,7 +549,7 @@ export function syncFileContent(content: string, docs: DocumentationData, issues
 // ── Docs-order reordering ─────────────────────────────────────────────────────
 
 const REORDER_METHOD_RE = /^\s*(\w+)\s*\([^)]*\)\s*:\s*[\w\[\]<>,.\s|]+;?\s*(?:\/\/.*)?$/;
-const REORDER_PROP_RE   = /^\s*(\w+)\??\s*:\s*[\w\[\]<>,.\s|]+;?\s*(?:\/\/.*)?$/;
+const REORDER_PROP_RE = /^\s*(\w+)\??\s*:\s*[\w\[\]<>,.\s|]+;?\s*(?:\/\/.*)?$/;
 
 interface MemberBlock {
     name: string;
@@ -555,18 +563,18 @@ interface MemberBlock {
  * properties first, then signals, then methods — each section sorted by docs order.
  * Section header comments (`/* Properties *\/`, etc.) are regenerated.
  */
-function reorderByDocsOrder(content: string, docs: DocumentationData): string {
+function sortByDocumentation(content: string, docs: DocumentationData): string {
     const openBrace = content.indexOf('{');
     if (openBrace === -1) return content;
 
     const header = content.slice(0, openBrace + 1);
-    const rest   = content.slice(openBrace + 1);
+    const rest = content.slice(openBrace + 1);
 
     // Find the last `\n}` — the closing brace of the class
     const lastBraceIdx = rest.lastIndexOf('\n}');
     if (lastBraceIdx === -1) return content;
 
-    const body   = rest.slice(0, lastBraceIdx + 1); // up to and including `\n`
+    const body = rest.slice(0, lastBraceIdx + 1); // up to and including `\n`
     const trailer = rest.slice(lastBraceIdx + 1);    // `}` + optional trailing newline
 
     // ── Parse body into member blocks ──────────────────────────────────────
@@ -580,7 +588,7 @@ function reorderByDocsOrder(content: string, docs: DocumentationData): string {
 
         if (trimmed.startsWith('/**')) {
             jsdocBuf = [line];
-            inJSDoc  = !trimmed.endsWith('*/');
+            inJSDoc = !trimmed.endsWith('*/');
             continue;
         }
         if (inJSDoc) {
@@ -590,16 +598,16 @@ function reorderByDocsOrder(content: string, docs: DocumentationData): string {
         }
 
         const methodMatch = REORDER_METHOD_RE.exec(line);
-        const propMatch   = methodMatch ? null : REORDER_PROP_RE.exec(line);
+        const propMatch = methodMatch ? null : REORDER_PROP_RE.exec(line);
 
         if (methodMatch || propMatch) {
             const name = methodMatch ? methodMatch[1] : propMatch![1];
             let category: MemberBlock['category'];
-            if (docs.signals.has(name))         category = 'signal';
-            else if (docs.methods.has(name))    category = 'method';
+            if (docs.signals.has(name)) category = 'signal';
+            else if (docs.methods.has(name)) category = 'method';
             else if (line.includes('ISignalT')) category = 'signal';
-            else if (line.includes('('))        category = 'method';
-            else                                category = 'property';
+            else if (line.includes('(')) category = 'method';
+            else category = 'property';
 
             // Skip exact duplicate declarations (same trimmed text already seen)
             if (!seen.has(trimmed)) {
@@ -615,7 +623,7 @@ function reorderByDocsOrder(content: string, docs: DocumentationData): string {
     }
 
     // ── Determine docs order ───────────────────────────────────────────────
-    const propOrder   = [...docs.properties.keys()];
+    const propOrder = [...docs.properties.keys()];
     const signalOrder = [...docs.signals.keys()];
     const methodOrder = [...docs.methods.keys()];
 
@@ -624,12 +632,12 @@ function reorderByDocsOrder(content: string, docs: DocumentationData): string {
         return i === -1 ? order.length : i;
     }
 
-    const props   = blocks.filter(b => b.category === 'property');
+    const props = blocks.filter(b => b.category === 'property');
     const signals = blocks.filter(b => b.category === 'signal');
     const methods = blocks.filter(b => b.category === 'method');
 
     // Stable sort: items not in docs stay at the end in their original relative order
-    props.sort((a, b)   => docsIndex(a.name, propOrder)   - docsIndex(b.name, propOrder));
+    props.sort((a, b) => docsIndex(a.name, propOrder) - docsIndex(b.name, propOrder));
     signals.sort((a, b) => docsIndex(a.name, signalOrder) - docsIndex(b.name, signalOrder));
     methods.sort((a, b) => docsIndex(a.name, methodOrder) - docsIndex(b.name, methodOrder));
 
@@ -647,13 +655,45 @@ function reorderByDocsOrder(content: string, docs: DocumentationData): string {
         }
     }
 
-    emitSection(props,   'Properties');
+    emitSection(props, 'Properties');
     emitSection(methods, 'Methods');
     emitSection(signals, 'Signals');
 
     out.push('');
 
     return header + out.join('\n') + trailer;
+}
+
+/**
+ * Sort files so ancestors are processed before their descendants.
+ * Files whose class has no parent in the set (or is not in the registry) come first.
+ */
+function sortByAncestry(files: FileToProcess[], registry: ClassRegistry): FileToProcess[] {
+    // Build className → file map
+    const classToFile = new Map<string, FileToProcess>();
+    const classNames = new Map<string, string>(); // filePath → className
+    for (const f of files) {
+        const info = parseClassInfo(fs.readFileSync(f.filePath, 'utf-8'));
+        if (info) {
+            classToFile.set(info.className, f);
+            classNames.set(f.filePath, info.className);
+        }
+    }
+
+    // Depth = number of ancestors that are also in the files-to-process set
+    function depth(className: string, visited = new Set<string>()): number {
+        if (visited.has(className)) return 0; // cycle guard
+        visited.add(className);
+        const parent = registry.get(className)?.extends ?? '';
+        if (!parent || !classToFile.has(parent)) return 0;
+        return 1 + depth(parent, visited);
+    }
+
+    return [...files].sort((a, b) => {
+        const da = depth(classNames.get(a.filePath) ?? '');
+        const db = depth(classNames.get(b.filePath) ?? '');
+        return da - db;
+    });
 }
 
 main().catch(console.error);
