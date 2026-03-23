@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "fetch": "node dist/scripts/fetchClass.js"
+    "fetch": "node dist/scripts/fetchClass.js",
+    "enrich": "ts-node src/scripts/enrichFromDocs.ts"
   },
   "files": [
     "src/types/"
