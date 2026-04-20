@@ -1,18 +1,21 @@
+/** Script wrapper for QTimer. */
 declare class DzTimer extends QObject {
-    active: boolean;	// false
-    interval: number;	// 0
-    name: string;	//
-    objectName: string;	//
-    singleShot: boolean;	// false
-    changeInterval(p0: number): any;
-    className(): any;
-    deleteLater(): any;
-    destroyed(): void;
-    destroyed(p0: QObject): void;
-    inherits(): any;
-    start(): any;
-    start(p0: number): any;
-    start(p0: number, p1: boolean): any;
-    stop(): any;
-    timeout(): any;
+    /** Whether the timer is running. Read only. */
+    readonly active: boolean;
+    /** Timeout interval in milliseconds. Default 0 — fires as soon as the event queue is empty. */
+    interval: number;
+    /** If true, the timer fires only once; if false, repeats every interval milliseconds. */
+    singleShot: number;
+
+    constructor(parent?: QObject);
+
+    /** Starts or restarts the timer with the given timeout in milliseconds. */
+    start(msec: number): void;
+    /** Starts or restarts the timer using the current interval property. */
+    start(): void;
+    /** Stops the timer. */
+    stop(): void;
+
+    /** Emitted when the timer times out. */
+    timeout: ISignalT<void>;
 }
