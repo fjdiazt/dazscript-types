@@ -37,6 +37,4 @@ jobs:
           npm version "${CI_VERSION}" --no-git-tag-version
 
       - name: Publish package
-        run: npm publish --tag main --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --tag main --access public
