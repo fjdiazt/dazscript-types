@@ -15,13 +15,18 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org
+
+      - name: Show Node and npm versions
+        run: |
+          node --version
+          npm --version
 
       - name: Install dependencies
         run: npm install
