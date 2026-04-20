@@ -66,6 +66,13 @@ declare class DzHttpHelper extends QObject {
     setPath(path: string): void;
 
     /**
+     * Sets the port for the connection
+     * @undocumented This method is not documented in the official Daz API but is available in DzHttpHelper
+     * @param port - The port number to set (0-65535)
+     */
+    setPort(port: number): void;
+
+    /**
      * Sets the query string (and optionally fragment) portion of the URL
      * @param query - The query string (and optionally fragment) to set
      */
@@ -76,6 +83,13 @@ declare class DzHttpHelper extends QObject {
      * @param method - The request method to set - e.g., "GET", "POST", "HEAD"
      */
     setRequestMethod(method: string): void;
+
+    /**
+     * Creates a clone of this handler instance
+     * @undocumented Discovered via runtime introspection; not in official docs
+     * @returns A new DzHttpHelper that shares the same underlying configuration
+     */
+    cloneHandler(): DzHttpHelper;
 
     /**
      * Signal emitted when new bytes are received
