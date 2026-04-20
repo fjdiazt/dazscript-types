@@ -28,7 +28,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/fjdiazt/dazscript-types"
+    "url": "git+https://github.com/fjdiazt/dazscript-types.git"
   },
   "devDependencies": {
     "@types/axios": "^0.14.4",

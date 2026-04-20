@@ -5,17 +5,24 @@ on:
     branches:
       - main
 
+concurrency:
+  group: npm-publish-main
+  cancel-in-progress: false
+
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 jobs:
   publish:
+    if: github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, '[skip ci]')
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -29,17 +36,26 @@ jobs:
           npm --version
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run tests
         run: npm test
 
-      - name: Create CI version
+      - name: Bump patch version
         shell: bash
         run: |
-          BASE_VERSION=$(node -p "require('./package.json').version")
-          CI_VERSION="${BASE_VERSION}-main.${GITHUB_RUN_NUMBER}"
-          npm version "${CI_VERSION}" --no-git-tag-version
+          npm version patch --no-git-tag-version
+          echo "VERSION=$(node -p "require('./package.json').version")" >> "$GITHUB_ENV"
+
+      - name: Commit version bump
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore(release): bump version to ${VERSION} [skip ci]"
+          git tag "v${VERSION}"
+          git push --follow-tags origin HEAD:main
 
       - name: Publish package
-        run: npm publish --tag main --access public
+        run: npm publish --access public
