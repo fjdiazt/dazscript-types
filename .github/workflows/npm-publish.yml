@@ -1,0 +1,42 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Create CI version
+        shell: bash
+        run: |
+          BASE_VERSION=$(node -p "require('./package.json').version")
+          CI_VERSION="${BASE_VERSION}-main.${GITHUB_RUN_NUMBER}"
+          npm version "${CI_VERSION}" --no-git-tag-version
+
+      - name: Publish package
+        run: npm publish --tag main --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
