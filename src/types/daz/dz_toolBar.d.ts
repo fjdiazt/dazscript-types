@@ -27,12 +27,18 @@ declare class DzToolBar extends QWidget {
     insertCustomAction(actionName: string, index: number): void;
 
     /**
-     * Remove item from toolbar
-     * @param item The item to remove.
+     * Remove item from toolbar by item reference or index.
+     * @param item The item to remove, or the index of the item.
      */
     removeItem(item: DzToolBarItem): void;
+    removeItem(index: number): void;
 
     getItemList(): DzToolBarItem[];
+
+    /**
+     * Returns true if there are items in this toolbar, otherwise false.
+     */
+    hasItems(): boolean;
 
     /**
      *

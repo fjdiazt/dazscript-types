@@ -155,6 +155,7 @@ declare class DzPaneMgr extends QWidget {
     movePaneGroup(group: DzPaneGroup, dock: number, index: number, newLine: boolean): DzError;
     createToolBar(name: QString): DzToolBar;
     removeToolBar(name: QString): void;
+    removeToolBar(toolbar: DzToolBar): void;
     removeAllToolBars(): void;
     hideAllToolBars(): void;
     createActivityLayout(name: QString, description: QString): DzActivityLayout;
