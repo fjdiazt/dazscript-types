@@ -8,9 +8,10 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "fetch": "node dist/scripts/fetchClass.js",
-    "sync": "ts-node src/scripts/sync.ts",
-    "scaffold": "ts-node src/scripts/scaffold.ts",
+    "sync": "npm run sync:html",
+    "sync:html": "ts-node src/sync/syncHtml.ts",
+    "sync:all": "npm run sync:html",
+    "scaffold": "ts-node src/sync/scaffold.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -36,6 +37,7 @@
     "@types/node": "^22.10.7",
     "axios": "^1.7.9",
     "cheerio": "^1.0.0",
+    "ts-node": "^10.9.2",
     "vitest": "^4.1.0"
   }
 }
