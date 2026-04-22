@@ -65,4 +65,34 @@ describe('rebuildClassFile', () => {
         expect(result.content).not.toContain('shared(): void;');
         expect(result.recoveredLegacyCount).toBe(1);
     });
+
+    it('renders enumeration values as ordinary properties', () => {
+        const model: DazClassModel = {
+            className: 'DzViewportLike',
+            docUrl: 'https://docs.example.test/DzViewportLike',
+            summary: 'Viewport-like class.',
+            extendsName: 'QObject',
+            enums: [
+                { kind: 'enum', name: 'NoFloor', type: { type: 'number' } },
+                { kind: 'enum', name: 'WireFloor', type: { type: 'number' } },
+            ],
+            properties: [
+                { kind: 'property', name: 'floorStyle', type: { type: 'number' }, description: 'Current floor style.' },
+            ],
+            constructors: [],
+            staticMethods: [],
+            methods: [],
+            signals: [],
+        };
+        const registry = buildClassRegistry([model], [makeLegacy('QObject', '', [])]);
+
+        const result = rebuildClassFile(model, [], registry);
+
+        expect(result.content).toContain('    /* Properties */');
+        expect(result.content).toContain('floorStyle: number;');
+        expect(result.content).toContain('NoFloor: number;');
+        expect(result.content).toContain('WireFloor: number;');
+        expect(result.content).not.toContain('/* Static Properties */');
+        expect(result.content).not.toContain('static NoFloor: number;');
+    });
 });

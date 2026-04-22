@@ -36,6 +36,7 @@ export function rebuildClassFile(
 
     const enums = model.enums.filter(member => !hasAncestorProperty(member.name));
     const properties = model.properties.filter(member => !hasAncestorProperty(member.name));
+    const renderedProperties = [...properties, ...enums];
     const staticMethods = model.staticMethods.filter(member => !hasAncestorMethod(member.name, member.parameters.length));
     const methods = model.methods.filter(member => !hasAncestorMethod(member.name, member.parameters.length));
     const signals = model.signals.filter(member => !hasAncestorProperty(member.name));
@@ -68,8 +69,7 @@ export function rebuildClassFile(
 
     lines.push(buildDeclareClassLine(model.className, model.extendsName));
 
-    emitSection(lines, 'Static Properties', enums, emitProperty);
-    emitSection(lines, 'Properties', properties, emitProperty);
+    emitSection(lines, 'Properties', renderedProperties, emitProperty);
     emitSection(lines, 'Constructors', model.constructors, emitMethod);
     emitSection(lines, 'Static Methods', staticMethods, emitMethod);
     emitSection(lines, 'Methods', methods, emitMethod);
@@ -114,7 +114,7 @@ function emitSection<T>(
 
 function emitProperty(member: DocProperty): string[] {
     const lines: string[] = [];
-    const doc = buildMemberDoc(member.description, [], member.kind === 'enum' ? undefined : undefined, member.since);
+    const doc = buildMemberDoc(member.description, [], undefined, member.since);
     if (doc) {
         lines.push(...indentDoc(doc));
     }
@@ -123,8 +123,7 @@ function emitProperty(member: DocProperty): string[] {
     const rawTypeSuffix = member.type.rawType && member.type.rawType !== member.type.type
         ? ` // ${member.type.rawType}`
         : readOnlySuffix;
-    const keyword = member.kind === 'enum' ? 'static ' : '';
-    lines.push(`    ${keyword}${member.name}: ${member.type.type};${rawTypeSuffix}`);
+    lines.push(`    ${member.name}: ${member.type.type};${rawTypeSuffix}`);
     return lines;
 }
 
