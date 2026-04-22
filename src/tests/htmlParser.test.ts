@@ -8,6 +8,7 @@ describe('htmlParser', () => {
   it('parses the existing fixture html', () => {
     const model = parseHtmlFile(FIXTURE_PATH);
     expect(model.className).toBe('DzTestClass');
+    expect(model.docUrl).toBe('https://docs.example.test/DzTestClass');
     expect(model.summary).toBe('Base class for testing the doc parser pipeline.');
     expect(model.extendsName).toBe('DzElement');
     expect(model.properties.map(member => member.name)).toContain('label');
@@ -35,6 +36,7 @@ describe('htmlParser', () => {
 
   it('parses enumerations and static methods from a synthetic fixture', () => {
     const html = `
+<!-- @docurl https://docs.example.test/DzStaticTest -->
 <!DOCTYPE html>
 <html>
 <body>
@@ -64,6 +66,7 @@ describe('htmlParser', () => {
 </body>
 </html>`;
     const model = parseHtml(html);
+    expect(model.docUrl).toBe('https://docs.example.test/DzStaticTest');
     expect(model.enums.map(member => member.name)).toEqual(['Foo', 'Bar']);
     expect(model.staticMethods).toHaveLength(1);
     expect(model.staticMethods[0].name).toBe('makeName');

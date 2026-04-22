@@ -27,6 +27,15 @@ async function fetchHtml(url) {
   return res.text();
 }
 
+function annotateHtmlWithSourceUrl(html, url) {
+  const marker = `<!-- @docurl ${url} -->`;
+  if (html.includes('<!-- @docurl ')) {
+    return html.replace(/<!--\s*@docurl\s+[^>]+-->/i, marker);
+  }
+
+  return `${marker}\n${html}`;
+}
+
 function extractDzLinks(html) {
   const seen = new Set();
 
@@ -72,7 +81,7 @@ function parseArgs(argv) {
   }
 
   return {
-    outDir: positional[0] ?? './daz_api_html',
+    outDir: positional[0] ?? './scripts/daz_api_html',
     targetType,
   };
 }
@@ -113,7 +122,7 @@ async function main() {
 
     try {
       const html = await fetchHtml(url);
-      await fs.writeFile(dest, html, 'utf8');
+      await fs.writeFile(dest, annotateHtmlWithSourceUrl(html, url), 'utf8');
       console.log(`  ✓  ${filename}`);
       ok++;
     } catch (err) {

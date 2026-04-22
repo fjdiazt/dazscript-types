@@ -61,7 +61,7 @@ export function rebuildClassFile(
     });
 
     const lines: string[] = [];
-    const classJsDoc = buildClassDoc(model.summary);
+    const classJsDoc = buildClassDoc(model.summary, model.docUrl);
     if (classJsDoc) {
         lines.push(classJsDoc);
     }
@@ -173,13 +173,22 @@ function buildDeclareClassLine(className: string, extendsName: string): string {
     return `declare class ${className} {`;
 }
 
-function buildClassDoc(summary: string): string | null {
+function buildClassDoc(summary: string, docUrl: string): string | null {
     const text = summary.trim();
-    if (!text) {
+    const url = docUrl.trim();
+    if (!text && !url) {
         return null;
     }
 
-    return ['/**', ` * ${text}`, ' */'].join('\n');
+    const lines = ['/**'];
+    if (text) {
+        lines.push(` * ${text}`);
+    }
+    if (url) {
+        lines.push(` * @docurl ${url}`);
+    }
+    lines.push(' */');
+    return lines.join('\n');
 }
 
 function buildMemberDoc(

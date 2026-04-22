@@ -16,6 +16,7 @@ describe('rebuildClassFile', () => {
     it('omits documented inherited members and appends legacy extras', () => {
         const parent: DazClassModel = {
             className: 'DzParent',
+            docUrl: 'https://docs.example.test/DzParent',
             summary: 'Parent class.',
             extendsName: 'QObject',
             enums: [],
@@ -27,6 +28,7 @@ describe('rebuildClassFile', () => {
         };
         const child: DazClassModel = {
             className: 'DzChild',
+            docUrl: 'https://docs.example.test/DzChild',
             summary: 'Child class.',
             extendsName: 'DzParent',
             enums: [],
@@ -52,6 +54,7 @@ describe('rebuildClassFile', () => {
         ];
 
         const result = rebuildClassFile(child, legacyMembers, registry);
+        expect(result.content).toContain('@docurl https://docs.example.test/DzChild');
         expect(result.content).toContain('declare class DzChild extends DzParent {');
         expect(result.content).toContain('count: number;');
         expect(result.content).toContain('ownMethod(): string;');

@@ -43,6 +43,7 @@ export interface DocSignal extends DocMemberBase {
 
 export interface DazClassModel {
     className: string;
+    docUrl: string;
     summary: string;
     extendsName: string;
     enums: DocProperty[];

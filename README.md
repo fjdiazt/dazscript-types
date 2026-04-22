@@ -51,6 +51,9 @@ node scripts/daz_scraper.mjs
 # Refresh one type only
 node scripts/daz_scraper.mjs --type DzNode
 
+# Custom output directory if needed
+node scripts/daz_scraper.mjs path/to/daz_api_html --type DzNode
+
 # Rebuild eligible DAZ class files from the saved HTML
 npm run sync:html
 

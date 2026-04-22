@@ -49,6 +49,7 @@ declare class DzTestClass extends DzWrongParent {
             'utf-8'
         );
         fs.writeFileSync(path.join(htmlDir, 'testclass_dz.html'), `
+<!-- @docurl https://docs.example.test/DzTestClass -->
 <!DOCTYPE html>
 <html>
 <body>
@@ -74,6 +75,7 @@ declare class DzTestClass extends DzWrongParent {
         const rebuilt = fs.readFileSync(path.join(typesDir, 'dz_testClass.d.ts'), 'utf-8');
 
         expect(rebuilt).toContain('declare class DzTestClass extends DzParent {');
+        expect(rebuilt).toContain('@docurl https://docs.example.test/DzTestClass');
         expect(rebuilt).toContain('count: number; // Number');
         expect(rebuilt).toContain('ownMethod(): string;');
         expect(rebuilt).toContain('legacyOnly(flag: boolean): void;');
@@ -102,6 +104,7 @@ declare class DzTestClass extends DzWrongParent {
         );
 
         fs.writeFileSync(path.join(htmlDir, 'alpha_dz.html'), `
+<!-- @docurl https://docs.example.test/DzAlpha -->
 <!DOCTYPE html>
 <html><body><div class="page">
 <h1>DzAlpha</h1>
@@ -111,6 +114,7 @@ declare class DzTestClass extends DzWrongParent {
 <h3>Methods</h3><div class="level3"><hr/><p>void : <strong><a name="alphaMethod">alphaMethod</a></strong>()</p><p>Alpha method.</p></div>
 </div></body></html>`, 'utf-8');
         fs.writeFileSync(path.join(htmlDir, 'beta_dz.html'), `
+<!-- @docurl https://docs.example.test/DzBeta -->
 <!DOCTYPE html>
 <html><body><div class="page">
 <h1>DzBeta</h1>
@@ -127,6 +131,7 @@ declare class DzTestClass extends DzWrongParent {
         expect(summary).toContain('Files scanned: 1');
         expect(summary).toContain('Eligible files: 1');
         expect(summary).toContain('Rebuilt files: 1');
+        expect(alpha).toContain('@docurl https://docs.example.test/DzAlpha');
         expect(alpha).toContain('alphaMethod(): void;');
         expect(beta).toContain('oldBeta(): void;');
     });

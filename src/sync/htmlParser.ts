@@ -53,6 +53,7 @@ export function parseHtml(html: string): DazClassModel {
     const $ = cheerio.load(html);
 
     const className = $('h1').first().text().trim();
+    const docUrl = extractDocUrl(html, $);
     const summary = $('div.page').children('div.level1').first().children('p').first().text().trim();
     const extendsName = extractExtendsName($);
     const enums = extractEnumMembers($);
@@ -71,6 +72,7 @@ export function parseHtml(html: string): DazClassModel {
 
     return {
         className,
+        docUrl,
         summary,
         extendsName,
         enums,
@@ -80,6 +82,23 @@ export function parseHtml(html: string): DazClassModel {
         methods,
         signals,
     };
+}
+
+function extractDocUrl(html: string, $: CheerioRoot): string {
+    const commentMatch = html.match(/<!--\s*@docurl\s+(https?:\/\/[^\s]+)\s*-->/i);
+    if (commentMatch) {
+        return commentMatch[1];
+    }
+
+    const canonical = $('link[rel="canonical"]').attr('href')?.trim() ?? '';
+    if (canonical.startsWith('http://') || canonical.startsWith('https://')) {
+        return canonical;
+    }
+    if (canonical.startsWith('/')) {
+        return `https://docs.daz3d.com${canonical}`;
+    }
+
+    return '';
 }
 
 function extractExtendsName($: CheerioRoot): string {
