@@ -1,3 +1,9 @@
+/**
+ * Ancestor registry utilities for class-member lookups.
+ *
+ * The registry is intentionally shape-based: it tracks only the minimal member
+ * identity needed for inheritance filtering, not full declaration text.
+ */
 import { ClassShapeMember, DazClassModel, LegacyClassInfo } from './typeModel';
 
 export interface ClassShape {
@@ -8,6 +14,9 @@ export interface ClassShape {
 
 export type ClassRegistry = Map<string, ClassShape>;
 
+/**
+ * Build a class registry from parsed HTML models plus legacy-only classes.
+ */
 export function buildClassRegistry(
     htmlModels: Iterable<DazClassModel>,
     legacyClasses: Iterable<LegacyClassInfo>
@@ -39,6 +48,9 @@ export function buildClassRegistry(
     return registry;
 }
 
+/**
+ * Collect all members reachable through the ancestor chain of a class.
+ */
 export function resolveAncestorMembers(className: string, registry: ClassRegistry): ClassShapeMember[] {
     const resolved: ClassShapeMember[] = [];
     const seenClasses = new Set<string>();

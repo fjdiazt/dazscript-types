@@ -1,3 +1,10 @@
+/**
+ * Shared normalized data model for the sync pipeline.
+ *
+ * This module should stay dependency-light and policy-free. Other modules can
+ * parse, transform, or render these shapes without importing one another's
+ * implementation details.
+ */
 export interface TypeRef {
     type: string;
     rawType?: string;

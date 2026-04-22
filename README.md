@@ -27,9 +27,52 @@ Then make sure you update your tsconfig.json to include the typings like so:
   "compilerOptions": {
     ...
   },
-  "include": ["node_modules/dazscript-types/**/*"]
+  "include": ["node_modules/dazscript-types/src/types/**/*"]
 }
 ```
+
+## Updating The Types
+
+When maintaining this package, update the types through the local sync pipeline instead of editing large generated sections by hand.
+
+Recommended collaborator workflow:
+
+1. Refresh the saved DAZ HTML corpus.
+2. Run the HTML sync pipeline.
+3. Review the summary and the resulting diff together with any skipped files.
+4. Discuss any out-of-scope or unsafe skips before making manual follow-up edits.
+
+Commands:
+
+```bash
+# Refresh the local HTML cache
+node scripts/daz_scraper.mjs
+
+# Refresh one type only
+node scripts/daz_scraper.mjs --type DzNode
+
+# Rebuild eligible DAZ class files from the saved HTML
+npm run sync:html
+
+# Rebuild one type only
+npm run sync:html -- --type DzNode
+
+# Run the current orchestrator
+npm run sync:all
+
+# Run the current orchestrator for one type only
+npm run sync:all -- --type DzNode
+```
+
+What the pipeline does:
+
+- rebuilds eligible `src/types/daz/*.d.ts` files from local HTML
+- fixes class summaries, `extends`, properties, methods, and signals from the docs
+- removes members already inherited from ancestors
+- preserves old non-HTML members at the end of the file as `@undocumented`
+- leaves helper or non-mapped files untouched and reports them in the summary
+
+If a file is skipped because it has no 1:1 HTML match or has unsafe top-level content, keep that discussion explicit in review instead of forcing it into the automated pass.
 
 ## Contributing
 

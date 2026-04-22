@@ -1,3 +1,10 @@
+/**
+ * Maps between DAZ class names, `.d.ts` filenames, and saved HTML filenames.
+ *
+ * This module is the single place where naming conventions are encoded so the
+ * rest of the pipeline can work with explicit index entries instead of string
+ * guessing.
+ */
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -42,6 +49,9 @@ export function isSpecialCaseFile(typeFile: string): boolean {
     return SPECIAL_SKIP_FILES.has(path.basename(typeFile));
 }
 
+/**
+ * Build the set of eligible 1:1 type/html mappings for the rebuild pass.
+ */
 export function buildHtmlIndex(typesDir: string, htmlDir: string): HtmlIndexEntry[] {
     const htmlFiles = new Map<string, string>();
     for (const entry of fs.readdirSync(htmlDir, { withFileTypes: true })) {

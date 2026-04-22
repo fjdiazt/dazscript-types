@@ -1,3 +1,9 @@
+/**
+ * Reporting utilities for the sync pipeline.
+ *
+ * Keep this module presentation-oriented: it should summarize work that the
+ * pipeline already decided, not contain sync logic itself.
+ */
 export interface SyncSkip {
     file: string;
     reason: string;

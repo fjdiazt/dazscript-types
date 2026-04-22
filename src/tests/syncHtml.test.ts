@@ -82,4 +82,52 @@ declare class DzTestClass extends DzWrongParent {
         expect(summary).toContain('Recovered legacy members: 1');
         expect(summary).toContain('dz_signals.d.ts: special-case support file');
     });
+
+    it('can target a single type', async () => {
+        const root = makeTempDir();
+        const typesDir = path.join(root, 'types');
+        const htmlDir = path.join(root, 'html');
+        fs.mkdirSync(typesDir, { recursive: true });
+        fs.mkdirSync(htmlDir, { recursive: true });
+
+        fs.writeFileSync(
+            path.join(typesDir, 'dz_alpha.d.ts'),
+            'declare class DzAlpha extends QObject {\n    oldAlpha(): void;\n}\n',
+            'utf-8'
+        );
+        fs.writeFileSync(
+            path.join(typesDir, 'dz_beta.d.ts'),
+            'declare class DzBeta extends QObject {\n    oldBeta(): void;\n}\n',
+            'utf-8'
+        );
+
+        fs.writeFileSync(path.join(htmlDir, 'alpha_dz.html'), `
+<!DOCTYPE html>
+<html><body><div class="page">
+<h1>DzAlpha</h1>
+<div class="level1"><p>Alpha summary.</p><p><strong>Inherits :</strong></p><ul><li><a>QObject</a></li></ul></div>
+<h2>Methods</h2><div class="level2"><table><tr><td>void</td><td><strong>alphaMethod</strong>()</td></tr></table></div>
+<h2>Detailed Description</h2><div class="level2"></div>
+<h3>Methods</h3><div class="level3"><hr/><p>void : <strong><a name="alphaMethod">alphaMethod</a></strong>()</p><p>Alpha method.</p></div>
+</div></body></html>`, 'utf-8');
+        fs.writeFileSync(path.join(htmlDir, 'beta_dz.html'), `
+<!DOCTYPE html>
+<html><body><div class="page">
+<h1>DzBeta</h1>
+<div class="level1"><p>Beta summary.</p><p><strong>Inherits :</strong></p><ul><li><a>QObject</a></li></ul></div>
+<h2>Methods</h2><div class="level2"><table><tr><td>void</td><td><strong>betaMethod</strong>()</td></tr></table></div>
+<h2>Detailed Description</h2><div class="level2"></div>
+<h3>Methods</h3><div class="level3"><hr/><p>void : <strong><a name="betaMethod">betaMethod</a></strong>()</p><p>Beta method.</p></div>
+</div></body></html>`, 'utf-8');
+
+        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'DzAlpha' });
+        const alpha = fs.readFileSync(path.join(typesDir, 'dz_alpha.d.ts'), 'utf-8');
+        const beta = fs.readFileSync(path.join(typesDir, 'dz_beta.d.ts'), 'utf-8');
+
+        expect(summary).toContain('Files scanned: 1');
+        expect(summary).toContain('Eligible files: 1');
+        expect(summary).toContain('Rebuilt files: 1');
+        expect(alpha).toContain('alphaMethod(): void;');
+        expect(beta).toContain('oldBeta(): void;');
+    });
 });

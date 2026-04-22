@@ -2,7 +2,7 @@
 /**
  * daz_scraper.mjs
  * Scrapes all dz* pages from the DAZ Studio scripting API object index.
- * Usage:  node daz_scraper.mjs [output-dir]
+ * Usage:  node daz_scraper.mjs [output-dir] [--type DzNode]
  * Output dir defaults to ./daz_api_html
  *
  * Node 18+ (built-in fetch).  For older Node: npm i node-fetch and uncomment the import below.
@@ -15,7 +15,6 @@ import path from 'path';
 
 const INDEX_URL = 'https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/start';
 const BASE_URL  = 'https://docs.daz3d.com';
-const OUT_DIR   = process.argv[2] ?? './daz_api_html';
 
 // Only grab hrefs that end with /object_index/dz<something>
 const DZ_RE = /\/object_index\/dz[^"'\s]*/i;
@@ -51,28 +50,66 @@ function urlToFilename(url) {
   return slug.endsWith('.html') ? slug : slug + '.html';
 }
 
+function classNameToSlug(className) {
+  if (!className || !className.startsWith('Dz')) {
+    throw new Error(`Unsupported type name: ${className}`);
+  }
+
+  return `${className.slice(2).toLowerCase()}_dz`;
+}
+
+function parseArgs(argv) {
+  const positional = [];
+  let targetType = null;
+
+  for (let i = 0; i < argv.length; i++) {
+    if (argv[i] === '--type') {
+      targetType = argv[i + 1] ?? null;
+      i++;
+    } else {
+      positional.push(argv[i]);
+    }
+  }
+
+  return {
+    outDir: positional[0] ?? './daz_api_html',
+    targetType,
+  };
+}
+
 async function main() {
-  await fs.mkdir(OUT_DIR, { recursive: true });
+  const { outDir, targetType } = parseArgs(process.argv.slice(2));
+
+  await fs.mkdir(outDir, { recursive: true });
 
   console.log(`Fetching index: ${INDEX_URL}`);
   const indexHtml = await fetchHtml(INDEX_URL);
-  const links = extractDzLinks(indexHtml);
+  let links = extractDzLinks(indexHtml);
 
   if (links.length === 0) {
     console.error('No _dz links found — page structure may have changed.');
     process.exit(1);
   }
 
-  console.log(`Found ${links.length} Dz* entries. Saving to ${OUT_DIR}/\n`);
+  if (targetType) {
+    const slug = classNameToSlug(targetType);
+    links = links.filter(url => url.endsWith(`/${slug}`));
+    if (links.length === 0) {
+      console.error(`No matching HTML entry found for ${targetType}.`);
+      process.exit(1);
+    }
+  }
+
+  console.log(`Found ${links.length} Dz* entries. Saving to ${outDir}/\n`);
 
   // Save the index itself so you have a local TOC
-  await fs.writeFile(path.join(OUT_DIR, '_index.html'), indexHtml, 'utf8');
+  await fs.writeFile(path.join(outDir, '_index.html'), indexHtml, 'utf8');
 
   let ok = 0, fail = 0;
 
   for (const url of links) {
     const filename = urlToFilename(url);
-    const dest     = path.join(OUT_DIR, filename);
+    const dest     = path.join(outDir, filename);
 
     try {
       const html = await fetchHtml(url);

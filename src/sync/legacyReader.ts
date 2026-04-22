@@ -1,9 +1,19 @@
+/**
+ * Reads the existing `.d.ts` file just enough to recover legacy declarations.
+ *
+ * This parser is intentionally shallow. Its job is not to understand all of
+ * TypeScript; it only extracts class/member signatures needed for the recovery
+ * pass and flags shapes that are unsafe to rewrite automatically.
+ */
 import { LegacyClassInfo, LegacyMember } from './typeModel';
 
 const METHOD_RE = /^(\s*)(static\s+)?(\w+)\s*\(([^)]*)\)\s*:\s*([^;]+);\s*(\/\/.*)?$/;
 const PROP_RE = /^(\s*)(static\s+)?(\w+)\??\s*:\s*([^;]+);\s*(\/\/.*)?$/;
 const CLASS_RE = /declare class\s+(\w+)(?:\s+extends\s+(\w+))?(?:\s*\/\*[\s\S]*?\*\/)?\s*\{/g;
 
+/**
+ * Parse a legacy class declaration from the current file content.
+ */
 export function parseLegacyClass(content: string, expectedClassName?: string): LegacyClassInfo | null {
     const classMatches = [...content.matchAll(CLASS_RE)];
     if (classMatches.length === 0) {

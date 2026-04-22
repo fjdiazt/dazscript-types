@@ -1,3 +1,10 @@
+/**
+ * Converts saved DAZ HTML pages into a normalized class model.
+ *
+ * Keep this module focused on extracting documentation truth from the local
+ * HTML corpus. It should not know about filesystem scanning, rebuild policy,
+ * or report formatting.
+ */
 import * as fs from 'fs';
 import * as cheerio from 'cheerio';
 import {
@@ -31,11 +38,17 @@ const DETAIL_SECTION_HEADERS = new Set([
     'Signature:',
 ]);
 
+/**
+ * Parse one saved HTML file from disk.
+ */
 export function parseHtmlFile(filePath: string): DazClassModel {
     const html = fs.readFileSync(filePath, 'utf-8');
     return parseHtml(html);
 }
 
+/**
+ * Parse one HTML document string into the normalized model used by the syncer.
+ */
 export function parseHtml(html: string): DazClassModel {
     const $ = cheerio.load(html);
 

@@ -1,3 +1,10 @@
+/**
+ * Renders the final `.d.ts` output for one class.
+ *
+ * This module turns normalized HTML data plus recovered legacy members into a
+ * deterministic class declaration. Ancestor filtering decisions happen here,
+ * while HTML parsing and legacy parsing stay in their own modules.
+ */
 import { resolveAncestorMembers, ClassRegistry } from './ancestorRegistry';
 import {
     DazClassModel,
@@ -13,6 +20,9 @@ export interface RebuildResult {
     recoveredLegacyCount: number;
 }
 
+/**
+ * Rebuild one class file from normalized inputs.
+ */
 export function rebuildClassFile(
     model: DazClassModel,
     legacyMembers: LegacyMember[],
