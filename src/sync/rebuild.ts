@@ -137,6 +137,11 @@ export function rebuildClassFile(
         ...model.properties.map(member => member.name),
         ...mergedSignals.map(member => member.name),
     ]);
+    const ancestorPropertyNames = new Set(
+        ancestorMembers
+            .filter(member => member.kind === 'property')
+            .map(member => member.name)
+    );
     const augmentOutput = augmentMembers.filter(member => {
         if (member.kind === 'constructor') {
             return true;
@@ -144,10 +149,12 @@ export function rebuildClassFile(
 
         if (member.kind === 'property') {
             return !documentedPropertyNames.has(member.name) &&
+                !ancestorPropertyNames.has(member.name) &&
                 !findPropertyOrMethodNameConflict(member.name);
         }
 
-        return !documentedPropertyNames.has(member.name);
+        return !documentedPropertyNames.has(member.name) &&
+            !ancestorPropertyNames.has(member.name);
     });
 
     const lines: string[] = [];
