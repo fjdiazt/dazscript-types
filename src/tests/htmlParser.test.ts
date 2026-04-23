@@ -209,6 +209,48 @@ describe('htmlParser', () => {
     expect(model.constructors[1].parameters[0].type.type).toBe('string');
   });
 
+  it('renames reserved parameter names while preserving descriptions', () => {
+    const html = `
+<!-- @docurl https://docs.example.test/DzScript -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>DzScript</h1>
+  <div class="level1">
+    <p>Script class.</p>
+    <p><strong>Inherits :</strong></p>
+    <ul><li><a>DzBase</a></li></ul>
+  </div>
+  <h2>Methods</h2>
+  <div class="level2">
+    <table>
+      <tr><td>Boolean</td><td><strong>call</strong>( String function, Array args )</td></tr>
+    </table>
+  </div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+  <h3>Methods</h3>
+  <div class="level3">
+    <hr/>
+    <p>Boolean : <strong><a name="call">call</a></strong>( String function, Array args )</p>
+    <p>Calls a function in the script.</p>
+    <p><strong>Parameter(s):</strong></p>
+    <ul>
+      <li><em>function</em> - The name of the function to call.</li>
+      <li><em>args</em> - A list of arguments to pass to the function.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>`;
+
+    const model = parseHtml(html);
+
+    expect(model.methods[0].parameters[0].name).toBe('func');
+    expect(model.methods[0].parameters[0].description).toBe('The name of the function to call.');
+    expect(model.methods[0].parameters[1].name).toBe('args');
+  });
+
   it('strips deprecated labels from class names and inheritance types', () => {
     const html = `
 <!-- @docurl https://docs.example.test/DzRotateManip -->

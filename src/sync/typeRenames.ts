@@ -4,6 +4,10 @@ const HTML_GENERATED_CLASS_RENAMES: Record<string, string> = {
     Image: 'DzImage',
 };
 
+const RESERVED_PARAMETER_NAME_RENAMES: Record<string, string> = {
+    function: 'func',
+};
+
 const REVERSE_HTML_GENERATED_CLASS_RENAMES = Object.fromEntries(
     Object.entries(HTML_GENERATED_CLASS_RENAMES).map(([rawName, canonicalName]) => [canonicalName, rawName])
 );
@@ -42,6 +46,15 @@ export function canonicalizeLegacySignature(signature: string): string {
     }
 
     return rewritten;
+}
+
+export function sanitizeParameterName(name: string): string {
+    const trimmed = name.trim();
+    if (!trimmed) {
+        return trimmed;
+    }
+
+    return RESERVED_PARAMETER_NAME_RENAMES[trimmed] ?? trimmed;
 }
 
 function stripDeprecatedSuffix(name: string): string {

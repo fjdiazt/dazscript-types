@@ -15,7 +15,7 @@ import {
     DocSignal,
     TypeRef,
 } from './typeModel';
-import { canonicalizeGeneratedClassName, canonicalizeTypeRef } from './typeRenames';
+import { canonicalizeGeneratedClassName, canonicalizeTypeRef, sanitizeParameterName } from './typeRenames';
 
 type CheerioRoot = ReturnType<typeof cheerio.load>;
 
@@ -360,7 +360,7 @@ function parseParam(rawParam: string): DocParameter | null {
         return null;
     }
 
-    const name = pieces[pieces.length - 1].trim();
+    const name = sanitizeParameterName(pieces[pieces.length - 1].trim());
     const typeName = pieces.slice(0, -1).join(' ').trim();
     if (!name || !typeName) {
         return null;
@@ -537,7 +537,7 @@ function parseDetailedBlock($: CheerioRoot, block: any[]): DetailedEntry | null 
             if (state === 'params') {
                 list.find('li').each((_, li) => {
                     const item = $(li);
-                    const paramName = item.find('em').first().text().trim();
+                    const paramName = sanitizeParameterName(item.find('em').first().text().trim());
                     const text = item.text().trim();
                     const splitAt = text.indexOf(' - ');
                     const desc = splitAt === -1 ? text : text.slice(splitAt + 3).trim();

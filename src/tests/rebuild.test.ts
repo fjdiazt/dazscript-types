@@ -389,4 +389,40 @@ describe('rebuildClassFile', () => {
     expect(result.content).not.toContain('nameChanged(p0: string): void;');
     expect(result.recoveredLegacyCount).toBe(0);
   });
+
+  it('emits sanitized reserved parameter names in method signatures and docs', () => {
+    const model: DazClassModel = {
+      className: 'DzScript',
+      docUrl: 'https://docs.example.test/DzScript',
+      summary: 'Script class.',
+      extendsName: 'DzBase',
+      enums: [],
+      properties: [],
+      constructors: [],
+      staticMethods: [],
+      methods: [
+        {
+          kind: 'method',
+          name: 'call',
+          returnType: { type: 'boolean' },
+          parameters: [
+            { name: 'func', type: { type: 'string' }, defaultValue: null, description: 'The name of the function to call.' },
+            { name: 'args', type: { type: 'any[]' }, defaultValue: null, description: 'A list of arguments to pass to the function.' },
+          ],
+          description: 'Calls a function in the script.',
+        },
+      ],
+      signals: [],
+    };
+    const registry = buildClassRegistry([model], [
+      makeLegacy('QObject', '', []),
+      makeLegacy('DzBase', 'QObject', []),
+    ]);
+
+    const result = rebuildClassFile(model, [], registry);
+
+    expect(result.content).toContain('@param func string - The name of the function to call.');
+    expect(result.content).toContain('call(func: string, args: any[]): boolean;');
+    expect(result.content).not.toContain('call(function: string, args: any[]): boolean;');
+  });
 });
