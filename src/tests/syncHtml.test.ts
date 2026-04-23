@@ -135,4 +135,156 @@ declare class DzTestClass extends DzWrongParent {
         expect(alpha).toContain('alphaMethod(): void;');
         expect(beta).toContain('oldBeta(): void;');
     });
+
+    it('creates a missing Dz type file from matching HTML', async () => {
+        const root = makeTempDir();
+        const typesDir = path.join(root, 'types');
+        const htmlDir = path.join(root, 'html');
+        fs.mkdirSync(typesDir, { recursive: true });
+        fs.mkdirSync(htmlDir, { recursive: true });
+
+        fs.writeFileSync(
+            path.join(typesDir, 'dz_parent.d.ts'),
+            'declare class DzParent extends QObject {\n}\n',
+            'utf-8'
+        );
+        fs.writeFileSync(path.join(htmlDir, 'newtype_dz.html'), `
+<!-- @docurl https://docs.example.test/DzNewType -->
+<!DOCTYPE html>
+<html><body><div class="page">
+<h1>DzNewType</h1>
+<div class="level1"><p>New type summary.</p><p><strong>Inherits :</strong></p><ul><li><a>QObject</a><ul><li><a>DzParent</a></li></ul></li></ul></div>
+<h2>Methods</h2><div class="level2"><table><tr><td>void</td><td><strong>newMethod</strong>()</td></tr></table></div>
+<h2>Detailed Description</h2><div class="level2"></div>
+<h3>Methods</h3><div class="level3"><hr/><p>void : <strong><a name="newMethod">newMethod</a></strong>()</p><p>New method.</p></div>
+</div></body></html>`, 'utf-8');
+
+        const summary = await runSyncHtml(typesDir, htmlDir);
+        const createdPath = path.join(typesDir, 'dz_newType.d.ts');
+
+        expect(fs.existsSync(createdPath)).toBe(true);
+        expect(fs.readFileSync(createdPath, 'utf-8')).toContain('declare class DzNewType extends DzParent {');
+        expect(fs.readFileSync(createdPath, 'utf-8')).toContain('newMethod(): void;');
+        expect(summary).toContain('Eligible files: 1');
+        expect(summary).toContain('Rebuilt files: 1');
+    });
+
+    it('creates a missing renamed type file from matching HTML and rewrites references', async () => {
+        const root = makeTempDir();
+        const typesDir = path.join(root, 'types');
+        const htmlDir = path.join(root, 'html');
+        fs.mkdirSync(typesDir, { recursive: true });
+        fs.mkdirSync(htmlDir, { recursive: true });
+
+        fs.writeFileSync(path.join(htmlDir, 'image.html'), `
+<!-- @docurl https://docs.example.test/Image -->
+<!DOCTYPE html>
+<html><body><div class="page">
+<h1>Image</h1>
+<div class="level1"><p>Image built-in.</p></div>
+<h2>Methods</h2><div class="level2"><table><tr><td>Number</td><td><strong>width</strong>()</td></tr><tr><td>Image</td><td><strong>copy</strong>( Image other )</td></tr></table></div>
+<h2>Detailed Description</h2><div class="level2"></div>
+<h3>Methods</h3><div class="level3"><hr/><p>Number : <strong><a name="width">width</a></strong>()</p><p>Gets width.</p><hr/><p>Image : <strong><a name="copy">copy</a></strong>( Image other )</p><p>Copies image.</p></div>
+</div></body></html>`, 'utf-8');
+
+        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'Image' });
+        const createdPath = path.join(typesDir, 'dz_image.d.ts');
+
+        expect(fs.existsSync(createdPath)).toBe(true);
+        expect(fs.readFileSync(createdPath, 'utf-8')).toContain('declare class DzImage {');
+        expect(fs.readFileSync(createdPath, 'utf-8')).toContain('width(): number; // Number');
+        expect(fs.readFileSync(createdPath, 'utf-8')).toContain('copy(other: DzImage): DzImage;');
+        expect(summary).toContain('Files scanned: 0');
+        expect(summary).toContain('Eligible files: 1');
+        expect(summary).toContain('Rebuilt files: 1');
+    });
+
+    it('can replace an existing file without recovering legacy members', async () => {
+        const root = makeTempDir();
+        const typesDir = path.join(root, 'types');
+        const htmlDir = path.join(root, 'html');
+        fs.mkdirSync(typesDir, { recursive: true });
+        fs.mkdirSync(htmlDir, { recursive: true });
+
+        fs.writeFileSync(
+            path.join(typesDir, 'dz_testClass.d.ts'),
+            `declare class DzTestClass extends QObject {
+    ownMethod(): string;
+    legacyOnly(flag: boolean): void;
+}
+`,
+            'utf-8'
+        );
+        fs.writeFileSync(path.join(htmlDir, 'testclass_dz.html'), `
+<!-- @docurl https://docs.example.test/DzTestClass -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>DzTestClass</h1>
+  <div class="level1">
+    <p>Rebuilt from HTML.</p>
+    <p><strong>Inherits :</strong></p>
+    <ul><li><a>QObject</a></li></ul>
+  </div>
+  <h2>Methods</h2>
+  <div class="level2"><table><tr><td>String</td><td><strong>ownMethod</strong>()</td></tr></table></div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+  <h3>Methods</h3><div class="level3"><hr/><p>String : <strong><a name="ownMethod">ownMethod</a></strong>()</p><p>Own method.</p><p><strong>Return Value:</strong></p><ul><li>The value.</li></ul></div>
+</div>
+</body>
+</html>`, 'utf-8');
+
+        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'DzTestClass', replace: true });
+        const rebuilt = fs.readFileSync(path.join(typesDir, 'dz_testClass.d.ts'), 'utf-8');
+
+        expect(rebuilt).toContain('ownMethod(): string;');
+        expect(rebuilt).not.toContain('legacyOnly(flag: boolean): void;');
+        expect(summary).toContain('Recovered legacy members: 0');
+    });
+
+    it('can replace an existing file even when it has unsafe top-level content', async () => {
+        const root = makeTempDir();
+        const typesDir = path.join(root, 'types');
+        const htmlDir = path.join(root, 'html');
+        fs.mkdirSync(typesDir, { recursive: true });
+        fs.mkdirSync(htmlDir, { recursive: true });
+
+        fs.writeFileSync(
+            path.join(typesDir, 'dz_testClass.d.ts'),
+            `const unsafe = true;
+declare class DzTestClass extends QObject {
+    legacyOnly(flag: boolean): void;
+}
+`,
+            'utf-8'
+        );
+        fs.writeFileSync(path.join(htmlDir, 'testclass_dz.html'), `
+<!-- @docurl https://docs.example.test/DzTestClass -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>DzTestClass</h1>
+  <div class="level1">
+    <p>Replaced from HTML.</p>
+    <p><strong>Inherits :</strong></p>
+    <ul><li><a>QObject</a></li></ul>
+  </div>
+  <h2>Methods</h2>
+  <div class="level2"><table><tr><td>void</td><td><strong>freshMethod</strong>()</td></tr></table></div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+  <h3>Methods</h3><div class="level3"><hr/><p>void : <strong><a name="freshMethod">freshMethod</a></strong>()</p><p>Fresh method.</p></div>
+</div>
+</body>
+</html>`, 'utf-8');
+
+        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'DzTestClass', replace: true });
+        const rebuilt = fs.readFileSync(path.join(typesDir, 'dz_testClass.d.ts'), 'utf-8');
+
+        expect(rebuilt).toContain('freshMethod(): void;');
+        expect(rebuilt).not.toContain('legacyOnly(flag: boolean): void;');
+        expect(summary).toContain('Rebuilt files: 1');
+        expect(summary).not.toContain('unsafe top-level content in existing file');
+    });
 });

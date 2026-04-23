@@ -15,6 +15,7 @@ import {
     DocSignal,
     TypeRef,
 } from './typeModel';
+import { canonicalizeGeneratedClassName, canonicalizeTypeRef } from './typeRenames';
 
 type CheerioRoot = cheerio.CheerioAPI;
 
@@ -52,10 +53,11 @@ export function parseHtmlFile(filePath: string): DazClassModel {
 export function parseHtml(html: string): DazClassModel {
     const $ = cheerio.load(html);
 
-    const className = $('h1').first().text().trim();
+    const className = canonicalizeGeneratedClassName(extractClassName($));
     const docUrl = extractDocUrl(html, $);
     const summary = $('div.page').children('div.level1').first().children('p').first().text().trim();
-    const extendsName = extractExtendsName($);
+    const extendsName = canonicalizeGeneratedClassName(extractExtendsName($));
+    const enumTypeNames = extractEnumTypeNames($);
     const enums = extractEnumMembers($);
     const properties = extractPropertyMembers($);
     const constructors = extractMethodMembers($, 'Constructors', 'constructor');
@@ -69,6 +71,7 @@ export function parseHtml(html: string): DazClassModel {
     applyDetailedDescriptions($, 'Static Methods', staticMethods);
     applyDetailedDescriptions($, 'Methods', methods);
     applyDetailedDescriptions($, 'Signals', signals);
+    normalizeClassLocalEnumRefs(enumTypeNames, properties, constructors, staticMethods, methods, signals);
 
     return {
         className,
@@ -82,6 +85,15 @@ export function parseHtml(html: string): DazClassModel {
         methods,
         signals,
     };
+}
+
+function extractClassName($: CheerioRoot): string {
+    const pageHeading = $('div.page > h1').first().text().trim();
+    if (pageHeading) {
+        return pageHeading;
+    }
+
+    return $('h1').map((_, el) => $(el).text().trim()).get().find(Boolean) ?? '';
 }
 
 function extractDocUrl(html: string, $: CheerioRoot): string {
@@ -119,6 +131,14 @@ function extractExtendsName($: CheerioRoot): string {
     return directParent;
 }
 
+function extractEnumTypeNames($: CheerioRoot): Set<string> {
+    return new Set(
+        findSectionRows($, 'Enumerations')
+            .map(row => $(row).find('td').first().text().trim())
+            .filter(Boolean)
+    );
+}
+
 function extractEnumMembers($: CheerioRoot): DocProperty[] {
     return findSectionRows($, 'Enumerations').flatMap(row => {
         const cols = $(row).find('td');
@@ -126,15 +146,58 @@ function extractEnumMembers($: CheerioRoot): DocProperty[] {
             return [];
         }
 
+        const enumName = $(cols[0]).text().trim();
         const names = $(cols[1]).find('strong a').map((_, el) => $(el).text().trim()).get();
         return names
             .filter(Boolean)
             .map(name => ({
                 kind: 'enum' as const,
                 name,
+                enumName,
                 type: { type: 'number' },
             }));
     });
+}
+
+function normalizeClassLocalEnumRefs(
+    enumTypeNames: Set<string>,
+    properties: DocProperty[],
+    constructors: DocMethod[],
+    staticMethods: DocMethod[],
+    methods: DocMethod[],
+    signals: DocSignal[]
+): void {
+    if (enumTypeNames.size === 0) {
+        return;
+    }
+
+    for (const property of properties) {
+        property.type = normalizeClassLocalEnumType(property.type, enumTypeNames);
+    }
+
+    for (const method of [...constructors, ...staticMethods, ...methods]) {
+        method.returnType = normalizeClassLocalEnumType(method.returnType, enumTypeNames);
+        for (const parameter of method.parameters) {
+            parameter.type = normalizeClassLocalEnumType(parameter.type, enumTypeNames);
+        }
+    }
+
+    for (const signal of signals) {
+        for (const parameter of signal.parameters) {
+            parameter.type = normalizeClassLocalEnumType(parameter.type, enumTypeNames);
+        }
+    }
+}
+
+function normalizeClassLocalEnumType(type: TypeRef, enumTypeNames: Set<string>): TypeRef {
+    if (!enumTypeNames.has(type.type)) {
+        return type;
+    }
+
+    return {
+        type: 'number',
+        rawType: type.rawType ?? type.type,
+    };
 }
 
 function extractPropertyMembers($: CheerioRoot): DocProperty[] {
@@ -153,7 +216,7 @@ function extractPropertyMembers($: CheerioRoot): DocProperty[] {
         return [{
             kind: 'property' as const,
             name,
-            type: normalizeType($(cols[0]).text().trim()),
+            type: normalizeTypeCell($, cols[0]),
             readOnly: /\(Read Only\)/i.test(descriptionText),
         }];
     });
@@ -172,7 +235,7 @@ function extractMethodMembers(
 
         const returnType = kind === 'constructor'
             ? { type: 'void' }
-            : normalizeType($(cols[0]).text().trim());
+            : normalizeTypeCell($, cols[0]);
         const name = kind === 'constructor'
             ? 'constructor'
             : $(cols[1]).find('strong').first().text().trim();
@@ -296,25 +359,40 @@ function parseParam(rawParam: string): DocParameter | null {
     };
 }
 
-function normalizeType(rawType: string): TypeRef {
+function normalizeTypeCell($: CheerioRoot, cell: any): TypeRef {
+    const rawType = $(cell).text().trim();
+    const undocumentedLink = $(cell).find('a.wikilink2').length > 0;
+    return normalizeType(rawType, { undocumentedLink });
+}
+
+function normalizeType(rawType: string, options: { undocumentedLink?: boolean } = {}): TypeRef {
     const compact = rawType.replace(/\s+/g, ' ').trim();
     switch (compact) {
         case 'String':
             return { type: 'string', rawType: compact };
         case 'Number':
+        case 'int':
             return { type: 'number', rawType: compact };
         case 'Boolean':
+        case 'bool':
             return { type: 'boolean', rawType: compact };
         case 'Array':
             return { type: 'any[]', rawType: compact };
         case 'void':
             return { type: 'void' };
         default:
+            if (options.undocumentedLink || isUndocumentedDazSlugType(compact)) {
+                return { type: 'any', rawType: compact, undocumented: true };
+            }
             if (/\w+::\w+/.test(compact)) {
                 return { type: 'number', rawType: compact };
             }
-            return { type: compact };
+            return canonicalizeTypeRef({ type: compact });
     }
+}
+
+function isUndocumentedDazSlugType(typeName: string): boolean {
+    return /^[a-z][a-z0-9_]*_dz$/.test(typeName);
 }
 
 function applyDetailedDescriptions(

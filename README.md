@@ -57,8 +57,14 @@ node scripts/daz_scraper.mjs path/to/daz_api_html --type DzNode
 # Rebuild eligible DAZ class files from the saved HTML
 npm run sync:html
 
+# Replace eligible DAZ class files from HTML only, discarding legacy members
+npm run sync:html -- --replace
+
 # Rebuild one type only
 npm run sync:html -- --type DzNode
+
+# Replace one type only from HTML only
+npm run sync:html -- --type DzNode --replace
 
 # Run the current orchestrator
 npm run sync:all
@@ -74,6 +80,8 @@ What the pipeline does:
 - removes members already inherited from ancestors
 - preserves old non-HTML members at the end of the file as `@undocumented`
 - leaves helper or non-mapped files untouched and reports them in the summary
+
+With `--replace`, the pipeline skips legacy-member recovery and overwrites the matched file with HTML-derived output only.
 
 If a file is skipped because it has no 1:1 HTML match or has unsafe top-level content, keep that discussion explicit in review instead of forcing it into the automated pass.
 

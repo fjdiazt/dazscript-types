@@ -14,6 +14,12 @@ export interface ClassShape {
 
 export type ClassRegistry = Map<string, ClassShape>;
 
+function isClassShapeMember(
+    member: LegacyClassInfo['members'][number]
+): member is LegacyClassInfo['members'][number] & ClassShapeMember {
+    return member.kind !== 'constructor';
+}
+
 /**
  * Build a class registry from parsed HTML models plus legacy-only classes.
  */
@@ -36,11 +42,13 @@ export function buildClassRegistry(
             registry.set(legacy.className, {
                 className: legacy.className,
                 extendsName: legacy.extendsName,
-                members: legacy.members.map(member => ({
-                    name: member.name,
-                    kind: member.kind,
-                    paramCount: member.paramCount,
-                })),
+                members: legacy.members
+                    .filter(isClassShapeMember)
+                    .map(member => ({
+                        name: member.name,
+                        kind: member.kind,
+                        paramCount: member.paramCount,
+                    })),
             });
         }
     }

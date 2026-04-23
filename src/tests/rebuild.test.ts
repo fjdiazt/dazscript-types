@@ -58,7 +58,7 @@ describe('rebuildClassFile', () => {
         expect(result.content).toContain('declare class DzChild extends DzParent {');
         expect(result.content).toContain('count: number;');
         expect(result.content).toContain('ownMethod(): string;');
-        expect(result.content).toContain('changed: ISignalT<number>;');
+        expect(result.content).toContain('changed: ISignal<number>;');
         expect(result.content).toContain('/** @undocumented */');
         expect(result.content).toContain('legacyOnly(value: number): void;');
         expect(result.content).not.toContain('Inherited label.');
@@ -66,15 +66,15 @@ describe('rebuildClassFile', () => {
         expect(result.recoveredLegacyCount).toBe(1);
     });
 
-    it('renders enumeration values as ordinary properties', () => {
+    it('renders enumeration values as documented static properties', () => {
         const model: DazClassModel = {
             className: 'DzViewportLike',
             docUrl: 'https://docs.example.test/DzViewportLike',
             summary: 'Viewport-like class.',
             extendsName: 'QObject',
             enums: [
-                { kind: 'enum', name: 'NoFloor', type: { type: 'number' } },
-                { kind: 'enum', name: 'WireFloor', type: { type: 'number' } },
+                { kind: 'enum', name: 'NoFloor', enumName: 'FloorStyle', type: { type: 'number' } },
+                { kind: 'enum', name: 'WireFloor', enumName: 'FloorStyle', type: { type: 'number' } },
             ],
             properties: [
                 { kind: 'property', name: 'floorStyle', type: { type: 'number' }, description: 'Current floor style.' },
@@ -90,9 +90,252 @@ describe('rebuildClassFile', () => {
 
         expect(result.content).toContain('    /* Properties */');
         expect(result.content).toContain('floorStyle: number;');
-        expect(result.content).toContain('NoFloor: number;');
-        expect(result.content).toContain('WireFloor: number;');
-        expect(result.content).not.toContain('/* Static Properties */');
-        expect(result.content).not.toContain('static NoFloor: number;');
+        expect(result.content).toContain('    /* Enumerations (Static Properties) */');
+        expect(result.content).toContain('DAZ enum member of FloorStyle.');
+        expect(result.content).toContain('static NoFloor: number;');
+        expect(result.content).toContain('static WireFloor: number;');
     });
+
+    it('does not recover legacy methods that duplicate documented signals', () => {
+        const model: DazClassModel = {
+            className: 'DzSignalHost',
+            docUrl: 'https://docs.example.test/DzSignalHost',
+            summary: 'Signal host.',
+            extendsName: 'QObject',
+            enums: [],
+            properties: [],
+            constructors: [],
+            staticMethods: [],
+            methods: [],
+            signals: [
+                {
+                    kind: 'signal',
+                    name: 'aspectOnChanged',
+                    parameters: [{ name: 'onOff', type: { type: 'boolean' }, defaultValue: null }],
+                    description: 'Aspect change.',
+                },
+            ],
+        };
+        const registry = buildClassRegistry([model], [makeLegacy('QObject', '', [])]);
+        const legacyMembers = [
+            {
+                kind: 'method' as const,
+                name: 'aspectOnChanged',
+                paramCount: 1,
+                signature: 'aspectOnChanged(onOff: boolean): void;',
+            },
+        ];
+
+        const result = rebuildClassFile(model, legacyMembers, registry);
+
+        expect(result.content).toContain('aspectOnChanged: ISignal<boolean>;');
+        expect(result.content).not.toContain('aspectOnChanged(onOff: boolean): void;');
+        expect(result.recoveredLegacyCount).toBe(0);
+    });
+
+    it('does not recover legacy methods when a documented signal with the same name changed arity', () => {
+        const model: DazClassModel = {
+            className: 'DzSignalHost',
+            docUrl: 'https://docs.example.test/DzSignalHost',
+            summary: 'Signal host.',
+            extendsName: 'QObject',
+            enums: [],
+            properties: [],
+            constructors: [],
+            staticMethods: [],
+            methods: [],
+            signals: [
+                {
+                    kind: 'signal',
+                    name: 'thirdsGuideOnChanged',
+                    parameters: [{ name: 'onOff', type: { type: 'boolean' }, defaultValue: null }],
+                    description: 'Thirds guide change.',
+                },
+            ],
+        };
+        const registry = buildClassRegistry([model], [makeLegacy('QObject', '', [])]);
+        const legacyMembers = [
+            {
+                kind: 'method' as const,
+                name: 'thirdsGuideOnChanged',
+                paramCount: 0,
+                signature: 'thirdsGuideOnChanged(): any; // TODO ;',
+            },
+        ];
+
+        const result = rebuildClassFile(model, legacyMembers, registry);
+
+        expect(result.content).toContain('thirdsGuideOnChanged: ISignal<boolean>;');
+        expect(result.content).not.toContain('thirdsGuideOnChanged(): any; // TODO ;');
+        expect(result.recoveredLegacyCount).toBe(0);
+    });
+
+  it('emits undocumented lowercase DAZ slug types as any with notes', () => {
+        const model: DazClassModel = {
+            className: 'DzUndocumentedTypeHost',
+            docUrl: 'https://docs.example.test/DzUndocumentedTypeHost',
+            summary: 'Undocumented type host.',
+            extendsName: 'QObject',
+            enums: [],
+            properties: [
+                { kind: 'property', name: 'cameraCube', type: { type: 'any', rawType: 'cameracube_dz', undocumented: true } },
+            ],
+            constructors: [],
+            staticMethods: [],
+            methods: [
+                {
+                    kind: 'method',
+                    name: 'getCameraCube',
+                    returnType: { type: 'any', rawType: 'cameracube_dz', undocumented: true },
+                    parameters: [{ name: 'cube', type: { type: 'any', rawType: 'cameracube_dz', undocumented: true }, defaultValue: null }],
+                    description: 'Gets a cube.',
+                },
+            ],
+            signals: [],
+        };
+        const registry = buildClassRegistry([model], [makeLegacy('QObject', '', [])]);
+
+        const result = rebuildClassFile(model, [], registry);
+
+        expect(result.content).toContain('cameraCube: any; // cameracube_dz; undocumented type');
+        expect(result.content).toContain('@param cube any - Undocumented DAZ type: cameracube_dz.');
+    expect(result.content).toContain('@returns any Undocumented DAZ type: cameracube_dz.');
+    expect(result.content).toContain('getCameraCube(cube: any): any; // cameracube_dz; undocumented type');
+  });
+
+  it('rewrites recovered legacy signatures for renamed generated types', () => {
+    const model: DazClassModel = {
+      className: 'DzImageHost',
+      docUrl: 'https://docs.example.test/DzImageHost',
+      summary: 'Image host.',
+      extendsName: 'QObject',
+      enums: [],
+      properties: [],
+      constructors: [],
+      staticMethods: [],
+      methods: [],
+      signals: [],
+    };
+    const registry = buildClassRegistry([model], [makeLegacy('QObject', '', [])]);
+    const legacyMembers = [
+      {
+        kind: 'method' as const,
+        name: 'setImage',
+        paramCount: 1,
+        signature: 'setImage(image: Image): void;',
+      },
+    ];
+
+    const result = rebuildClassFile(model, legacyMembers, registry);
+
+    expect(result.content).toContain('setImage(image: DzImage): void;');
+    expect(result.content).not.toContain('setImage(image: Image): void;');
+  });
+
+  it('does not recover a legacy method when a documented property now uses the same name', () => {
+    const model: DazClassModel = {
+      className: 'DzAbstractAssetContainer',
+      docUrl: 'https://docs.example.test/DzAbstractAssetContainer',
+      summary: 'Asset container.',
+      extendsName: 'DzRefCountedItem',
+      enums: [],
+      properties: [
+        {
+          kind: 'property',
+          name: 'removeAssetCausesDelete',
+          type: { type: 'boolean' },
+          description: 'Read-only property.',
+        },
+      ],
+      constructors: [],
+      staticMethods: [],
+      methods: [],
+      signals: [],
+    };
+    const registry = buildClassRegistry([model], [
+      makeLegacy('QObject', '', []),
+      makeLegacy('DzRefCountedItem', 'QObject', []),
+    ]);
+    const legacyMembers = [
+      {
+        kind: 'method' as const,
+        name: 'removeAssetCausesDelete',
+        paramCount: 0,
+        signature: 'removeAssetCausesDelete(): boolean;',
+      },
+    ];
+
+    const result = rebuildClassFile(model, legacyMembers, registry);
+
+    expect(result.content).toContain('removeAssetCausesDelete: boolean;');
+    expect(result.content).not.toContain('removeAssetCausesDelete(): boolean;');
+    expect(result.recoveredLegacyCount).toBe(0);
+  });
+
+  it('comments a signal when its name conflicts with a documented property', () => {
+    const model: DazClassModel = {
+      className: 'DzAction',
+      docUrl: 'https://docs.example.test/DzAction',
+      summary: 'Action class.',
+      extendsName: 'QObject',
+      enums: [],
+      properties: [
+        {
+          kind: 'property',
+          name: 'enabled',
+          type: { type: 'boolean' },
+          description: 'Enabled state.',
+        },
+      ],
+      constructors: [],
+      staticMethods: [],
+      methods: [],
+      signals: [
+        {
+          kind: 'signal',
+          name: 'enabled',
+          parameters: [{ name: 'onOff', type: { type: 'boolean' }, defaultValue: null }],
+          description: 'Enabled signal.',
+        },
+      ],
+    };
+    const registry = buildClassRegistry([model], [makeLegacy('QObject', '', [])]);
+
+    const result = rebuildClassFile(model, [], registry);
+
+    expect(result.content).toContain('enabled: boolean;');
+    expect(result.content).toContain('/* Conflicting Signals */');
+    expect(result.content).toContain('TypeScript conflict: DAZ documents this as a signal, but a property with the same name is also documented.');
+    expect(result.content).toContain('// enabled: ISignal<boolean>;');
+  });
+
+  it('recovers undocumented legacy constructors when docs omit them', () => {
+    const model: DazClassModel = {
+      className: 'DzCtorHost',
+      docUrl: 'https://docs.example.test/DzCtorHost',
+      summary: 'Ctor host.',
+      extendsName: 'QObject',
+      enums: [],
+      properties: [],
+      constructors: [],
+      staticMethods: [],
+      methods: [],
+      signals: [],
+    };
+    const registry = buildClassRegistry([model], [makeLegacy('QObject', '', [])]);
+    const legacyMembers = [
+      {
+        kind: 'constructor' as const,
+        name: 'constructor',
+        paramCount: 1,
+        signature: 'constructor(name: string);',
+      },
+    ];
+
+    const result = rebuildClassFile(model, legacyMembers, registry);
+
+    expect(result.content).toContain('/** @undocumented */');
+    expect(result.content).toContain('constructor(name: string);');
+    expect(result.recoveredLegacyCount).toBe(1);
+  });
 });

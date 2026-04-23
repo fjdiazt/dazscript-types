@@ -8,6 +8,7 @@
 export interface TypeRef {
     type: string;
     rawType?: string;
+    undocumented?: boolean;
 }
 
 export interface DocParameter {
@@ -27,6 +28,7 @@ export interface DocProperty extends DocMemberBase {
     kind: 'property' | 'enum';
     type: TypeRef;
     readOnly?: boolean;
+    enumName?: string;
 }
 
 export interface DocMethod extends DocMemberBase {
@@ -57,7 +59,7 @@ export interface DazClassModel {
 export interface LegacyMember {
     name: string;
     signature: string;
-    kind: 'property' | 'method';
+    kind: 'property' | 'method' | 'constructor';
     paramCount: number;
 }
 

@@ -8,9 +8,9 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "sync": "npm run sync:html",
+    "sync": "npm run sync:html --",
     "sync:html": "ts-node src/sync/syncHtml.ts",
-    "sync:all": "npm run sync:html",
+    "sync:all": "npm run sync:html --",
     "scaffold": "ts-node src/sync/scaffold.ts",
     "test": "vitest run",
     "test:watch": "vitest"

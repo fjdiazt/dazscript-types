@@ -20,15 +20,17 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { buildClassRegistry } from './ancestorRegistry';
-import { buildHtmlIndex, isSpecialCaseFile, typeFileToHtmlFile } from './htmlIndex';
+import { htmlFileToTypeFile, isSpecialCaseFile, typeFileToHtmlFile } from './htmlIndex';
 import { parseHtmlFile } from './htmlParser';
 import { parseLegacyClass } from './legacyReader';
 import { createSummary, formatSummary } from './report';
 import { rebuildClassFile } from './rebuild';
 import { DazClassModel, LegacyClassInfo } from './typeModel';
+import { canonicalizeGeneratedClassName } from './typeRenames';
 
 export interface SyncHtmlOptions {
     targetType?: string;
+    replace?: boolean;
 }
 
 /**
@@ -36,6 +38,7 @@ export interface SyncHtmlOptions {
  */
 export async function runSyncHtml(typesDir: string, htmlDir: string, options: SyncHtmlOptions = {}): Promise<string> {
     const targetTypeFile = options.targetType ? normalizeTargetTypeFile(options.targetType) : null;
+    const replace = options.replace ?? false;
     const summary = createSummary();
     const discoveredTypeFiles = fs.readdirSync(typesDir, { withFileTypes: true })
         .filter(entry => entry.isFile() && entry.name.endsWith('.d.ts'))
@@ -46,20 +49,57 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
         : discoveredTypeFiles;
     summary.scannedFiles = allTypeFiles.length;
 
-    if (targetTypeFile && allTypeFiles.length === 0) {
+    const htmlEntries: Array<{ className: string; htmlFile: string; htmlPath: string; typeFile: string; typePath: string }> = [];
+    for (const entry of fs.readdirSync(htmlDir, { withFileTypes: true })) {
+        if (!entry.isFile() || !entry.name.endsWith('.html') || entry.name === '_index.html') {
+            continue;
+        }
+
+        const htmlPath = path.join(htmlDir, entry.name);
+        const mappedTypeFile = htmlFileToTypeFile(entry.name);
+        if (!mappedTypeFile) {
+            continue;
+        }
+
+        let model: DazClassModel;
+        try {
+            model = parseHtmlFile(htmlPath);
+        } catch (error) {
+            summary.errors.push({
+                file: mappedTypeFile,
+                error: `failed to parse HTML: ${toErrorMessage(error)}`,
+            });
+            continue;
+        }
+
+        const typeFile = model.className.startsWith('Dz')
+            ? normalizeTargetTypeFile(model.className)
+            : mappedTypeFile;
+        if (targetTypeFile && typeFile.toLowerCase() !== targetTypeFile.toLowerCase()) {
+            continue;
+        }
+
+        htmlEntries.push({
+            className: model.className,
+            htmlFile: entry.name,
+            htmlPath,
+            typeFile,
+            typePath: path.join(typesDir, typeFile),
+        });
+    }
+
+    htmlEntries.sort((a, b) => a.typeFile.localeCompare(b.typeFile));
+    summary.eligibleFiles = htmlEntries.length;
+
+    if (targetTypeFile && allTypeFiles.length === 0 && htmlEntries.length === 0) {
         summary.errors.push({
             file: targetTypeFile,
-            error: 'target type file was not found',
+            error: 'target type file or matching HTML entry was not found',
         });
         return formatSummary(summary);
     }
 
-    const htmlIndex = buildHtmlIndex(typesDir, htmlDir).filter(entry =>
-        !targetTypeFile || entry.typeFile.toLowerCase() === targetTypeFile.toLowerCase()
-    );
-    summary.eligibleFiles = htmlIndex.length;
-
-    const eligibleByFile = new Map(htmlIndex.map(entry => [entry.typeFile, entry]));
+    const eligibleByFile = new Map(htmlEntries.map(entry => [entry.typeFile, entry]));
     for (const typeFile of allTypeFiles) {
         if (eligibleByFile.has(typeFile)) {
             continue;
@@ -72,7 +112,7 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
 
         const expectedHtml = typeFileToHtmlFile(typeFile);
         if (!expectedHtml) {
-            summary.skippedFiles.push({ file: typeFile, reason: 'not a mapped Dz class file' });
+            summary.skippedFiles.push({ file: typeFile, reason: 'not a mapped object index type file' });
         } else if (!fs.existsSync(path.join(htmlDir, expectedHtml))) {
             summary.skippedFiles.push({ file: typeFile, reason: `no matching HTML file (${expectedHtml})` });
         } else {
@@ -83,15 +123,8 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
     const htmlModels = new Map<string, DazClassModel>();
     const legacyClasses = new Map<string, LegacyClassInfo>();
 
-    for (const entry of htmlIndex) {
-        try {
-            htmlModels.set(entry.className, parseHtmlFile(entry.htmlPath));
-        } catch (error) {
-            summary.errors.push({
-                file: entry.typeFile,
-                error: `failed to parse HTML: ${toErrorMessage(error)}`,
-            });
-        }
+    for (const entry of htmlEntries) {
+        htmlModels.set(entry.className, parseHtmlFile(entry.htmlPath));
     }
 
     for (const typeFile of allTypeFiles) {
@@ -104,26 +137,35 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
 
     const registry = buildClassRegistry(htmlModels.values(), legacyClasses.values());
 
-    for (const entry of htmlIndex) {
+    for (const entry of htmlEntries) {
         const model = htmlModels.get(entry.className);
         if (!model) {
             continue;
         }
 
-        const legacy = parseLegacyClass(fs.readFileSync(entry.typePath, 'utf-8'), entry.className);
-        if (!legacy) {
-            summary.errors.push({ file: entry.typeFile, error: 'failed to parse existing type file' });
-            continue;
-        }
-
-        if (legacy.hasUnsafeTopLevelContent) {
-            summary.skippedFiles.push({ file: entry.typeFile, reason: 'unsafe top-level content in existing file' });
-            continue;
-        }
-
         try {
-            const result = rebuildClassFile(model, legacy.members, registry);
-            const original = fs.readFileSync(entry.typePath, 'utf-8');
+            let legacyMembers: LegacyClassInfo['members'] = [];
+            let original = '';
+
+            if (fs.existsSync(entry.typePath)) {
+                original = fs.readFileSync(entry.typePath, 'utf-8');
+                if (!replace) {
+                    const legacy = parseLegacyClass(original, entry.className);
+                    if (!legacy) {
+                        summary.errors.push({ file: entry.typeFile, error: 'failed to parse existing type file' });
+                        continue;
+                    }
+
+                    if (legacy.hasUnsafeTopLevelContent) {
+                        summary.skippedFiles.push({ file: entry.typeFile, reason: 'unsafe top-level content in existing file' });
+                        continue;
+                    }
+
+                    legacyMembers = legacy.members;
+                }
+            }
+
+            const result = rebuildClassFile(model, legacyMembers, registry);
             if (original === result.content) {
                 summary.unchangedFiles++;
                 continue;
@@ -147,11 +189,14 @@ async function main() {
     const args = process.argv.slice(2);
     const positional: string[] = [];
     let targetType: string | undefined;
+    let replace = false;
 
     for (let i = 0; i < args.length; i++) {
         if (args[i] === '--type') {
             targetType = args[i + 1];
             i++;
+        } else if (args[i] === '--replace') {
+            replace = true;
         } else {
             positional.push(args[i]);
         }
@@ -159,7 +204,7 @@ async function main() {
 
     const targetDir = positional[0] ?? path.join(process.cwd(), 'src', 'types', 'daz');
     const htmlDir = positional[1] ?? path.join(process.cwd(), 'scripts', 'daz_api_html');
-    const summary = await runSyncHtml(targetDir, htmlDir, { targetType });
+    const summary = await runSyncHtml(targetDir, htmlDir, { targetType, replace });
     console.log(summary);
 }
 
@@ -181,8 +226,13 @@ function normalizeTargetTypeFile(targetType: string): string {
         return `dz_${path.basename(trimmed, '.html').replace(/_dz$/i, '')}.d.ts`;
     }
 
-    if (trimmed.startsWith('Dz')) {
-        const suffix = trimmed.slice(2);
+    if (trimmed.endsWith('.html')) {
+        return htmlFileToTypeFile(path.basename(trimmed)) ?? `${path.basename(trimmed, '.html')}.d.ts`;
+    }
+
+    const canonicalClassName = canonicalizeGeneratedClassName(trimmed);
+    if (canonicalClassName.startsWith('Dz')) {
+        const suffix = canonicalClassName.slice(2);
         return `dz_${suffix[0].toLowerCase()}${suffix.slice(1)}.d.ts`;
     }
 
@@ -190,7 +240,7 @@ function normalizeTargetTypeFile(targetType: string): string {
         return `${trimmed}.d.ts`;
     }
 
-    return `dz_${trimmed}.d.ts`;
+    return `${canonicalClassName.toLowerCase()}.d.ts`;
 }
 
 if (require.main === module) {

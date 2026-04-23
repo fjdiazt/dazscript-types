@@ -16,6 +16,28 @@ describe('htmlParser', () => {
     expect(model.signals.map(member => member.name)).toContain('labelChanged');
   });
 
+  it('prefers the page heading over site chrome headings', () => {
+    const html = `
+<!DOCTYPE html>
+<html>
+<body>
+  <h1></h1>
+  <div class="page">
+    <h1>DzRealPageClass</h1>
+    <div class="level1">
+      <p>Real page class.</p>
+      <p><strong>Inherits :</strong></p>
+      <ul><li><a>QObject</a></li></ul>
+    </div>
+  </div>
+</body>
+</html>`;
+
+    const model = parseHtml(html);
+
+    expect(model.className).toBe('DzRealPageClass');
+  });
+
   it('parses properties, methods, docs, and signal signatures', () => {
     const model = parseHtmlFile(FIXTURE_PATH);
     const label = model.properties.find(member => member.name === 'label');
@@ -49,8 +71,14 @@ describe('htmlParser', () => {
   </div>
   <h2>Enumerations</h2>
   <div class="level2"><table><tr><td>Mode</td><td><strong><a>Foo</a>, <a>Bar</a></strong></td></tr></table></div>
+  <h2>Properties</h2>
+  <div class="level2"><table><tr><td>Mode</td><td><strong>currentMode</strong></td></tr></table></div>
   <h2>Static Methods</h2>
   <div class="level2"><table><tr><td>String</td><td><strong>makeName</strong>( Number count, Boolean simple=false )</td></tr></table></div>
+  <h2>Methods</h2>
+  <div class="level2"><table><tr><td>Mode</td><td><strong>getMode</strong>()</td></tr><tr><td>void</td><td><strong>setMode</strong>( Mode mode )</td></tr></table></div>
+  <h2>Signals</h2>
+  <div class="level2"><table><tr><td>void</td><td><strong>modeChanged</strong>( Mode mode )</td></tr></table></div>
   <h2>Detailed Description</h2><div class="level2"></div>
   <h3>Static Methods</h3>
   <div class="level3">
@@ -68,9 +96,83 @@ describe('htmlParser', () => {
     const model = parseHtml(html);
     expect(model.docUrl).toBe('https://docs.example.test/DzStaticTest');
     expect(model.enums.map(member => member.name)).toEqual(['Foo', 'Bar']);
+    expect(model.enums.map(member => member.enumName)).toEqual(['Mode', 'Mode']);
+    expect(model.properties[0].type.type).toBe('number');
+    expect(model.properties[0].type.rawType).toBe('Mode');
     expect(model.staticMethods).toHaveLength(1);
     expect(model.staticMethods[0].name).toBe('makeName');
     expect(model.staticMethods[0].parameters[1].defaultValue).toBe('false');
     expect(model.staticMethods[0].description).toBe('Builds a name.');
+    expect(model.methods[0].returnType.type).toBe('number');
+    expect(model.methods[0].returnType.rawType).toBe('Mode');
+    expect(model.methods[1].parameters[0].type.type).toBe('number');
+    expect(model.methods[1].parameters[0].type.rawType).toBe('Mode');
+    expect(model.signals[0].parameters[0].type.type).toBe('number');
+    expect(model.signals[0].parameters[0].type.rawType).toBe('Mode');
+  });
+
+  it('treats red-linked lowercase DAZ slug types as undocumented any', () => {
+    const html = `
+<!-- @docurl https://docs.example.test/DzUndocumentedTypeHost -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>DzUndocumentedTypeHost</h1>
+  <div class="level1">
+    <p>Undocumented type test.</p>
+    <p><strong>Inherits :</strong></p>
+    <ul><li><a>QObject</a></li></ul>
+  </div>
+  <h2>Methods</h2>
+  <div class="level2">
+    <table>
+      <tr><td><a class="wikilink2">cameracube_dz</a></td><td><strong>getCameraCube</strong>()</td></tr>
+      <tr><td>void</td><td><strong>setCameraCube</strong>( cameracube_dz cube )</td></tr>
+    </table>
+  </div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+</div>
+</body>
+</html>`;
+
+    const model = parseHtml(html);
+
+    expect(model.methods[0].returnType.type).toBe('any');
+    expect(model.methods[0].returnType.rawType).toBe('cameracube_dz');
+    expect(model.methods[0].returnType.undocumented).toBe(true);
+    expect(model.methods[1].parameters[0].type.type).toBe('any');
+    expect(model.methods[1].parameters[0].type.rawType).toBe('cameracube_dz');
+    expect(model.methods[1].parameters[0].type.undocumented).toBe(true);
+  });
+
+  it('normalizes int and bool spellings to TypeScript primitives', () => {
+    const html = `
+<!-- @docurl https://docs.example.test/Image -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>Image</h1>
+  <div class="level1"><p>Image test.</p></div>
+  <h2>Methods</h2>
+  <div class="level2">
+    <table>
+      <tr><td>Image</td><td><strong>mirror</strong>( bool horizontal, int x )</td></tr>
+    </table>
+  </div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+</div>
+</body>
+</html>`;
+
+    const model = parseHtml(html);
+
+    expect(model.className).toBe('DzImage');
+    expect(model.methods[0].returnType.type).toBe('DzImage');
+    expect(model.methods[0].parameters[0].type.type).toBe('boolean');
+    expect(model.methods[0].parameters[0].type.rawType).toBe('bool');
+    expect(model.methods[0].parameters[1].type.type).toBe('number');
+    expect(model.methods[0].parameters[1].type.rawType).toBe('int');
   });
 });

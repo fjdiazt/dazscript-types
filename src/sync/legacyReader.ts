@@ -8,8 +8,9 @@
 import { LegacyClassInfo, LegacyMember } from './typeModel';
 
 const METHOD_RE = /^(\s*)(static\s+)?(\w+)\s*\(([^)]*)\)\s*:\s*([^;]+);\s*(\/\/.*)?$/;
+const CONSTRUCTOR_RE = /^(\s*)constructor\s*\(([^)]*)\)\s*;\s*(\/\/.*)?$/;
 const PROP_RE = /^(\s*)(static\s+)?(\w+)\??\s*:\s*([^;]+);\s*(\/\/.*)?$/;
-const CLASS_RE = /declare class\s+(\w+)(?:\s+extends\s+(\w+))?(?:\s*\/\*[\s\S]*?\*\/)?\s*\{/g;
+const CLASS_RE = /declare class(?:\s+(\w+))?(?:\s+\(deprecated\))?(?:\s+extends\s+(\w+)(?:\s+\(deprecated\))?)?(?:\s*\/\*[\s\S]*?\*\/)?\s*\{/g;
 
 /**
  * Parse a legacy class declaration from the current file content.
@@ -21,13 +22,16 @@ export function parseLegacyClass(content: string, expectedClassName?: string): L
     }
 
     const classMatch = expectedClassName
-        ? classMatches.find(match => match[1] === expectedClassName) ?? null
+        ? classMatches.find(match => (match[1] || expectedClassName) === expectedClassName) ?? null
         : classMatches[0];
     if (!classMatch) {
         return null;
     }
 
-    const className = classMatch[1];
+    const className = classMatch[1] || expectedClassName;
+    if (!className) {
+        return null;
+    }
     const extendsName = classMatch[2] ?? '';
     const classStart = classMatch.index ?? 0;
     const braceStart = content.indexOf('{', classStart);
@@ -80,6 +84,17 @@ function parseLegacyMembers(body: string): LegacyMember[] {
             continue;
         }
         if (trimmed.startsWith('/*') || trimmed.startsWith('//')) {
+            continue;
+        }
+
+        const constructorMatch = trimmed.match(CONSTRUCTOR_RE);
+        if (constructorMatch) {
+            members.push({
+                name: 'constructor',
+                signature: trimmed,
+                kind: 'constructor',
+                paramCount: countParams(constructorMatch[2]),
+            });
             continue;
         }
 

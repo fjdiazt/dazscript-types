@@ -7,6 +7,7 @@
  */
 import * as fs from 'fs';
 import * as path from 'path';
+import { canonicalizeGeneratedClassName, getHtmlSourceClassName } from './typeRenames';
 
 export const SPECIAL_SKIP_FILES = new Set([
     'dz_signals.d.ts',
@@ -21,28 +22,59 @@ export interface HtmlIndexEntry {
 }
 
 export function classNameToTypeFile(className: string): string {
-    if (!className.startsWith('Dz') || className.length <= 2) {
+    const canonicalClassName = canonicalizeGeneratedClassName(className);
+    if (!canonicalClassName) {
         throw new Error(`Unsupported class name: ${className}`);
     }
 
-    const suffix = className.slice(2);
+    if (!canonicalClassName.startsWith('Dz') || canonicalClassName.length <= 2) {
+        return `${canonicalClassName}.d.ts`;
+    }
+
+    const suffix = canonicalClassName.slice(2);
     return `dz_${suffix[0].toLowerCase()}${suffix.slice(1)}.d.ts`;
 }
 
 export function classNameToHtmlFile(className: string): string {
-    if (!className.startsWith('Dz') || className.length <= 2) {
+    const sourceClassName = getHtmlSourceClassName(className);
+    if (!sourceClassName) {
         throw new Error(`Unsupported class name: ${className}`);
     }
 
-    return `${className.slice(2).toLowerCase()}_dz.html`;
+    if (!sourceClassName.startsWith('Dz') || sourceClassName.length <= 2) {
+        return `${sourceClassName.toLowerCase()}.html`;
+    }
+
+    return `${sourceClassName.slice(2).toLowerCase()}_dz.html`;
 }
 
 export function typeFileToHtmlFile(typeFile: string): string | null {
-    if (!typeFile.startsWith('dz_') || !typeFile.endsWith('.d.ts')) {
+    if (!typeFile.endsWith('.d.ts')) {
         return null;
     }
 
-    return `${typeFile.slice(3, -5).toLowerCase()}_dz.html`;
+    const className = typeFileToClassName(typeFile);
+    return className ? classNameToHtmlFile(className) : null;
+}
+
+export function htmlFileToTypeFile(htmlFile: string): string | null {
+    if (!htmlFile.endsWith('.html')) {
+        return null;
+    }
+
+    if (htmlFile === '_index.html') {
+        return null;
+    }
+
+    if (htmlFile.endsWith('_dz.html')) {
+        return `dz_${htmlFile.replace(/_dz\.html$/i, '')}.d.ts`;
+    }
+
+    if (htmlFile.toLowerCase() === 'image.html') {
+        return classNameToTypeFile('Image');
+    }
+
+    return `${htmlFile.slice(0, -5)}.d.ts`;
 }
 
 export function isSpecialCaseFile(typeFile: string): boolean {
@@ -99,8 +131,13 @@ export function buildHtmlIndex(typesDir: string, htmlDir: string): HtmlIndexEntr
 }
 
 function typeFileToClassName(typeFile: string): string | null {
-    if (!typeFile.startsWith('dz_') || !typeFile.endsWith('.d.ts')) {
+    if (!typeFile.endsWith('.d.ts')) {
         return null;
+    }
+
+    if (!typeFile.startsWith('dz_')) {
+        const baseName = typeFile.slice(0, -5);
+        return canonicalizeGeneratedClassName(baseName || '');
     }
 
     const suffix = typeFile.slice(3, -5);
@@ -108,5 +145,5 @@ function typeFileToClassName(typeFile: string): string | null {
         return null;
     }
 
-    return `Dz${suffix[0].toUpperCase()}${suffix.slice(1)}`;
+    return canonicalizeGeneratedClassName(`Dz${suffix[0].toUpperCase()}${suffix.slice(1)}`);
 }

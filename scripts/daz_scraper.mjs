@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * daz_scraper.mjs
- * Scrapes all dz* pages from the DAZ Studio scripting API object index.
+ * Scrapes object pages from the DAZ Studio scripting API object index.
  * Usage:  node daz_scraper.mjs [output-dir] [--type DzNode]
  * Output dir defaults to ./daz_api_html
  *
@@ -15,9 +15,6 @@ import path from 'path';
 
 const INDEX_URL = 'https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/start';
 const BASE_URL  = 'https://docs.daz3d.com';
-
-// Only grab hrefs that end with /object_index/dz<something>
-const DZ_RE = /\/object_index\/dz[^"'\s]*/i;
 
 async function fetchHtml(url) {
   const res = await fetch(url, {
@@ -36,21 +33,42 @@ function annotateHtmlWithSourceUrl(html, url) {
   return `${marker}\n${html}`;
 }
 
-function extractDzLinks(html) {
-  const seen = new Set();
+function stripDeprecatedSuffix(text) {
+  return text.replace(/\s+\(deprecated\)$/i, '').trim();
+}
 
-  // Match only hrefs whose path ends with _dz (the Dz* class slugs).
-  // Anchoring on the _dz suffix avoids sidebar nav, breadcrumbs,
-  // and non-Dz built-ins like Array, Color, QObject, Boolean, etc.
-  const re = /href="([^"]*\/object_index\/[a-z0-9]+_dz)"/gi;
-  let m;
-  while ((m = re.exec(html)) !== null) {
-    const href  = m[1];
-    const full  = href.startsWith('http') ? href : BASE_URL + href;
+function extractObjectIndexEntries(html) {
+  const pageStart = html.indexOf('<div class="page');
+  const pageEnd = html.indexOf('<!-- wikipage stop -->');
+  const scope = pageStart !== -1 && pageEnd !== -1
+    ? html.slice(pageStart, pageEnd)
+    : html;
+
+  const seen = new Set();
+  const entries = [];
+  const re = /<a\s+href="([^"]*\/object_index\/([^"#?\/]+))"[^>]*>([^<]+)<\/a>/gi;
+  let match;
+
+  while ((match = re.exec(scope)) !== null) {
+    const href = match[1];
+    const slug = match[2];
+    const label = stripDeprecatedSuffix(match[3]);
+    if (!slug || slug === 'start' || !label) {
+      continue;
+    }
+
+    const full = href.startsWith('http') ? href : BASE_URL + href;
     const clean = full.split('?')[0].split('#')[0];
-    seen.add(clean);
+    const key = `${label.toLowerCase()}:::${clean.toLowerCase()}`;
+    if (seen.has(key)) {
+      continue;
+    }
+
+    seen.add(key);
+    entries.push({ label, slug, url: clean });
   }
-  return [...seen].sort();
+
+  return entries.sort((a, b) => a.label.localeCompare(b.label));
 }
 
 function urlToFilename(url) {
@@ -59,12 +77,30 @@ function urlToFilename(url) {
   return slug.endsWith('.html') ? slug : slug + '.html';
 }
 
-function classNameToSlug(className) {
-  if (!className || !className.startsWith('Dz')) {
-    throw new Error(`Unsupported type name: ${className}`);
+function normalizeTargetName(name) {
+  return stripDeprecatedSuffix(name).replace(/\s+/g, '').toLowerCase();
+}
+
+function matchesTarget(entry, targetType) {
+  const normalizedTarget = normalizeTargetName(targetType);
+  if (!normalizedTarget) {
+    return false;
   }
 
-  return `${className.slice(2).toLowerCase()}_dz`;
+  if (normalizeTargetName(entry.label) === normalizedTarget) {
+    return true;
+  }
+
+  if (entry.slug.toLowerCase() === normalizedTarget) {
+    return true;
+  }
+
+  if (targetType.startsWith('Dz')) {
+    const dzSlug = `${targetType.slice(2).toLowerCase()}_dz`;
+    return entry.slug.toLowerCase() === dzSlug;
+  }
+
+  return false;
 }
 
 function parseArgs(argv) {
@@ -93,36 +129,36 @@ async function main() {
 
   console.log(`Fetching index: ${INDEX_URL}`);
   const indexHtml = await fetchHtml(INDEX_URL);
-  let links = extractDzLinks(indexHtml);
+  const entries = extractObjectIndexEntries(indexHtml);
 
-  if (links.length === 0) {
-    console.error('No _dz links found — page structure may have changed.');
+  if (entries.length === 0) {
+    console.error('No object_index links found — page structure may have changed.');
     process.exit(1);
   }
 
+  let selectedEntries = entries;
   if (targetType) {
-    const slug = classNameToSlug(targetType);
-    links = links.filter(url => url.endsWith(`/${slug}`));
-    if (links.length === 0) {
+    selectedEntries = entries.filter(entry => matchesTarget(entry, targetType));
+    if (selectedEntries.length === 0) {
       console.error(`No matching HTML entry found for ${targetType}.`);
       process.exit(1);
     }
   }
 
-  console.log(`Found ${links.length} Dz* entries. Saving to ${outDir}/\n`);
+  console.log(`Found ${selectedEntries.length} object index entries. Saving to ${outDir}/\n`);
 
   // Save the index itself so you have a local TOC
   await fs.writeFile(path.join(outDir, '_index.html'), indexHtml, 'utf8');
 
   let ok = 0, fail = 0;
 
-  for (const url of links) {
-    const filename = urlToFilename(url);
+  for (const entry of selectedEntries) {
+    const filename = urlToFilename(entry.url);
     const dest     = path.join(outDir, filename);
 
     try {
-      const html = await fetchHtml(url);
-      await fs.writeFile(dest, annotateHtmlWithSourceUrl(html, url), 'utf8');
+      const html = await fetchHtml(entry.url);
+      await fs.writeFile(dest, annotateHtmlWithSourceUrl(html, entry.url), 'utf8');
       console.log(`  ✓  ${filename}`);
       ok++;
     } catch (err) {
