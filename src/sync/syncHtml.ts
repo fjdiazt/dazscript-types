@@ -21,7 +21,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { buildClassRegistry } from './ancestorRegistry';
 import { loadAugmentFile, writeHtmlModel } from './artifactStore';
-import { htmlFileToTypeFile, isSpecialCaseFile, typeFileToHtmlFile } from './htmlIndex';
+import { htmlFileToTypeFile, typeFileToHtmlFile } from './htmlIndex';
 import { parseHtmlFile } from './htmlParser';
 import { createSummary, formatSummary } from './report';
 import { runPruneAugments } from './pruneAugments';
@@ -110,11 +110,6 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
     const eligibleByFile = new Map(htmlEntries.map(entry => [entry.typeFile, entry]));
     for (const typeFile of allTypeFiles) {
         if (eligibleByFile.has(typeFile)) {
-            continue;
-        }
-
-        if (isSpecialCaseFile(typeFile)) {
-            summary.skippedFiles.push({ file: typeFile, reason: 'special-case support file' });
             continue;
         }
 

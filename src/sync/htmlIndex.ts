@@ -6,12 +6,7 @@
  * guessing.
  */
 import * as fs from 'fs';
-import * as path from 'path';
 import { canonicalizeGeneratedClassName, getHtmlSourceClassName } from './typeRenames';
-
-export const SPECIAL_SKIP_FILES = new Set([
-    'dz_signals.d.ts',
-]);
 
 export interface HtmlIndexEntry {
     className: string;
@@ -77,10 +72,6 @@ export function htmlFileToTypeFile(htmlFile: string): string | null {
     return `${htmlFile.slice(0, -5)}.d.ts`;
 }
 
-export function isSpecialCaseFile(typeFile: string): boolean {
-    return SPECIAL_SKIP_FILES.has(path.basename(typeFile));
-}
-
 /**
  * Build the set of eligible 1:1 type/html mappings for the rebuild pass.
  */
@@ -95,10 +86,6 @@ export function buildHtmlIndex(typesDir: string, htmlDir: string): HtmlIndexEntr
     const entries: HtmlIndexEntry[] = [];
     for (const entry of fs.readdirSync(typesDir, { withFileTypes: true })) {
         if (!entry.isFile() || !entry.name.endsWith('.d.ts')) {
-            continue;
-        }
-
-        if (isSpecialCaseFile(entry.name)) {
             continue;
         }
 

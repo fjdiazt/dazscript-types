@@ -45,7 +45,6 @@ describe('runSyncHtml', () => {
         fs.mkdirSync(typesDir, { recursive: true });
         fs.mkdirSync(htmlDir, { recursive: true });
 
-        fs.writeFileSync(path.join(typesDir, 'dz_signals.d.ts'), 'interface ISignal {}', 'utf-8');
         fs.writeFileSync(
             path.join(typesDir, 'dz_testClass.d.ts'),
             `/**
@@ -120,7 +119,6 @@ declare class DzTestClass extends DzWrongParent {
         expect(rebuilt).not.toContain('shared(): void;');
         expect(summary).toContain('Rebuilt files: 2');
         expect(summary).toContain('Applied augment members: 1');
-        expect(summary).toContain('dz_signals.d.ts: special-case support file');
     });
 
     it('can target a single type', async () => {
