@@ -1,0 +1,47 @@
+{
+  "className": "DzBrickMaterial",
+  "members": [
+    {
+      "name": "moveBrick",
+      "signature": "moveBrick(brick: number, brickUser: IDzBrickUser): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getIdentifier",
+      "signature": "getIdentifier(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setIdentifier",
+      "signature": "setIdentifier(uuid: QUuid): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "fromScene",
+      "signature": "fromScene(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "unsetRender",
+      "signature": "unsetRender(settings: DzRenderSettings): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeSet",
+      "signature": "removeSet(brickSet: DzBrickSet): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "brickIDChanged",
+      "signature": "brickIDChanged(brickId: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

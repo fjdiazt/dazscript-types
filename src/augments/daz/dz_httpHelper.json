@@ -1,0 +1,17 @@
+{
+  "className": "DzHttpHelper",
+  "members": [
+    {
+      "name": "setPort",
+      "signature": "setPort(port: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "cloneHandler",
+      "signature": "cloneHandler(): DzHttpHelper;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

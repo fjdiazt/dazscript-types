@@ -1,0 +1,179 @@
+{
+  "className": "DzAbstractAssetContainer",
+  "members": [
+    {
+      "name": "data",
+      "signature": "data: string; // StylePromoted",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "name",
+      "signature": "name: string; //",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "objectName",
+      "signature": "objectName: string; //",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "icon",
+      "signature": "icon: object; // QVariant(QIcon)",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "addConnectedModel",
+      "signature": "addConnectedModel(model: QAbstractItemModel): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "assetContainerValid",
+      "signature": "assetContainerValid(ptr: void): DzAbstractAssetContainer;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "canAddSubContainer",
+      "signature": "canAddSubContainer(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "canDelete",
+      "signature": "canDelete(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "canModAssets",
+      "signature": "canModAssets(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "canRename",
+      "signature": "canRename(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getCanCopyContainers",
+      "signature": "getCanCopyContainers(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getID",
+      "signature": "getID(): QVariant;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getIcon",
+      "signature": "getIcon(): QIcon;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getToolTip",
+      "signature": "getToolTip(): QString;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getUseCount",
+      "signature": "getUseCount(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isConnectedToModel",
+      "signature": "isConnectedToModel(model: QAbstractItemModel): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "loadMetadata",
+      "signature": "loadMetadata(asset: DzAsset): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setCanAddSubContainer",
+      "signature": "setCanAddSubContainer(yesNo: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setCanDelete",
+      "signature": "setCanDelete(yesNo: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setCanModifyAssets",
+      "signature": "setCanModifyAssets(yesNo: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setCanRename",
+      "signature": "setCanRename(yesNo: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setID",
+      "signature": "setID(id: QVariant): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setIcon",
+      "signature": "setIcon(icon: QIcon): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setOwner",
+      "signature": "setOwner(newOwner: DzAbstractAssetContainer): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setToolTip",
+      "signature": "setToolTip(tip: QString): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setUseCount",
+      "signature": "setUseCount(count: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "showAsNew",
+      "signature": "showAsNew(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "standardPasteAssets",
+      "signature": "standardPasteAssets(list: DzAsset[], copy: boolean, from: DzAbstractAssetContainer): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "updateMetadata",
+      "signature": "updateMetadata(asset: DzAsset): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

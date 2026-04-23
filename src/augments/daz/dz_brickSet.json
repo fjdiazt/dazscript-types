@@ -1,0 +1,347 @@
+{
+  "className": "DzBrickSet",
+  "members": [
+    {
+      "name": "AmbientLight",
+      "signature": "static AmbientLight: number;\t// 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Displacement",
+      "signature": "static Displacement: number;\t// 7",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "DistantLight",
+      "signature": "static DistantLight: number;\t// 3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Imager",
+      "signature": "static Imager: number;\t// 8",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Light",
+      "signature": "static Light: number;\t// 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "LightArea",
+      "signature": "static LightArea: number;\t// 3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "None",
+      "signature": "static None: number;\t// 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "NullLight",
+      "signature": "static NullLight: number;\t// 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PointLight",
+      "signature": "static PointLight: number;\t// 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "SpotLight",
+      "signature": "static SpotLight: number;\t// 4",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Surface",
+      "signature": "static Surface: number;\t// 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "VolumeAtmosphere",
+      "signature": "static VolumeAtmosphere: number;\t// 4",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "VolumeExterior",
+      "signature": "static VolumeExterior: number;\t// 6",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "VolumeInterior",
+      "signature": "static VolumeInterior: number;\t// 5",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "name",
+      "signature": "name: string;\t// shader_Volume",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "objectName",
+      "signature": "objectName: string;\t// shader_Volume",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "allowsAutoBake",
+      "signature": "allowsAutoBake(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "className",
+      "signature": "className(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "deleteLater",
+      "signature": "deleteLater(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(p0: QObject): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getBackgroundColor",
+      "signature": "getBackgroundColor(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getBakeSettings",
+      "signature": "getBakeSettings(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getBrickUserOwner",
+      "signature": "getBrickUserOwner(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNewToken",
+      "signature": "getNewToken(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getOwner",
+      "signature": "getOwner(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getRenderSettings",
+      "signature": "getRenderSettings(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getRoot",
+      "signature": "getRoot(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getShaderType",
+      "signature": "getShaderType(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "inherits",
+      "signature": "inherits(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isActiveInBakePass",
+      "signature": "isActiveInBakePass(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isActiveInBeautyPass",
+      "signature": "isActiveInBeautyPass(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isActiveInShadowPass",
+      "signature": "isActiveInShadowPass(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isBakePass",
+      "signature": "isBakePass(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isBeautyPass",
+      "signature": "isBeautyPass(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isOnlyInShadowPass",
+      "signature": "isOnlyInShadowPass(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isShadowPass",
+      "signature": "isShadowPass(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setColorAttrib",
+      "signature": "setColorAttrib(p0: string, p1: string, p2: QColor): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setColorAttrib",
+      "signature": "setColorAttrib(p0: string, p1: string, p2: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setColorAttrib",
+      "signature": "setColorAttrib(p0: string, p1: string, p2: number, p3: number, p4: number): any;",
+      "kind": "method",
+      "paramCount": 5
+    },
+    {
+      "name": "setColorAttrib",
+      "signature": "setColorAttrib(p0: string, p1: string, p2: number, p3: number, p4: number, p5: boolean): any;",
+      "kind": "method",
+      "paramCount": 6
+    },
+    {
+      "name": "setColorToken",
+      "signature": "setColorToken(p0: string, p1: QColor): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setDisplacementBound",
+      "signature": "setDisplacementBound(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setFloatAttrib",
+      "signature": "setFloatAttrib(p0: string, p1: string, p2: number): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setFloatToken",
+      "signature": "setFloatToken(p0: string, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setIntegerAttrib",
+      "signature": "setIntegerAttrib(p0: string, p1: string, p2: number): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setIntegerToken",
+      "signature": "setIntegerToken(p0: string, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setMatrixAttrib",
+      "signature": "setMatrixAttrib(p0: string, p1: string, p2: DzMatrix4): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setMatrixToken",
+      "signature": "setMatrixToken(p0: string, p1: DzMatrix4): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setNormalAttrib",
+      "signature": "setNormalAttrib(p0: string, p1: string, p2: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setNormalToken",
+      "signature": "setNormalToken(p0: string, p1: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setPointAttrib",
+      "signature": "setPointAttrib(p0: string, p1: string, p2: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setPointToken",
+      "signature": "setPointToken(p0: string, p1: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setStringAttrib",
+      "signature": "setStringAttrib(p0: string, p1: string, p2: string): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setStringToken",
+      "signature": "setStringToken(p0: string, p1: string): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setVectorAttrib",
+      "signature": "setVectorAttrib(p0: string, p1: string, p2: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setVectorToken",
+      "signature": "setVectorToken(p0: string, p1: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 2
+    }
+  ]
+}

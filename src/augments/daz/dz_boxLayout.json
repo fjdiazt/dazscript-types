@@ -1,0 +1,11 @@
+{
+  "className": "DzBoxLayout",
+  "members": [
+    {
+      "name": "setGeometry",
+      "signature": "setGeometry(p0: number, p1: number, p2: number, p3: number): any;",
+      "kind": "method",
+      "paramCount": 4
+    }
+  ]
+}

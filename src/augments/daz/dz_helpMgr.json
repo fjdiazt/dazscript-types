@@ -1,0 +1,17 @@
+{
+  "className": "DzHelpMgr",
+  "members": [
+    {
+      "name": "getHelpContents",
+      "signature": "getHelpContents(): DzHelpContentsItem;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "saveInlineHelp",
+      "signature": "saveInlineHelp(filename: QString): DzError;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

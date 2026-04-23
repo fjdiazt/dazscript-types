@@ -1,0 +1,167 @@
+{
+  "className": "DzMorph",
+  "members": [
+    {
+      "name": "clearHDDeltasOnFacetSelection",
+      "signature": "clearHDDeltasOnFacetSelection(p0: DzFacetMesh): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearHDDeltasOnFacetSelection",
+      "signature": "clearHDDeltasOnFacetSelection(p0: DzFacetMesh, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "clearHDDeltasOnFacetSelection",
+      "signature": "clearHDDeltasOnFacetSelection(p0: DzFacetMesh, p1: boolean, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "createElementCopy",
+      "signature": "createElementCopy(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "createElementCopySignal",
+      "signature": "createElementCopySignal(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "doDuplicateElement",
+      "signature": "doDuplicateElement(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "doMergeElement",
+      "signature": "doMergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateElement",
+      "signature": "duplicateElement(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateElementSignal",
+      "signature": "duplicateElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateMissingCustomData",
+      "signature": "duplicateMissingCustomData(p0: DzElement): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingCustomDataWithContext",
+      "signature": "duplicateMissingCustomDataWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateMissingPrivateProperties",
+      "signature": "duplicateMissingPrivateProperties(p0: DzElement): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingPrivatePropertiesWithContext",
+      "signature": "duplicateMissingPrivatePropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateMissingProperties",
+      "signature": "duplicateMissingProperties(p0: DzElement): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingPropertiesWithContext",
+      "signature": "duplicateMissingPropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getName",
+      "signature": "getName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isDataItemNameUnique",
+      "signature": "isDataItemNameUnique(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isDataItemNameUnique",
+      "signature": "isDataItemNameUnique(p0: string, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isPrivatePropertyNameUnique",
+      "signature": "isPrivatePropertyNameUnique(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isPrivatePropertyNameUnique",
+      "signature": "isPrivatePropertyNameUnique(p0: string, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isPropertyNameUnique",
+      "signature": "isPropertyNameUnique(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isPropertyNameUnique",
+      "signature": "isPropertyNameUnique(p0: string, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "mergeElement",
+      "signature": "mergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "mergeElementSignal",
+      "signature": "mergeElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "remapForTopologyChange",
+      "signature": "remapForTopologyChange(p0: DzShape, p1: DzIndexChangeSet): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "remapForTopologyChangeSlot",
+      "signature": "remapForTopologyChangeSlot(p0: DzShape, p1: DzIndexChangeSet): any;",
+      "kind": "method",
+      "paramCount": 2
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "className": "DzAction",
+  "members": [
+    {
+      "name": "setOn",
+      "signature": "setOn(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

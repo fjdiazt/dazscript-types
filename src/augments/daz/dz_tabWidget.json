@@ -1,0 +1,71 @@
+{
+  "className": "DzTabWidget",
+  "members": [
+    {
+      "name": "currentPage",
+      "signature": "currentPage: number; // -1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "changeTab",
+      "signature": "changeTab(widget: DzWidget, text: QString): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "currentPageWidget",
+      "signature": "currentPageWidget(): DzWidget;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "label",
+      "signature": "label(index: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "page",
+      "signature": "page(page: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeTabToolTip",
+      "signature": "removeTabToolTip(widget: DzWidget): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setTabLabel",
+      "signature": "setTabLabel(widget: DzWidget, label: QString): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "tabLabel",
+      "signature": "tabLabel(widget: DzWidget): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removePage",
+      "signature": "removePage(widget: DzWidget): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setCurrentPage",
+      "signature": "setCurrentPage(page: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "showPage",
+      "signature": "showPage(widget: DzWidget): void;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

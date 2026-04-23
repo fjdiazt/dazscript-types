@@ -1,0 +1,341 @@
+{
+  "className": "DzShape",
+  "members": [
+    {
+      "name": "addRigidityGroup",
+      "signature": "addRigidityGroup(group: DzRigidityGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addShapeInstance",
+      "signature": "addShapeInstance(instance: DzAbstractShapeInstance): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "buildRegionMaps",
+      "signature": "buildRegionMaps(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "buildRegionMapsRecurse",
+      "signature": "buildRegionMapsRecurse(region: DzGeometryRegion): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "draw",
+      "signature": "draw(style: DzDrawStyle, wsGeom: DzGeometry): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "findAssemblyMaterialIndex",
+      "signature": "findAssemblyMaterialIndex(mat: DzMaterial): number;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findLeafRegion",
+      "signature": "findLeafRegion(regionName: string): DzGeometryRegion;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findRigidityGroup",
+      "signature": "findRigidityGroup(group: string): DzRigidityGroup;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "geomTopologyChanged",
+      "signature": "geomTopologyChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "geometryRegionChanged",
+      "signature": "geometryRegionChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "geometryRegionSelectionChanged",
+      "signature": "geometryRegionSelectionChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getAllRenderAssemblyPrioritizedMaterials",
+      "signature": "getAllRenderAssemblyPrioritizedMaterials(prioritizedMaterials: DzMaterialPtr[]): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getAssemblyMaterial",
+      "signature": "getAssemblyMaterial(which: number): DzMaterial;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getFacetToLeafMap",
+      "signature": "getFacetToLeafMap(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getFacetMesh",
+      "signature": "getFacetMesh(): DzFacetMesh;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getGeometryRegion",
+      "signature": "getGeometryRegion(): DzGeometryRegion;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getGeometryRegionLeafSelection",
+      "signature": "getGeometryRegionLeafSelection(): DzGeometryRegion;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getGeometryRegionSelection",
+      "signature": "getGeometryRegionSelection(): DzGeometryRegion;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getLeafRegion",
+      "signature": "getLeafRegion(index: number): DzGeometryRegion;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getModifiableGeom",
+      "signature": "getModifiableGeom(isRender: boolean, currentCache: DzVertexMesh): DzVertexMesh;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getNumAssemblyMaterials",
+      "signature": "getNumAssemblyMaterials(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumFacetToRegionLeafValues",
+      "signature": "getNumFacetToRegionLeafValues(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumLeafRegions",
+      "signature": "getNumLeafRegions(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumRigidityGroups",
+      "signature": "getNumRigidityGroups(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumSelectedMaterials",
+      "signature": "getNumSelectedMaterials(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumShapeInstances",
+      "signature": "getNumShapeInstances(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getRenderPrioritizedMaterials",
+      "signature": "getRenderPrioritizedMaterials(inputMaterials: DzMaterialPtr[], prioritizedMaterials: DzMaterialPtr[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getRigidityGroup",
+      "signature": "getRigidityGroup(which: number): DzRigidityGroup;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getRigidityGroups",
+      "signature": "getRigidityGroups(): DzRigidityGroup[];",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getRigidityMap",
+      "signature": "getRigidityMap(): DzWeightMap;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getShapeInstance",
+      "signature": "getShapeInstance(which: number): DzAbstractShapeInstance;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getShapeInstance",
+      "signature": "getShapeInstance(): DzAbstractShapeInstance[];",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "invalidateGeomCaches",
+      "signature": "invalidateGeomCaches(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "invalidateWorkingMesh",
+      "signature": "invalidateWorkingMesh(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isSubDivisionEnabled",
+      "signature": "isSubDivisionEnabled(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "mergesSnapGeometry",
+      "signature": "mergesSnapGeometry(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "modifyGeometryAsset",
+      "signature": "modifyGeometryAsset(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "moveGeometryRegion",
+      "signature": "moveGeometryRegion(newShape: DzShape): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "rebuildBaseMap",
+      "signature": "rebuildBaseMap(whichUVSet: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeRigidityGroup",
+      "signature": "removeRigidityGroup(group: DzRigidityGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeShapeInstance",
+      "signature": "removeShapeInstance(instance: DzAbstractShapeInstance): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "render",
+      "signature": "render(settings: DzRenderSettings, wsGeom: DzGeometry): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "rigidityGroupIterator",
+      "signature": "rigidityGroupIterator(): DzRigidityGroupListIterator;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "rigidityGroupListChanged",
+      "signature": "rigidityGroupListChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "rigidityMapChanged",
+      "signature": "rigidityMapChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setGeometryRegion",
+      "signature": "setGeometryRegion(region: DzGeometryRegion): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGeometryRegionLeafSelection",
+      "signature": "setGeometryRegionLeafSelection(sel: DzGeometryRegion): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGeometryRegionSelection",
+      "signature": "setGeometryRegionSelection(sel: DzGeometryRegion): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setRigidityMap",
+      "signature": "setRigidityMap(map: DzWeightMap): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "shapeInstancesIterator",
+      "signature": "shapeInstancesIterator(): DzAbstractShapeInstanceListIterator;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateGeom",
+      "signature": "updateGeom(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateMaterialSelection",
+      "signature": "updateMaterialSelection(mat: DzMaterial, onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "updateMaterials",
+      "signature": "updateMaterials(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateRegionMap",
+      "signature": "updateRegionMap(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateSmoothing",
+      "signature": "updateSmoothing(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateUVs",
+      "signature": "updateUVs(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

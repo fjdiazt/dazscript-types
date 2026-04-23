@@ -1,0 +1,23 @@
+{
+  "className": "DzContentMgr",
+  "members": [
+    {
+      "name": "getDefaultContentDir",
+      "signature": "getDefaultContentDir(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getName",
+      "signature": "getName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

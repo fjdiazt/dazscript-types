@@ -1,0 +1,59 @@
+{
+  "className": "DzTextEdit",
+  "members": [
+    {
+      "name": "paragraphs",
+      "signature": "paragraphs: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "lines",
+      "signature": "lines: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "length",
+      "signature": "length: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "color",
+      "signature": "color: QColor;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "linkUnderline",
+      "signature": "linkUnderline: boolean; // false",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "selectionParaStart",
+      "signature": "selectionParaStart(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "selectionIndexStart",
+      "signature": "selectionIndexStart(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "selectionParaEnd",
+      "signature": "selectionParaEnd(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "selectionIndexEnd",
+      "signature": "selectionIndexEnd(): number;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

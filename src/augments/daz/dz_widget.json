@@ -1,0 +1,11 @@
+{
+  "className": "DzWidget",
+  "members": [
+    {
+      "name": "reparent",
+      "signature": "reparent(parent: DzWidget): void;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

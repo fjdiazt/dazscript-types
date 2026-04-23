@@ -1,0 +1,17 @@
+{
+  "className": "DzPresentation",
+  "members": [
+    {
+      "name": "iconReady",
+      "signature": "iconReady(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "attributeChanged",
+      "signature": "attributeChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

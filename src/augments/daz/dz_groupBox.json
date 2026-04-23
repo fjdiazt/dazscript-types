@@ -1,0 +1,17 @@
+{
+  "className": "DzGroupBox",
+  "members": [
+    {
+      "name": "margin",
+      "signature": "margin: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "spacing",
+      "signature": "spacing: number;",
+      "kind": "property",
+      "paramCount": 0
+    }
+  ]
+}

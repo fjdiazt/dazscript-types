@@ -1,0 +1,77 @@
+{
+  "className": "DzGeometryShellNode",
+  "members": [
+    {
+      "name": "addFacetGroupVisiblity",
+      "signature": "addFacetGroupVisiblity(name: string): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addMaterialGroupVisiblity",
+      "signature": "addMaterialGroupVisiblity(name: string): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "createProperties",
+      "signature": "createProperties(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getIcon",
+      "signature": "getIcon(): QIcon;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getPixmap",
+      "signature": "getPixmap(state: number): QPixmap;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeFacetGroupVisiblity",
+      "signature": "removeFacetGroupVisiblity(name: string): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeMaterialGroupVisiblity",
+      "signature": "removeMaterialGroupVisiblity(name: string): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setShellVisiblity",
+      "signature": "setShellVisiblity(newMesh: DzFacetMesh): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setUpFaceGroups",
+      "signature": "setUpFaceGroups(mesh: DzFacetMesh): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setUpMaterials",
+      "signature": "setUpMaterials(mesh: DzFacetMesh): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "targetNodeChanged",
+      "signature": "targetNodeChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "tgtCacheInvalidated",
+      "signature": "tgtCacheInvalidated(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

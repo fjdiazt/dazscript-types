@@ -1,0 +1,17 @@
+{
+  "className": "DzTime",
+  "members": [
+    {
+      "name": "constructor",
+      "signature": "constructor();",
+      "kind": "constructor",
+      "paramCount": 0
+    },
+    {
+      "name": "constructor",
+      "signature": "constructor(time: number);",
+      "kind": "constructor",
+      "paramCount": 1
+    }
+  ]
+}

@@ -1,0 +1,383 @@
+{
+  "className": "DzDockArea",
+  "members": [
+    {
+      "name": "modal",
+      "signature": "modal: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "windowModality",
+      "signature": "windowModality: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "geometry",
+      "signature": "geometry: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "frameGeometry",
+      "signature": "frameGeometry: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "normalGeometry",
+      "signature": "normalGeometry: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "pos",
+      "signature": "pos: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "frameSize",
+      "signature": "frameSize: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "size",
+      "signature": "size: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "rect",
+      "signature": "rect: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "childrenRect",
+      "signature": "childrenRect: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "childrenRegion",
+      "signature": "childrenRegion: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "minimumSize",
+      "signature": "minimumSize: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "maximumSize",
+      "signature": "maximumSize: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "minimumWidth",
+      "signature": "minimumWidth: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "minimumHeight",
+      "signature": "minimumHeight: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "maximumWidth",
+      "signature": "maximumWidth: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "maximumHeight",
+      "signature": "maximumHeight: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "sizeIncrement",
+      "signature": "sizeIncrement: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "baseSize",
+      "signature": "baseSize: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "cursor",
+      "signature": "cursor: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "mouseTracking",
+      "signature": "mouseTracking: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "isActiveWindow",
+      "signature": "isActiveWindow: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "focus",
+      "signature": "focus: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "contextMenuPolicy",
+      "signature": "contextMenuPolicy: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "updatesEnabled",
+      "signature": "updatesEnabled: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "minimized",
+      "signature": "minimized: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "maximized",
+      "signature": "maximized: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "fullScreen",
+      "signature": "fullScreen: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "sizeHint",
+      "signature": "sizeHint: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "acceptDrops",
+      "signature": "acceptDrops: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "windowTitle",
+      "signature": "windowTitle: string;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "windowIcon",
+      "signature": "windowIcon: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "windowIconText",
+      "signature": "windowIconText: string;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "windowOpacity",
+      "signature": "windowOpacity: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "windowModified",
+      "signature": "windowModified: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "accessibleName",
+      "signature": "accessibleName: string;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "accessibleDescription",
+      "signature": "accessibleDescription: string;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "layoutDirection",
+      "signature": "layoutDirection: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "autoFillBackground",
+      "signature": "autoFillBackground: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "styleSheet",
+      "signature": "styleSheet: string;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "locale",
+      "signature": "locale: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "windowFilePath",
+      "signature": "windowFilePath: string;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "inputMethodHints",
+      "signature": "inputMethodHints: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "customContextMenuRequested",
+      "signature": "customContextMenuRequested(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setEnabled",
+      "signature": "setEnabled(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setDisabled",
+      "signature": "setDisabled(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setWindowModified",
+      "signature": "setWindowModified(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setWindowTitle",
+      "signature": "setWindowTitle(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setStyleSheet",
+      "signature": "setStyleSheet(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "repaint",
+      "signature": "repaint(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setVisible",
+      "signature": "setVisible(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setHidden",
+      "signature": "setHidden(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "show",
+      "signature": "show(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "hide",
+      "signature": "hide(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setShown",
+      "signature": "setShown(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "showMinimized",
+      "signature": "showMinimized(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "showMaximized",
+      "signature": "showMaximized(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "showFullScreen",
+      "signature": "showFullScreen(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "showNormal",
+      "signature": "showNormal(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "close",
+      "signature": "close(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "raise",
+      "signature": "raise(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "lower",
+      "signature": "lower(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateMicroFocus",
+      "signature": "updateMicroFocus(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

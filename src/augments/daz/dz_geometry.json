@@ -1,0 +1,11 @@
+{
+  "className": "DzGeometry",
+  "members": [
+    {
+      "name": "isSubDivisionEnabled",
+      "signature": "isSubDivisionEnabled(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

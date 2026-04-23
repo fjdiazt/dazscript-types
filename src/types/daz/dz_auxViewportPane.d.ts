@@ -91,10 +91,6 @@ declare class DzAuxViewportPane extends DzPane {
     customContextMenuRequested(p0: number): any;
     handleCameraChanged(p0: DzCamera): any;
     // handleGroupChanged(p0: DzPaneGroup, p1: DzPaneGroup*): any;
-    labelChanged(p0: string): any;
-    menuChanged(): any;
     // paneGroupChanged(p0: DzPaneGroup, p1: DzPaneGroup*): any;
     showingToolbarChanged(p0: boolean): any;
-    tabBarHiddenChanged(p0: boolean): any;
-    visibilityChanged(p0: boolean): any;
 }

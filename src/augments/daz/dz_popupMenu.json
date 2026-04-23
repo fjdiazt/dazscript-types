@@ -1,0 +1,11 @@
+{
+  "className": "DzPopupMenu",
+  "members": [
+    {
+      "name": "connectItem",
+      "signature": "connectItem(id: number, thisObject: null, functionRef: Function): boolean;",
+      "kind": "method",
+      "paramCount": 3
+    }
+  ]
+}

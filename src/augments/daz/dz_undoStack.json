@@ -1,0 +1,11 @@
+{
+  "className": "DzUndoStack",
+  "members": [
+    {
+      "name": "push",
+      "signature": "push(item: any /*DzUndoItem*/): any; // TODO",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

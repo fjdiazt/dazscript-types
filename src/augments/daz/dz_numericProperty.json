@@ -1,0 +1,191 @@
+{
+  "className": "DzNumericProperty",
+  "members": [
+    {
+      "name": "applyControllers",
+      "signature": "applyControllers(tm: DzTime, raw: number, local: boolean): number;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "applyControllersInverse",
+      "signature": "applyControllersInverse(tm: DzTime, raw: number, local: boolean): number;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "changeFollowBone",
+      "signature": "changeFollowBone(bone: DzBone): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "changeFollowNode",
+      "signature": "changeFollowNode(node: DzNode): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "changeFollowTarget",
+      "signature": "changeFollowTarget(skel: DzSkeleton): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearLink",
+      "signature": "clearLink(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitClampedChanged",
+      "signature": "emitClampedChanged(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitLinked",
+      "signature": "emitLinked(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitMapChanged",
+      "signature": "emitMapChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitMinMaxChanged",
+      "signature": "emitMinMaxChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitUnlinked",
+      "signature": "emitUnlinked(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getMin",
+      "signature": "getMin(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getMax",
+      "signature": "getMax(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "linkNotify",
+      "signature": "linkNotify(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "removeFollowNode",
+      "signature": "removeFollowNode(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "removeFollowProperty",
+      "signature": "removeFollowProperty(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setFollowListeners",
+      "signature": "setFollowListeners(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setFollowProperty",
+      "signature": "setFollowProperty(prop: DzNumericProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setLink",
+      "signature": "setLink(link: DzNumericProperty, isMaster: boolean): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "addImageMapMenu",
+      "signature": "addImageMapMenu(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "addLabel",
+      "signature": "addLabel(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "addTieWgt",
+      "signature": "addTieWgt(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "addWidget",
+      "signature": "addWidget(wgt: QWidget): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "changeMap",
+      "signature": "changeMap(map: DzTexture): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getMapDisplay",
+      "signature": "getMapDisplay(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setLayout",
+      "signature": "setLayout(layout: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setMapDisplay",
+      "signature": "setMapDisplay(mode: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "showEvent",
+      "signature": "showEvent(e: QShowEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "updateLabel",
+      "signature": "updateLabel(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateLayout",
+      "signature": "updateLayout(layout: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "updateValue",
+      "signature": "updateValue(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

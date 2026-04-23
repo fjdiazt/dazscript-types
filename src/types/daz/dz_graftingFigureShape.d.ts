@@ -1,278 +1,430 @@
+/**
+ * DzShape subclass for grafting polygonal mesh geometry.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/graftingfigureshape_dz
+ */
 declare class DzGraftingFigureShape extends DzFacetShape {
-    elementID: number;	// 1059
-    name: string;	// Genesis8Female
-    objectName: string;	// Genesis8Female
-    aboutToFinalize(p0: DzVertexMesh): any;
-    addDataItem(p0: DzElementData): any;
+
+    /* Constructors */
+
+    constructor();
+
+    /* Methods */
+
+    /**
+     * @returns any[] A list of facet indices, where the index of the facet in the original mesh is used to lookup the corresponding facet in the welded mesh (if any). A value of less than 0 indicates that the facet was removed as a result of grafting.
+     * @since 4.11.0.68
+     */
+    getOrignalToWeldMeshList(): any[]; // Array
+
+    /**
+     * @returns number The number of entries in the orignal to weld mesh list.
+     */
+    getOrignalToWeldMeshMapSize(): number; // Number
+
+    /**
+     * @returns any[] A list of facet indices, where the index of the facet in the welded mesh is used to lookup the corresponding facet in the orignal mesh.
+     * @since 4.11.0.68
+     */
+    getWeldMeshToOrginalList(): any[]; // Array
+
+    /**
+     * @returns number The number of entries in the weld to orignal mesh list.
+     */
+    getWeldMeshToOrginalMapSize(): number; // Number
+
+    /**
+     * @returns boolean true if the topology of this shape has changed as a result of grafting; e.g., facets have been added/removed.
+     */
+    hasWeldedFollowers(): boolean; // Boolean
+
+    /**
+     * Forces a refresh of the grafting geometry cache.
+     */
+    updateBuilder(): void;
+
+    /* Undocumented Augment Members */
+
+    /** @undocumented */
     addEdgeSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     addFacetSelectionGroup(p0: DzSelectionGroup): any;
-    addMaterial(p0: DzMaterial): any;
+
+    /** @undocumented */
     addMaterialType(p0: string, p1: string): any;
-    addPrivateProperty(p0: DzProperty): any;
-    addProperty(p0: DzProperty): any;
+
+    /** @undocumented */
     addRigidityGroup(p0: DzRigidityGroup): any;
+
+    /** @undocumented */
     addShapeInstance(p0: DzAbstractShapeInstance): any;
+
+    /** @undocumented */
     addVertexSelectionGroup(p0: DzSelectionGroup): any;
-    assemblyChanged(): void;
-    assemblyNeedsConfigurationCheck(): any;
-    beginEdit(): any;
-    cancelEdit(): any;
-    className(): any;
-    className(): any;
-    clearAllAnimData(): any;
-    clearAnimData(p0: DzTimeRange): any;
+
+    /** @undocumented */
     clearEdgeSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     clearFacetSelectionGroup(p0: DzSelectionGroup): any;
-    clearMaterialSelection(): any;
+
+    /** @undocumented */
     clearMaterialTypes(): any;
+
+    /** @undocumented */
     clearMaterialTypes(p0: string): any;
+
+    /** @undocumented */
     clearSimulationProviderList(): any;
+
+    /** @undocumented */
     clearVertexSelectionGroup(p0: DzSelectionGroup): any;
-    copyFrom(p0: DzElement): any;
-    copyToClipboard(): any;
-    copyToClipboard(p0: string[]): any;
+
+    /** @undocumented */
     createElementCopy(p0: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     createElementCopySignal(p0: DzElementDuplicateContext): any;
-    createMaterial(p0: string): any;
+
+    /** @undocumented */
     createShapeFromGroup(p0: string): any;
-    deleteDataItem(p0: DzElementData): any;
-    deleteLater(): any;
-    destroyed(): void;
-    destroyed(p0: QObject): void;
+
+    /** @undocumented */
     doDuplicateElement(p0: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     doMergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     duplicateElement(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     duplicateElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     duplicateMissingCustomData(p0: DzElement): any;
+
+    /** @undocumented */
     duplicateMissingCustomDataWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     duplicateMissingPrivateProperties(p0: DzElement): any;
+
+    /** @undocumented */
     duplicateMissingPrivatePropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     duplicateMissingProperties(p0: DzElement): any;
+
+    /** @undocumented */
     duplicateMissingPropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     edgeSelectionChanged(): void;
+
+    /** @undocumented */
     edgeSelectionGroupListChanged(): void;
+
+    /** @undocumented */
     emitMaterialListChanged(): void;
+
+    /** @undocumented */
     endManip(): any;
-    facetMeshChanged(): void;
+
+    /** @undocumented */
     facetSelectionChanged(): void;
+
+    /** @undocumented */
     facetSelectionGroupListChanged(): void;
+
+    /** @undocumented */
     findAssemblyMaterialIndex(p0: DzMaterial): any;
-    findDataItem(p0: string): any;
-    findDataItemIndex(p0: DzElementData): any;
+
+    /** @undocumented */
     findEdgeSelectionGroup(p0: string): any;
+
+    /** @undocumented */
     findEdgeSelectionGroup(p0: string, p1: boolean): any;
+
+    /** @undocumented */
     findFacetSelectionGroup(p0: string): any;
+
+    /** @undocumented */
     findFacetSelectionGroup(p0: string, p1: boolean): any;
+
+    /** @undocumented */
     findLeafRegion(p0: string): any;
-    findMatchingProperty(p0: DzProperty): any;
-    findMaterial(p0: string): any;
-    findMaterialIndex(p0: string): any;
-    findMaterialIndex(p0: DzMaterial): any;
-    findMaterials(p0: string): any;
-    findPrivateProperty(p0: string): any;
-    findPrivateProperty(p0: string, p1: boolean): any;
-    findPrivatePropertyByLabel(p0: string): any;
-    findPrivatePropertyByLabel(p0: string, p1: boolean): any;
-    findProperty(p0: string): any;
-    findProperty(p0: string, p1: boolean): any;
-    findPropertyByLabel(p0: string): any;
-    findPropertyByLabel(p0: string, p1: boolean): any;
+
+    /** @undocumented */
     findRigidityGroup(p0: string): any;
+
+    /** @undocumented */
     findSimulationSettingsProvider(p0: string): any;
+
+    /** @undocumented */
     findVertexSelectionGroup(p0: string): any;
+
+    /** @undocumented */
     findVertexSelectionGroup(p0: string, p1: boolean): any;
-    finishEdit(): any;
-    geomChanged(): void;
+
+    /** @undocumented */
     geomTopologyChanged(): void;
+
+    /** @undocumented */
     geometryRegionChanged(): void;
+
+    /** @undocumented */
     geometryRegionSelectionChanged(): void;
-    getAllMaterials(): any;
-    getAllRenderPrioritizedMaterials(): any;
-    getAllSelectedMaterials(): any;
-    getAssemblyGeometry(): any;
+
+    /** @undocumented */
     getAssemblyMaterial(p0: number): any;
-    getAttributes(p0: DzSettings): any;
-    getCurrentShapeForNode(p0: DzNode): any;
-    getDataItem(p0: number): any;
-    getDataItemList(): any;
+
+    /** @undocumented */
     getEdgeSelectionGroup(p0: number): any;
-    getElementChild(p0: number): any;
-    getElementParent(): any;
-    getFacetMesh(): any;
+
+    /** @undocumented */
     getFacetSelectionGroup(p0: number): any;
-    getGeometry(): any;
+
+    /** @undocumented */
     getGeometryRegion(): any;
+
+    /** @undocumented */
     getGeometryRegionLeafSelection(): any;
+
+    /** @undocumented */
     getGeometryRegionSelection(): any;
-    getLODControl(): any;
-    getLabel(): any;
+
+    /** @undocumented */
     getLeafRegion(p0: number): any;
-    getLoadScript(): any;
-    getMaterial(p0: number): any;
+
+    /** @undocumented */
     getMaterialNamesWithTypes(): any;
+
+    /** @undocumented */
     getMaterialSelectionSets(): any;
+
+    /** @undocumented */
     getMaterialSelectionSets(p0: boolean): any;
+
+    /** @undocumented */
     getMaterialTypes(p0: string): any;
-    getModifiableAssemblyGeom(p0: boolean): any;
+
+    /** @undocumented */
     getName(): any;
-    getNode(): any;
+
+    /** @undocumented */
     getNumAssemblyMaterials(): any;
-    getNumDataItems(): any;
+
+    /** @undocumented */
     getNumEdgeSelectionGroups(): any;
-    getNumElementChildren(): any;
+
+    /** @undocumented */
     getNumFacetSelectionGroups(): any;
+
+    /** @undocumented */
     getNumLeafRegions(): any;
-    getNumMaterials(): any;
-    getNumPrivateProperties(): any;
-    getNumProperties(): any;
+
+    /** @undocumented */
     getNumRigidityGroups(): any;
+
+    /** @undocumented */
     getNumSelectedMaterials(): any;
+
+    /** @undocumented */
     getNumShapeInstances(): any;
+
+    /** @undocumented */
     getNumSimulationProviders(): any;
+
+    /** @undocumented */
     getNumVertexSelectionGroups(): any;
-    getOrignalToWeldMeshMapSize(): any;
-    getPrivateProperty(p0: number): any;
-    getPrivatePropertyGroups(): any;
-    getPrivatePropertyList(): any;
-    getProperty(p0: number): any;
-    getPropertyGroups(): any;
-    getPropertyList(): any;
+
+    /** @undocumented */
     getRigidityGroup(p0: number): any;
+
+    /** @undocumented */
     getRigidityMap(): any;
-    getSelectedMaterial(p0: number): any;
+
+    /** @undocumented */
     getSimulationProviderNames(): any;
-    getSubDAlgo(): any;
-    getSubDAlgorithmControl(): any;
-    getSubDDrawLevel(): any;
-    getSubDInterpolateLevel(): any;
-    getSubDInterpolateLevelControl(): any;
-    getSubDLevelControl(): any;
-    getSubDRenderLevel(): any;
-    getSubDRenderLevelControl(): any;
-    getUniquePrivatePropertyName(p0: string): any;
-    getUniquePropertyName(p0: string): any;
+
+    /** @undocumented */
     getVertexSelectionGroup(p0: number): any;
-    getWeldMeshToOrginalMapSize(): any;
+
+    /** @undocumented */
     handleNeedsConfigurationCheck(): any;
-    hasAssemblyGeometry(): any;
-    hasDifferentRenderThanDraw(): any;
+
+    /** @undocumented */
     hasMultipleLOD(): any;
-    hasWeldedFollowers(): any;
+
+    /** @undocumented */
     hideProperties(p0: boolean): any;
-    inEdit(): any;
-    inherits(): any;
-    inherits(p0: string): any;
-    insertMaterial(p0: DzMaterial): any;
-    insertMaterial(p0: DzMaterial, p1: number): any;
-    insertPrivateProperty(p0: number, p1: DzProperty): any;
-    insertProperty(p0: number, p1: DzProperty): any;
-    //insertSimulationSettingsProvider(p0: string, p1: DzSimulationSettingsProviderPtr): any;
-    //insertSimulationSettingsProvider(p0: string, p1: DzSimulationSettingsProviderPtr, p2: DzSimulationSettingsProviderPtr): any;
+
+    /** @undocumented */
     invalidateGeomCaches(): any;
+
+    /** @undocumented */
     invalidateWorkingMesh(): any;
+
+    /** @undocumented */
     isDataItemNameUnique(p0: string): any;
+
+    /** @undocumented */
     isDataItemNameUnique(p0: string, p1: boolean): any;
-    isLodActive(): any;
+
+    /** @undocumented */
     isPrivatePropertyNameUnique(p0: string): any;
+
+    /** @undocumented */
     isPrivatePropertyNameUnique(p0: string, p1: boolean): any;
+
+    /** @undocumented */
     isPropertyNameUnique(p0: string): any;
+
+    /** @undocumented */
     isPropertyNameUnique(p0: string, p1: boolean): any;
-    isSubDivisionActive(): any;
+
+    /** @undocumented */
     iskindof(p0: string): any;
-    labelChanged(p0: string): void;
-    makePersistent(): any;
-    materialAdded(p0: DzMaterial): void;
-    materialChanged(): void;
-    materialListChanged(): void;
-    materialRemoved(p0: DzMaterial): void;
-    materialSelected(p0: DzMaterial): void;
-    materialSelectionChanged(): void;
+
+    /** @undocumented */
     materialSelectionSetsChanged(): void;
+
+    /** @undocumented */
     materialTypesChanged(): void;
-    materialUnselected(p0: DzMaterial): void;
+
+    /** @undocumented */
     mergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     mergeElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     mergesSnapGeometry(): any;
+
+    /** @undocumented */
     modifyGeometryAsset(): any;
-    moveDataItemToIndex(p0: DzElementData, p1: number): any;
+
+    /** @undocumented */
     moveGeometryRegion(p0: DzShape): any;
-    movePrivateProperty(p0: DzProperty, p1: DzElement): any;
-    moveProperty(p0: DzProperty, p1: DzElement): any;
-    nameChanged(p0: string): void;
-    parentChanged(): void;
+
+    /** @undocumented */
     prefixPropertyLabels(p0: string): any;
-    privatePropertyAdded(p0: DzProperty): void;
-    privatePropertyListChanged(): void;
-    privatePropertyListInTreeChanged(): void;
-    privatePropertyRemoved(p0: DzProperty): void;
-    privatePropertyTreeChanged(): void;
-    propertyAdded(p0: DzProperty): void;
-    propertyListChanged(): void;
-    propertyListInTreeChanged(): void;
-    propertyRemoved(p0: DzProperty): void;
-    propertyTreeChanged(): void;
+
+    /** @undocumented */
     rebuildBaseMap(p0: number): any;
-    //remapMaterials(p0: DzIndexChangeMap): any;
+
+    /** @undocumented */
     remappingForTopologyChange(p0: DzIndexChangeSet): any;
-    removeDataItem(p0: DzElementData): any;
+
+    /** @undocumented */
     removeEdgeSelectionGroup(p0: string): any;
+
+    /** @undocumented */
     removeEdgeSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     removeEdgeSelectionGroup(p0: number): any;
+
+    /** @undocumented */
     removeFacetSelectionGroup(p0: string): any;
+
+    /** @undocumented */
     removeFacetSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     removeFacetSelectionGroup(p0: number): any;
-    removeMaterial(p0: DzMaterial): any;
-    removeMaterialByName(p0: string): any;
-    removeMaterialByName(p0: string, p1: string): any;
+
+    /** @undocumented */
     removeMaterialType(p0: string, p1: string): any;
-    removePrivateProperty(p0: DzProperty): any;
-    removePrivateProperty(p0: string): any;
-    removeProperty(p0: DzProperty): any;
-    removeProperty(p0: string): any;
+
+    /** @undocumented */
     removeRigidityGroup(p0: DzRigidityGroup): any;
+
+    /** @undocumented */
     removeShapeInstance(p0: DzAbstractShapeInstance): any;
+
+    /** @undocumented */
     removeSimulationSettingsProvider(p0: string): any;
+
+    /** @undocumented */
     removeVertexSelectionGroup(p0: string): any;
+
+    /** @undocumented */
     removeVertexSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     removeVertexSelectionGroup(p0: number): any;
-    renderSubDChanged(): void;
-    replaceMaterial(p0: DzMaterial, p1: DzMaterial): any;
+
+    /** @undocumented */
     rigidityGroupListChanged(): void;
+
+    /** @undocumented */
     rigidityMapChanged(): void;
+
+    /** @undocumented */
     rigidityWeightMapChanged(): void;
+
+    /** @undocumented */
     selectionGroupListChanged(): void;
-    setAttributes(p0: DzSettings): any;
+
+    /** @undocumented */
     setFacetMesh(p0: DzFacetMesh): any;
+
+    /** @undocumented */
     setFacetsForNodeVisibility(p0: DzNode, p1: DzFacetMesh, p2: boolean): any;
+
+    /** @undocumented */
     setGeometryRegion(p0: DzGeometryRegion): any;
+
+    /** @undocumented */
     setGeometryRegionLeafSelection(p0: DzGeometryRegion): any;
+
+    /** @undocumented */
     setGeometryRegionSelection(p0: DzGeometryRegion): any;
-    setLabel(p0: string): any;
-    setLoadScript(p0: DzScript): any;
+
+    /** @undocumented */
     setMaterialSelectionSets(p0: DzMaterialSelectionSet): any;
+
+    /** @undocumented */
     setMaterialTypes(p0: string, p1: string[]): any;
-    setName(p0: string): any;
+
+    /** @undocumented */
     setRigidityMap(p0: DzWeightMap): any;
-    shouldSortOnLoad(): any;
+
+    /** @undocumented */
     simulationProviderListChanged(): void;
-    smoothingChanged(): void;
-    subDAlgorithmChanged(): void;
-    subDInterpolateLevelChanged(): void;
-    subDMesh(p0: DzFacetMesh, p1: boolean): any;
-    subdivisonChanged(): void;
-    update(): any;
+
+    /** @undocumented */
     updateAlgo(): any;
-    updateBuilder(): any;
+
+    /** @undocumented */
     updateFacetGeom(): any;
+
+    /** @undocumented */
     updateInterpLevel(): any;
+
+    /** @undocumented */
     updateLODControl(): any;
+
+    /** @undocumented */
     updateLODs(): any;
+
+    /** @undocumented */
     updateMaterialTypesToNewName(p0: string, p1: string): any;
+
+    /** @undocumented */
     updateSmoothing(): any;
+
+    /** @undocumented */
     updateSubDControl(): any;
+
+    /** @undocumented */
     updateSubDEnabled(): void;
+
+    /** @undocumented */
     updateUVs(): any;
-    uvsChanged(): void;
-    vertexSelectionChanged(): void;
+
+    /** @undocumented */
     vertexSelectionGroupListChanged(): void;
 }

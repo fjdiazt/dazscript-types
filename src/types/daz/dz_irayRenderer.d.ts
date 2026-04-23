@@ -1,54 +1,165 @@
-declare class DzIrayRenderer {
-    name: string;	//
-    objectName: string;	//
-    IPRRenderHandlerChanged(p0: DzRenderer, p1: DzIPRRenderHandler): void;
-    aboutToRender(p0: DzRenderer): any;
+/**
+ * The NVIDIA Iray renderer.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/irayrenderer_dz
+ */
+declare class DzIrayRenderer extends DzRenderer {
+
+    /* Constructors */
+
+    constructor();
+
+    /* Methods */
+
+    /**
+     * @returns boolean
+     * @since 4.12.1.81
+     */
+    getAllowCPUFallback(): boolean; // Boolean
+
+    /**
+     * @returns boolean
+     * @since 4.12.1.81
+     */
+    getAllowGPUDetection(): boolean; // Boolean
+
+    /**
+     * @returns number The CPU load limit for the NVIDIA Iray renderer.
+     * @since 4.12.1.81
+     */
+    getCPULoadLimit(): number; // Number
+
+    /**
+     * @returns boolean true if CPU thread affinity is enabled, otherwise false.
+     * @since 4.12.1.81
+     */
+    getCPUThreadAffinityEnabled(): boolean; // Boolean
+
+    /**
+     * @returns boolean
+     * @since 4.12.1.81
+     */
+    getGPUDriverCheck(): boolean; // Boolean
+
+    /**
+     * @returns number The GPU load limit for the NVIDIA Iray renderer.
+     * @since 4.12.1.81
+     */
+    getGPULoadLimit(): number; // Number
+
+    /**
+     * @returns number
+     * @since 4.12.1.81
+     */
+    getHighThreshold(): number; // Number
+
+    /**
+     * @returns number
+     * @since 4.12.1.81
+     */
+    getMediumThreshold(): number; // Number
+
+    /**
+     * @returns number
+     * @since 4.12.1.81
+     */
+    getNVLINKPeerGroupSize(): number; // Number
+
+    /**
+     * @returns DzElement The element that holds the properties for this renderer.
+     */
+    getPropertyHolder(): DzElement;
+
+    /**
+     * @returns boolean true if this renderer is currently performing an interactive progressive render, otherwise false.
+     */
+    isIPRRendering(): boolean; // Boolean
+
+    /**
+     * @param onOff boolean
+     * @since 4.12.1.81
+     */
+    setAllowCPUFallback(onOff: boolean): void;
+
+    /**
+     * @param onOff boolean
+     * @since 4.12.1.81
+     */
+    setAllowGPUDetection(onOff: boolean): void;
+
+    /**
+     * Sets the CPU load limit for the NVIDIA Iray renderer.
+     * @param limit number - The new CPU load limit. This value may be clamped against some upper bound imposed by license restrictions.
+     * @returns boolean true if the limit was successfully set, false if the new limit was not set (e.g., invalid - less than 1.0).
+     * @since 4.12.1.81
+     */
+    setCPULoadLimit(limit: number): boolean; // Boolean
+
+    /**
+     * Sets the affinity of CPU threads.
+     * @param onOff boolean - If true, threads are bound to the CPU they are currently running on. If false (default), the operating system is free to migrate threads between CPUs as it sees fit (which may suffer from cache misses).
+     * @returns boolean true if thread affinity was successfully set, otherwise false.
+     * @since 4.12.1.81
+     */
+    setCPUThreadAffinityEnabled(onOff: boolean): boolean; // Boolean
+
+    /**
+     * @param onOff boolean
+     * @since 4.12.1.81
+     */
+    setGPUDriverCheck(onOff: boolean): void;
+
+    /**
+     * Sets the GPU load limit for the NVIDIA Iray renderer.
+     * @param limit number - The new GPU load limit. This value may be clamped against some upper bound imposed by license restrictions.
+     * @returns boolean true if the limit was successfully set, false if the new limit was not set (e.g., invalid - less than 1.0).
+     * @since 4.12.1.81
+     */
+    setGPULoadLimit(limit: number): boolean; // Boolean
+
+    /**
+     * @param val number
+     * @since 4.12.1.81
+     */
+    setHighThreshold(val: number): void;
+
+    /**
+     * @param val number
+     * @since 4.12.1.81
+     */
+    setMediumThreshold(val: number): void;
+
+    /**
+     * @param size number
+     * @since 4.12.1.81
+     */
+    setNVLINKPeerGroupSize(size: number): void;
+
+    /* Undocumented Augment Members */
+
+    /** @undocumented */
     addRenderElements(p0: DzElementList): any;
+
+    /** @undocumented */
     autoBake(p0: DzRenderHandler, p1: DzCamera, p2: DzLightListIterator, p3: DzNodeListIterator, p4: DzBakerOptions): any;
+
+    /** @undocumented */
     bake(p0: DzRenderHandler, p1: DzCamera, p2: DzLightListIterator, p3: DzNodeListIterator, p4: DzBakerOptions): any;
-    className(): any;
-    compileShader(p0: QString): any;
-    compileShader(p0: QString, p1: QString): any;
-    customRender(p0: DzRenderHandler, p1: DzCamera, p2: QObject[], p3: QObject[], p4: DzRenderOptions): any;
-    deleteLater(): any;
-    destroyed(): void;
-    destroyed(p0: QObject): void;
+
+    /** @undocumented */
     exportRenderToBridgeQueue(p0: QString): any;
+
+    /** @undocumented */
     exportRenderToBridgeQueue(p0: QString, p1: QString): any;
+
+    /** @undocumented */
     exportRenderToBridgeQueue(p0: QString, p1: QString, p2: DzCamera): any;
+
+    /** @undocumented */
     exportRenderToBridgeQueue(p0: QString, p1: QString, p2: DzCamera, p3: DzRenderOptions): any;
+
+    /** @undocumented */
     exportRenderToBridgeQueue(p0: QString, p1: QString, p2: DzCamera, p3: DzRenderOptions, p4: number): any;
-    getCurrentNode(): any;
-    getIPRRenderHandler(): any;
-    getName(): any;
-    getPropertyHolder(): DzIrayPropertyHolder;
-    getRendererMode(): any;
-    getShaderCompilerPath(): any;
-    getShaderExtension(): any;
-    getShaderFileName(p0: QString): any;
-    getShaderInfo(p0: QString): any;
-    getShaderPath(p0: QString): any;
-    getShaderPath(p0: QString, p1: boolean): any;
-    getShaderSearchPaths(): any;
-    getTextureUtilityPath(): any;
-    imagePrepared(p0: DzTexture, p1: QString): void;
-    inherits(): any;
-    inherits(p0: QString): any;
-    isIPRRendering(): any;
-    isRendering(): any;
+
+    /** @undocumented */
     iskindof(p0: QString): any;
-    killRender(): any;
-    makePersistent(): any;
-    nameChanged(p0: QString): void;
-    prepareImage(p0: DzTexture, p1: QString): any;
-    processShaderName(p0: QString): any;
-    render(p0: DzRenderHandler, p1: DzCamera, p2: DzRenderOptions): any;
-    renderFinished(p0: DzRenderer): void;
-    rendererModeChanged(p0: DzRenderer): void;
-    saveBakeImage(p0: DzBakerOptions, p1: boolean): any;
-    setIPRRenderHandler(p0: DzIPRRenderHandler): any;
-    shapeRenderBeginning(p0: DzShape): any;
-    shapeRenderFinished(p0: DzShape): void;
-    stopBaking(): any;
-    textureConvert(p0: DzRenderHandler, p1: DzCamera, p2: DzTextureConvertorOptions): any;
 }

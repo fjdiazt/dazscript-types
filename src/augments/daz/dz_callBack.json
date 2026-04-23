@@ -1,0 +1,11 @@
+{
+  "className": "DzCallBack",
+  "members": [
+    {
+      "name": "getArguments",
+      "signature": "getArguments(which: number): object;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

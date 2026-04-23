@@ -1,0 +1,77 @@
+{
+  "className": "DzBase",
+  "members": [
+    {
+      "name": "assertCast",
+      "signature": "assertCast(className: string): DzBase;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "finishLoad",
+      "signature": "finishLoad(file: DzInFile): DzError;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getClassFactory",
+      "signature": "getClassFactory(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getName",
+      "signature": "getName(): QString;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(clname: QString): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "loadSection",
+      "signature": "loadSection(file: DzInFile, sectionID: number): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "postLoadFile",
+      "signature": "postLoadFile(file: DzInFile): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "save",
+      "signature": "save(file: DzOutFile): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setName",
+      "signature": "setName(newName: QString): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setPointer",
+      "signature": "setPointer(file: DzInFile, sectionID: number, pointerID: number, ptr: DzBase): void;",
+      "kind": "method",
+      "paramCount": 4
+    },
+    {
+      "name": "setStorablePaths",
+      "signature": "setStorablePaths(path: QString): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "startLoad",
+      "signature": "startLoad(file: DzInFile): void;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

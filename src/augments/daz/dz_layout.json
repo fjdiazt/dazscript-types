@@ -1,0 +1,23 @@
+{
+  "className": "DzLayout",
+  "members": [
+    {
+      "name": "constructor",
+      "signature": "constructor(parent: DzWidget);",
+      "kind": "constructor",
+      "paramCount": 1
+    },
+    {
+      "name": "constructor",
+      "signature": "constructor(parent: DzLayout);",
+      "kind": "constructor",
+      "paramCount": 1
+    },
+    {
+      "name": "itemAt",
+      "signature": "itemAt(index: number): DzWidget;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

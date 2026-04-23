@@ -1,0 +1,179 @@
+{
+  "className": "DzIntProperty",
+  "members": [
+    {
+      "name": "getKeys",
+      "signature": "getKeys(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getMinMax",
+      "signature": "getMinMax(min: number, max: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setRawValue",
+      "signature": "setRawValue(tm: DzTime, val: number): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setRawValue",
+      "signature": "setRawValue(val: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setRawValue",
+      "signature": "setRawValue(tm: DzTime, val: number): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setRawValue",
+      "signature": "setRawValue(val: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addImageMenu",
+      "signature": "addImageMenu(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "calcEditRect",
+      "signature": "calcEditRect(): QRect;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "calcLabelRect",
+      "signature": "calcLabelRect(): QRect;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "calcMinSize",
+      "signature": "calcMinSize(): QSize;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "calcSliderRect",
+      "signature": "calcSliderRect(): QRect;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "calcTextRect",
+      "signature": "calcTextRect(): QRect;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "enterEvent",
+      "signature": "enterEvent(e: QEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isMouseOverType",
+      "signature": "isMouseOverType(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isPropHidden",
+      "signature": "isPropHidden(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "leaveEvent",
+      "signature": "leaveEvent(e: QEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "mouseMoveEvent",
+      "signature": "mouseMoveEvent(e: QMouseEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "mouseReleaseEvent",
+      "signature": "mouseReleaseEvent(e: QMouseEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setIndent",
+      "signature": "setIndent(indent: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setIsMouseOverType",
+      "signature": "setIsMouseOverType(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setLocked",
+      "signature": "setLocked(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setPropHidden",
+      "signature": "setPropHidden(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "timerEvent",
+      "signature": "timerEvent(obj: QTimerEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "updateImageMenuGeom",
+      "signature": "updateImageMenuGeom(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isMouseOverSlider",
+      "signature": "isMouseOverSlider(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "propStateChangeNotify",
+      "signature": "propStateChangeNotify(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "propertyChangeNotify",
+      "signature": "propertyChangeNotify(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setIsMouseOverSlider",
+      "signature": "setIsMouseOverSlider(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "startEdit",
+      "signature": "startEdit(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

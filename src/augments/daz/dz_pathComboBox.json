@@ -1,0 +1,11 @@
+{
+  "className": "DzPathComboBox",
+  "members": [
+    {
+      "name": "currentTypeContainer",
+      "signature": "currentTypeContainer(): any; // TODO: DzTypeAssetContainer",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

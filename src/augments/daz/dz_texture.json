@@ -1,0 +1,47 @@
+{
+  "className": "DzTexture",
+  "members": [
+    {
+      "name": "assetModified",
+      "signature": "assetModified(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "assetWasSaved",
+      "signature": "assetWasSaved(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getImageData",
+      "signature": "getImageData(p0: QImage): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "inherits",
+      "signature": "inherits(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "invalidate",
+      "signature": "invalidate(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "refreshSources",
+      "signature": "refreshSources(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setTextureToRefresh",
+      "signature": "setTextureToRefresh(): any;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

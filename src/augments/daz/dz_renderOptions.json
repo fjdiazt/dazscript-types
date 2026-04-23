@@ -1,0 +1,17 @@
+{
+  "className": "DzRenderOptions",
+  "members": [
+    {
+      "name": "getStartTime",
+      "signature": "getStartTime: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "getEndTime",
+      "signature": "getEndTime: DzTime;",
+      "kind": "property",
+      "paramCount": 0
+    }
+  ]
+}

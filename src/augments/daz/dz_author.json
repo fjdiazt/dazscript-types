@@ -1,0 +1,11 @@
+{
+  "className": "DzAuthor",
+  "members": [
+    {
+      "name": "toString",
+      "signature": "toString(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

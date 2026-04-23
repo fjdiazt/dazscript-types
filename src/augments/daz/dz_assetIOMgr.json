@@ -1,0 +1,29 @@
+{
+  "className": "DzAssetIOMgr",
+  "members": [
+    {
+      "name": "doScopedLoad",
+      "signature": "doScopedLoad(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "doScopedLoad",
+      "signature": "doScopedLoad(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "doSceneSave",
+      "signature": "doSceneSave(filePath: QString, category: QString): DzError;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "doSceneSave",
+      "signature": "doSceneSave(filePath: QString, category: QString): DzError;",
+      "kind": "method",
+      "paramCount": 2
+    }
+  ]
+}

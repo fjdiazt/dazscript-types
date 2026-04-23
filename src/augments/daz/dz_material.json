@@ -1,0 +1,521 @@
+{
+  "className": "DzMaterial",
+  "members": [
+    {
+      "name": "addedTo",
+      "signature": "addedTo(shape: DzShape): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "allowsAutoBake",
+      "signature": "allowsAutoBake(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "connectForAutoBake",
+      "signature": "connectForAutoBake(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "createProperties",
+      "signature": "createProperties(copyFrom: DzMaterial): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "followMaterialChanged",
+      "signature": "followMaterialChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getAssetType",
+      "signature": "getAssetType(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getFollowBlendControl",
+      "signature": "getFollowBlendControl(): DzFloatProperty;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getFollowMaterial",
+      "signature": "getFollowMaterial(): DzMaterial;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getRenderPriority",
+      "signature": "getRenderPriority(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "init",
+      "signature": "init(doCreateProperties: boolean, copyFrom: DzMaterial): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isRenderingAsCoShader",
+      "signature": "isRenderingAsCoShader(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "multiTexturingSupported",
+      "signature": "multiTexturingSupported(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "propagateRenderPriorityToNodes",
+      "signature": "propagateRenderPriorityToNodes(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "removedFrom",
+      "signature": "removedFrom(shape: DzShape): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "requestAutoBake",
+      "signature": "requestAutoBake(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "resetBakedMap",
+      "signature": "resetBakedMap(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setCoShader",
+      "signature": "setCoShader(settings: DzRenderSettings, info: DzCoShaderInfo): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setFollowMaterial",
+      "signature": "setFollowMaterial(mat: DzMaterial): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGL",
+      "signature": "setGL(style: DzDrawStyle): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGLBakeMat",
+      "signature": "setGLBakeMat(style: DzDrawStyle): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGLHighlight",
+      "signature": "setGLHighlight(style: DzDrawStyle): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGLMat",
+      "signature": "setGLMat(style: DzDrawStyle): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setRender",
+      "signature": "setRender(settings: DzRenderSettings): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setRenderPriority",
+      "signature": "setRenderPriority(priority: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setRenderPriority",
+      "signature": "setRenderPriority(priority: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setRenderPriority",
+      "signature": "setRenderPriority(priority: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setRenderPriority",
+      "signature": "setRenderPriority(priority: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setShader",
+      "signature": "setShader(settings: DzRenderSettings): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setTextureConvertShader",
+      "signature": "setTextureConvertShader(settings: DzRenderSettings): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setTextureConvertTokens",
+      "signature": "setTextureConvertTokens(settings: DzRenderSettings): number;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "shapeListIterator",
+      "signature": "shapeListIterator(): DzShapeListIterator;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toQObject",
+      "signature": "toQObject(): QObject;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toQObject",
+      "signature": "toQObject(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toQObject",
+      "signature": "toQObject(): QObject;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toQObject",
+      "signature": "toQObject(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "triggerAutoBake",
+      "signature": "triggerAutoBake(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "unsetGL",
+      "signature": "unsetGL(style: DzDrawStyle): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "unsetGLBakeMat",
+      "signature": "unsetGLBakeMat(style: DzDrawStyle): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "unsetGLHighlight",
+      "signature": "unsetGLHighlight(style: DzDrawStyle): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "unsetGLMat",
+      "signature": "unsetGLMat(style: DzDrawStyle): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "unsetRender",
+      "signature": "unsetRender(settings: DzRenderSettings): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "updateUVList",
+      "signature": "updateUVList(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getShouldRenderAsCurve",
+      "signature": "getShouldRenderAsCurve(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setRenderAsCurve",
+      "signature": "setRenderAsCurve(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "currentValueInAnimation",
+      "signature": "currentValueInAnimation(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getMaterialIncludeProperties",
+      "signature": "getMaterialIncludeProperties(): DzProperty[];",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setWriteAnimation",
+      "signature": "setWriteAnimation(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setWriteInstances",
+      "signature": "setWriteInstances(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "writeAnimations",
+      "signature": "writeAnimations(prop: DzProperty, io: any, foundAnimation: boolean): boolean;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "writeAnimations",
+      "signature": "writeAnimations(io: any): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "writeAnimations",
+      "signature": "writeAnimations(prop: DzProperty, io: any, foundAnimation: boolean): boolean;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "writeAnimations",
+      "signature": "writeAnimations(io: any): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "writeMaterialInstances",
+      "signature": "writeMaterialInstances(io: any): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "writeUVSetAnimation",
+      "signature": "writeUVSetAnimation(mat: DzMaterial, io: any, propRef: QString): boolean;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "activate",
+      "signature": "activate(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "aimCamera",
+      "signature": "aimCamera(view: Dz3DViewport): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearHighlighting",
+      "signature": "clearHighlighting(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "contextMenu",
+      "signature": "contextMenu(view: Dz3DViewport, menu: DzMenu, pos: QPoint): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "deactivate",
+      "signature": "deactivate(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "draw",
+      "signature": "draw(style: DzDrawStyle, view: Dz3DViewport): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "drawMaterial",
+      "signature": "drawMaterial(mat: DzMaterial): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "drawSelectedMaterials",
+      "signature": "drawSelectedMaterials(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "frameCamera",
+      "signature": "frameCamera(view: Dz3DViewport): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getPane",
+      "signature": "getPane(parent: QWidget): QWidget;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getPropertyFromUser",
+      "signature": "getPropertyFromUser(imageOnly: boolean, mat: DzMaterial): DzProperty;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getSelectionBoundingBox",
+      "signature": "getSelectionBoundingBox(box: DzBox3): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getSurfacePane",
+      "signature": "getSurfacePane(): DzSurfacesPane;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "menuSelection",
+      "signature": "menuSelection(id: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "mouseLeave",
+      "signature": "mouseLeave(view: Dz3DViewport, e: QEvent): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "mouseOver",
+      "signature": "mouseOver(view: Dz3DViewport, e: QMouseEvent, accel: number): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "mousePress",
+      "signature": "mousePress(view: Dz3DViewport, e: QMouseEvent, accel: number): boolean;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "rebuildSelectedMats",
+      "signature": "rebuildSelectedMats(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "selectAllMaterials",
+      "signature": "selectAllMaterials(match: DzMaterial): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "selectAllMaterials",
+      "signature": "selectAllMaterials(onOff: boolean, match: DzMaterial, useTextureMap: boolean, prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 4
+    },
+    {
+      "name": "selectAllMaterials",
+      "signature": "selectAllMaterials(match: DzMaterial): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "selectAllMaterials",
+      "signature": "selectAllMaterials(onOff: boolean, match: DzMaterial, useTextureMap: boolean, prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 4
+    },
+    {
+      "name": "setHighlightMaterial",
+      "signature": "setHighlightMaterial(mat: DzMaterial, view: Dz3DViewport): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setHighlightSelected",
+      "signature": "setHighlightSelected(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setHighlightWidth",
+      "signature": "setHighlightWidth(width: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "stylize",
+      "signature": "stylize(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateNodeSelection",
+      "signature": "updateNodeSelection(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "whatsThisText",
+      "signature": "whatsThisText(): QString;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "buildSelectionGroup",
+      "signature": "buildSelectionGroup(parent: QWidget): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "highlightSelectedChanged",
+      "signature": "highlightSelectedChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "initOptions",
+      "signature": "initOptions(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "outlineWidthChanged",
+      "signature": "outlineWidthChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

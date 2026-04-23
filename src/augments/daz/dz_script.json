@@ -1,0 +1,29 @@
+{
+  "className": "DzScript",
+  "members": [
+    {
+      "name": "iskindof",
+      "signature": "iskindof(kind: String): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getName",
+      "signature": "getName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "executeScript",
+      "signature": "executeScript(script: DzScript, ...list: string[]): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setContext",
+      "signature": "setContext(scriptContext: DzScriptContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

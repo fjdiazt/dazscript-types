@@ -1,0 +1,17 @@
+{
+  "className": "DzPropertyGroupTree",
+  "members": [
+    {
+      "name": "getName",
+      "signature": "getName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "moveChildToIndex",
+      "signature": "moveChildToIndex(childName: QString, newIndex: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "className": "DzUniversalTool",
+  "members": [
+    {
+      "name": "stylize",
+      "signature": "stylize(): any;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

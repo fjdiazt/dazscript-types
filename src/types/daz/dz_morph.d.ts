@@ -1,151 +1,225 @@
+/**
+ * A three dimensional displacement map for a mesh.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/morph_dz
+ */
 declare class DzMorph extends DzModifier {
 
-    // Enumerations
-    NoNameEdit: number; // 0
-    ElementNameEdit: number; // 1
-    PropertyNameEdit: number; // 2
+    /* Properties */
 
-    // Properties
-    objectName: string; // PHMMouthRealism_HD_div2
-    name: string; // PHMMouthRealism_HD_div2
-    elementID: number; // 9852
-    assetUri: object; // /data/DAZ%203D/Genesis%208/Female/Morphs/DAZ%203D/Base/PHMMouthRealism_HD_div2.dsf#PHMMouthRealism_HD_div2
-    assetSource: object; //
-    assetId: string; // PHMMouthRealism_HD_div2
-    assetAuthor: object; // ["Daz 3D","","www.daz3d.com"]
-    assetFileRevision: object; // 1.0.0.0
-    assetModifiedDate: object; // Tue Aug 16 2022 22:04:35 GMT-0400 (Pacific SA Standard Time)
+    /**
+     * Holds the author of the file for this modifier. (Read Only)
+     * @since 4.8.1.21
+     */
+    assetAuthor: DzAuthor;
 
-    // Methods
-    aboutToBeRemoved(): any;
-    addDataItem(p0: DzElementData): any;
-    addPrivateProperty(p0: DzProperty): any;
-    addProperty(p0: DzProperty): any;
-    added(): any;
-    assetModified(): any;
-    assetWasSaved(): any;
-    beginEdit(): any;
-    cancelEdit(): any;
-    className(): any;
-    clearAllAnimData(): any;
-    clearAnimData(p0: DzTimeRange): any;
-    clearDeltasOnVertexSelection(p0: DzVertexMesh): any;
-    clearDeltasOnVertexSelection(p0: DzVertexMesh, p1: boolean): any;
-    clearDeltasOnVertexSelection(p0: DzVertexMesh, p1: boolean, p2: boolean): any;
+    /**
+     * Holds the revision version of the asset file for this modifier. (Read Only)
+     * @since 4.8.1.21
+     */
+    assetFileRevision: DzVersion;
+
+    /**
+     * Holds the asset id for this modifier.
+     * @since 4.8.1.18
+     */
+    assetId: string; // String
+
+    /**
+     * Holds the modified date of the asset file for this modifier. (Read Only)
+     * @since 4.8.1.21
+     */
+    assetModifiedDate: Date;
+
+    /**
+     * Holds whether or not the asset for this modifier needs to be saved. (Read Only)
+     * @since 4.11.0.249
+     */
+    assetNeedSave: boolean; // Boolean
+
+    /**
+     * Holds the URI of the asset source for this modifier; only valid when the asset is in an embedded state - i.e. modified. (Read Only)
+     * @since 4.8.1.21
+     */
+    assetSource: DzUri;
+
+    /**
+     * Holds the asset URI for this modifier. (Read Only)
+     * @since 4.8.1.18
+     */
+    assetUri: DzUri;
+
+    /* Constructors */
+
+    constructor();
+
+    /**
+     * @param deltas DzMorphDeltas
+     */
+    constructor(deltas: DzMorphDeltas);
+
+    /* Methods */
+
+    /**
+     * Clears the deltas of the selected vertices on mesh.
+     * @param mesh DzVertexMesh - The mesh to clear deltas on.
+     * @param selected boolean - If true, the selected vertices are cleared. If false, the non-selected vertices are cleared.
+     * @param writeToStatusLine boolean - If , writes processing data to status line.
+     * @returns DzError The deltas used by this morph.
+     * @since 4.10.0.32
+     */
+    clearDeltasOnVertexSelection(mesh: DzVertexMesh, selected?: boolean, writeToStatusLine?: boolean): DzError;
+
+    /**
+     * @returns DzMorphDeltas
+     */
+    getDeltas(): DzMorphDeltas;
+
+    /**
+     * @returns number The limit for the active level of a High Definition (HD) morph.
+     * @since 4.6.0.99
+     */
+    getHDLimit(): number; // Number
+
+    /**
+     * @returns DzFloatProperty The property that controls the strength of this modifier.
+     * @since 4.9.3.137
+     */
+    getValueControl(): DzFloatProperty;
+
+    /**
+     * Marks the asset as being modified.
+     * @param newUri DzUri - The new file URI for the asset.
+     * @returns boolean true if the asset at the specified URI is marked as modified, otherwise false.
+     */
+    modifyAsset(newUri: DzUri): boolean; // Boolean
+
+    /**
+     * Marks the asset as being modified.
+     * @returns boolean true if the asset is marked as modified, otherwise false.
+     */
+    modifyAsset(): boolean; // Boolean
+
+    /**
+     * Replace the delta set that this morph is using.
+     * @param deltas DzMorphDeltas - The new deltas for the morph. Delta sets are reference counted and so can be shared between multiple morphs.
+     */
+    setDeltas(deltas: DzMorphDeltas): void;
+
+    /**
+     * Sets the limit for the active level of a High Definition (HD) morph.
+     * @param limit number - The limit to set.
+     * @since 4.6.0.99
+     */
+    setHDLimit(limit: number): void;
+
+    /**
+     * Deprecated
+     * @returns DzFloatProperty
+     */
+    getValueChannel(): DzFloatProperty;
+
+    /* Signals */
+
+    /**
+     * Emitted when the deltas for the morph have been modified.
+     */
+    assetModified: ISignal<void>;
+
+    /**
+     * Emitted when the deltas for the morph have been saved.
+     */
+    assetWasSaved: ISignal<void>;
+
+    /**
+     * Emitted when the deltas for the morph has changed.
+     */
+    deltasChanged: ISignal<void>;
+
+    /**
+     * Emitted when the high definition (HD) deltas for the morph have changed.
+     */
+    hdLimitChanged: ISignal<void>;
+
+    /* Undocumented Augment Members */
+
+    /** @undocumented */
     clearHDDeltasOnFacetSelection(p0: DzFacetMesh): any;
-    clearHDDeltasOnFacetSelection(p0: DzFacetMesh, p1: boolean): any;
-    clearHDDeltasOnFacetSelection(p0: DzFacetMesh, p1: boolean, p2: boolean): any;
-    copyFrom(p0: DzElement): any;
-    copyToClipboard(): any;
-    copyToClipboard(p0: string[]): any;
-    createElementCopy(p0: DzElementDuplicateContext): any;
-    createElementCopySignal(p0: DzElementDuplicateContext): any;
-    deleteDataItem(p0: DzElementData): any;
-    deleteLater(): any;
-    destroyed(): any;
-    destroyed(p0: QObject): any;
-    doDuplicateElement(p0: DzElementDuplicateContext): any;
-    doMergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;
-    duplicateElement(p0: DzElement, p1: DzElementDuplicateContext): any;
-    duplicateElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;
-    duplicateMissingCustomData(p0: DzElement): any;
-    duplicateMissingCustomDataWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
-    duplicateMissingPrivateProperties(p0: DzElement): any;
-    duplicateMissingPrivatePropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
-    duplicateMissingProperties(p0: DzElement): any;
-    duplicateMissingPropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
-    findDataItem(p0: string): any;
-    findDataItemIndex(p0: DzElementData): any;
-    findMatchingProperty(p0: DzProperty): any;
-    findPrivateProperty(p0: string): any;
-    findPrivateProperty(p0: string, p1: boolean): any;
-    findPrivatePropertyByLabel(p0: string): any;
-    findPrivatePropertyByLabel(p0: string, p1: boolean): any;
-    findProperty(p0: string): any;
-    findProperty(p0: string, p1: boolean): any;
-    findPropertyByLabel(p0: string): any;
-    findPropertyByLabel(p0: string, p1: boolean): any;
-    finishEdit(): any;
-    getAssignedModifierStackSectionID(): any;
-    getAttributes(p0: DzSettings): any;
-    getDataItem(p0: number): any;
-    getDataItemList(): any;
-    getDeltas(): any;
-    getElementChild(p0: number): any;
-    getElementParent(): any;
-    getHDLimit(): any;
-    getLabel(): any;
-    getLoadScript(): any;
-    getName(): any;
-    getNameEditScope(): any;
-    getNumDataItems(): any;
-    getNumElementChildren(): any;
-    getNumPrivateProperties(): any;
-    getNumProperties(): any;
-    getPreferredModifierStackSectionID(): any;
-    getPrivateProperty(p0: number): any;
-    getPrivatePropertyGroups(): any;
-    getPrivatePropertyList(): any;
-    getProperty(p0: number): any;
-    getPropertyGroups(): any;
-    getPropertyList(): DzProperty[];
-    getTypeLabel(): any;
-    getUniquePrivatePropertyName(p0: string): any;
-    getUniquePropertyName(p0: string): any;
-    getUnknownModifierStackSectionID(): any;
-    getValueChannel(): any;
-    getValueControl(): any;
-    inEdit(): any;
-    inherits(p0: string): any;
-    insertPrivateProperty(p0: number, p1: DzProperty): any;
-    insertProperty(p0: number, p1: DzProperty): any;
-    isDataItemNameUnique(p0: string): any;
-    isDataItemNameUnique(p0: string, p1: boolean): any;
-    isPrivatePropertyNameUnique(p0: string): any;
-    isPrivatePropertyNameUnique(p0: string, p1: boolean): any;
-    isPropertyNameUnique(p0: string): any;
-    isPropertyNameUnique(p0: string, p1: boolean): any;
-    iskindof(p0: string): any;
-    makePersistent(): any;
-    mergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;
-    mergeElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;
-    modifyAsset(): any;
-    modifyAsset(p0: DzUri): any;
-    moveDataItemToIndex(p0: DzElementData, p1: number): any;
-    movePrivateProperty(p0: DzProperty, p1: DzElement): any;
-    moveProperty(p0: DzProperty, p1: DzElement): any;
-    privatePropertyAdded(p0: DzProperty): any;
-    privatePropertyRemoved(p0: DzProperty): any;
-    propertyAdded(p0: DzProperty): any;
-    propertyRemoved(p0: DzProperty): any;
-    remapForTopologyChange(p0: DzShape, p1: DzIndexChangeSet): any;
-    remapForTopologyChangeSlot(p0: DzShape, p1: DzIndexChangeSet): any;
-    removeDataItem(p0: DzElementData): any;
-    removePrivateProperty(p0: DzProperty): any;
-    removePrivateProperty(p0: string): any;
-    removeProperty(p0: DzProperty): any;
-    removeProperty(p0: string): any;
-    removed(): any;
-    setAttributes(p0: DzSettings): any;
-    // setDeltas(p0:DzMorphDeltas): any;
-    setHDLimit(p0: number): any;
-    setLabel(p0: string): any;
-    setLoadScript(p0: DzScript): any;
-    setName(p0: string): any;
-    shouldSortOnLoad(): any;
-    update(): any;
 
-    // Signals
-    nameChanged(p0: string): any;
-    propertyListChanged(): any;
-    propertyListInTreeChanged(): any;
-    propertyTreeChanged(): any;
-    privatePropertyListChanged(): any;
-    privatePropertyListInTreeChanged(): any;
-    privatePropertyTreeChanged(): any;
-    labelChanged(p0: string): any;
-    parentChanged(): any;
-    currentValueChanged(): any;
-    deltasChanged(): any;
-    hdLimitChanged(): any;
+    /** @undocumented */
+    clearHDDeltasOnFacetSelection(p0: DzFacetMesh, p1: boolean): any;
+
+    /** @undocumented */
+    clearHDDeltasOnFacetSelection(p0: DzFacetMesh, p1: boolean, p2: boolean): any;
+
+    /** @undocumented */
+    createElementCopy(p0: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    createElementCopySignal(p0: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    doDuplicateElement(p0: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    doMergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    duplicateElement(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    duplicateElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    duplicateMissingCustomData(p0: DzElement): any;
+
+    /** @undocumented */
+    duplicateMissingCustomDataWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    duplicateMissingPrivateProperties(p0: DzElement): any;
+
+    /** @undocumented */
+    duplicateMissingPrivatePropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    duplicateMissingProperties(p0: DzElement): any;
+
+    /** @undocumented */
+    duplicateMissingPropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    getName(): any;
+
+    /** @undocumented */
+    isDataItemNameUnique(p0: string): any;
+
+    /** @undocumented */
+    isDataItemNameUnique(p0: string, p1: boolean): any;
+
+    /** @undocumented */
+    isPrivatePropertyNameUnique(p0: string): any;
+
+    /** @undocumented */
+    isPrivatePropertyNameUnique(p0: string, p1: boolean): any;
+
+    /** @undocumented */
+    isPropertyNameUnique(p0: string): any;
+
+    /** @undocumented */
+    isPropertyNameUnique(p0: string, p1: boolean): any;
+
+    /** @undocumented */
+    iskindof(p0: string): any;
+
+    /** @undocumented */
+    mergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    mergeElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    remapForTopologyChange(p0: DzShape, p1: DzIndexChangeSet): any;
+
+    /** @undocumented */
+    remapForTopologyChangeSlot(p0: DzShape, p1: DzIndexChangeSet): any;
 }

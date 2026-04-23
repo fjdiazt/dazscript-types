@@ -1,0 +1,455 @@
+{
+  "className": "DzApp",
+  "members": [
+    {
+      "name": "Mac10_0",
+      "signature": "static Mac10_0: number;\t// 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_1",
+      "signature": "static Mac10_1: number;\t// 3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_10",
+      "signature": "static Mac10_10: number;\t// 12",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_11",
+      "signature": "static Mac10_11: number;\t// 13",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_12",
+      "signature": "static Mac10_12: number;\t// 14",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_2",
+      "signature": "static Mac10_2: number;\t// 4",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_3",
+      "signature": "static Mac10_3: number;\t// 5",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_4",
+      "signature": "static Mac10_4: number;\t// 6",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_5",
+      "signature": "static Mac10_5: number;\t// 7",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_6",
+      "signature": "static Mac10_6: number;\t// 8",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_7",
+      "signature": "static Mac10_7: number;\t// 9",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_8",
+      "signature": "static Mac10_8: number;\t// 10",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Mac10_9",
+      "signature": "static Mac10_9: number;\t// 11",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "MacUnknown",
+      "signature": "static MacUnknown: number;\t// 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Unknown",
+      "signature": "static Unknown: number;\t// 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Windows10",
+      "signature": "static Windows10: number;\t// 192",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Windows2000",
+      "signature": "static Windows2000: number;\t// 32",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Windows2003",
+      "signature": "static Windows2003: number;\t// 64",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Windows7",
+      "signature": "static Windows7: number;\t// 144",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Windows8",
+      "signature": "static Windows8: number;\t// 160",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Windows8_1",
+      "signature": "static Windows8_1: number;\t// 176",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Windows95",
+      "signature": "static Windows95: number;\t// 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Windows98",
+      "signature": "static Windows98: number;\t// 3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "WindowsMe",
+      "signature": "static WindowsMe: number;\t// 4",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "WindowsUnknown",
+      "signature": "static WindowsUnknown: number;\t// 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "WindowsVista",
+      "signature": "static WindowsVista: number;\t// 128",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "WindowsXP",
+      "signature": "static WindowsXP: number;\t// 48",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "applicationName",
+      "signature": "applicationName: string;\t// Studio4",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "applicationVersion",
+      "signature": "applicationVersion: string;\t// 4.9.4.117",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "autoSipEnabled",
+      "signature": "autoSipEnabled: boolean;\t// true",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "cursorFlashTime",
+      "signature": "cursorFlashTime: number;\t// 1060",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "doubleClickInterval",
+      "signature": "doubleClickInterval: number;\t// 550",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "globalStrut",
+      "signature": "globalStrut: QObject;\t// [object Object]",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "keyboardInputInterval",
+      "signature": "keyboardInputInterval: number;\t// 400",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "layoutDirection",
+      "signature": "layoutDirection: number;\t// 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "organizationDomain",
+      "signature": "organizationDomain: string;\t//",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "organizationName",
+      "signature": "organizationName: string;\t// DAZ",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "quitOnLastWindowClosed",
+      "signature": "quitOnLastWindowClosed: boolean;\t// true",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "shouldAutoCloseHeadless",
+      "signature": "shouldAutoCloseHeadless: boolean;\t// true",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "startDragDistance",
+      "signature": "startDragDistance: number;\t// 5",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "startDragTime",
+      "signature": "startDragTime: number;\t// 500",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "styleSheet",
+      "signature": "styleSheet: string;\t//",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "wheelScrollLines",
+      "signature": "wheelScrollLines: number;\t// 3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "windowIcon",
+      "signature": "windowIcon: QObject;\t// QVariant(QIcon)",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "aboutQt",
+      "signature": "aboutQt(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "aboutToQuit",
+      "signature": "aboutToQuit(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "addSessionFileLoad",
+      "signature": "addSessionFileLoad(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "breadCrumbTrackingIsActive",
+      "signature": "breadCrumbTrackingIsActive(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "clearSkin",
+      "signature": "clearSkin(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "closeAllWindows",
+      "signature": "closeAllWindows(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "commitDataRequest",
+      "signature": "commitDataRequest(p0: QSessionManager): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "focusChanged",
+      "signature": "focusChanged(p0: QWidget, p1: QWidget): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "fontDatabaseChanged",
+      "signature": "fontDatabaseChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getSkin",
+      "signature": "getSkin(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getTextureBakerMgr",
+      "signature": "getTextureBakerMgr(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getTextureConvertorMgr",
+      "signature": "getTextureConvertorMgr(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isDeleting",
+      "signature": "isDeleting(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "lastWindowClosed",
+      "signature": "lastWindowClosed(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "quit",
+      "signature": "quit(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "refreshStyleSheet",
+      "signature": "refreshStyleSheet(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "refreshStyleSheet",
+      "signature": "refreshStyleSheet(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "saveStateRequest",
+      "signature": "saveStateRequest(p0: QSessionManager): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "saveStateScript",
+      "signature": "saveStateScript(p0: DzScript): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "sendSourceBreadCrumb",
+      "signature": "sendSourceBreadCrumb(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "sendSourceBreadCrumb",
+      "signature": "sendSourceBreadCrumb(p0: number, p1: string): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "sendSourceBreadCrumb",
+      "signature": "sendSourceBreadCrumb(p0: number, p1: string, p2: string): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "sendSourceBreadCrumb",
+      "signature": "sendSourceBreadCrumb(p0: number, p1: string, p2: string, p3: string): any;",
+      "kind": "method",
+      "paramCount": 4
+    },
+    {
+      "name": "setAutoSipEnabled",
+      "signature": "setAutoSipEnabled(p0: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setBreadCrumbTrackingActive",
+      "signature": "setBreadCrumbTrackingActive(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setSkin",
+      "signature": "setSkin(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setStyleSheet",
+      "signature": "setStyleSheet(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setUpBreadCrumbTrackingSignalWatch",
+      "signature": "setUpBreadCrumbTrackingSignalWatch(p0: QObject, p1: string): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setUpBreadCrumbTrackingSignalWatch",
+      "signature": "setUpBreadCrumbTrackingSignalWatch(p0: QObject, p1: string, p2: number): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "skinChanged",
+      "signature": "skinChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "unixSignal",
+      "signature": "unixSignal(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

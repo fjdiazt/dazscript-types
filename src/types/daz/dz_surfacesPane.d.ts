@@ -143,11 +143,6 @@ declare class DzSurfacesPane extends DzPane {
     updateSurfaces(): any;
 
     // Signals
-    visibilityChanged(p0: boolean): any;
-    menuChanged(): any;
-    labelChanged(p0: string): any;
-    tabBarHiddenChanged(p0: boolean): any;
-    paneGroupChanged(p0: DzPaneGroup, p1: DzPaneGroup): any;
     showingHiddenChanged(p0: boolean): any;
     editModeChanged(p0: boolean): any;
     groupSettingChanged(p0: number): any;

@@ -1,0 +1,41 @@
+{
+  "className": "DzVec2",
+  "members": [
+    {
+      "name": "objectName",
+      "signature": "objectName: string;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "deleteLater",
+      "signature": "deleteLater(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "inherits",
+      "signature": "inherits(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "className",
+      "signature": "className(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

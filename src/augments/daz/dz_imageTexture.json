@@ -1,0 +1,155 @@
+{
+  "className": "DzImageTexture",
+  "members": [
+    {
+      "name": "objectName",
+      "signature": "objectName: string; // Scott6_EyesD.jpg",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "drawnDataChanged",
+      "signature": "drawnDataChanged(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "tempFilenameChanged",
+      "signature": "tempFilenameChanged(s: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "refresh",
+      "signature": "refresh(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getFilename",
+      "signature": "getFilename(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getTempFilename",
+      "signature": "getTempFilename(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getGLTextureSize",
+      "signature": "getGLTextureSize(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getGLAlphaTextureSize",
+      "signature": "getGLAlphaTextureSize(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getOriginalImageSize",
+      "signature": "getOriginalImageSize(): QSize;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getPreviewPixmap",
+      "signature": "getPreviewPixmap(width: number, height: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getPreviewPixmap",
+      "signature": "getPreviewPixmap(size: QSize): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGamma",
+      "signature": "setGamma(value: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getGamma",
+      "signature": "getGamma(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getTextureType",
+      "signature": "getTextureType(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setTextureType",
+      "signature": "setTextureType(value: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "loadImageData",
+      "signature": "loadImageData(image: QImage): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getImageData",
+      "signature": "getImageData(image: QImage): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "invalidate",
+      "signature": "invalidate(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "refreshSources",
+      "signature": "refreshSources(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setTextureToRefresh",
+      "signature": "setTextureToRefresh(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "Standard",
+      "signature": "Standard: number; // 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "LatLong",
+      "signature": "LatLong: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "LightProbe",
+      "signature": "LightProbe: number; // 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "CustomTexture",
+      "signature": "CustomTexture: number; // 65536",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "name",
+      "signature": "name: string; // Scott6_EyesD.jpg",
+      "kind": "property",
+      "paramCount": 0
+    }
+  ]
+}

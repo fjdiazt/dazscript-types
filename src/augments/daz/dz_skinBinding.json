@@ -1,0 +1,17 @@
+{
+  "className": "DzSkinBinding",
+  "members": [
+    {
+      "name": "findBoneBinding",
+      "signature": "findBoneBinding(name: string): DzBoneBinding;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addBoneBinding",
+      "signature": "addBoneBinding(boneBinding: DzBoneBinding): void;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

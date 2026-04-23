@@ -1,194 +1,382 @@
+/**
+ * DzShape subclass for polygonal mesh geometry.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/facetshape_dz
+ */
 declare class DzFacetShape extends DzShape {
-    elementID: number;	// 1970
-    name: string;	// shape
-    objectName: string;	// shape
-    aboutToFinalize(p0: DzVertexMesh): any;
-    addDataItem(p0: DzElementData): any;
+
+    /* Constructors */
+
+    constructor();
+
+    /* Methods */
+
+    /**
+     * @returns DzFacetMesh The facet mesh geometry held by this shape.
+     */
+    getFacetMesh(): DzFacetMesh;
+
+    /**
+     * @returns DzEnumProperty The property that controls the resolution level.
+     */
+    getLODControl(): DzEnumProperty;
+
+    /**
+     * @returns number The subdivision algorithm used for this shape.
+     * @since 4.7.1.25
+     */
+    getSubDAlgo(): number; // Number
+
+    /**
+     * @returns DzEnumProperty The property that controls the subdivision algorithm.
+     */
+    getSubDAlgorithmControl(): DzEnumProperty;
+
+    /**
+     * @returns number The subdivision level used for this shape when drawing in the viewport.
+     * @since 4.7.1.25
+     */
+    getSubDDrawLevel(): number; // Number
+
+    /**
+     * @returns number The subdivision edge interpolation mode used for this shape.
+     * @since 4.7.1.25
+     */
+    getSubDInterpolateLevel(): number; // Number
+
+    /**
+     * @returns DzEnumProperty The property that controls the edge interpolation mode.
+     */
+    getSubDInterpolateLevelControl(): DzEnumProperty;
+
+    /**
+     * @returns DzIntProperty The property that controls the view subd level.
+     */
+    getSubDLevelControl(): DzIntProperty;
+
+    /**
+     * @returns number The subdivision level used for this shape when rendering.
+     * @since 4.7.1.25
+     */
+    getSubDRenderLevel(): number; // Number
+
+    /**
+     * @returns DzIntProperty The property that controls the render subd level (minimum).
+     */
+    getSubDRenderLevelControl(): DzIntProperty;
+
+    /**
+     * @returns boolean true if level of detail (LOD) is active on this shape, otherwise false.
+     */
+    isLodActive(): boolean; // Boolean
+
+    /**
+     * @returns boolean true if subdivision is active on this shape, otherwise false.
+     */
+    isSubDivisionActive(): boolean; // Boolean
+
+    /**
+     * Subdivides the mesh based on the values of properties that control the algorithm, edge interpolation mode, normal smoothing mode, and whether it is for rendering or drawing.
+     * @param mesh DzFacetMesh - The mesh to subdivide.
+     * @param isRender boolean - If true, subD render level is used instead of subD draw level.
+     */
+    subDMesh(mesh: DzFacetMesh, isRender: boolean): void;
+
+    /* Signals */
+
+    facetMeshChanged: ISignal<void>;
+
+    renderSubDChanged: ISignal<void>;
+
+    subDAlgorithmChanged: ISignal<void>;
+
+    subDInterpolateLevelChanged: ISignal<void>;
+
+    subDNormalSmoothingChanged: ISignal<void>;
+
+    /* Undocumented Augment Members */
+
+    /** @undocumented */
     addEdgeSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     addFacetSelectionGroup(p0: DzSelectionGroup): any;
-    addMaterial(p0: DzMaterial): any;
+
+    /** @undocumented */
     addMaterialType(p0: QString, p1: QString): any;
-    addPrivateProperty(p0: DzProperty): any;
-    addProperty(p0: DzProperty): any;
+
+    /** @undocumented */
     addRigidityGroup(p0: DzRigidityGroup): any;
+
+    /** @undocumented */
     addShapeInstance(p0: DzAbstractShapeInstance): any;
+
+    /** @undocumented */
     addVertexSelectionGroup(p0: DzSelectionGroup): any;
-    assemblyChanged(): void;
-    clearAnimData(p0: DzTimeRange): any;
+
+    /** @undocumented */
     clearEdgeSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     clearFacetSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     clearMaterialTypes(p0: QString): any;
+
+    /** @undocumented */
     clearVertexSelectionGroup(p0: DzSelectionGroup): any;
-    copyFrom(p0: DzElement): any;
-    copyToClipboard(p0: string[]): any;
+
+    /** @undocumented */
     createElementCopy(p0: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     createElementCopySignal(p0: DzElementDuplicateContext): any;
-    createMaterial(p0: QString): any;
+
+    /** @undocumented */
     createShapeFromGroup(p0: QString): any;
-    deleteDataItem(p0: DzElementData): any;
-    destroyed(): void;
-    destroyed(p0: QObject): void;
+
+    /** @undocumented */
     doDuplicateElement(p0: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     doMergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     duplicateElement(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     duplicateElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     duplicateMissingCustomData(p0: DzElement): any;
+
+    /** @undocumented */
     duplicateMissingCustomDataWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     duplicateMissingPrivateProperties(p0: DzElement): any;
+
+    /** @undocumented */
     duplicateMissingPrivatePropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     duplicateMissingProperties(p0: DzElement): any;
+
+    /** @undocumented */
     duplicateMissingPropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     edgeSelectionChanged(): void;
+
+    /** @undocumented */
     edgeSelectionGroupListChanged(): void;
+
+    /** @undocumented */
     emitMaterialListChanged(): void;
-    facetMeshChanged(): void;
+
+    /** @undocumented */
     facetSelectionChanged(): void;
+
+    /** @undocumented */
     facetSelectionGroupListChanged(): void;
+
+    /** @undocumented */
     findAssemblyMaterialIndex(p0: DzMaterial): any;
-    findDataItem(p0: QString): any;
-    findDataItemIndex(p0: DzElementData): any;
+
+    /** @undocumented */
     findEdgeSelectionGroup(p0: QString): any;
+
+    /** @undocumented */
     findEdgeSelectionGroup(p0: QString, p1: boolean): any;
+
+    /** @undocumented */
     findFacetSelectionGroup(p0: QString): any;
+
+    /** @undocumented */
     findFacetSelectionGroup(p0: QString, p1: boolean): any;
+
+    /** @undocumented */
     findLeafRegion(p0: QString): any;
-    findMatchingProperty(p0: DzProperty): any;
-    findMaterial(p0: QString): any;
-    findMaterialIndex(p0: QString): any;
-    findMaterialIndex(p0: DzMaterial): any;
-    findMaterials(p0: QString): any;
-    findPrivateProperty(p0: QString): any;
-    findPrivateProperty(p0: QString, p1: boolean): any;
-    findPrivatePropertyByLabel(p0: QString): any;
-    findPrivatePropertyByLabel(p0: QString, p1: boolean): any;
-    findProperty(p0: QString): any;
-    findProperty(p0: QString, p1: boolean): any;
-    findPropertyByLabel(p0: QString): any;
-    findPropertyByLabel(p0: QString, p1: boolean): any;
+
+    /** @undocumented */
     findRigidityGroup(p0: QString): any;
+
+    /** @undocumented */
     findSimulationSettingsProvider(p0: QString): any;
+
+    /** @undocumented */
     findVertexSelectionGroup(p0: QString): any;
+
+    /** @undocumented */
     findVertexSelectionGroup(p0: QString, p1: boolean): any;
-    geomChanged(): void;
+
+    /** @undocumented */
     geomTopologyChanged(): void;
+
+    /** @undocumented */
     geometryRegionChanged(): void;
+
+    /** @undocumented */
     geometryRegionSelectionChanged(): void;
+
+    /** @undocumented */
     getAssemblyMaterial(p0: number): any;
-    getAttributes(p0: DzSettings): any;
-    getCurrentShapeForNode(p0: DzNode): any;
-    getDataItem(p0: number): any;
+
+    /** @undocumented */
     getEdgeSelectionGroup(p0: number): any;
-    getElementChild(p0: number): any;
+
+    /** @undocumented */
     getFacetSelectionGroup(p0: number): any;
+
+    /** @undocumented */
     getLeafRegion(p0: number): any;
-    getMaterial(p0: number): any;
+
+    /** @undocumented */
     getMaterialSelectionSets(p0: boolean): any;
+
+    /** @undocumented */
     getMaterialTypes(p0: QString): any;
-    getModifiableAssemblyGeom(p0: boolean): any;
-    getPrivateProperty(p0: number): any;
-    getProperty(p0: number): any;
+
+    /** @undocumented */
     getRigidityGroup(p0: number): any;
-    getSelectedMaterial(p0: number): any;
-    //getShapeInstance(p0: number): any;
-    getUniquePrivatePropertyName(p0: QString): any;
-    getUniquePropertyName(p0: QString): any;
+
+    /** @undocumented */
     getVertexSelectionGroup(p0: number): any;
+
+    /** @undocumented */
     hideProperties(p0: boolean): any;
-    inherits(p0: QString): any;
-    insertMaterial(p0: DzMaterial): any;
-    insertMaterial(p0: DzMaterial, p1: number): any;
-    insertPrivateProperty(p0: number, p1: DzProperty): any;
-    insertProperty(p0: number, p1: DzProperty): any;
-    //insertSimulationSettingsProvider(p0: QString, p1: DzSimulationSettingsProviderPtr): any;
-    //insertSimulationSettingsProvider(p0: QString, p1: DzSimulationSettingsProviderPtr, p2: DzSimulationSettingsProviderPtr): any;
+
+    /** @undocumented */
     isDataItemNameUnique(p0: QString): any;
+
+    /** @undocumented */
     isDataItemNameUnique(p0: QString, p1: boolean): any;
+
+    /** @undocumented */
     isPrivatePropertyNameUnique(p0: QString): any;
+
+    /** @undocumented */
     isPrivatePropertyNameUnique(p0: QString, p1: boolean): any;
+
+    /** @undocumented */
     isPropertyNameUnique(p0: QString): any;
+
+    /** @undocumented */
     isPropertyNameUnique(p0: QString, p1: boolean): any;
+
+    /** @undocumented */
     iskindof(p0: QString): any;
-    labelChanged(p0: QString): void;
-    materialAdded(p0: DzMaterial): void;
-    materialChanged(): void;
-    materialListChanged(): void;
-    materialRemoved(p0: DzMaterial): void;
-    materialSelected(p0: DzMaterial): void;
-    materialSelectionChanged(): void;
+
+    /** @undocumented */
     materialSelectionSetsChanged(): void;
+
+    /** @undocumented */
     materialTypesChanged(): void;
-    materialUnselected(p0: DzMaterial): void;
+
+    /** @undocumented */
     mergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;
+
+    /** @undocumented */
     mergeElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;
-    moveDataItemToIndex(p0: DzElementData, p1: number): any;
+
+    /** @undocumented */
     moveGeometryRegion(p0: DzShape): any;
-    movePrivateProperty(p0: DzProperty, p1: DzElement): any;
-    moveProperty(p0: DzProperty, p1: DzElement): any;
-    nameChanged(p0: QString): void;
-    parentChanged(): void;
+
+    /** @undocumented */
     prefixPropertyLabels(p0: QString): any;
-    privatePropertyAdded(p0: DzProperty): void;
-    privatePropertyListChanged(): void;
-    privatePropertyListInTreeChanged(): void;
-    privatePropertyRemoved(p0: DzProperty): void;
-    privatePropertyTreeChanged(): void;
-    propertyAdded(p0: DzProperty): void;
-    propertyListChanged(): void;
-    propertyListInTreeChanged(): void;
-    propertyRemoved(p0: DzProperty): void;
-    propertyTreeChanged(): void;
+
+    /** @undocumented */
     rebuildBaseMap(p0: number): any;
+
+    /** @undocumented */
     remapMaterials(p0: DzIndexChangeMap): any;
+
+    /** @undocumented */
     remappingForTopologyChange(p0: DzIndexChangeSet): any;
-    removeDataItem(p0: DzElementData): any;
+
+    /** @undocumented */
     removeEdgeSelectionGroup(p0: QString): any;
+
+    /** @undocumented */
     removeEdgeSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     removeEdgeSelectionGroup(p0: number): any;
+
+    /** @undocumented */
     removeFacetSelectionGroup(p0: QString): any;
+
+    /** @undocumented */
     removeFacetSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     removeFacetSelectionGroup(p0: number): any;
-    removeMaterial(p0: DzMaterial): any;
-    removeMaterialByName(p0: QString): any;
-    removeMaterialByName(p0: QString, p1: QString): any;
+
+    /** @undocumented */
     removeMaterialType(p0: QString, p1: QString): any;
-    removePrivateProperty(p0: DzProperty): any;
-    removePrivateProperty(p0: QString): any;
-    removeProperty(p0: DzProperty): any;
-    removeProperty(p0: QString): any;
+
+    /** @undocumented */
     removeRigidityGroup(p0: DzRigidityGroup): any;
+
+    /** @undocumented */
     removeShapeInstance(p0: DzAbstractShapeInstance): any;
+
+    /** @undocumented */
     removeSimulationSettingsProvider(p0: QString): any;
+
+    /** @undocumented */
     removeVertexSelectionGroup(p0: QString): any;
+
+    /** @undocumented */
     removeVertexSelectionGroup(p0: DzSelectionGroup): any;
+
+    /** @undocumented */
     removeVertexSelectionGroup(p0: number): any;
-    renderSubDChanged(): void;
-    replaceMaterial(p0: DzMaterial, p1: DzMaterial): any;
+
+    /** @undocumented */
     rigidityGroupListChanged(): void;
+
+    /** @undocumented */
     rigidityMapChanged(): void;
+
+    /** @undocumented */
     rigidityWeightMapChanged(): void;
+
+    /** @undocumented */
     selectionGroupListChanged(): void;
-    setAttributes(p0: DzSettings): any;
+
+    /** @undocumented */
     setFacetMesh(p0: DzFacetMesh): any;
+
+    /** @undocumented */
     setFacetsForNodeVisibility(p0: DzNode, p1: DzFacetMesh, p2: boolean): any;
+
+    /** @undocumented */
     setGeometryRegion(p0: DzGeometryRegion): any;
+
+    /** @undocumented */
     setGeometryRegionLeafSelection(p0: DzGeometryRegion): any;
+
+    /** @undocumented */
     setGeometryRegionSelection(p0: DzGeometryRegion): any;
-    setLabel(p0: QString): any;
-    setLoadScript(p0: DzScript): any;
+
+    /** @undocumented */
     setMaterialSelectionSets(p0: DzMaterialSelectionSet): any;
+
+    /** @undocumented */
     setMaterialTypes(p0: QString, p1: string[]): any;
-    setName(p0: QString): any;
+
+    /** @undocumented */
     setRigidityMap(p0: DzWeightMap): any;
+
+    /** @undocumented */
     simulationProviderListChanged(): void;
-    smoothingChanged(): void;
-    subDAlgorithmChanged(): void;
-    subDInterpolateLevelChanged(): void;
-    subDMesh(p0: DzFacetMesh, p1: boolean): any;
-    subDNormalSmoothingChanged(): void;
-    subdivisonChanged(): void;
+
+    /** @undocumented */
     updateMaterialTypesToNewName(p0: QString, p1: QString): any;
+
+    /** @undocumented */
     updateSubDEnabled(): void;
-    uvsChanged(): void;
-    vertexSelectionChanged(): void;
+
+    /** @undocumented */
     vertexSelectionGroupListChanged(): void;
 }

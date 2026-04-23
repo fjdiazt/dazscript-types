@@ -55,6 +55,7 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
         : discoveredTypeFiles;
     summary.scannedFiles = allTypeFiles.length;
 
+    const allHtmlModels = new Map<string, DazClassModel>();
     const htmlEntries: Array<{ className: string; htmlFile: string; htmlPath: string; typeFile: string; typePath: string }> = [];
     for (const entry of fs.readdirSync(htmlDir, { withFileTypes: true })) {
         if (!entry.isFile() || !entry.name.endsWith('.html') || entry.name === '_index.html') {
@@ -70,6 +71,7 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
         let model: DazClassModel;
         try {
             model = parseHtmlFile(htmlPath);
+            allHtmlModels.set(model.className, model);
         } catch (error) {
             summary.errors.push({
                 file: mappedTypeFile,
@@ -126,18 +128,18 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
         }
     }
 
-    const htmlModels = new Map<string, DazClassModel>();
-
     for (const entry of htmlEntries) {
-        const model = parseHtmlFile(entry.htmlPath);
-        htmlModels.set(entry.className, model);
+        const model = allHtmlModels.get(entry.className);
+        if (!model) {
+            continue;
+        }
         writeHtmlModel(htmlModelsDir, model);
     }
 
-    const registry = buildClassRegistry(htmlModels.values());
+    const registry = buildClassRegistry(allHtmlModels.values());
 
     for (const entry of htmlEntries) {
-        const model = htmlModels.get(entry.className);
+        const model = allHtmlModels.get(entry.className);
         if (!model) {
             continue;
         }

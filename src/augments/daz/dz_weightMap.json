@@ -1,0 +1,11 @@
+{
+  "className": "DzWeightMap",
+  "members": [
+    {
+      "name": "copyFrom",
+      "signature": "copyFrom(element: DzElement): void;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

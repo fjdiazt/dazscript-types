@@ -1,0 +1,59 @@
+{
+  "className": "DzIrayRenderer",
+  "members": [
+    {
+      "name": "addRenderElements",
+      "signature": "addRenderElements(p0: DzElementList): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "autoBake",
+      "signature": "autoBake(p0: DzRenderHandler, p1: DzCamera, p2: DzLightListIterator, p3: DzNodeListIterator, p4: DzBakerOptions): any;",
+      "kind": "method",
+      "paramCount": 5
+    },
+    {
+      "name": "bake",
+      "signature": "bake(p0: DzRenderHandler, p1: DzCamera, p2: DzLightListIterator, p3: DzNodeListIterator, p4: DzBakerOptions): any;",
+      "kind": "method",
+      "paramCount": 5
+    },
+    {
+      "name": "exportRenderToBridgeQueue",
+      "signature": "exportRenderToBridgeQueue(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "exportRenderToBridgeQueue",
+      "signature": "exportRenderToBridgeQueue(p0: QString, p1: QString): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "exportRenderToBridgeQueue",
+      "signature": "exportRenderToBridgeQueue(p0: QString, p1: QString, p2: DzCamera): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "exportRenderToBridgeQueue",
+      "signature": "exportRenderToBridgeQueue(p0: QString, p1: QString, p2: DzCamera, p3: DzRenderOptions): any;",
+      "kind": "method",
+      "paramCount": 4
+    },
+    {
+      "name": "exportRenderToBridgeQueue",
+      "signature": "exportRenderToBridgeQueue(p0: QString, p1: QString, p2: DzCamera, p3: DzRenderOptions, p4: number): any;",
+      "kind": "method",
+      "paramCount": 5
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

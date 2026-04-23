@@ -1,0 +1,17 @@
+{
+  "className": "DzViewTool",
+  "members": [
+    {
+      "name": "getName",
+      "signature": "getName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0:string): any;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

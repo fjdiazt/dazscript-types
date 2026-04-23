@@ -1,0 +1,89 @@
+{
+  "className": "DzCamera",
+  "members": [
+    {
+      "name": "PERSPECTIVE_CAM",
+      "signature": "static PERSPECTIVE_CAM: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "accFrustum",
+      "signature": "accFrustum(left: number, right: number, bottom: number): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "accPerspective",
+      "signature": "accPerspective(fovy: number, aspect: number): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "calcLocalBoundingBox",
+      "signature": "calcLocalBoundingBox(): DzBox3;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "draw",
+      "signature": "draw(style: DzDrawStyle): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getAspectRatio",
+      "signature": "getAspectRatio(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getFarClippingPlane",
+      "signature": "getFarClippingPlane(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getIcon",
+      "signature": "getIcon(): QIcon;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNearClippingPlane",
+      "signature": "getNearClippingPlane(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getPixmap",
+      "signature": "getPixmap(state: number): QPixmap;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setAspectRatio",
+      "signature": "setAspectRatio(aspect: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGL",
+      "signature": "setGL(width: number, height: number, view: QRect, pass: number, totalPasses: number): void;",
+      "kind": "method",
+      "paramCount": 5
+    },
+    {
+      "name": "setProjection",
+      "signature": "setProjection(settings: DzRenderSettings, width: number, height: number): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setRenderGlobals",
+      "signature": "setRenderGlobals(settings: DzRenderSettings): void;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

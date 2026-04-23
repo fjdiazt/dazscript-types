@@ -1,0 +1,71 @@
+{
+  "className": "DzBackdrop",
+  "members": [
+    {
+      "name": "mergeElementSignal",
+      "signature": "mergeElementSignal(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "duplicateElementSignal",
+      "signature": "duplicateElementSignal(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "createElementCopySignal",
+      "signature": "createElementCopySignal(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "duplicateMissingCustomDataWithContext",
+      "signature": "duplicateMissingCustomDataWithContext(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "duplicateMissingPropertiesWithContext",
+      "signature": "duplicateMissingPropertiesWithContext(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "duplicateMissingPrivatePropertiesWithContext",
+      "signature": "duplicateMissingPrivatePropertiesWithContext(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "doMergeElement",
+      "signature": "doMergeElement(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "doDuplicateElement",
+      "signature": "doDuplicateElement(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "mergeElement",
+      "signature": "mergeElement(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "duplicateElement",
+      "signature": "duplicateElement(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "createElementCopy",
+      "signature": "createElementCopy(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

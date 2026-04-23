@@ -1,0 +1,65 @@
+{
+  "className": "DzStringProperty",
+  "members": [
+    {
+      "name": "keysAreClamped",
+      "signature": "keysAreClamped(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setKeysAreClamped",
+      "signature": "setKeysAreClamped(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toggleKeysAreClamped",
+      "signature": "toggleKeysAreClamped(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "doCopyBaseData",
+      "signature": "doCopyBaseData(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getEmitValueChangedOnSceneClear",
+      "signature": "getEmitValueChangedOnSceneClear(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setEmitValueChangedOnSceneClear",
+      "signature": "setEmitValueChangedOnSceneClear(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitRemoved",
+      "signature": "emitRemoved(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "invalidateCacheValue",
+      "signature": "invalidateCacheValue(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setAdvanceEditorWgtClass",
+      "signature": "setAdvanceEditorWgtClass(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getAdvanceEditorWgtClass",
+      "signature": "getAdvanceEditorWgtClass(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

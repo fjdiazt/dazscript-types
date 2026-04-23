@@ -1,0 +1,11 @@
+{
+  "className": "DzRSLShader",
+  "members": [
+    {
+      "name": "className",
+      "signature": "static className(): string;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

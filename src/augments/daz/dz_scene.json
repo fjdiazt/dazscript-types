@@ -1,0 +1,29 @@
+{
+  "className": "DzScene",
+  "members": [
+    {
+      "name": "stripLabelnumber",
+      "signature": "stripLabelnumber(label: QString): QString;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearDebugPoints",
+      "signature": "clearDebugPoints(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setDebugPoints",
+      "signature": "setDebugPoints(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setDebugPoints",
+      "signature": "setDebugPoints(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

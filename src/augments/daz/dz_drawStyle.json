@@ -1,0 +1,185 @@
+{
+  "className": "DzDrawStyle",
+  "members": [
+    {
+      "name": "WIRE_BOX",
+      "signature": "WIRE_BOX: number; // 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "SOLID_BOX",
+      "signature": "SOLID_BOX: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "WIREFRAME",
+      "signature": "WIREFRAME: number; // 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "LIT_WIREFRAME",
+      "signature": "LIT_WIREFRAME: number; // 3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "HIDDEN_LINE",
+      "signature": "HIDDEN_LINE: number; // 4",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "WIRE_SHADED",
+      "signature": "WIRE_SHADED: number; // 5",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "SMOOTH_SHADED",
+      "signature": "SMOOTH_SHADED: number; // 6",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "WIRE_TEXTURED",
+      "signature": "WIRE_TEXTURED: number; // 7",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "TEXTURED",
+      "signature": "TEXTURED: number; // 8",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "GLSL_SHADER",
+      "signature": "GLSL_SHADER: number; // 9",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "UNSHADED",
+      "signature": "UNSHADED: number; // 10",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PICKING",
+      "signature": "PICKING: number; // 11",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "DrawOpaqueOnly",
+      "signature": "DrawOpaqueOnly: number; // 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "DrawTransparentOnly",
+      "signature": "DrawTransparentOnly: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "DrawBoth",
+      "signature": "DrawBoth: number; // 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "DRAW_OPAQUE_ONLY",
+      "signature": "DRAW_OPAQUE_ONLY: number; // 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "DRAW_TRANSPARENT_ONLY",
+      "signature": "DRAW_TRANSPARENT_ONLY: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "DRAW_BOTH",
+      "signature": "DRAW_BOTH: number; // 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PickNone",
+      "signature": "PickNone: number; // 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PickFaces",
+      "signature": "PickFaces: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PickPoints",
+      "signature": "PickPoints: number; // 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PickNodes",
+      "signature": "PickNodes: number; // 3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PickMaterials",
+      "signature": "PickMaterials: number; // 4",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PICK_NONE",
+      "signature": "PICK_NONE: number; // 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PICK_FACES",
+      "signature": "PICK_FACES: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PICK_POINTS",
+      "signature": "PICK_POINTS: number; // 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PICK_NODES",
+      "signature": "PICK_NODES: number; // 3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "PICK_MATERIALS",
+      "signature": "PICK_MATERIALS: number; // 4",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "objectName",
+      "signature": "objectName: string; //",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "name",
+      "signature": "name: string; //",
+      "kind": "property",
+      "paramCount": 0
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "className": "DzContentFolder",
+  "members": [
+    {
+      "name": "canMoveFiles",
+      "signature": "canMoveFiles(files: DzContentFilePtr[]): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "moveFiles",
+      "signature": "moveFiles(files: DzContentFilePtr[]): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "copyFiles",
+      "signature": "copyFiles(files: DzContentFilePtr[]): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

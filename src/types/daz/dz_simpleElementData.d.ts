@@ -1,28 +1,29 @@
-declare class DzSimpleElementData {
-    // Properties
-    objectName: string; // TEST
-    name: string; // TEST
+/**
+ * A DzElementData implementation that allows arbitrary data to be associated with an element of the scene.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/simpleelementdata_dz
+ */
+declare class DzSimpleElementData extends DzElementData {
 
-    constructor(name: string, persistent: boolean);
+    /* Constructors */
 
-    // Methods
-    addedToElement(owner: DzElement): DzElementData;
+    /**
+     * @param name string
+     * @param persistent boolean
+     */
+    constructor(name: string, persistent?: boolean);
+
+    /* Methods */
+
+    /**
+     * @returns DzSettings The settings owned by this element data item.
+     */
     getSettings(): DzSettings;
 
-    className(): any;
-    deleteLater(): any;
-    duplicate(p0: DzElement): any;
-    getName(): any;
-    getOwner(): any;
-    inherits(p0: string): any;
-    isPersistent(): any;
-    iskindof(p0: string): any;
-    makePersistent(): any;
+    /* Undocumented Augment Members */
 
-    // Signals
-    nameChanged(p0: string): any;
-    removedFromElement(p0: DzElement): any;
-    elementDeleting(p0: DzElement): any;
-    destroyed(): any;
-    destroyed(p0: QObject): any;
+    /** @undocumented */
+    getName(): any;
+
+    /** @undocumented */
+    iskindof(p0: string): any;
 }

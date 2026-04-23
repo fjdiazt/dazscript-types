@@ -1,0 +1,23 @@
+{
+  "className": "DzShaderMaterial",
+  "members": [
+    {
+      "name": "getAllImages",
+      "signature": "getAllImages(list: DzTexturePtr[]): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "allowsAutoBake",
+      "signature": "allowsAutoBake(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "unsetRender",
+      "signature": "unsetRender(renderSettings: DzRenderSettings): void;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

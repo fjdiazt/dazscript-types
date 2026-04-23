@@ -1,0 +1,53 @@
+{
+  "className": "DzModifier",
+  "members": [
+    {
+      "name": "apply",
+      "signature": "apply(geom: DzVertexMesh, node: DzNode): DzError;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "applyInverse",
+      "signature": "applyInverse(geom: DzVertexMesh, node: DzNode): DzError;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isWeightMapModifier",
+      "signature": "isWeightMapModifier(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setIsWeightMapModifier",
+      "signature": "setIsWeightMapModifier(onoff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getMorph",
+      "signature": "getMorph(): DzMorph;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getParentUri",
+      "signature": "getParentUri(morph: DzMorph): string;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setOverrideParentPath",
+      "signature": "setOverrideParentPath(parentPath: string): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "writeModifierInstances",
+      "signature": "writeModifierInstances(io: any): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

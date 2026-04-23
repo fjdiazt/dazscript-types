@@ -1,0 +1,47 @@
+{
+  "className": "DzInteractiveLessonMgr",
+  "members": [
+    {
+      "name": "scheduleStop",
+      "signature": "scheduleStop(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "scheduleSkip",
+      "signature": "scheduleSkip(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "menuHook",
+      "signature": "menuHook(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "menuHook",
+      "signature": "menuHook(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getRecordedInstructions",
+      "signature": "getRecordedInstructions(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "startRecording",
+      "signature": "startRecording(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "finishRecording",
+      "signature": "finishRecording(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

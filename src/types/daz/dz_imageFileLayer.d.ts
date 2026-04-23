@@ -1,35 +1,21 @@
-declare class DzImageFileLayer extends QObject {
-    static className(): string;
-    filename: string;	//
-    label: string;	//
-    name: string;	//
-    objectName: string;	//
-    visible: boolean;	// true
-    addManipulator(p0: DzImageManip): any;
-    blendModeChanged(p0: DzImageBlend): void;
-    className(): any;
-    deleteLater(): any;
-    destroyed(): void;
-    destroyed(p0: QObject): void;
-    filenameChanged(p0: string): void;
-    freeImageData(): any;
-    getBlendMode(): any;
-    getDescription(): any;
-    getImageData(): any;
-    getManipulator(p0: number): any;
-    getMask(): any;
-    getNumManipulators(): any;
-    getSize(): any;
-    imageDataChanged(): void;
-    inherits(): any;
-    insertManipulator(p0: number, p1: DzImageManip): any;
-    labelChanged(p0: string): void;
-    manipulatorListChanged(): void;
-    maskChanged(p0: DzImageMask): void;
-    removeManipulator(p0: number): any;
-    removeManipulator(p0: DzImageManip): any;
-    setBlendMode(p0: DzImageBlend): any;
-    setMask(p0: DzImageMask): any;
-    toTextureLayer(p0: DzTextureLayer, p1: QSize): any;
-    visibilityChanged(p0: boolean): void;
+/**
+ * A single layer in a multi-layer texture image that references an image file for its data. (deprecated).
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imagefilelayer_dz
+ */
+declare class DzImageFileLayer extends DzImageLayer {
+
+    /* Properties */
+
+    /**
+     * The filename of the image that this layer references.
+     */
+    filename: string; // String
+
+    /* Signals */
+
+    /**
+     * Emitted when the file name associated with this layer changes
+     * @param filename string - The new file name
+     */
+    filenameChanged: ISignal<string>;
 }

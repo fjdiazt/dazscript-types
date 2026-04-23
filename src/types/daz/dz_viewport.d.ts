@@ -1,100 +1,280 @@
-declare class DzViewport extends QFrame {
-
-    /* Properties */
-    modal: boolean;
-    windowModality: number;
-    geometry: QObject;
-    frameGeometry: QObject;
-    normalGeometry: QObject;
-    pos: QObject;
-    frameSize: QObject;
-    size: QObject;
-    rect: QObject;
-    childrenRect: QObject;
-    childrenRegion: QObject;
-    minimumSize: QObject;
-    maximumSize: QObject;
-    minimumWidth: number;
-    minimumHeight: number;
-    maximumWidth: number;
-    maximumHeight: number;
-    sizeIncrement: QObject;
-    baseSize: QObject;
-    cursor: QObject;
-    mouseTracking: boolean;
-    isActiveWindow: boolean;
-    focusPolicy: number;
-    focus: boolean;
-    contextMenuPolicy: number;
-    updatesEnabled: boolean;
-    visible: boolean;
-    minimized: boolean;
-    maximized: boolean;
-    fullScreen: boolean;
-    //sizeHint: QObject;
-
-    acceptDrops: boolean;
-    windowTitle: string;
-    windowIcon: QObject;
-    windowIconText: string;
-    windowOpacity: number;
-    windowModified: boolean;
-    accessibleName: string;
-    accessibleDescription: string;
-    layoutDirection: number;
-    autoFillBackground: boolean;
-    styleSheet: string;
-    locale: QObject;
-    windowFilePath: string;
-    inputMethodHints: number;
-    //frameShape: number;
-    //frameShadow: number;
-    //lineWidth: number;
-    //midLineWidth: number;
-    //frameWidth: number;
-    //frameRect: QObject;
-    NoFrame: number;
-    Box: number;
-    Panel: number;
-    WinPanel: number;
-    HLine: number;
-    VLine: number;
-    StyledPanel: number;
-    Plain: number;
-    Raised: number;
-    Sunken: number;
+/**
+ * A container widget for a three dimensional viewport and any associated decoration.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/viewport_dz
+ */
+declare class DzViewport extends QWidget {
 
     /* Methods */
-    customContextMenuRequested(): any; // TODO ;
-    setEnabled(): any; // TODO ;
-    setDisabled(): any; // TODO ;
-    setWindowModified(): any; // TODO ;
-    setWindowTitle(): any; // TODO ;
-    setStyleSheet(): any; // TODO ;
-    setFocus(): any; // TODO ;
-    update(): any; // TODO ;
-    repaint(): any; // TODO ;
-    setVisible(): any; // TODO ;
-    setHidden(): any; // TODO ;
-    show(): any; // TODO ;
-    hide(): any; // TODO ;
-    setShown(): any; // TODO ;
-    showMinimized(): any; // TODO ;
-    showMaximized(): any; // TODO ;
-    showFullScreen(): any; // TODO ;
-    showNormal(): any; // TODO ;
-    close(): any; // TODO ;
-    raise(): any; // TODO ;
-    lower(): any; // TODO ;
-    updateMicroFocus(): any; // TODO ;
-    viewChanged(view: DzView): void;
-    dimensionsChanged(): void;
-    view3dCurrentDimensionsChanged(): any; // TODO ;
-    setView(view: DzView): void;
-    isCustom(): any; // TODO ;
+
+    /**
+     * @returns Dz3DViewport The embedded 3D viewport that this viewport encapsulates.
+     */
     get3DViewport(): Dz3DViewport;
+
+    /**
+     * @returns DzViewportMgr The manager of this viewport.
+     */
     getManager(): DzViewportMgr;
+
+    /**
+     * @returns DzView The alternate view currently being displayed in the viewport; NULL if an alternate view is not displayed (i.e., the 3D viewport is active).
+     */
     getView(): DzView;
-    setViewVisible(): any; // TODO ;
+
+    /**
+     * @returns boolean true if this viewport is custom; otherwise false.
+     * @since 4.7.1.104
+     */
+    isCustom(): boolean; // Boolean
+
+    /**
+     * Sets the alternate view for the viewport; this replaces the 3D viewport while active. Pass in NULL to clear the alternate view and restore the 3D viewport.
+     * @param view DzView - The view to display in the viewport.
+     */
+    setView(view: DzView): void;
+
+    /**
+     * Sets the visible state of the alternate view for this viewport, if an alternate view has been set.
+     * @param onOff boolean - If true, the alternate view (if any) is displayed.
+     */
+    setViewVisible(onOff: boolean): void;
+
+    /* Signals */
+
+    /**
+     * Emitted when the dimensions of the viewport has changed.
+     */
+    dimensionsChanged: ISignal<void>;
+
+    /**
+     * Emitted when the dimensions of the encapsulated 3D viewport has changed.
+     */
+    view3dCurrentDimensionsChanged: ISignal<void>;
+
+    /**
+     * Emitted when the view has changed (e.g., when switched between the 3D viewport and an alternate view).
+     * @param view DzView - The view that was changed to.
+     */
+    viewChanged: ISignal<DzView>;
+
+    /* Undocumented Augment Members */
+
+    /** @undocumented */
+    modal: boolean;
+
+    /** @undocumented */
+    windowModality: number;
+
+    /** @undocumented */
+    geometry: QObject;
+
+    /** @undocumented */
+    frameGeometry: QObject;
+
+    /** @undocumented */
+    normalGeometry: QObject;
+
+    /** @undocumented */
+    pos: QObject;
+
+    /** @undocumented */
+    frameSize: QObject;
+
+    /** @undocumented */
+    size: QObject;
+
+    /** @undocumented */
+    rect: QObject;
+
+    /** @undocumented */
+    childrenRect: QObject;
+
+    /** @undocumented */
+    childrenRegion: QObject;
+
+    /** @undocumented */
+    minimumSize: QObject;
+
+    /** @undocumented */
+    maximumSize: QObject;
+
+    /** @undocumented */
+    minimumWidth: number;
+
+    /** @undocumented */
+    minimumHeight: number;
+
+    /** @undocumented */
+    maximumWidth: number;
+
+    /** @undocumented */
+    maximumHeight: number;
+
+    /** @undocumented */
+    sizeIncrement: QObject;
+
+    /** @undocumented */
+    baseSize: QObject;
+
+    /** @undocumented */
+    cursor: QObject;
+
+    /** @undocumented */
+    mouseTracking: boolean;
+
+    /** @undocumented */
+    isActiveWindow: boolean;
+
+    /** @undocumented */
+    focus: boolean;
+
+    /** @undocumented */
+    contextMenuPolicy: number;
+
+    /** @undocumented */
+    updatesEnabled: boolean;
+
+    /** @undocumented */
+    minimized: boolean;
+
+    /** @undocumented */
+    maximized: boolean;
+
+    /** @undocumented */
+    fullScreen: boolean;
+
+    /** @undocumented */
+    acceptDrops: boolean;
+
+    /** @undocumented */
+    windowTitle: string;
+
+    /** @undocumented */
+    windowIcon: QObject;
+
+    /** @undocumented */
+    windowIconText: string;
+
+    /** @undocumented */
+    windowOpacity: number;
+
+    /** @undocumented */
+    windowModified: boolean;
+
+    /** @undocumented */
+    accessibleName: string;
+
+    /** @undocumented */
+    accessibleDescription: string;
+
+    /** @undocumented */
+    layoutDirection: number;
+
+    /** @undocumented */
+    autoFillBackground: boolean;
+
+    /** @undocumented */
+    styleSheet: string;
+
+    /** @undocumented */
+    locale: QObject;
+
+    /** @undocumented */
+    windowFilePath: string;
+
+    /** @undocumented */
+    inputMethodHints: number;
+
+    /** @undocumented */
+    NoFrame: number;
+
+    /** @undocumented */
+    Box: number;
+
+    /** @undocumented */
+    Panel: number;
+
+    /** @undocumented */
+    WinPanel: number;
+
+    /** @undocumented */
+    HLine: number;
+
+    /** @undocumented */
+    VLine: number;
+
+    /** @undocumented */
+    StyledPanel: number;
+
+    /** @undocumented */
+    Plain: number;
+
+    /** @undocumented */
+    Raised: number;
+
+    /** @undocumented */
+    Sunken: number;
+
+    /** @undocumented */
+    customContextMenuRequested(): any; // TODO ;
+
+    /** @undocumented */
+    setEnabled(): any; // TODO ;
+
+    /** @undocumented */
+    setDisabled(): any; // TODO ;
+
+    /** @undocumented */
+    setWindowModified(): any; // TODO ;
+
+    /** @undocumented */
+    setWindowTitle(): any; // TODO ;
+
+    /** @undocumented */
+    setStyleSheet(): any; // TODO ;
+
+    /** @undocumented */
+    repaint(): any; // TODO ;
+
+    /** @undocumented */
+    setVisible(): any; // TODO ;
+
+    /** @undocumented */
+    setHidden(): any; // TODO ;
+
+    /** @undocumented */
+    show(): any; // TODO ;
+
+    /** @undocumented */
+    hide(): any; // TODO ;
+
+    /** @undocumented */
+    setShown(): any; // TODO ;
+
+    /** @undocumented */
+    showMinimized(): any; // TODO ;
+
+    /** @undocumented */
+    showMaximized(): any; // TODO ;
+
+    /** @undocumented */
+    showFullScreen(): any; // TODO ;
+
+    /** @undocumented */
+    showNormal(): any; // TODO ;
+
+    /** @undocumented */
+    close(): any; // TODO ;
+
+    /** @undocumented */
+    raise(): any; // TODO ;
+
+    /** @undocumented */
+    lower(): any; // TODO ;
+
+    /** @undocumented */
+    updateMicroFocus(): any; // TODO ;
+
+    /** @undocumented */
     interactiveLessonQuery(): any; // TODO ;
 }

@@ -1,0 +1,11 @@
+{
+  "className": "DzCheckListItem",
+  "members": [
+    {
+      "name": "tristate",
+      "signature": "tristate: boolean; // false",
+      "kind": "property",
+      "paramCount": 0
+    }
+  ]
+}

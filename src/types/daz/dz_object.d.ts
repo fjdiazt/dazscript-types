@@ -1,134 +1,287 @@
+/**
+ * The main object class.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/object_dz
+ */
 declare class DzObject extends DzElement {
-    aboutToAddModifier(p0: DzModifier): any;
-    aboutToDelete(): any;
-    aboutToFinalize(p0: DzVertexMesh): any;
-    addDataItem(p0: DzElementData): any;
-    addModifier(p0: DzModifier): any;
-    addModifier(p0: DzModifier, p1: number): any;
-    addPrivateProperty(p0: DzProperty): any;
-    addProperty(p0: DzProperty): any;
-    addShape(p0: DzShape): any;
-    addShape(p0: DzShape, p1: number): any;
-    beginEdit(): any;
-    cachedGeomFinalized(): any;
-    cachedGeomInvalidated(): any;
-    cachedGeomUpdated(): any;
-    cancelEdit(): any;
-    clearAllAnimData(): any;
-    clearAnimData(p0: DzTimeRange): any;
-    copyFrom(p0: DzElement): any;
-    copyToClipboard(): any;
-    createElementCopy(p0: DzElementDuplicateContext): any;
-    createElementCopySignal(p0: DzElementDuplicateContext): any;
-    currentShapeSwitched(): any;
-    deleteDataItem(p0: DzElementData): any;
-    deleteLater(): any;
-    destroyed(): any;
-    destroyed(p0: QObject): any;
-    findDataItem(p0: string): any;
-    findDataItemIndex(p0: DzElementData): any;
-    findMatchingProperty(p0: DzProperty): any;
-    findModifier(p0: string): any;
-    findModifierIndex(p0: DzModifier): any;
-    findModifierIndexFromEnd(p0: DzModifier): any;
-    findPrivateProperty(p0: string): any;
-    findPrivateProperty(p0: string, p1: boolean): any;
-    findPrivatePropertyByLabel(p0: string): any;
-    findPrivatePropertyByLabel(p0: string, p1: boolean): any;
-    findProperty(p0: string): any;
-    findProperty(p0: string, p1: boolean): any;
-    findPropertyByLabel(p0: string): any;
-    findPropertyByLabel(p0: string, p1: boolean): any;
-    finishEdit(): any;
-    forceCacheUpdate(p0: DzNode): any;
-    forceCacheUpdate(p0: DzNode, p1: boolean): any;
-    getAttributes(p0: DzSettings): any;
-    getBoundingBox(): any;
-    getCachedGeom(): any;
-    getCurrentShape(): DzShape;
-    getDataItem(p0: number): any;
-    getDataItemList(): any;
-    getElementChild(p0: number): any;
-    getElementParent(): any;
-    getGeometryControl(): any;
-    getLabel(): any;
-    getLoadScript(): any;
-    getLocalBoundingBox(): any;
-    getLocalOrientedBox(): any;
-    getModifier(p0: number): DzModifier;
-    getName(): any;
-    getNameEditScope(): any;
-    getNumDataItems(): any;
-    getNumElementChildren(): any;
-    getNumModifiers(): any;
-    getNumPrivateProperties(): any;
-    getNumProperties(): any;
-    getNumShapes(): any;
-    getPrivateProperty(p0: number): any;
-    getPrivatePropertyGroups(): any;
-    getPrivatePropertyList(): any;
-    getProperty(p0: number): any;
-    getPropertyGroups(): any;
-    getPropertyList(): any;
-    getShape(p0: number): DzShape;
-    getTypeLabel(): any;
-    getUniquePrivatePropertyName(p0: string): any;
-    getUniquePropertyName(p0: string): any;
-    inEdit(): any;
-    insertPrivateProperty(p0: number, p1: DzProperty): any;
-    insertProperty(p0: number, p1: DzProperty): any;
-    invalidateCache(): any;
-    isBuildingGeom(): any;
-    isBuildingGeomValid(): any;
-    iskindof(p0: string): any;
-    makePersistent(): any;
-    modifierAdded(p0: DzModifier): any;
-    modifierRemoved(p0: DzModifier): any;
-    moveDataItemToIndex(p0: DzElementData, p1: number): any;
-    moveModifier(p0: DzModifier): any;
-    moveModifier(p0: DzModifier, p1: number): any;
-    moveShape(p0: DzShape): any;
-    moveShape(p0: DzShape, p1: number): any;
-    privatePropertyAdded(p0: DzProperty): any;
-    privatePropertyRemoved(p0: DzProperty): any;
-    propertyAdded(p0: DzProperty): any;
-    propertyRemoved(p0: DzProperty): any;
-    removeAllModifiers(): any;
-    removeAllShapes(): any;
-    removeDataItem(p0: DzElementData): any;
-    removeModifier(p0: DzModifier): any;
-    removePrivateProperty(p0: DzProperty): any;
-    removePrivateProperty(p0: string): any;
-    removeProperty(p0: DzProperty): any;
-    removeProperty(p0: string): any;
-    removeShape(p0: number): any;
-    setAllPrivatePropertyAttributesAsDefinitions(): any;
-    setAllPropertyAttributesAsDefinitions(): any;
-    setAttributes(p0: DzSettings): any;
-    setLabel(p0: string): any;
-    setLoadScript(p0: DzScript): any;
-    setName(p0: string): any;
-    shapeAdded(p0: DzShape): any;
-    shapeRemoved(p0: DzShape): any;
-    shouldSortOnLoad(): any;
-    update(): any;
 
-    // Signals
-    cachedTopologyChanged(): any;
-    drawnDataChanged(): any;
-    labelChanged(p0: string): any;
-    materialListChanged(): any;
-    materialSelectionChanged(): any;
-    materialSelectionSetsChanged(): any;
-    modifierStackChanged(): any;
-    nameChanged(p0: string): any;
-    parentChanged(): any;
-    privatePropertyListChanged(): any;
-    privatePropertyListInTreeChanged(): any;
-    privatePropertyTreeChanged(): any;
-    propertyListChanged(): any;
-    propertyListInTreeChanged(): any;
-    propertyTreeChanged(): any;
-    shapeTopologyChanged(): any;
-    uvsChanged(): any;
+    /* Constructors */
+
+    constructor();
+
+    /* Methods */
+
+    /**
+     * Adds a modifier to the modifier stack.
+     * @param modifier DzModifier - The modifier to add to this object's modifier stack.
+     * @param index number - The position in the list to insert the modifer. If this is less than 0 (default), the modifier is appended to the end of the list.
+     * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
+     */
+    addModifier(modifier: DzModifier, index?: number): DzError;
+
+    /**
+     * Add a shape to this object.
+     * @param shape DzShape - The shape that will be added to this object's list of possible shapes.
+     * @param index number - The position in the list to insert the shape. If this is less than 0 (default), the shape is appended to the end of the list.
+     * @returns DzError
+     */
+    addShape(shape: DzShape, index?: number): DzError;
+
+    /**
+     * @param name string - The name of the modifier to get.
+     * @returns DzModifier The modifier in the stack with the given name (if any), otherwise NULL.
+     */
+    findModifier(name: string): DzModifier;
+
+    /**
+     * @param mod DzModifier - The modifier to find the index for.
+     * @returns number The index of the modifier in the modifier stack (if any), otherwise -1.
+     */
+    findModifierIndex(mod: DzModifier): number; // Number
+
+    /**
+     * @param mod DzModifier - The modifier to find the index for.
+     * @returns number The index of the modifier in the modifier stack (if any), otherwise -1.
+     */
+    findModifierIndexFromEnd(mod: DzModifier): number; // Number
+
+    /**
+     * @param node DzNode
+     * @param isRender boolean
+     */
+    forceCacheUpdate(node: DzNode, isRender?: boolean): void;
+
+    /**
+     * @returns DzBox3 A world space bounding box for this object.
+     */
+    getBoundingBox(): DzBox3;
+
+    /**
+     * @returns DzVertexMesh The final world-space transformed mesh for the current shape.
+     */
+    getCachedGeom(): DzVertexMesh;
+
+    /**
+     * Get the current shape.
+     * @returns DzShape The current shape this object is caching/drawing.
+     */
+    getCurrentShape(): DzShape;
+
+    /**
+     * @returns DzEnumProperty The property that controls the current shape of this object.
+     */
+    getGeometryControl(): DzEnumProperty;
+
+    /**
+     * @returns DzBox3 A local space bounding box for this object; cached by the last call to evaluate().
+     */
+    getLocalBoundingBox(): DzBox3;
+
+    /**
+     * @returns DzOrientedBox3 A local space oriented bounding box for this object; cached by the last call to evaluate().
+     */
+    getLocalOrientedBox(): DzOrientedBox3;
+
+    /**
+     * @param which number - The index of the modifier in the stack to get.
+     * @returns DzModifier The modifier at the given position in the modifier stack (if any), otherwise NULL.
+     */
+    getModifier(which: number): DzModifier;
+
+    /**
+     * @returns number The number of modifiers in the local modifier stack for this object.
+     */
+    getNumModifiers(): number; // Number
+
+    /**
+     * @returns number The number of possible shapes that this object can display.
+     */
+    getNumShapes(): number; // Number
+
+    /**
+     * @param which number - Index of the shape to get.
+     * @returns DzShape The shape at the given index (if any), otherwise NULL.
+     */
+    getShape(which: number): DzShape;
+
+    /**
+     * Flags this object to reevaluate its geometry pipeline the next time the cached shape is requested.
+     */
+    invalidateCache(): void;
+
+    /**
+     * @returns boolean true when this object is currently building, otherwise false.
+     * @since 4.12.0.10
+     */
+    isBuildingGeom(): boolean; // Boolean
+
+    /**
+     * @returns boolean true if the geom that this object is currently building is still valid, otherwise false.
+     * @since 4.12.0.10
+     */
+    isBuildingGeomValid(): boolean; // Boolean
+
+    /**
+     * Moves the modifier from its source object to this object's modifier stack. DZ_ILLEGAL_ARGUMENT_ERROR is returned if there is not a modifier, or if the modifier's element parent is not an object. This move is not undo-able.
+     * @param modifier DzModifier - The modifier to add to this object's modifier stack.
+     * @param index number - The position in the list to insert the modifer. If this is less than 0 (default), the modifier is appended to the end of the list.
+     * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
+     */
+    moveModifier(modifier: DzModifier, index?: number): DzError;
+
+    /**
+     * Moves the given shape from its source object to this object. Operation fails if the shape's element parent is not a different dzobject with this shape in its shape list.
+     * @param shape DzShape - The shape that will be added to this object's list of possible shapes.
+     * @param index number - The position in the list to insert the shape. If this is less than 0 (default), the shape is appended to the end of the list.
+     * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
+     */
+    moveShape(shape: DzShape, index?: number): DzError;
+
+    /**
+     * Removes all the modifiers from the modifier stack.
+     * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
+     */
+    removeAllModifiers(): DzError;
+
+    /**
+     * Remove all shapes from this object.
+     * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
+     */
+    removeAllShapes(): DzError;
+
+    /**
+     * Removes a modifier from the modifier stack.
+     * @param modifier DzModifier - The modifier to remove from this object's modifier stack.
+     * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
+     */
+    removeModifier(modifier: DzModifier): DzError;
+
+    /**
+     * Remove a shape from this object.
+     * @param index number - The index of the shape to remove from this object's list of possible shapes.
+     * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
+     */
+    removeShape(index: number): DzError;
+
+    /* Signals */
+
+    /**
+     * Emitted when a modifier is about to be added to this object.
+     * @param mod DzModifier - The modifier that is about to be added to the object.
+     */
+    aboutToAddModifier: ISignal<DzModifier>;
+
+    /**
+     * Emitted when this object is about to be deleted.
+     */
+    aboutToDelete: ISignal<void>;
+
+    /**
+     * Emitted when the vertex mesh for this object is about to be finalized.
+     * @param mesh DzVertexMesh - The vertex mesh about to be finalized.
+     */
+    aboutToFinalize: ISignal<DzVertexMesh>;
+
+    /**
+     * Emitted when the cached geometry for this object has been finalized.
+     */
+    cachedGeomFinalized: ISignal<void>;
+
+    /**
+     * Emitted when the cached geometry for this object has been invalidated.
+     */
+    cachedGeomInvalidated: ISignal<void>;
+
+    /**
+     * Emitted when the cached geometry for this object has been updated.
+     */
+    cachedGeomUpdated: ISignal<void>;
+
+    /**
+     * Emitted when the cached topology for this object has changed.
+     */
+    cachedTopologyChanged: ISignal<void>;
+
+    /**
+     * Emitted when the current shape is swapped out.
+     */
+    currentShapeSwitched: ISignal<void>;
+
+    /**
+     * Emitted when this object needs to be redrawn.
+     */
+    drawnDataChanged: ISignal<void>;
+
+    /**
+     * Emitted when the material list for the current shape changes.
+     */
+    materialListChanged: ISignal<void>;
+
+    /**
+     * Emitted when the material selection state for the current shape changes.
+     */
+    materialSelectionChanged: ISignal<void>;
+
+    /**
+     * Emitted when the material selection state for the current shape changes.
+     */
+    materialSelectionSetsChanged: ISignal<void>;
+
+    /**
+     * Emitted when a modifier is added to this object.
+     * @param mod DzModifier - The modifier added to the object.
+     */
+    modifierAdded: ISignal<DzModifier>;
+
+    /**
+     * Emitted when a modifier is removed from this object.
+     * @param mod DzModifier - The modifier removed from the object.
+     */
+    modifierRemoved: ISignal<DzModifier>;
+
+    /**
+     * Emitted when a modifier is added to or removed from this object.
+     */
+    modifierStackChanged: ISignal<void>;
+
+    /**
+     * Emitted when a shape is added to this object.
+     * @param shape DzShape - The shape added to the object.
+     */
+    shapeAdded: ISignal<DzShape>;
+
+    /**
+     * Emitted when a shape is removed from this object.
+     * @param shape DzShape - The shape removed from the object.
+     */
+    shapeRemoved: ISignal<DzShape>;
+
+    /**
+     * Emitted when the topology of the current shape for this object has changed.
+     */
+    shapeTopologyChanged: ISignal<void>;
+
+    /**
+     * Emitted when the current uv set for the object has changed.
+     */
+    uvsChanged: ISignal<void>;
+
+    /* Undocumented Augment Members */
+
+    /** @undocumented */
+    createElementCopy(p0: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    createElementCopySignal(p0: DzElementDuplicateContext): any;
+
+    /** @undocumented */
+    getName(): any;
+
+    /** @undocumented */
+    iskindof(p0: string): any;
+
+    /** @undocumented */
+    setAllPrivatePropertyAttributesAsDefinitions(): any;
+
+    /** @undocumented */
+    setAllPropertyAttributesAsDefinitions(): any;
 }

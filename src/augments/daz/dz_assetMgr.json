@@ -1,0 +1,419 @@
+{
+  "className": "DzAssetMgr",
+  "members": [
+    {
+      "name": "markFoldersContainingNewContentChanged",
+      "signature": "markFoldersContainingNewContentChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getMetaHost",
+      "signature": "getMetaHost(): QString;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setCompatibilityBase",
+      "signature": "setCompatibilityBase(uri: QString, compatibility: DzDBCompatibilityBaseTable, isVendor: boolean): boolean;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setTopLevelPoserNameOnContainer",
+      "signature": "setTopLevelPoserNameOnContainer(name: QString, cont: DzFolderAssetContainer): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "updateUserMetadata",
+      "signature": "updateUserMetadata(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getMaxChunkSize",
+      "signature": "getMaxChunkSize(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getMarkFoldersContainingNewContent",
+      "signature": "getMarkFoldersContainingNewContent(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setMarkFoldersContainingNewContent",
+      "signature": "setMarkFoldersContainingNewContent(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setMaxChunkSize",
+      "signature": "setMaxChunkSize(maxSize: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findTypeRowID",
+      "signature": "findTypeRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "findTypeRowID",
+      "signature": "findTypeRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "findTypeRowID",
+      "signature": "findTypeRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "createTypeWithRowID",
+      "signature": "createTypeWithRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getTypeByRowID",
+      "signature": "getTypeByRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "findCompatibilityBaseTable",
+      "signature": "findCompatibilityBaseTable(plat: QString, create: boolean): DzDBCompatibilityBaseTable;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "findCompatibilityBaseTable",
+      "signature": "findCompatibilityBaseTable(plat: QString, create: boolean): DzDBCompatibilityBaseTable;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "findCompatibilityBaseRowID",
+      "signature": "findCompatibilityBaseRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "findCompatibilityBaseRowID",
+      "signature": "findCompatibilityBaseRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "createCompatibilityBaseWithRowID",
+      "signature": "createCompatibilityBaseWithRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getCompatibilityBaseByRowID",
+      "signature": "getCompatibilityBaseByRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "refreshBasePaths",
+      "signature": "refreshBasePaths(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getBasePaths",
+      "signature": "getBasePaths(): String[];",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "findBasePathID",
+      "signature": "findBasePathID(basePath: QString, create: boolean): number;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "findBasePathID",
+      "signature": "findBasePathID(basePath: QString, create: boolean): number;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "createBasePath",
+      "signature": "createBasePath(basePath: QString): number;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getBasePath",
+      "signature": "getBasePath(id: number): QString;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeAndCleanBasePath",
+      "signature": "removeAndCleanBasePath(id: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findBasePathRowID",
+      "signature": "findBasePathRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "findBasePathRowID",
+      "signature": "findBasePathRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "createBasePathWithRowID",
+      "signature": "createBasePathWithRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getBasePathByRowID",
+      "signature": "getBasePathByRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "removeAndCleanBasePathByRowID",
+      "signature": "removeAndCleanBasePathByRowID(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getUnMappedBasePaths",
+      "signature": "getUnMappedBasePaths(): String[];",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "stopDBSearch",
+      "signature": "stopDBSearch(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "stopProductSyncThread",
+      "signature": "stopProductSyncThread(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "stopSearchForFileAssociations",
+      "signature": "stopSearchForFileAssociations(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "stopStoreSearch",
+      "signature": "stopStoreSearch(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, opts: number, finishObj: QObject): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, categories: String[], compatibilityBases: String[]): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, opts: number, finishObj: QObject): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, categories: String[], compatibilityBases: String[]): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, opts: number, finishObj: QObject): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, categories: String[], compatibilityBases: String[]): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, opts: number, finishObj: QObject): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, categories: String[], compatibilityBases: String[]): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, opts: number, finishObj: QObject): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, categories: String[], compatibilityBases: String[]): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, opts: number, finishObj: QObject): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, categories: String[], compatibilityBases: String[]): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, opts: number, finishObj: QObject): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "searchDB",
+      "signature": "searchDB(str: QString, categories: String[], compatibilityBases: String[]): DzSearchContainerPtr;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "productSearchDB",
+      "signature": "productSearchDB(str: QString, categories: String[]): DzProductHolderContainerPtr;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "productSearchDB",
+      "signature": "productSearchDB(str: QString, categories: String[]): DzProductHolderContainerPtr;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "productSearchDB",
+      "signature": "productSearchDB(str: QString, categories: String[]): DzProductHolderContainerPtr;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "storeSearch",
+      "signature": "storeSearch(str: QString, types: String[]): DzProductHolderContainerPtr;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "storeSearch",
+      "signature": "storeSearch(str: QString, types: String[]): DzProductHolderContainerPtr;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "storeSearch",
+      "signature": "storeSearch(str: QString, types: String[]): DzProductHolderContainerPtr;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "markAllContentSeen",
+      "signature": "markAllContentSeen(notify: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "markAllContentSeen",
+      "signature": "markAllContentSeen(notify: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "syncFileMetadata",
+      "signature": "syncFileMetadata(relativeFilePaths: String[], prepend: boolean): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "syncFileMetadata",
+      "signature": "syncFileMetadata(relativeFilePaths: String[], prepend: boolean): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "prependToMetadataSyncList",
+      "signature": "prependToMetadataSyncList(productGuid: QString): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "prependToMetadataSyncList",
+      "signature": "prependToMetadataSyncList(productGuidList: String[]): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "prependToMetadataSyncList",
+      "signature": "prependToMetadataSyncList(productGuid: QString): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "prependToMetadataSyncList",
+      "signature": "prependToMetadataSyncList(productGuidList: String[]): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "processSyncList",
+      "signature": "processSyncList(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getBaseAndRelativePath",
+      "signature": "getBaseAndRelativePath(absolutePath: QString, rPath: QString, basePath: QString): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "findCategoryAndAssetFromShortFilename",
+      "signature": "findCategoryAndAssetFromShortFilename(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "convertFromValentina",
+      "signature": "convertFromValentina(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

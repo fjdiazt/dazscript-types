@@ -1,0 +1,41 @@
+{
+  "className": "DzObject",
+  "members": [
+    {
+      "name": "createElementCopy",
+      "signature": "createElementCopy(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "createElementCopySignal",
+      "signature": "createElementCopySignal(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getName",
+      "signature": "getName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setAllPrivatePropertyAttributesAsDefinitions",
+      "signature": "setAllPrivatePropertyAttributesAsDefinitions(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setAllPropertyAttributesAsDefinitions",
+      "signature": "setAllPropertyAttributesAsDefinitions(): any;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

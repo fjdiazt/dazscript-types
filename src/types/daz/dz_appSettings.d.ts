@@ -1,46 +1,153 @@
-declare class DzAppSettings {
-    constructor();
-    constructor(startPath: string)
+/**
+ * Provides cross-platform support for persistent application settings.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/appsettings_dz
+ */
+declare class DzAppSettings extends DzBase {
 
-    name: string;	//
-    objectName: string;	//
-    className(): any;
-    className(): any;
-    containsValue(p0: string): any;
-    deleteLater(): any;
-    destroyed(): void;
-    destroyed(p0: QObject): void;
-    getBoolValue(p0: string): any;
-    getBoolValue(p0: string, p1: boolean): any;
-    getBoolValue(p0: string, p1: boolean, p2: boolean): any;
-    getColorValue(p0: string): any;
-    getColorValue(p0: string, p1: Color): any;
-    getColorValue(p0: string, p1: Color, p2: boolean): any;
-    getFloatColorValue(p0: string): any;
-    getFloatColorValue(p0: string, p1: DzFloatColor): any;
-    getFloatColorValue(p0: string, p1: DzFloatColor, p2: boolean): any;
-    getFloatValue(p0: string): any;
-    getFloatValue(p0: string, p1: number): any;
-    getFloatValue(p0: string, p1: number, p2: boolean): any;
-    getIntValue(p0: string): any;
-    getIntValue(p0: string, p1: number): any;
-    getIntValue(p0: string, p1: number, p2: boolean): any;
-    getName(): any;
-    getStringValue(p0: string): any;
-    getStringValue(p0: string, p1: string): any;
-    getStringValue(p0: string, p1: string, p2: boolean): any;
-    inherits(): any;
-    inherits(p0: string): any;
-    iskindof(p0: string): any;
-    makePersistent(): any;
-    nameChanged(p0: string): void;
+    /* Constructors */
+
+    constructor();
+
+    /**
+     * @param startPath string
+     */
+    constructor(startPath: string);
+
+    /* Methods */
+
+    /**
+     * @param key string - The name of the value to check.
+     * @returns boolean true if this settings contains the named value, otherwise false.
+     */
+    containsValue(key: string): boolean; // Boolean
+
+    /**
+     * Read a boolean value from the given key.
+     * @param key string - The name of the value to read.
+     * @param def boolean - Default value - this value is returned if the named value fails to be read.
+     * @returns boolean The value of the requested key.
+     */
+    getBoolValue(key: string, def?: boolean): boolean; // Boolean
+
+    /**
+     * Read a color value from the given key.
+     * @param key string - The name of the value to read.
+     * @param def Color - Default value - this value is returned if the named value fails to be read.
+     * @returns Color The value of the requested key.
+     */
+    getColorValue(key: string, def?: Color): Color;
+
+    /**
+     * Read a float color value from the given key.
+     * @param key string - The name of the value to read.
+     * @param def DzFloatColor - Default value - this value is returned if the named value fails to be read.
+     * @returns DzFloatColor The value of the requested key.
+     */
+    getFloatColorValue(key: string, def?: DzFloatColor): DzFloatColor;
+
+    /**
+     * Read a floating point value from the given key.
+     * @param key string - The name of the value to read.
+     * @param def number - Default value - this value is returned if the named value fails to be read.
+     * @returns number The value of the requested key.
+     */
+    getFloatValue(key: string, def?: number): number; // Number
+
+    /**
+     * Read a integer value from the given key.
+     * @param key string - The name of the value to read.
+     * @param def number - Default value - this value is returned if the named value fails to be read.
+     * @returns number The value of the requested key.
+     */
+    getIntValue(key: string, def?: number): number; // Number
+
+    /**
+     * Read a string value from the given key.
+     * @param key string - The name of the value to read.
+     * @param def string - Default value - this value is returned if the named value fails to be read.
+     * @returns string The value of the requested key.
+     */
+    getStringValue(key: string, def?: string): string; // String
+
+    /**
+     * Pops a temporary key path off the top of the stack.
+     */
     popPath(): void;
+
+    /**
+     * Sets the current key path temporarily to the given path; popPath() can be called to remove this path.
+     * @param path string - The sub-path to add to the current key path.
+     */
     pushPath(path: string): void;
-    removeValue(p0: string): any;
-    setBoolValue(p0: string, p1: boolean): any;
-    setColorValue(p0: string, p1: Color): any;
-    setFloatColorValue(p0: string, p1: DzFloatColor): any;
-    setFloatValue(p0: string, p1: number): any;
-    setIntValue(p0: string, p1: number): any;
-    setStringValue(p0: string, p1: string): any;
+
+    /**
+     * Removes a key (and all values, sub-keys/ by name.
+     * @param key string - The name of the key to remove.
+     * @returns boolean
+     * @since 4.15.0.30
+     */
+    removeKey(key: string): boolean; // Boolean
+
+    /**
+     * Removes a setting by name.
+     * @param key string - The name of the key to remove.
+     * @returns boolean true if the key/value existed and was successfully removed, otherwise false.
+     */
+    removeValue(key: string): boolean; // Boolean
+
+    /**
+     * Sets a key with a boolean value.
+     * @param key string - The name of the key to write.
+     * @param setting boolean - The value to set.
+     * @returns boolean true if the key/value was successfully set, otherwise false.
+     */
+    setBoolValue(key: string, setting: boolean): boolean; // Boolean
+
+    /**
+     * Sets a key with a color value.
+     * @param key string - The name of the key to write.
+     * @param setting Color - The value to set.
+     * @returns boolean true if the key/value was successfully set, otherwise false.
+     */
+    setColorValue(key: string, setting: Color): boolean; // Boolean
+
+    /**
+     * Sets a key with a float color value.
+     * @param key string - The name of the key to write.
+     * @param setting DzFloatColor - The value to set.
+     * @returns boolean true if the key/value was successfully set, otherwise false.
+     */
+    setFloatColorValue(key: string, setting: DzFloatColor): boolean; // Boolean
+
+    /**
+     * Sets a key with a floating point value.
+     * @param key string - The name of the key to write.
+     * @param setting number - The value to set.
+     * @returns boolean true if the key/value was successfully set, otherwise false.
+     */
+    setFloatValue(key: string, setting: number): boolean; // Boolean
+
+    /**
+     * Sets a key with a integer value.
+     * @param key string - The name of the key to write.
+     * @param setting number - The value to set.
+     * @returns boolean true if the key/value was successfully set, otherwise false.
+     */
+    setIntValue(key: string, setting: number): boolean; // Boolean
+
+    /**
+     * Sets a key with a string value.
+     * @param key string - The name of the key to write.
+     * @param setting string - The value to set.
+     * @returns boolean true if the key/value was successfully set, otherwise false.
+     */
+    setStringValue(key: string, setting: string): boolean; // Boolean
+
+    /* Undocumented Augment Members */
+
+    /** @undocumented */
+    getName(): any;
+
+    /** @undocumented */
+    iskindof(p0: string): any;
 }

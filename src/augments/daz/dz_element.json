@@ -1,0 +1,227 @@
+{
+  "className": "DzElement",
+  "members": [
+    {
+      "name": "addElementChild",
+      "signature": "addElementChild(child: DzElement): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addPrivatePropertyInternal",
+      "signature": "addPrivatePropertyInternal(newprop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addPrivatePropertyToList",
+      "signature": "addPrivatePropertyToList(prop: DzProperty): DzError;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addPropertyInternal",
+      "signature": "addPropertyInternal(newprop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addPropertyToList",
+      "signature": "addPropertyToList(prop: DzProperty): DzError;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "defaultPropertyGroupTree",
+      "signature": "defaultPropertyGroupTree(): DzPropertyGroupTree;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "duplicateMissingCustomData",
+      "signature": "duplicateMissingCustomData(tgt: DzElement): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingPrivateProperties",
+      "signature": "duplicateMissingPrivateProperties(tgt: DzElement): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingProperties",
+      "signature": "duplicateMissingProperties(tgt: DzElement): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "elementChildIterator",
+      "signature": "elementChildIterator(): DzElementListIterator;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getIsPropertyTreeOwnedByParent",
+      "signature": "getIsPropertyTreeOwnedByParent(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "insertPrivatePropertyInList",
+      "signature": "insertPrivatePropertyInList(index: number, prop: DzProperty): DzError;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "insertPropertyInList",
+      "signature": "insertPropertyInList(index: number, prop: DzProperty): DzError;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isDataItemNameUnique",
+      "signature": "isDataItemNameUnique(dataName: QString, makeUnique: boolean): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isPrivatePropertyNameUnique",
+      "signature": "isPrivatePropertyNameUnique(name: QString, makeUnique: boolean): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isPropertyNameUnique",
+      "signature": "isPropertyNameUnique(name: QString, makeUnique: boolean): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "privatePropertyListIterator",
+      "signature": "privatePropertyListIterator(): DzPropertyListIterator;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "propertyListIterator",
+      "signature": "propertyListIterator(): DzPropertyListIterator;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "regroupPrivateProperties",
+      "signature": "regroupPrivateProperties(tree: DzPropertyGroupTree): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "regroupProperties",
+      "signature": "regroupProperties(tree: DzPropertyGroupTree): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeElementChild",
+      "signature": "removeElementChild(child: DzElement): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setElementParent",
+      "signature": "setElementParent(elem: DzElement, regroup: boolean): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setIsPropertyTreeOwnedByParent",
+      "signature": "setIsPropertyTreeOwnedByParent(onoff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getElementName",
+      "signature": "getElementName(): QString;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "paste",
+      "signature": "paste(elem: DzElement, contentTypes: String[]): DzError;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicate",
+      "signature": "duplicate(owner: DzElement): DzElementData;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "writeDataItem",
+      "signature": "writeDataItem(dataItem: DzElementData, io: any): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "writeScene",
+      "signature": "writeScene(io: any): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "shouldWriteProperty",
+      "signature": "shouldWriteProperty(prop: DzProperty): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "applyToProperty",
+      "signature": "applyToProperty(prop: DzProperty, opts: DzFileIOSettings): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getPropertyName",
+      "signature": "getPropertyName(): QString;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setPropertyName",
+      "signature": "setPropertyName(name: QString): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "writeProperty",
+      "signature": "writeProperty(file: DzAssetOutFile, io: any, prop: DzProperty): boolean;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "writePropertyValue",
+      "signature": "writePropertyValue(file: DzAssetOutFile, io: any, prop: DzProperty): boolean;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "applyToElement",
+      "signature": "applyToElement(elem: DzElement, checkPrivateProperties: boolean, opts: DzFileIOSettings): boolean;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "writeElementProperties",
+      "signature": "writeElementProperties(file: DzAssetOutFile, io: any, elem: DzElement, filter: DzElementPropertyIOFilter): boolean;",
+      "kind": "method",
+      "paramCount": 4
+    },
+    {
+      "name": "writeProperties",
+      "signature": "writeProperties(file: DzAssetOutFile, io: any, propIt: DzPropertyListIterator, filter: DzElementPropertyIOFilter): boolean;",
+      "kind": "method",
+      "paramCount": 4
+    }
+  ]
+}

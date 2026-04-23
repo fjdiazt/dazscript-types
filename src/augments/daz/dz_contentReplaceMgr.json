@@ -1,0 +1,23 @@
+{
+  "className": "DzContentReplaceMgr",
+  "members": [
+    {
+      "name": "getReplaceNodes",
+      "signature": "getReplaceNodes(replaceNodes: DzNode[]): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getPotentialReplaceNodes",
+      "signature": "getPotentialReplaceNodes(potentialReplaceNodes: DzNode[], baseNode: DzNode): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getDefaultReplaceNodes",
+      "signature": "getDefaultReplaceNodes(defaultReplaceNodes: DzNode[], baseNode: DzNode): void;",
+      "kind": "method",
+      "paramCount": 2
+    }
+  ]
+}

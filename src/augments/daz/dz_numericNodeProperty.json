@@ -1,0 +1,23 @@
+{
+  "className": "DzNumericNodeProperty",
+  "members": [
+    {
+      "name": "redirectNodes",
+      "signature": "redirectNodes(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitNodeChanged",
+      "signature": "emitNodeChanged(node: DzNode): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitInvalidWithoutNodeChanged",
+      "signature": "emitInvalidWithoutNodeChanged(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

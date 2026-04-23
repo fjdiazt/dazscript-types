@@ -1,0 +1,137 @@
+{
+  "className": "DzSelectionGroup",
+  "members": [
+    {
+      "name": "name",
+      "signature": "name: string;\t// MyFacetSlectionGroup",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "objectName",
+      "signature": "objectName: string;\t// MyFacetSlectionGroup",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "addIndex",
+      "signature": "addIndex(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addSortedIndex",
+      "signature": "addSortedIndex(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "className",
+      "signature": "className(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "className",
+      "signature": "className(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "clear",
+      "signature": "clear(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "count",
+      "signature": "count(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "deleteLater",
+      "signature": "deleteLater(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(p0: QObject): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findIndex",
+      "signature": "findIndex(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getIndex",
+      "signature": "getIndex(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getMaxIndex",
+      "signature": "getMaxIndex(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getName",
+      "signature": "getName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "inherits",
+      "signature": "inherits(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "inherits",
+      "signature": "inherits(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "makePersistent",
+      "signature": "makePersistent(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "nameChanged",
+      "signature": "nameChanged(p0: string): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeComponent",
+      "signature": "removeComponent(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeIndex",
+      "signature": "removeIndex(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

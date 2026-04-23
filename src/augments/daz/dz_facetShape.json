@@ -1,0 +1,575 @@
+{
+  "className": "DzFacetShape",
+  "members": [
+    {
+      "name": "addEdgeSelectionGroup",
+      "signature": "addEdgeSelectionGroup(p0: DzSelectionGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addFacetSelectionGroup",
+      "signature": "addFacetSelectionGroup(p0: DzSelectionGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addMaterialType",
+      "signature": "addMaterialType(p0: QString, p1: QString): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "addRigidityGroup",
+      "signature": "addRigidityGroup(p0: DzRigidityGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addShapeInstance",
+      "signature": "addShapeInstance(p0: DzAbstractShapeInstance): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addVertexSelectionGroup",
+      "signature": "addVertexSelectionGroup(p0: DzSelectionGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearEdgeSelectionGroup",
+      "signature": "clearEdgeSelectionGroup(p0: DzSelectionGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearFacetSelectionGroup",
+      "signature": "clearFacetSelectionGroup(p0: DzSelectionGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearMaterialTypes",
+      "signature": "clearMaterialTypes(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearVertexSelectionGroup",
+      "signature": "clearVertexSelectionGroup(p0: DzSelectionGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "createElementCopy",
+      "signature": "createElementCopy(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "createElementCopySignal",
+      "signature": "createElementCopySignal(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "createShapeFromGroup",
+      "signature": "createShapeFromGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "doDuplicateElement",
+      "signature": "doDuplicateElement(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "doMergeElement",
+      "signature": "doMergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateElement",
+      "signature": "duplicateElement(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateElementSignal",
+      "signature": "duplicateElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateMissingCustomData",
+      "signature": "duplicateMissingCustomData(p0: DzElement): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingCustomDataWithContext",
+      "signature": "duplicateMissingCustomDataWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateMissingPrivateProperties",
+      "signature": "duplicateMissingPrivateProperties(p0: DzElement): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingPrivatePropertiesWithContext",
+      "signature": "duplicateMissingPrivatePropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateMissingProperties",
+      "signature": "duplicateMissingProperties(p0: DzElement): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingPropertiesWithContext",
+      "signature": "duplicateMissingPropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "edgeSelectionChanged",
+      "signature": "edgeSelectionChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "edgeSelectionGroupListChanged",
+      "signature": "edgeSelectionGroupListChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitMaterialListChanged",
+      "signature": "emitMaterialListChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "facetSelectionChanged",
+      "signature": "facetSelectionChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "facetSelectionGroupListChanged",
+      "signature": "facetSelectionGroupListChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "findAssemblyMaterialIndex",
+      "signature": "findAssemblyMaterialIndex(p0: DzMaterial): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findEdgeSelectionGroup",
+      "signature": "findEdgeSelectionGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findEdgeSelectionGroup",
+      "signature": "findEdgeSelectionGroup(p0: QString, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "findFacetSelectionGroup",
+      "signature": "findFacetSelectionGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findFacetSelectionGroup",
+      "signature": "findFacetSelectionGroup(p0: QString, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "findLeafRegion",
+      "signature": "findLeafRegion(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findRigidityGroup",
+      "signature": "findRigidityGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findSimulationSettingsProvider",
+      "signature": "findSimulationSettingsProvider(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findVertexSelectionGroup",
+      "signature": "findVertexSelectionGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findVertexSelectionGroup",
+      "signature": "findVertexSelectionGroup(p0: QString, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "geomTopologyChanged",
+      "signature": "geomTopologyChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "geometryRegionChanged",
+      "signature": "geometryRegionChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "geometryRegionSelectionChanged",
+      "signature": "geometryRegionSelectionChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getAssemblyMaterial",
+      "signature": "getAssemblyMaterial(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getEdgeSelectionGroup",
+      "signature": "getEdgeSelectionGroup(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getFacetSelectionGroup",
+      "signature": "getFacetSelectionGroup(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getLeafRegion",
+      "signature": "getLeafRegion(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getMaterialSelectionSets",
+      "signature": "getMaterialSelectionSets(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getMaterialTypes",
+      "signature": "getMaterialTypes(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getRigidityGroup",
+      "signature": "getRigidityGroup(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getVertexSelectionGroup",
+      "signature": "getVertexSelectionGroup(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "hideProperties",
+      "signature": "hideProperties(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isDataItemNameUnique",
+      "signature": "isDataItemNameUnique(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isDataItemNameUnique",
+      "signature": "isDataItemNameUnique(p0: QString, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isPrivatePropertyNameUnique",
+      "signature": "isPrivatePropertyNameUnique(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isPrivatePropertyNameUnique",
+      "signature": "isPrivatePropertyNameUnique(p0: QString, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isPropertyNameUnique",
+      "signature": "isPropertyNameUnique(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isPropertyNameUnique",
+      "signature": "isPropertyNameUnique(p0: QString, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "materialSelectionSetsChanged",
+      "signature": "materialSelectionSetsChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "materialTypesChanged",
+      "signature": "materialTypesChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "mergeElement",
+      "signature": "mergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "mergeElementSignal",
+      "signature": "mergeElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "moveGeometryRegion",
+      "signature": "moveGeometryRegion(p0: DzShape): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "prefixPropertyLabels",
+      "signature": "prefixPropertyLabels(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "rebuildBaseMap",
+      "signature": "rebuildBaseMap(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "remapMaterials",
+      "signature": "remapMaterials(p0: DzIndexChangeMap): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "remappingForTopologyChange",
+      "signature": "remappingForTopologyChange(p0: DzIndexChangeSet): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeEdgeSelectionGroup",
+      "signature": "removeEdgeSelectionGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeEdgeSelectionGroup",
+      "signature": "removeEdgeSelectionGroup(p0: DzSelectionGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeEdgeSelectionGroup",
+      "signature": "removeEdgeSelectionGroup(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeFacetSelectionGroup",
+      "signature": "removeFacetSelectionGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeFacetSelectionGroup",
+      "signature": "removeFacetSelectionGroup(p0: DzSelectionGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeFacetSelectionGroup",
+      "signature": "removeFacetSelectionGroup(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeMaterialType",
+      "signature": "removeMaterialType(p0: QString, p1: QString): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "removeRigidityGroup",
+      "signature": "removeRigidityGroup(p0: DzRigidityGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeShapeInstance",
+      "signature": "removeShapeInstance(p0: DzAbstractShapeInstance): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeSimulationSettingsProvider",
+      "signature": "removeSimulationSettingsProvider(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeVertexSelectionGroup",
+      "signature": "removeVertexSelectionGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeVertexSelectionGroup",
+      "signature": "removeVertexSelectionGroup(p0: DzSelectionGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeVertexSelectionGroup",
+      "signature": "removeVertexSelectionGroup(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "rigidityGroupListChanged",
+      "signature": "rigidityGroupListChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "rigidityMapChanged",
+      "signature": "rigidityMapChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "rigidityWeightMapChanged",
+      "signature": "rigidityWeightMapChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "selectionGroupListChanged",
+      "signature": "selectionGroupListChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setFacetMesh",
+      "signature": "setFacetMesh(p0: DzFacetMesh): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setFacetsForNodeVisibility",
+      "signature": "setFacetsForNodeVisibility(p0: DzNode, p1: DzFacetMesh, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setGeometryRegion",
+      "signature": "setGeometryRegion(p0: DzGeometryRegion): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGeometryRegionLeafSelection",
+      "signature": "setGeometryRegionLeafSelection(p0: DzGeometryRegion): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGeometryRegionSelection",
+      "signature": "setGeometryRegionSelection(p0: DzGeometryRegion): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setMaterialSelectionSets",
+      "signature": "setMaterialSelectionSets(p0: DzMaterialSelectionSet): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setMaterialTypes",
+      "signature": "setMaterialTypes(p0: QString, p1: string[]): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setRigidityMap",
+      "signature": "setRigidityMap(p0: DzWeightMap): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "simulationProviderListChanged",
+      "signature": "simulationProviderListChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateMaterialTypesToNewName",
+      "signature": "updateMaterialTypesToNewName(p0: QString, p1: QString): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "updateSubDEnabled",
+      "signature": "updateSubDEnabled(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "vertexSelectionGroupListChanged",
+      "signature": "vertexSelectionGroupListChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

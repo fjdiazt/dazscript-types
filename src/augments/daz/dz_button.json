@@ -1,0 +1,29 @@
+{
+  "className": "DzButton",
+  "members": [
+    {
+      "name": "autoExclusive",
+      "signature": "autoExclusive: boolean; // false",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "icon",
+      "signature": "icon: QObject; // QVariant(QIcon)",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "iconSize",
+      "signature": "iconSize: QSizeWrapper; // [object Object]",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "shortcut",
+      "signature": "shortcut: QObject; //",
+      "kind": "property",
+      "paramCount": 0
+    }
+  ]
+}

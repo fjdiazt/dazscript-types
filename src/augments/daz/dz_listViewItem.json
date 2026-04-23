@@ -1,0 +1,11 @@
+{
+  "className": "DzListViewItem",
+  "members": [
+    {
+      "name": "pixmap",
+      "signature": "pixmap(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

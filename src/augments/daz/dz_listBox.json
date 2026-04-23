@@ -1,0 +1,41 @@
+{
+  "className": "DzListBox",
+  "members": [
+    {
+      "name": "ensureCurrentVisible",
+      "signature": "ensureCurrentVisible(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "clearSelection",
+      "signature": "clearSelection(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "selectAll",
+      "signature": "selectAll(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "invertSelection",
+      "signature": "invertSelection(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "sort",
+      "signature": "sort(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "sort",
+      "signature": "sort(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

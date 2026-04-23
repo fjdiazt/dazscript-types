@@ -1,0 +1,41 @@
+{
+  "className": "DzObjImporter",
+  "members": [
+    {
+      "name": "iskindof",
+      "signature": "iskindof(kind: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getName",
+      "signature": "getName(): string;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setLoadFilter",
+      "signature": "setLoadFilter(filter: DzFileLoadFilter): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getFileLoadFilter",
+      "signature": "getFileLoadFilter(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "addNodetoFilter",
+      "signature": "addNodetoFilter(node: DzNode): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "finishFilter",
+      "signature": "finishFilter(): any;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "className": "DzFloatColorProperty",
+  "members": [
+    {
+      "name": "emitAnimationBlendModeChanged",
+      "signature": "emitAnimationBlendModeChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitAutoFollowTargetUriChanged",
+      "signature": "emitAutoFollowTargetUriChanged(p0: DzUri): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitCanAnimateChanged",
+      "signature": "emitCanAnimateChanged(p0: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitCanAutoFollowChanged",
+      "signature": "emitCanAutoFollowChanged(p0: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitClampedChanged",
+      "signature": "emitClampedChanged(p0: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitCurrentValueChanged",
+      "signature": "emitCurrentValueChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitDefaultMapGammaChanged",
+      "signature": "emitDefaultMapGammaChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitDefaultMapTextureTypeChanged",
+      "signature": "emitDefaultMapTextureTypeChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitEditFinished",
+      "signature": "emitEditFinished(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitIsManipulatorChanged",
+      "signature": "emitIsManipulatorChanged(p0: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitIsMappableChanged",
+      "signature": "emitIsMappableChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitIsUserPropertyChanged",
+      "signature": "emitIsUserPropertyChanged(p0: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitKeySelectionChanged",
+      "signature": "emitKeySelectionChanged(p0: DzTimeRange): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitLinked",
+      "signature": "emitLinked(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitLockStateChanged",
+      "signature": "emitLockStateChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitMapChanged",
+      "signature": "emitMapChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitMinMaxChanged",
+      "signature": "emitMinMaxChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitOverridingControllersChanged",
+      "signature": "emitOverridingControllersChanged(p0: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitRemoved",
+      "signature": "emitRemoved(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitTextureModifierChanged",
+      "signature": "emitTextureModifierChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitTextureModifierFlagsChanged",
+      "signature": "emitTextureModifierFlagsChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitUnlinked",
+      "signature": "emitUnlinked(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitValueChanged",
+      "signature": "emitValueChanged(p0: DzTimeRange): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getEmitValueChangedOnSceneClear",
+      "signature": "getEmitValueChangedOnSceneClear(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getFloatMinMax",
+      "signature": "getFloatMinMax(p0: number, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getFloatMinMax",
+      "signature": "getFloatMinMax(p0: number, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getGroupOnlyPath",
+      "signature": "getGroupOnlyPath(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getKeyIndexRange",
+      "signature": "getKeyIndexRange(p0: DzTimeRange, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getName",
+      "signature": "getName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getValueAsDouble",
+      "signature": "getValueAsDouble(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getValueAsDouble",
+      "signature": "getValueAsDouble(p0: DzTime): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "invalidateCacheValue",
+      "signature": "invalidateCacheValue(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isKey",
+      "signature": "isKey(p0: DzTime, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "keysAreClamped",
+      "signature": "keysAreClamped(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setCurrentAttributesAsDefinition",
+      "signature": "setCurrentAttributesAsDefinition(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setFollowListeners",
+      "signature": "setFollowListeners(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setKeyInterpolation",
+      "signature": "setKeyInterpolation(p0: number, p1?: number, p2?: number, p3?: number, p4?: number): any;",
+      "kind": "method",
+      "paramCount": 5
+    },
+    {
+      "name": "toggleKeysAreClamped",
+      "signature": "toggleKeysAreClamped(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

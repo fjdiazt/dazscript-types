@@ -1,0 +1,23 @@
+{
+  "className": "DzBoneBinding",
+  "members": [
+    {
+      "name": "getWeights",
+      "signature": "getWeights(): DzWeightMap;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setBone",
+      "signature": "setBone(bone: DzBone): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setWeights",
+      "signature": "setWeights(weights: DzWeightMap): void;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

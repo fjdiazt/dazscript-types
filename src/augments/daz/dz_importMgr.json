@@ -1,0 +1,11 @@
+{
+  "className": "DzImportMgr",
+  "members": [
+    {
+      "name": "getImporter",
+      "signature": "getImporter(i: number): DzImporter;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

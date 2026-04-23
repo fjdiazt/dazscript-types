@@ -1,0 +1,293 @@
+{
+  "className": "DzTypeAssetContainer",
+  "members": [
+    {
+      "name": "assetRenamed",
+      "signature": "assetRenamed(p0:DzAsset, p1:number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "beginAssetAdd",
+      "signature": "beginAssetAdd(p0:number, p1:number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "beginAssetRemove",
+      "signature": "beginAssetRemove(p0:number, p1:number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "beginChildContainerAdd",
+      "signature": "beginChildContainerAdd(p0:DzAbstractAssetContainer, p1:number, p2:number): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "beginChildContainerRemove",
+      "signature": "beginChildContainerRemove(p0:DzAbstractAssetContainer, p1:number, p2:number): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "childContainerAboutToBeRemoved",
+      "signature": "childContainerAboutToBeRemoved(p0:DzAbstractAssetContainerPtr): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "childContainerRemoved",
+      "signature": "childContainerRemoved(p0:DzAbstractAssetContainerPtr): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearRebuildableAssets",
+      "signature": "clearRebuildableAssets(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "createNewChildContainer",
+      "signature": "createNewChildContainer(p0:string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "deleteLater",
+      "signature": "deleteLater(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(p0:QObject): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "endAssetAdd",
+      "signature": "endAssetAdd(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "endAssetRemove",
+      "signature": "endAssetRemove(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "endChildContainerAdd",
+      "signature": "endChildContainerAdd(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "endChildContainerRemove",
+      "signature": "endChildContainerRemove(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getAsset",
+      "signature": "getAsset(p0:number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getAssets",
+      "signature": "getAssets(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getChildContainer",
+      "signature": "getChildContainer(p0:number): DzTypeAssetContainer;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getChildIconSize",
+      "signature": "getChildIconSize(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getContainerName",
+      "signature": "getContainerName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getIDPath",
+      "signature": "getIDPath(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getIconForStandardCategory",
+      "signature": "getIconForStandardCategory(p0:DzTypeAssetContainer): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getNumAssets",
+      "signature": "getNumAssets(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumChildContainers",
+      "signature": "getNumChildContainers(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getOwner",
+      "signature": "getOwner(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getSmallChildIconSize",
+      "signature": "getSmallChildIconSize(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getSupportFile",
+      "signature": "getSupportFile(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "hasAsset",
+      "signature": "hasAsset(p0:DzAsset): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "hasChildContainers",
+      "signature": "hasChildContainers(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "ignoreAssetConflicts",
+      "signature": "ignoreAssetConflicts(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "initChildren",
+      "signature": "initChildren(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "insertAsset",
+      "signature": "insertAsset(p0:DzAsset): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "insertChildContainer",
+      "signature": "insertChildContainer(p0:DzAbstractAssetContainer): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isFileSystemBased",
+      "signature": "isFileSystemBased(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "moveFromParent",
+      "signature": "moveFromParent(p0:DzAbstractAssetContainer): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeAsset",
+      "signature": "removeAsset(p0:DzAsset): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeAssetOnCut",
+      "signature": "removeAssetOnCut(p0:DzAbstractAssetContainer): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeChildContainer",
+      "signature": "removeChildContainer(p0:DzAbstractAssetContainer): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "rename",
+      "signature": "rename(p0:string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "renameAsset",
+      "signature": "renameAsset(p0:DzAsset, p1:string): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "renameChildContainer",
+      "signature": "renameChildContainer(p0:DzAbstractAssetContainer, p1:string): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setContainerName",
+      "signature": "setContainerName(p0:string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "update",
+      "signature": "update(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateAssets",
+      "signature": "updateAssets(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateChildren",
+      "signature": "updateChildren(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "iconChanged",
+      "signature": "iconChanged(p0:DzAbstractAssetContainer): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "assetIconChanged",
+      "signature": "assetIconChanged(p0:DzAsset): any;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

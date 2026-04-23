@@ -1,0 +1,131 @@
+{
+  "className": "DzAsset",
+  "members": [
+    {
+      "name": "User",
+      "signature": "User: number; // 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "Vendor",
+      "signature": "Vendor: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "UserAndVendor",
+      "signature": "UserAndVendor: number; // 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "objectName",
+      "signature": "objectName: string; //",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "autoKeywords",
+      "signature": "autoKeywords: object; // Angels Secrets Bracelet.duf,Angels Secrets Bracelet,duf,Accessories,Arms,Lower,Angels Secrets Lingerie and Poses for Genesis 3 and 8 Female(s),Val3dart",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "name",
+      "signature": "name: string; //",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "_clone",
+      "signature": "_clone: any;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "_getMethodsNames",
+      "signature": "_getMethodsNames: any;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "className",
+      "signature": "className: any;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "deleteLater",
+      "signature": "deleteLater(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(p0: QObject): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getConstRelativeFilePath",
+      "signature": "getConstRelativeFilePath(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getInstance",
+      "signature": "getInstance(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getMetadata",
+      "signature": "getMetadata(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumInstances",
+      "signature": "getNumInstances(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getPriorityInstance",
+      "signature": "getPriorityInstance(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "inherits",
+      "signature": "inherits: any;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "prioritySet",
+      "signature": "prioritySet(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "removeInstance",
+      "signature": "removeInstance(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setPriority",
+      "signature": "setPriority(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    }
+  ]
+}

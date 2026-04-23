@@ -1,0 +1,47 @@
+{
+  "className": "DzImageMgr",
+  "members": [
+    {
+      "name": "loadLayeredImage",
+      "signature": "loadLayeredImage(filename: QString, img: DzLayeredImage, importerIdx: number): DzError;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "loadLayeredImage",
+      "signature": "loadLayeredImage(filename: QString, img: DzLayeredImage, importerIdx: number): DzError;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "saveLayeredImage",
+      "signature": "saveLayeredImage(filename: QString, image: DzLayeredImage, exporterIdx: number): DzError;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "saveLayeredImage",
+      "signature": "saveLayeredImage(filename: QString, image: DzLayeredImage, exporterIdx: number): DzError;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "findLayerImageFiles",
+      "signature": "findLayerImageFiles(filename: QString): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findLayerImageFile",
+      "signature": "findLayerImageFile(path: QString, askUser: boolean): QString;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "addGLImageToDelete",
+      "signature": "addGLImageToDelete(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

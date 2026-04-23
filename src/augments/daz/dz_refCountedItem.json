@@ -1,0 +1,35 @@
+{
+  "className": "DzRefCountedItem",
+  "members": [
+    {
+      "name": "getRefCount",
+      "signature": "getRefCount(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isShared",
+      "signature": "isShared(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isUnique",
+      "signature": "isUnique(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "ref",
+      "signature": "ref(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "unref",
+      "signature": "unref(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

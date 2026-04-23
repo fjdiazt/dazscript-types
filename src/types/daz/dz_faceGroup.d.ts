@@ -1,35 +1,44 @@
-declare class DzFaceGroup {
-    // Properties
+/**
+ * Represents a list of facet indices from a geometry.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/facegroup_dz
+ */
+declare class DzFaceGroup extends DzRefCountedItem {
+
+    /* Undocumented Augment Members */
+
+    /** @undocumented */
     objectName: string; // rPinky3
+
+    /** @undocumented */
     name: string; // rPinky3
 
-    // Methods
-    //addIndex(p0: number): any;
-    //addIndices(p0: DzIndexList): any;
-    //addSortedIndex(int): any;
+    /** @undocumented */
     className(): any;
-    // clear(): any;
-    // clone(): any;
-    // count(): any;
+
+    /** @undocumented */
     deleteLater(): any;
+
+    /** @undocumented */
     destroyed(): any;
-    // destroyed(QObject): any;
-    // findIndex(int): any;
-    // getIndex(int): any;
+
+    /** @undocumented */
     getMaxIndex(): any;
-    // getMethodsNames: any;
+
+    /** @undocumented */
     getName(): any;
+
+    /** @undocumented */
     getPolylineMembers(): any;
+
+    /** @undocumented */
     inherits(p0: any): any;
-    // insertIndex(int): any;
-    // insertSortedIndex(int): any;
+
+    /** @undocumented */
     iskindof(p0: QString): boolean;
-    // makePersistent(): any;
-    // nameChanged(QString): any;
-    // preSizeArray(int): any;
-    // removeComponent(int): any;
-    // removeIndex(int): any;
-    // removeIndexes(DzIndexList): any;
+
+    /** @undocumented */
     toList(): any;
+
+    /** @undocumented */
     toString(): any;
 }

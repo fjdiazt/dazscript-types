@@ -1,0 +1,77 @@
+{
+  "className": "DzFaceGroup",
+  "members": [
+    {
+      "name": "objectName",
+      "signature": "objectName: string; // rPinky3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "name",
+      "signature": "name: string; // rPinky3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "className",
+      "signature": "className(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "deleteLater",
+      "signature": "deleteLater(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getMaxIndex",
+      "signature": "getMaxIndex(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getName",
+      "signature": "getName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getPolylineMembers",
+      "signature": "getPolylineMembers(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "inherits",
+      "signature": "inherits(p0: any): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0: QString): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "toList",
+      "signature": "toList(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toString",
+      "signature": "toString(): any;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

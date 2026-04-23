@@ -1,0 +1,29 @@
+{
+  "className": "DzPushModifier",
+  "members": [
+    {
+      "name": "createProperties",
+      "signature": "createProperties(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getAssetType",
+      "signature": "getAssetType(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getValueChannel",
+      "signature": "getValueChannel(): DzFloatProperty;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toQObject",
+      "signature": "toQObject(): QObject;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

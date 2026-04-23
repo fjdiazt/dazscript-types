@@ -1,55 +1,76 @@
+/**
+ * A static (non-animatable) string property.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/stringproperty_dz
+ */
 declare class DzStringProperty extends DzProperty {
-    /**
-     * Default Constructor. Creates a non-user property.
-     */
+
+    /* Constructors */
+
     constructor();
 
     /**
-     *
-     * @param name The name of this property.
-     * @param isUserProperty If true, creates a user property; user properties are properties that can be added/deleted by users.
+     * @param name string
+     * @param isUserProperty boolean
      */
     constructor(name: string, isUserProperty: boolean);
 
-    static className(): string;
-    /* Properties */
-
-    emitValueChangedOnSceneClear: boolean;
-
     /* Methods */
-    dynamicallyHiddenChanged(): any; // TODO ;
-    dynamicallyAutoFollowChanged(): any; // TODO ;
-    controllerListChanged(): any; // TODO ;
-    slaveControllerListChanged(): any; // TODO ;
-    aliasListChanged(): any; // TODO ;
+
+    /**
+     * @returns string The default string value of this property.
+     * @since 4.20.0.5
+     */
+    getDefaultValue(): string; // String
+
+    /**
+     * @returns string The string value of this property.
+     */
+    getValue(): string; // String
+
+    /**
+     * Sets the default string value of this property.
+     * @param val string - The string value to set.
+     * @returns boolean
+     * @since 4.20.0.5
+     */
+    setDefaultValue(val: string): boolean; // Boolean
+
+    /**
+     * Sets the string value of this property.
+     * @param val string - The string value to set.
+     * @returns boolean
+     */
+    setValue(val: string): boolean; // Boolean
+
+    /* Undocumented Augment Members */
+
+    /** @undocumented */
     keysAreClamped(): any; // TODO ;
+
+    /** @undocumented */
     setKeysAreClamped(): any; // TODO ;
+
+    /** @undocumented */
     toggleKeysAreClamped(): any; // TODO ;
-    setDynamicallyHidden(): any; // TODO ;
-    setDynamicallyAutoFollow(): any; // TODO ;
-    currentValueIsDefinitionValue(): any; // TODO ;
+
+    /** @undocumented */
     doCopyBaseData(): any; // TODO ;
+
+    /** @undocumented */
     getEmitValueChangedOnSceneClear(): any; // TODO ;
+
+    /** @undocumented */
     setEmitValueChangedOnSceneClear(): any; // TODO ;
-    isDynamicallyHidden(): any; // TODO ;
-    isDynamicallyAutoFollow(): any; // TODO ;
+
+    /** @undocumented */
     emitRemoved(): any; // TODO ;
+
+    /** @undocumented */
     invalidateCacheValue(): any; // TODO ;
-    addValueToSettings(): any; // TODO ;
-    addValueToSettings(): any; // TODO ;
-    setValueFromSettings(): any; // TODO ;
-    setValueFromSettings(): any; // TODO ;
-    addValueToSettings(): any; // TODO ;
-    addValueToSettings(): any; // TODO ;
-    setValueFromSettings(): any; // TODO ;
-    setValueFromSettings(): any; // TODO ;
-    setWidgetClassOverride(): any; // TODO ;
-    getWidgetClassOverride(): any; // TODO ;
-    getWidgetClassOverride(): any; // TODO ;
-    hasWidgetClassOverride(): any; // TODO ;
-    hasWidgetClassOverride(): any; // TODO ;
-    setValue(val: QString): boolean;
-    getValue(): QString;
+
+    /** @undocumented */
     setAdvanceEditorWgtClass(): any; // TODO ;
+
+    /** @undocumented */
     getAdvanceEditorWgtClass(): any; // TODO ;
 }

@@ -1,0 +1,41 @@
+{
+  "className": "DzNodeProperty",
+  "members": [
+    {
+      "name": "changeNode",
+      "signature": "changeNode(node: DzNode): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearobject",
+      "signature": "clearobject(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "propertyChangeNotify",
+      "signature": "propertyChangeNotify(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "showEvent",
+      "signature": "showEvent(e: QShowEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "updateNodeList",
+      "signature": "updateNodeList(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateValue",
+      "signature": "updateValue(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

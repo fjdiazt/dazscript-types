@@ -1,0 +1,29 @@
+{
+  "className": "DzRenderMgr",
+  "members": [
+    {
+      "name": "buildRenderElementsList",
+      "signature": "buildRenderElementsList(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "shutdown",
+      "signature": "shutdown(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitRenderFolderChanged",
+      "signature": "emitRenderFolderChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "postProcessRender",
+      "signature": "postProcessRender(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

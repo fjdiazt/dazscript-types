@@ -1,0 +1,1391 @@
+{
+  "className": "DzProperty",
+  "members": [
+    {
+      "name": "isPrivate",
+      "signature": "isPrivate: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "addAlias",
+      "signature": "addAlias(prop: DzProperty, alias: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "addAlias",
+      "signature": "addAlias(alias: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addAlias",
+      "signature": "addAlias(prop: DzProperty, alias: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "addAlias",
+      "signature": "addAlias(alias: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addSlaveController",
+      "signature": "addSlaveController(control: DzController): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearGroup",
+      "signature": "clearGroup(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "controllerListIterator",
+      "signature": "controllerListIterator(): DzControllerListIterator;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "copyBaseData",
+      "signature": "copyBaseData(prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "definitionLoadFromDAZ",
+      "signature": "definitionLoadFromDAZ(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitCanAnimateChanged",
+      "signature": "emitCanAnimateChanged(enabled: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitCanAutoFollowChanged",
+      "signature": "emitCanAutoFollowChanged(canAutoFollow: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitCurrentValueChanged",
+      "signature": "emitCurrentValueChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitEditFinished",
+      "signature": "emitEditFinished(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitIsManipulatorChanged",
+      "signature": "emitIsManipulatorChanged(isManip: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitIsUserPropertyChanged",
+      "signature": "emitIsUserPropertyChanged(isUserProp: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitKeySelectionChanged",
+      "signature": "emitKeySelectionChanged(range: DzTimeRange): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitLockStateChanged",
+      "signature": "emitLockStateChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitOverridingControllersChanged",
+      "signature": "emitOverridingControllersChanged(overriding: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitValueChanged",
+      "signature": "emitValueChanged(range: DzTimeRange): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "ensurePropertyType",
+      "signature": "ensurePropertyType(prop: DzProperty, srcProp: DzProperty): DzProperty;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getAssetType",
+      "signature": "getAssetType(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getFlags",
+      "signature": "getFlags(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getGroupOnlyPath",
+      "signature": "getGroupOnlyPath(): string;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getKeyIndexRange",
+      "signature": "getKeyIndexRange(iv: DzTimeRange, start: number): number;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getPropertyDefinition",
+      "signature": "getPropertyDefinition(): DzPropertyDefinition;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "insertController",
+      "signature": "insertController(controller: DzController, idx: number): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isKey",
+      "signature": "isKey(t: DzTime, index: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "regroup",
+      "signature": "regroup(tree: DzPropertyGroupTree): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeAlias",
+      "signature": "removeAlias(prop: DzProperty, alias: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "removeSlaveController",
+      "signature": "removeSlaveController(control: DzController): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setCurrentAttributesAsDefinition",
+      "signature": "setCurrentAttributesAsDefinition(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setFlags",
+      "signature": "setFlags(int: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setGroup",
+      "signature": "setGroup(group: DzPropertyGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setIsPrivateProperty",
+      "signature": "setIsPrivateProperty(yesNo: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setOwner",
+      "signature": "setOwner(owner: DzElement): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "slaveControllerListIterator",
+      "signature": "slaveControllerListIterator(): DzControllerListIterator;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toQObject",
+      "signature": "toQObject(): QObject;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toQObject",
+      "signature": "toQObject(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toQObject",
+      "signature": "toQObject(): QObject;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toQObject",
+      "signature": "toQObject(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateControllerState",
+      "signature": "updateControllerState(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateTime",
+      "signature": "updateTime(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "valueIsReplaced",
+      "signature": "valueIsReplaced(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "paste",
+      "signature": "paste(prop: DzProperty): DzError;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addChild",
+      "signature": "addChild(child: DzPropertyGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addProperty",
+      "signature": "addProperty(prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addSibling",
+      "signature": "addSibling(sibling: DzPropertyGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addedChild",
+      "signature": "addedChild(newChild: DzPropertyGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "childListChanged",
+      "signature": "childListChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "collectAllPaths",
+      "signature": "collectAllPaths(paths: String[]): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findChild",
+      "signature": "findChild(name: string): DzPropertyGroup;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findSibling",
+      "signature": "findSibling(name: string): DzPropertyGroup;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getAllPaths",
+      "signature": "getAllPaths(): String[];",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getCollapsed",
+      "signature": "getCollapsed(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getFirstChild",
+      "signature": "getFirstChild(): DzPropertyGroup;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNextSibling",
+      "signature": "getNextSibling(): DzPropertyGroup;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumProperties",
+      "signature": "getNumProperties(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getParent",
+      "signature": "getParent(): DzPropertyGroup;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getProperties",
+      "signature": "getProperties(): DzPropertyListIterator;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getTree",
+      "signature": "getTree(): DzPropertyGroupTree;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "hasProperty",
+      "signature": "hasProperty(label: string, exclude: DzProperty): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "indexOfProperty",
+      "signature": "indexOfProperty(prop: DzProperty): number;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isRegion",
+      "signature": "isRegion(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "moveChildToIndex",
+      "signature": "moveChildToIndex(childName: string, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "movePropertyToIndex",
+      "signature": "movePropertyToIndex(prop: DzProperty, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "movePropertyToIndex",
+      "signature": "movePropertyToIndex(propName: string, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "movePropertyToIndex",
+      "signature": "movePropertyToIndex(curIndex: number, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "movePropertyToIndex",
+      "signature": "movePropertyToIndex(prop: DzProperty, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "movePropertyToIndex",
+      "signature": "movePropertyToIndex(propName: string, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "movePropertyToIndex",
+      "signature": "movePropertyToIndex(curIndex: number, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "movePropertyToIndex",
+      "signature": "movePropertyToIndex(prop: DzProperty, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "movePropertyToIndex",
+      "signature": "movePropertyToIndex(propName: string, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "movePropertyToIndex",
+      "signature": "movePropertyToIndex(curIndex: number, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "parentChanged",
+      "signature": "parentChanged(newParent: DzPropertyGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeChild",
+      "signature": "removeChild(child: DzPropertyGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeProperty",
+      "signature": "removeProperty(prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removedChild",
+      "signature": "removedChild(child: DzPropertyGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setCollapsed",
+      "signature": "setCollapsed(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setParent",
+      "signature": "setParent(parent: DzPropertyGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setTree",
+      "signature": "setTree(tree: DzPropertyGroupTree): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setUniquePropertyLabel",
+      "signature": "setUniquePropertyLabel(prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "sort",
+      "signature": "sort(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "sortGroups",
+      "signature": "sortGroups(sortSibs: boolean): DzPropertyGroup;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "treeChanged",
+      "signature": "treeChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "decode",
+      "signature": "decode(src: QMimeSource, propGroupList: DzPropertyGroup[]): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "decode",
+      "signature": "decode(src: QMimeData, propGroupList: DzPropertyGroup[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "decode",
+      "signature": "decode(src: QMimeSource, propGroupList: DzPropertyGroup[]): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "decode",
+      "signature": "decode(src: QMimeData, propGroupList: DzPropertyGroup[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "encode",
+      "signature": "encode(propGroupList: DzPropertyGroup[]): number[];",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addChild",
+      "signature": "addChild(child: DzPropertyGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "childListChanged",
+      "signature": "childListChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "collectAllPaths",
+      "signature": "collectAllPaths(paths: String[]): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findChild",
+      "signature": "findChild(name: string): DzPropertyGroup;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getAllPaths",
+      "signature": "getAllPaths(): String[];",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getDefaultGroup",
+      "signature": "getDefaultGroup(): DzPropertyGroup;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getFirstChild",
+      "signature": "getFirstChild(): DzPropertyGroup;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getPropertyGroup",
+      "signature": "getPropertyGroup(path: string): DzPropertyGroup;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "moveChildToIndex",
+      "signature": "moveChildToIndex(childName: string, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "removeChild",
+      "signature": "removeChild(child: DzPropertyGroup): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setIsPrivate",
+      "signature": "setIsPrivate(onoff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setOwner",
+      "signature": "setOwner(owner: DzElement): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "sortGroups",
+      "signature": "sortGroups(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "treeChanged",
+      "signature": "treeChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "findPropertyOnNode",
+      "signature": "findPropertyOnNode(propName: string, node: DzNode): DzProperty;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "findPropertyOnNodeByInternalName",
+      "signature": "findPropertyOnNodeByInternalName(internalName: string, node: DzNode): DzProperty;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "findPropertyOnNodeByLabel",
+      "signature": "findPropertyOnNodeByLabel(label: string, node: DzNode): DzProperty;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getErcController",
+      "signature": "getErcController(controlledProp: DzProperty, controllingProp: DzProperty): DzERCLink;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getInternalName",
+      "signature": "getInternalName(prop: DzProperty): string;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getNode",
+      "signature": "getNode(prop: DzProperty): DzNode;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getNodeName",
+      "signature": "getNodeName(prop: DzProperty): string;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getNodeType",
+      "signature": "getNodeType(prop: DzProperty): string;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getPrivatePropertiesOnNode",
+      "signature": "getPrivatePropertiesOnNode(prop: DzProperty, propList: DzProperty[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getPrivatePropertiesOnNode",
+      "signature": "getPrivatePropertiesOnNode(node: DzNode, propList: DzProperty[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getPrivatePropertiesOnNode",
+      "signature": "getPrivatePropertiesOnNode(prop: DzProperty, propList: DzProperty[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getPrivatePropertiesOnNode",
+      "signature": "getPrivatePropertiesOnNode(node: DzNode, propList: DzProperty[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getPropertiesOnElement",
+      "signature": "getPropertiesOnElement(elem: DzElement, propList: DzProperty[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getPropertiesOnNode",
+      "signature": "getPropertiesOnNode(prop: DzProperty, propList: DzProperty[], includeModifiers: boolean): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "getPropertiesOnNode",
+      "signature": "getPropertiesOnNode(node: DzNode, propList: DzProperty[], includeModifiers: boolean): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "getPropertiesOnNode",
+      "signature": "getPropertiesOnNode(prop: DzProperty, propList: DzProperty[], includeModifiers: boolean): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "getPropertiesOnNode",
+      "signature": "getPropertiesOnNode(node: DzNode, propList: DzProperty[], includeModifiers: boolean): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "getRegionPropertiesOnNode",
+      "signature": "getRegionPropertiesOnNode(curNode: DzNode, propList: DzProperty[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getRegionPropertiesRecurse",
+      "signature": "getRegionPropertiesRecurse(region: DzGeometryRegion, propList: DzProperty[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isAtDefaultValue",
+      "signature": "isAtDefaultValue(prop: DzProperty): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isDFormModProperty",
+      "signature": "isDFormModProperty(prop: DzProperty): DzProperty;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isLegacyJointProperty",
+      "signature": "isLegacyJointProperty(prop: DzProperty): DzProperty;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isLegacyProperty",
+      "signature": "isLegacyProperty(prop: DzProperty): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isModifierProperty",
+      "signature": "isModifierProperty(prop: DzProperty): DzProperty;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isMorphProperty",
+      "signature": "isMorphProperty(prop: DzProperty): DzProperty;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isNodeProperty",
+      "signature": "isNodeProperty(prop: DzProperty): DzProperty;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isTransformProperty",
+      "signature": "isTransformProperty(prop: DzProperty): DzProperty;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setInternalName",
+      "signature": "setInternalName(prop: DzProperty, name: string): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setPropertyPath",
+      "signature": "setPropertyPath(prop: DzProperty, inPath: string): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "decode",
+      "signature": "decode(src: QMimeSource, propList: DzProperty[]): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "decode",
+      "signature": "decode(src: QMimeData, propList: DzProperty[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "decode",
+      "signature": "decode(src: QMimeSource, propList: DzProperty[]): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "decode",
+      "signature": "decode(src: QMimeData, propList: DzProperty[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "encode",
+      "signature": "encode(propList: DzProperty[]): number[];",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addProperty",
+      "signature": "addProperty(prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "propertyValueChanged",
+      "signature": "propertyValueChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "createEditor",
+      "signature": "createEditor(parent: QWidget, option: QStyleOptionViewItem, index: QModelIndex): QWidget;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "getPropertyWgt",
+      "signature": "getPropertyWgt(node: DzPropertyListNodePtr): DzPropertyWgt;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isCardMode",
+      "signature": "isCardMode(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "paint",
+      "signature": "paint(painter: QPainter, option: QStyleOptionViewItem, index: QModelIndex): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setCardMode",
+      "signature": "setCardMode(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setEditorData",
+      "signature": "setEditorData(editor: QWidget, index: QModelIndex): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "sizeHint",
+      "signature": "sizeHint(option: QStyleOptionViewItem, index: QModelIndex): Size;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "updateControlOnlySettings",
+      "signature": "updateControlOnlySettings(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateEditorGeometry",
+      "signature": "updateEditorGeometry(editor: QWidget, option: QStyleOptionViewItem, index: QModelIndex): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "addProperty",
+      "signature": "addProperty(prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearProperties",
+      "signature": "clearProperties(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "columnCount",
+      "signature": "columnCount(parent: QModelIndex): number;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "data",
+      "signature": "data(index: QModelIndex, role: number): QVariant;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "event",
+      "signature": "event(eve: QEvent): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "flags",
+      "signature": "flags(index: QModelIndex): number;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getIndexForNode",
+      "signature": "getIndexForNode(propNode: DzPropertyListNode): QModelIndex;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getPropertyNodeForIndex",
+      "signature": "getPropertyNodeForIndex(index: QModelIndex): DzPropertyListNodePtr;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "index",
+      "signature": "index(row: number, column: number, parent: QModelIndex): QModelIndex;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "parent",
+      "signature": "parent(index: QModelIndex): QModelIndex;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "processLabelUpdates",
+      "signature": "processLabelUpdates(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "processPropUpdates",
+      "signature": "processPropUpdates(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "propertyChanged",
+      "signature": "propertyChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "propertyHiddenStateChange",
+      "signature": "propertyHiddenStateChange(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "propertyLabelChanged",
+      "signature": "propertyLabelChanged(lbl: string): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeProp",
+      "signature": "removeProp(prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "rowCount",
+      "signature": "rowCount(parent: QModelIndex): number;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addProperty",
+      "signature": "addProperty(prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getNumProperties",
+      "signature": "getNumProperties(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getProperties",
+      "signature": "getProperties(): DzProperty[];",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "removeProperty",
+      "signature": "removeProperty(prop: DzProperty): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "updateNew",
+      "signature": "updateNew(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "addProperty",
+      "signature": "addProperty(prop: DzProperty): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addPropertyGroup",
+      "signature": "addPropertyGroup(group: DzPropertyGroup, showHidden: boolean): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "addPropertyGroupRecurse",
+      "signature": "addPropertyGroupRecurse(root: DzPropertyGroup, showHidden: boolean): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "addPropertyToGroup",
+      "signature": "addPropertyToGroup(prop: DzProperty, widGroup: DzWidgetGroup): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "addPropertyTree",
+      "signature": "addPropertyTree(tree: DzPropertyGroupTree, showHidden: boolean): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "centralWidget",
+      "signature": "centralWidget(): QWidget;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "clear",
+      "signature": "clear(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "moveWidgetListGroupToEnd",
+      "signature": "moveWidgetListGroupToEnd(widgetListGroup: DzWidgetGroup): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "resetLayout",
+      "signature": "resetLayout(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "resizeEvent",
+      "signature": "resizeEvent(e: QResizeEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setNewGroupsCollapsed",
+      "signature": "setNewGroupsCollapsed(open: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "deleteProperty",
+      "signature": "deleteProperty(temp: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getArg",
+      "signature": "getArg(i: number): string;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getArgType",
+      "signature": "getArgType(i: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getDirection",
+      "signature": "getDirection(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumArgs",
+      "signature": "getNumArgs(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumProperties",
+      "signature": "getNumProperties(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumTokensNeeded",
+      "signature": "getNumTokensNeeded(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getProperty",
+      "signature": "getProperty(i: number): DzProperty;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getPropertyMapToken",
+      "signature": "getPropertyMapToken(i: number): number;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getStringValue",
+      "signature": "getStringValue(i: number): string;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getType",
+      "signature": "getType(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getTypeForToken",
+      "signature": "getTypeForToken(i: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "propertyDestoyed",
+      "signature": "propertyDestoyed(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setDirection",
+      "signature": "setDirection(i: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setProperty",
+      "signature": "setProperty(prop: DzProperty, arg: string, mapArg: string): void;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setShouldWriteTokenInShader",
+      "signature": "setShouldWriteTokenInShader(onoff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setTokenInBuffer",
+      "signature": "setTokenInBuffer(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "shouldWriteTokenInShader",
+      "signature": "shouldWriteTokenInShader(i: number): boolean;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clicked",
+      "signature": "clicked(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isDefault",
+      "signature": "isDefault(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "mousePressEvent",
+      "signature": "mousePressEvent(event: QMouseEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "paintEvent",
+      "signature": "paintEvent(e: QPaintEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setIsDefault",
+      "signature": "setIsDefault(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "aboutToShowOptionsDialog",
+      "signature": "aboutToShowOptionsDialog(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "addProperty",
+      "signature": "addProperty(prop: DzProperty): DzError;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearPropertyList",
+      "signature": "clearPropertyList(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "doOptionsDialog",
+      "signature": "doOptionsDialog(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "fastUpdate",
+      "signature": "fastUpdate(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getFirstProperty",
+      "signature": "getFirstProperty(): DzProperty;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumProperties",
+      "signature": "getNumProperties(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getNumTotalProperties",
+      "signature": "getNumTotalProperties(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getProperties",
+      "signature": "getProperties(): DzPropertyListIterator;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getPropertyHiddenState",
+      "signature": "getPropertyHiddenState(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getViewItemStyleOptions",
+      "signature": "getViewItemStyleOptions(): number;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isFastMode",
+      "signature": "isFastMode(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isShowingControlOnly",
+      "signature": "isShowingControlOnly(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "mouseDoubleClickEvent",
+      "signature": "mouseDoubleClickEvent(e: QMouseEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "mousePressEvent",
+      "signature": "mousePressEvent(e: QMouseEvent): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "propertySelectionChanged",
+      "signature": "propertySelectionChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "removeAllProperties",
+      "signature": "removeAllProperties(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "removeDeletedProperty",
+      "signature": "removeDeletedProperty(prop: DzProperty): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "resetProperties",
+      "signature": "resetProperties(allowUndo: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setFastMode",
+      "signature": "setFastMode(mode: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setLevel",
+      "signature": "setLevel(level: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setPropertyList",
+      "signature": "setPropertyList(list: DzProperty[]): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setViewItemStyleOptions",
+      "signature": "setViewItemStyleOptions(flags: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "showControlOnly",
+      "signature": "showControlOnly(onOff: boolean): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "updateFromList",
+      "signature": "updateFromList(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updatePropertyHiddenState",
+      "signature": "updatePropertyHiddenState(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

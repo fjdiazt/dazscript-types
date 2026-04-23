@@ -1,0 +1,281 @@
+{
+  "className": "DzInstanceGroupNode",
+  "members": [
+    {
+      "name": "createElementCopy",
+      "signature": "createElementCopy(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "createElementCopySignal",
+      "signature": "createElementCopySignal(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "doDuplicateElement",
+      "signature": "doDuplicateElement(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "doMergeElement",
+      "signature": "doMergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "doobjectDuplicateAndSet",
+      "signature": "doobjectDuplicateAndSet(p0: DzNode, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateElement",
+      "signature": "duplicateElement(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateElementSignal",
+      "signature": "duplicateElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateMissingCustomData",
+      "signature": "duplicateMissingCustomData(p0: DzElement): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingCustomDataWithContext",
+      "signature": "duplicateMissingCustomDataWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateMissingPrivateProperties",
+      "signature": "duplicateMissingPrivateProperties(p0: DzElement): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingPrivatePropertiesWithContext",
+      "signature": "duplicateMissingPrivatePropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "duplicateMissingProperties",
+      "signature": "duplicateMissingProperties(p0: DzElement): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "duplicateMissingPropertiesWithContext",
+      "signature": "duplicateMissingPropertiesWithContext(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "finalizeDuplicate",
+      "signature": "finalizeDuplicate(p0: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getName",
+      "signature": "getName(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getnumberOfGroupItems",
+      "signature": "getnumberOfGroupItems(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getobject",
+      "signature": "getobject(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getPreviewControl",
+      "signature": "getPreviewControl(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getRenderPriority",
+      "signature": "getRenderPriority(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getWeightMapHandler",
+      "signature": "getWeightMapHandler(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "handleRendererModeChanged",
+      "signature": "handleRendererModeChanged(p0: DzRenderer): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "instanceNodeRemoved",
+      "signature": "instanceNodeRemoved(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "invalidateCache",
+      "signature": "invalidateCache(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "invalidateInstanceBoundingBox",
+      "signature": "invalidateInstanceBoundingBox(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "invalidateOrientation",
+      "signature": "invalidateOrientation(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isDataItemNameUnique",
+      "signature": "isDataItemNameUnique(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isDataItemNameUnique",
+      "signature": "isDataItemNameUnique(p0: string, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isPrivatePropertyNameUnique",
+      "signature": "isPrivatePropertyNameUnique(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isPrivatePropertyNameUnique",
+      "signature": "isPrivatePropertyNameUnique(p0: string, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isPropertyNameUnique",
+      "signature": "isPropertyNameUnique(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "isPropertyNameUnique",
+      "signature": "isPropertyNameUnique(p0: string, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "isVisibileInRender",
+      "signature": "isVisibileInRender(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0: string): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "mergeElement",
+      "signature": "mergeElement(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "mergeElementSignal",
+      "signature": "mergeElementSignal(p0: DzElement, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "modifierDuplicateFinished",
+      "signature": "modifierDuplicateFinished(p0: DzElementDuplicateContext): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "objectDuplicateAndSet",
+      "signature": "objectDuplicateAndSet(p0: DzNode, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "objectDuplicateAndSetSignal",
+      "signature": "objectDuplicateAndSetSignal(p0: DzNode, p1: DzElementDuplicateContext): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "selectionMapModified",
+      "signature": "selectionMapModified(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setobject",
+      "signature": "setobject(p0: Dzobject): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setRenderPriority",
+      "signature": "setRenderPriority(p0: number): any; // DzRenderMgr::RenderPriority",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setRenderPriority",
+      "signature": "setRenderPriority(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "updateRenderable",
+      "signature": "updateRenderable(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateTarget",
+      "signature": "updateTarget(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateTransform",
+      "signature": "updateTransform(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateVis",
+      "signature": "updateVis(): any;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

@@ -1,15 +1,33 @@
-
 /**
  * Base class for objects that have animatable/storable properties.
  * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/element_dz
  */
 declare class DzElement extends DzBase {
+
     /* Properties */
 
     /**
      * Holds the number used to uniquely identify this element in the scene. (Read Only)
+     * @since 4.6.4.13
      */
-    elementID: number;
+    elementID: number; // Number
+
+    /* Enumerations (Static Properties) */
+
+    /**
+     * DAZ enum member of NameEditScope.
+     */
+    static NoNameEdit: number;
+
+    /**
+     * DAZ enum member of NameEditScope.
+     */
+    static ElementNameEdit: number;
+
+    /**
+     * DAZ enum member of NameEditScope.
+     */
+    static PropertyNameEdit: number;
 
     /* Methods */
 
@@ -64,9 +82,9 @@ declare class DzElement extends DzBase {
     /**
      * Copies the property values of the element to a 'clipboard' so that they may be saved and applied (copied) to another element - or to the same element.
      * @param contentTypes any[] - A list of the contentTypes that should be included in the copy. An empty list will copy all property values.
-     * @returns elementclipboard_dz The 'clipboard' which holds a copy of the current element's property values. These values are a snapshot of the current state of the element, and will remain unchanged even if the element is changed or deleted. The caller is responsible for deleting this element.
+     * @returns any The 'clipboard' which holds a copy of the current element's property values. These values are a snapshot of the current state of the element, and will remain unchanged even if the element is changed or deleted. The caller is responsible for deleting this element. Undocumented DAZ type: elementclipboard_dz.
      */
-    copyToClipboard(contentTypes?: any[]): any; //elementclipboard_dz;
+    copyToClipboard(contentTypes?: any[]): any; // elementclipboard_dz; undocumented type
 
     /**
      * Remove the data item from this element and deletes it.
@@ -80,6 +98,12 @@ declare class DzElement extends DzBase {
      * @returns DzElementData The data item with the given name (if any), otherwise null.
      */
     findDataItem(dataName: string): DzElementData;
+
+    /**
+     * @param item DzElementData - The data item to find.
+     * @returns number The first index of the data item (if any), otherwise -1.
+     */
+    findDataItemIndex(item: DzElementData): number; // Number
 
     /**
      * @param srcProp DzProperty - The property to search for a match.
@@ -121,7 +145,6 @@ declare class DzElement extends DzBase {
     findProperty(name: string): DzProperty;
 
     /**
-     * Locate a property by name.
      * @param name string - The name of the property to search for.
      * @param caseSensitive boolean - Whether or not the search should be case sensitive.
      * @returns DzProperty The property with the given name (if any), otherwise null.
@@ -130,16 +153,16 @@ declare class DzElement extends DzBase {
 
     /**
      * @param label string - The label of the property to search for.
-     * @returns DzProperty The property with the given label (if any), otherwise null.
-     */
-    findPropertyByLabel(label: string): DzProperty;
-
-    /**
-     * @param label string - The label of the property to search for.
      * @param caseSensitive boolean - Whether or not the search should be case sensitive.
      * @returns DzProperty The property with the given label (if any), otherwise null.
      */
     findPropertyByLabel(label: string, caseSensitive: boolean): DzProperty;
+
+    /**
+     * @param label string - The label of the property to search for.
+     * @returns DzProperty The property with the given label (if any), otherwise null.
+     */
+    findPropertyByLabel(label: string): DzProperty;
 
     /**
      * Finishes an editing operation for this element - DzProperty::finishEdit() will be called for all properties belonging to this element.
@@ -153,7 +176,6 @@ declare class DzElement extends DzBase {
     getAttributes(settings: DzSettings): void;
 
     /**
-     * See Also:
      * @param index number - The index of the data item to return.
      * @returns DzElementData The data item for this element at the given index.
      */
@@ -162,7 +184,7 @@ declare class DzElement extends DzBase {
     /**
      * @returns any[] A list of the data items attached to this element.
      */
-    getDataItemList(): QObject[];
+    getDataItemList(): any[]; // Array
 
     /**
      * @param which number - The index of the child element to return.
@@ -178,7 +200,7 @@ declare class DzElement extends DzBase {
     /**
      * @returns string The user-facing label for this element.
      */
-    getLabel(): string;
+    getLabel(): string; // String
 
     /**
      * @returns DzScript The script that is executed when this element is loaded from a file (if any), otherwise null.
@@ -186,24 +208,30 @@ declare class DzElement extends DzBase {
     getLoadScript(): DzScript;
 
     /**
+     * @returns number The value that represents the intended scope (if any) at which the name of this element, or its constituent parts, is exposed to the user for editing.
+     * @since 4.12.1.103
+     */
+    getNameEditScope(): number; // NameEditScope
+
+    /**
      * @returns number The number of user data items attached to this element.
      */
-    getNumDataItems(): number;
+    getNumDataItems(): number; // Number
 
     /**
      * @returns number The number of children this element has.
      */
-    getNumElementChildren(): number;
+    getNumElementChildren(): number; // Number
 
     /**
      * @returns number The number of private properties currently owned by this element.
      */
-    getNumPrivateProperties(): number;
+    getNumPrivateProperties(): number; // Number
 
     /**
      * @returns number The number of properties currently owned by this element.
      */
-    getNumProperties(): number;
+    getNumProperties(): number; // Number
 
     /**
      * @param index number
@@ -219,7 +247,7 @@ declare class DzElement extends DzBase {
     /**
      * @returns any[] A list of all private properties on this element.
      */
-    getPrivatePropertyList(): DzProperty[];
+    getPrivatePropertyList(): any[]; // Array
 
     /**
      * @param index number
@@ -235,26 +263,39 @@ declare class DzElement extends DzBase {
     /**
      * @returns any[] A list of all properties on this element.
      */
-    getPropertyList(): DzProperty[];
+    getPropertyList(): any[]; // Array
 
     /**
      * @returns string The user-facing label for this type of element.
      * @since 4.12.1.103
      */
-    getTypeLabel(): string;
+    getTypeLabel(): string; // String
 
     /**
      * @param dataName string - The name of the data item to make unique.
      * @returns string The original value if dataName is already unique, otherwise a unique name.
      * @since 4.9.3.117
      */
-    getUniqueDataItemName(dataName: string): string;
+    getUniqueDataItemName(dataName: string): string; // String
 
     /**
-     * See Also:
+     * @param name string - The private property name to make unique.
+     * @returns string The original value if name is already unique, otherwise a unique private property name.
+     * @since 4.9.3.117
+     */
+    getUniquePrivatePropertyName(name: string): string; // String
+
+    /**
+     * @param name string - The property name to make unique.
+     * @returns string The original value if name is already unique, otherwise a unique property name.
+     * @since 4.9.3.117
+     */
+    getUniquePropertyName(name: string): string; // String
+
+    /**
      * @returns boolean true if the element is in an editing operation, otherwise false.
      */
-    inEdit(): boolean;
+    inEdit(): boolean; // Boolean
 
     /**
      * Adds a new private property to this element that will be available for connections or direct editing.
@@ -271,6 +312,14 @@ declare class DzElement extends DzBase {
      * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
      */
     insertProperty(index: number, prop: DzProperty): DzError;
+
+    /**
+     * Moves a data item to a new index.
+     * @param item DzElementData - The data item to move.
+     * @param index number
+     * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
+     */
+    moveDataItemToIndex(item: DzElementData, index: number): DzError;
 
     /**
      * Moves the given property from this element to newElement, if it can be removed. Properties can be specified as non-removable (i.e., DzProperty::isUserProperty()). Doing so makes it impossible to move that property to another element.
@@ -303,7 +352,7 @@ declare class DzElement extends DzBase {
     removePrivateProperty(prop: DzProperty): DzError;
 
     /**
-     * Removes the given private property, if it can be removed. Properties can be specified as non-removable (i.e., DzProperty::isUserProperty() - e.g. the rotation channels of the DzNode class). Doing so makes it impossible to remove that property from this element.
+     * Attempts to remove the named property. Fails if the property could not be found or could not be removed (i.e., DzProperty::isUserProperty()).
      * @param name string - The name of the property to search for and remove if it is found.
      * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
      */
@@ -317,7 +366,7 @@ declare class DzElement extends DzBase {
     removeProperty(name: string): DzError;
 
     /**
-     * Attempts to remove the named property. Fails if the property could not be found or could not be removed.
+     * Removes the given property, if it can be removed. Properties can be specified as non-removable (e.g. the rotation channels of the DzNode class). Doing so makes it impossible to remove that property from the element.
      * @param prop DzProperty - The property to remove from the element.
      * @returns DzError DZ_NO_ERROR on success, otherwise an appropriate error code.
      */
@@ -344,9 +393,89 @@ declare class DzElement extends DzBase {
     setLoadScript(script: DzScript): void;
 
     /**
+     * Sets the internal name of this element.
+     * @param name string - The name to assign to this element.
+     */
+    setName(name: string): void;
+
+    /**
      * @returns boolean true if this element should have its property groups and properties sorted after being created on load, otherwise false.
      */
-    shouldSortOnLoad(): boolean;
+    shouldSortOnLoad(): boolean; // Boolean
+
+    /**
+     * Called to update any cached or display data for this element.
+     */
+    update(): void;
+
+    /* Signals */
+
+    /**
+     * Emitted when this element's label is changed.
+     * @param newLabel string - The new label of the element.
+     */
+    labelChanged: ISignal<string>;
+
+    /**
+     * Emitted when this element's parent is changed.
+     */
+    parentChanged: ISignal<void>;
+
+    /**
+     * Emitted when a private property is added to this element.
+     * @param prop DzProperty - The property just added.
+     */
+    privatePropertyAdded: ISignal<DzProperty>;
+
+    /**
+     * Emitted when a private property is added to or removed from this element.
+     */
+    privatePropertyListChanged: ISignal<void>;
+
+    /**
+     * Emitted when a private property is added to or removed from the property tree for this element.
+     */
+    privatePropertyListInTreeChanged: ISignal<void>;
+
+    /**
+     * Emitted when a private property is removed from this element.
+     * @param prop DzProperty - The property just removed.
+     */
+    privatePropertyRemoved: ISignal<DzProperty>;
+
+    /**
+     * Emitted when the private property tree has changed.
+     */
+    privatePropertyTreeChanged: ISignal<void>;
+
+    /**
+     * Emitted when a property is added to this element.
+     * @param prop DzProperty - The property just added.
+     */
+    propertyAdded: ISignal<DzProperty>;
+
+    /**
+     * Emitted when a property is added to or removed from this element.
+     */
+    propertyListChanged: ISignal<void>;
+
+    /**
+     * Emitted when a property is added to or removed from the property tree for this element.
+     */
+    propertyListInTreeChanged: ISignal<void>;
+
+    /**
+     * Emitted when a property is removed from this element.
+     * @param prop DzProperty - The property just removed.
+     */
+    propertyRemoved: ISignal<DzProperty>;
+
+    /**
+     * Emitted when the property tree has changed.
+     */
+    propertyTreeChanged: ISignal<void>;
+
+    /* Undocumented Augment Members */
 
     /** @undocumented */
     addElementChild(child: DzElement): void;
@@ -458,56 +587,4 @@ declare class DzElement extends DzBase {
 
     /** @undocumented */
     writeProperties(file: DzAssetOutFile, io: any, propIt: DzPropertyListIterator, filter: DzElementPropertyIOFilter): boolean;
-
-    /* Signals */
-
-    /**
-     * Emitted when this element's label is changed.
-     */
-    labelChanged: ISignalT<string>;
-
-    /**
-     * Emitted when this element's parent is changed.
-     */
-    parentChanged: ISignalT<void>;
-
-    /**
-     * Emitted when a private property is added to this element.
-     */
-    privatePropertyAdded: ISignalT<DzProperty>;
-
-    /**
-     * Emitted when a private property is added to or removed from this element.
-     */
-    privatePropertyListChanged: ISignalT<void>;
-
-    /**
-     * Emitted when a private property is removed from this element.
-     */
-    privatePropertyRemoved: ISignalT<DzProperty>;
-
-    /**
-     * Emitted when the private property tree has changed.
-     */
-    privatePropertyTreeChanged: ISignalT<void>;
-
-    /**
-     * Emitted when a property is added to this element.
-     */
-    propertyAdded: ISignalT<DzProperty>;
-
-    /**
-     * Emitted when a property is added to or removed from this element.
-     */
-    propertyListChanged: ISignalT<void>;
-
-    /**
-     * Emitted when a property is removed from this element.
-     */
-    propertyRemoved: ISignalT<DzProperty>;
-
-    /**
-     * Emitted when the property tree has changed.
-     */
-    propertyTreeChanged: ISignalT<void>;
 }

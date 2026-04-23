@@ -1,19 +1,30 @@
-declare class DzObjImporter extends DzImporter {
-    nameChanged(name: string): any;
-    makePersistent(): any;
+/**
+ * Class for importing geometry in the Wavefront Object (*.obj) format.
+ * @docurl https://docs.daz3d.com/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/objimporter_dz
+ */
+declare class DzObjImporter extends DzGeometryImporter {
+
+    /* Constructors */
+
+    constructor();
+
+    /* Undocumented Augment Members */
+
+    /** @undocumented */
     iskindof(kind: string): any;
+
+    /** @undocumented */
     getName(): string;
-    getDefaultOptions(settings: DzFileIOSettings): any;
-    getOptions(settings: DzFileIOSettings, flag: boolean, name: string): void;
-    showOptions(): any;
-    readFile(file: string, settings?: DzFileIOSettings): any;
+
+    /** @undocumented */
     setLoadFilter(filter: DzFileLoadFilter): any;
+
+    /** @undocumented */
     getFileLoadFilter(): any;
+
+    /** @undocumented */
     addNodetoFilter(node: DzNode): any;
+
+    /** @undocumented */
     finishFilter(): any;
-    recognize(value: string): any;
-    getNumExtensions(): any;
-    getExtension(index: number): any;
-    getDescription(): string;
-    readFile(file: string, shape: DzShape, settings: DzFileIOSettings): any;
 }

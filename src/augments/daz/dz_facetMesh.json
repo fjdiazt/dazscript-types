@@ -1,0 +1,731 @@
+{
+  "className": "DzFacetMesh",
+  "members": [
+    {
+      "name": "TimingUnknown",
+      "signature": "TimingUnknown: number; // 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "TimingAsync",
+      "signature": "TimingAsync: number; // 1",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "TimingPreferCacheAsync",
+      "signature": "TimingPreferCacheAsync: number; // 2",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "TimingSync",
+      "signature": "TimingSync: number; // 3",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "objectName",
+      "signature": "objectName: string; // geometry",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "name",
+      "signature": "name: string; // geometry",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "hasPendingChanges",
+      "signature": "hasPendingChanges: boolean; // false",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "buildTiming",
+      "signature": "buildTiming: number; // 0",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "activateVertexGroup",
+      "signature": "activateVertexGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addSelectedFacetsToGroup",
+      "signature": "addSelectedFacetsToGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addSelectedFacetsToMaterialGroup",
+      "signature": "addSelectedFacetsToMaterialGroup(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addToVertexGroup",
+      "signature": "addToVertexGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addVertex",
+      "signature": "addVertex(p0: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "addVertex",
+      "signature": "addVertex(p0: number, p1: number, p2: number): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "addVerticesFromMesh",
+      "signature": "addVerticesFromMesh(p0: DzVertexMesh): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "beginEdit",
+      "signature": "beginEdit(p0?: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "calculateSurfaceAreaForBoundingBox",
+      "signature": "calculateSurfaceAreaForBoundingBox(p0: DzBox3): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "calculateSurfaceAreaForFacetList",
+      "signature": "calculateSurfaceAreaForFacetList(p0: any[]): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "clearNgonIndex",
+      "signature": "clearNgonIndex(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "copyFrom",
+      "signature": "copyFrom(p0: DzVertexMesh): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "copyFrom",
+      "signature": "copyFrom(p0: DzVertexMesh, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "copyFrom",
+      "signature": "copyFrom(p0: DzVertexMesh, p1: boolean, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "createFacetSet",
+      "signature": "createFacetSet(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "createVertexGroup",
+      "signature": "createVertexGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "deactivateVertexGroup",
+      "signature": "deactivateVertexGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "decrementNgons",
+      "signature": "decrementNgons(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "deselectAllFacets",
+      "signature": "deselectAllFacets(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "deselectAllPolylines",
+      "signature": "deselectAllPolylines(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "deselectFacets",
+      "signature": "deselectFacets(p0: DzFaceGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "deselectHiddenEdgesAndVertices",
+      "signature": "deselectHiddenEdgesAndVertices(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "destroyed",
+      "signature": "destroyed(p0: QObject): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "emitFacetSelectionChanged",
+      "signature": "emitFacetSelectionChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitVertexSelectionChanged",
+      "signature": "emitVertexSelectionChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "enableSubDivision",
+      "signature": "enableSubDivision(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "facesFromVertices",
+      "signature": "facesFromVertices(p0: any[]): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "find",
+      "signature": "find(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "find",
+      "signature": "find(p0: DzUri): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "findFacetSet",
+      "signature": "findFacetSet(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "finishEdit",
+      "signature": "finishEdit(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getActiveVertexGroup",
+      "signature": "getActiveVertexGroup(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getCurrentGeometryForNode",
+      "signature": "getCurrentGeometryForNode(p0: DzNode): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getFacetSetName",
+      "signature": "getFacetSetName(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getGroupBoundingBox",
+      "signature": "getGroupBoundingBox(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getGroupBoundingBox",
+      "signature": "getGroupBoundingBox(p0: QString, p1: DzMatrix3): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "getGroupOrientedBox",
+      "signature": "getGroupOrientedBox(p0: QString, p1: DzVec3, p2: DzQuat, p3: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 4
+    },
+    {
+      "name": "getGroupOrientedBox",
+      "signature": "getGroupOrientedBox(p0: QString, p1: DzMatrix3, p2: DzVec3, p3: DzQuat, p4: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 5
+    },
+    {
+      "name": "getLODName",
+      "signature": "getLODName(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getOrientedBox",
+      "signature": "getOrientedBox(p0: DzVec3, p1: DzQuat, p2: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "getUVSet",
+      "signature": "getUVSet(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getUVs",
+      "signature": "getUVs(): any;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getVertex",
+      "signature": "getVertex(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getVertexGroup",
+      "signature": "getVertexGroup(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "hasChanged",
+      "signature": "hasChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "hasOverlappingUVIslands",
+      "signature": "hasOverlappingUVIslands(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "hideFacets",
+      "signature": "hideFacets(p0: DzFaceGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "incrementNgons",
+      "signature": "incrementNgons(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "inherits",
+      "signature": "inherits(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "invalidateVBOs",
+      "signature": "invalidateVBOs(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "invalidateVBOs",
+      "signature": "invalidateVBOs(p0: boolean, p1: boolean, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "isSubDivisionEnabled",
+      "signature": "isSubDivisionEnabled(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "isVertexSelected",
+      "signature": "isVertexSelected(p0: number): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "iskindof",
+      "signature": "iskindof(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "lodsChanged",
+      "signature": "lodsChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "makeCopy",
+      "signature": "makeCopy(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "makeCopy",
+      "signature": "makeCopy(p0: boolean, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "markChanged",
+      "signature": "markChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "modifyAsset",
+      "signature": "modifyAsset(p0: DzUri): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "moveFacetSet",
+      "signature": "moveFacetSet(p0: number, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "nameChanged",
+      "signature": "nameChanged(p0: QString): void;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "needRebuild",
+      "signature": "needRebuild(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "needsSave",
+      "signature": "needsSave(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "preSizeVertexArray",
+      "signature": "preSizeVertexArray(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeFacetGroup",
+      "signature": "removeFacetGroup(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeFacetGroup",
+      "signature": "removeFacetGroup(p0: QString, p1: QString): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "removeFacetSet",
+      "signature": "removeFacetSet(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeUnusedVertices",
+      "signature": "removeUnusedVertices(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "removeUnusedVertices",
+      "signature": "removeUnusedVertices(p0: boolean, p1: DzIndexChangeSet): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "removeUnusedVertices",
+      "signature": "removeUnusedVertices(p0: boolean, p1: DzIndexChangeSet, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "renameFacetSet",
+      "signature": "renameFacetSet(p0: number, p1: QString): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "rotate",
+      "signature": "rotate(p0: DzQuat): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "scale",
+      "signature": "scale(p0: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "scale",
+      "signature": "scale(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "selectAllVertices",
+      "signature": "selectAllVertices(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "selectAllVisibleVertices",
+      "signature": "selectAllVisibleVertices(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "selectEdgesByFacets",
+      "signature": "selectEdgesByFacets(p0: any[]): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "selectEdgesByFacets",
+      "signature": "selectEdgesByFacets(p0: number, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "selectEdgesByFacets",
+      "signature": "selectEdgesByFacets(p0: any[], p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "selectEdgesByFacets",
+      "signature": "selectEdgesByFacets(p0: number, p1: number, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "selectEdgesBySubdivisonWeight",
+      "signature": "selectEdgesBySubdivisonWeight(p0: number, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "selectEdgesBySubdivisonWeight",
+      "signature": "selectEdgesBySubdivisonWeight(p0: number, p1: number, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "selectFacets",
+      "signature": "selectFacets(p0: DzFaceGroup): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "selectFacetsByEdgeCount",
+      "signature": "selectFacetsByEdgeCount(p0: number, p1: number, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "selectVertex",
+      "signature": "selectVertex(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "selectVertex",
+      "signature": "selectVertex(p0: number, p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "selectVerticesByFacets",
+      "signature": "selectVerticesByFacets(p0: any[]): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "selectVerticesByFacets",
+      "signature": "selectVerticesByFacets(p0: number, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "selectVerticesByFacets",
+      "signature": "selectVerticesByFacets(p0: any[], p1: boolean): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "selectVerticesByFacets",
+      "signature": "selectVerticesByFacets(p0: number, p1: number, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "selectVerticesByIndexList",
+      "signature": "selectVerticesByIndexList(p0: number, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "selectVerticesByIndexList",
+      "signature": "selectVerticesByIndexList(p0: number, p1: number, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "selectVerticesBySubdivisonWeight",
+      "signature": "selectVerticesBySubdivisonWeight(p0: number, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "selectVerticesBySubdivisonWeight",
+      "signature": "selectVerticesBySubdivisonWeight(p0: number, p1: number, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "selectVisibleVerticesByIndexList",
+      "signature": "selectVisibleVerticesByIndexList(p0: number, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "selectVisibleVerticesByIndexList",
+      "signature": "selectVisibleVerticesByIndexList(p0: number, p1: number, p2: boolean): any;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
+      "name": "setActiveFacetSet",
+      "signature": "setActiveFacetSet(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setActiveFacetSet",
+      "signature": "setActiveFacetSet(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setNumFacets",
+      "signature": "setNumFacets(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setUseVBORendering",
+      "signature": "setUseVBORendering(p0: boolean): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "setVertex",
+      "signature": "setVertex(p0: number, p1: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "setVertexArray",
+      "signature": "setVertexArray(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "subdivideCatmullClark",
+      "signature": "subdivideCatmullClark(p0: number): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "subdivideGeneral",
+      "signature": "subdivideGeneral(p0: number, p1: number): any;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "topologyChanged",
+      "signature": "topologyChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "transform",
+      "signature": "transform(p0: DzMatrix3): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "translate",
+      "signature": "translate(p0: DzVec3): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "unableToFindFile",
+      "signature": "unableToFindFile(p0: QString): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "vertexMapFromImage",
+      "signature": "vertexMapFromImage(p0: QImage): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "vertexSelectionChanged",
+      "signature": "vertexSelectionChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "verticesFromFaces",
+      "signature": "verticesFromFaces(p0: any[]): any;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "visibilityChanged",
+      "signature": "visibilityChanged(): void;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

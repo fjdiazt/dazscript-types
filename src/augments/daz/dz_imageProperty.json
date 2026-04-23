@@ -1,0 +1,77 @@
+{
+  "className": "DzImageProperty",
+  "members": [
+    {
+      "name": "keysAreClamped",
+      "signature": "keysAreClamped(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setKeysAreClamped",
+      "signature": "setKeysAreClamped(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "toggleKeysAreClamped",
+      "signature": "toggleKeysAreClamped(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "doCopyBaseData",
+      "signature": "doCopyBaseData(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getEmitValueChangedOnSceneClear",
+      "signature": "getEmitValueChangedOnSceneClear(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "setEmitValueChangedOnSceneClear",
+      "signature": "setEmitValueChangedOnSceneClear(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitRemoved",
+      "signature": "emitRemoved(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "invalidateCacheValue",
+      "signature": "invalidateCacheValue(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitDefaultMapGammaChanged",
+      "signature": "emitDefaultMapGammaChanged(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitDefaultMapTextureTypeChanged",
+      "signature": "emitDefaultMapTextureTypeChanged(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitTextureModifierChanged",
+      "signature": "emitTextureModifierChanged(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "emitTextureModifierFlagsChanged",
+      "signature": "emitTextureModifierFlagsChanged(): any; // TODO ;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

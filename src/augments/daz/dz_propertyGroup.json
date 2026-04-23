@@ -1,0 +1,11 @@
+{
+  "className": "DzPropertyGroup",
+  "members": [
+    {
+      "name": "moveChildToIndex",
+      "signature": "moveChildToIndex(childName: QString, newIndex: number): boolean;",
+      "kind": "method",
+      "paramCount": 2
+    }
+  ]
+}

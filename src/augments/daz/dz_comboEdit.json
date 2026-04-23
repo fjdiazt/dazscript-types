@@ -1,0 +1,11 @@
+{
+  "className": "DzComboEdit",
+  "members": [
+    {
+      "name": "statusTip",
+      "signature": "statusTip: string; //",
+      "kind": "property",
+      "paramCount": 0
+    }
+  ]
+}

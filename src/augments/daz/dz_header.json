@@ -1,0 +1,11 @@
+{
+  "className": "DzHeader",
+  "members": [
+    {
+      "name": "statusTip",
+      "signature": "statusTip: string;\t//",
+      "kind": "property",
+      "paramCount": 0
+    }
+  ]
+}

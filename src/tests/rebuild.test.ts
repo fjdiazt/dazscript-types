@@ -309,6 +309,59 @@ describe('rebuildClassFile', () => {
     expect(result.content).toContain('// enabled: ISignal<boolean>;');
   });
 
+  it('comments a method when its name conflicts with an inherited property', () => {
+    const parent: DazClassModel = {
+      className: 'DzWidget',
+      docUrl: 'https://docs.example.test/DzWidget',
+      summary: 'Widget.',
+      extendsName: 'QObject',
+      enums: [],
+      properties: [
+        {
+          kind: 'property',
+          name: 'whatsThis',
+          type: { type: 'string' },
+          description: 'What is this text.',
+        },
+      ],
+      constructors: [],
+      staticMethods: [],
+      methods: [],
+      signals: [],
+    };
+    const model: DazClassModel = {
+      className: 'DzPopupMenu',
+      docUrl: 'https://docs.example.test/DzPopupMenu',
+      summary: 'Popup menu.',
+      extendsName: 'DzWidget',
+      enums: [],
+      properties: [],
+      constructors: [],
+      staticMethods: [],
+      methods: [
+        {
+          kind: 'method',
+          name: 'whatsThis',
+          returnType: { type: 'string' },
+          parameters: [{ name: 'id', type: { type: 'number' }, defaultValue: null, description: 'The item id.' }],
+          description: 'Gets the help text for the item.',
+        },
+      ],
+      signals: [],
+    };
+    const registry = buildClassRegistry([parent, model], [
+      makeLegacy('QObject', '', []),
+      makeLegacy('DzWidget', 'QObject', []),
+    ]);
+
+    const result = rebuildClassFile(model, [], registry);
+
+    expect(result.content).toContain('/* Conflicting Methods */');
+    expect(result.content).toContain('TypeScript conflict: DAZ documents this as a method, but an inherited property with the same name already exists.');
+    expect(result.content).toContain('// whatsThis(id: number): string;');
+    expect(result.content).not.toContain('\n    whatsThis(id: number): string;');
+  });
+
   it('recovers undocumented legacy constructors when docs omit them', () => {
     const model: DazClassModel = {
       className: 'DzCtorHost',
@@ -510,5 +563,47 @@ describe('rebuildClassFile', () => {
     expect(result.content).toContain('setMax(max: number): void;');
     expect(result.content).toContain('setMax(prop: DzProperty, max: number): void;');
     expect(result.appliedAugmentCount).toBe(1);
+  });
+
+  it('synthesizes a union constructor overload when constructor overloads differ by one parameter type', () => {
+    const model: DazClassModel = {
+      className: 'DzListViewItem',
+      docUrl: 'https://docs.example.test/DzListViewItem',
+      summary: 'List view item.',
+      extendsName: 'QObject',
+      enums: [],
+      properties: [],
+      constructors: [
+        {
+          kind: 'constructor',
+          name: 'constructor',
+          returnType: { type: 'void' },
+          parameters: [
+            { name: 'parent', type: { type: 'DzListView' }, defaultValue: null },
+            { name: 'id', type: { type: 'number' }, defaultValue: 'undefined' },
+          ],
+        },
+        {
+          kind: 'constructor',
+          name: 'constructor',
+          returnType: { type: 'void' },
+          parameters: [
+            { name: 'parent', type: { type: 'DzListViewItem' }, defaultValue: null },
+            { name: 'id', type: { type: 'number' }, defaultValue: 'undefined' },
+          ],
+        },
+      ],
+      staticMethods: [],
+      methods: [],
+      signals: [],
+    };
+    const registry = buildClassRegistry([model], [makeLegacy('QObject', '', [])]);
+
+    const result = rebuildClassFile(model, [], registry);
+
+    expect(result.content).toContain('@param parent DzListView | DzListViewItem');
+    expect(result.content).toContain('constructor(parent: DzListView | DzListViewItem, id?: number);');
+    expect(result.content).toContain('constructor(parent: DzListView, id?: number);');
+    expect(result.content).toContain('constructor(parent: DzListViewItem, id?: number);');
   });
 });

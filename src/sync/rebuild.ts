@@ -26,6 +26,11 @@ interface ConflictingSignal {
     conflictKind: 'property' | 'method';
 }
 
+interface ConflictingMethod {
+    method: DocMethod;
+    conflictKind: 'property';
+}
+
 function mergeSignals(signals: DocSignal[]): DocSignal[] {
     const merged = new Map<string, DocSignal>();
 
@@ -89,7 +94,19 @@ export function rebuildClassFile(
     const properties = model.properties.filter(member => !hasAncestorProperty(member.name));
     const renderedProperties = [...properties, ...enums];
     const staticMethods = model.staticMethods.filter(member => !hasAncestorMethod(member.name, member.parameters.length));
-    const methods = model.methods.filter(member => !hasAncestorMethod(member.name, member.parameters.length));
+    const methods = model.methods.filter(member =>
+        !hasAncestorMethod(member.name, member.parameters.length) &&
+        !hasAncestorProperty(member.name)
+    );
+    const conflictingMethods = model.methods.flatMap(member => {
+        if (hasAncestorMethod(member.name, member.parameters.length)) {
+            return [];
+        }
+
+        return hasAncestorProperty(member.name)
+            ? [{ method: member, conflictKind: 'property' as const }]
+            : [];
+    });
     const findPropertyOrMethodNameConflict = (name: string, paramCount?: number): ConflictingSignal['conflictKind'] | null => {
         if (renderedProperties.some(member => member.name === name)) {
             return 'property';
@@ -143,9 +160,11 @@ export function rebuildClassFile(
 
     emitSection(lines, 'Properties', properties, emitProperty);
     emitSection(lines, 'Enumerations (Static Properties)', enums, emitProperty);
-    emitSection(lines, 'Constructors', model.constructors, emitMethod);
+    const constructors = synthesizeUnionConstructors(model.constructors);
+    emitSection(lines, 'Constructors', constructors, emitMethod);
     emitSection(lines, 'Static Methods', staticMethods, emitMethod);
     emitSection(lines, 'Methods', methods, emitMethod);
+    emitSection(lines, 'Conflicting Methods', conflictingMethods, emitConflictingMethod);
     emitSection(lines, 'Signals', signals, emitSignal);
     emitSection(lines, 'Conflicting Signals', conflictingSignals, emitConflictingSignal);
 
@@ -263,6 +282,106 @@ function emitConflictingSignal(member: ConflictingSignal): string[] {
         : member.signal.parameters.map(parameter => parameter.type.type).join(', ');
     lines.push(`    // ${member.signal.name}: ISignal<${typeArgs}>;`);
     return lines;
+}
+
+function emitConflictingMethod(member: ConflictingMethod): string[] {
+    const lines: string[] = [];
+    const doc = buildMemberDoc(
+        member.method.description,
+        member.method.parameters,
+        { type: member.method.returnType, description: member.method.returnDescription },
+        member.method.since
+    );
+    if (doc) {
+        lines.push(...indentDoc(doc));
+    }
+
+    lines.push('    /**');
+    lines.push(`     * TypeScript conflict: DAZ documents this as a method, but an inherited ${member.conflictKind} with the same name already exists.`);
+    lines.push('     * Left commented because TypeScript does not allow both declarations in the same class hierarchy.');
+    lines.push('     */');
+
+    const params = member.method.parameters.map(formatParam).join(', ');
+    const suffix = buildRawTypeComment(member.method.returnType);
+    lines.push(`    // ${member.method.name}(${params}): ${member.method.returnType.type};${suffix}`);
+    return lines;
+}
+
+function methodSignatureKey(method: DocMethod): string {
+    const params = method.parameters.map(parameter => `${parameter.name}:${parameter.type.type}:${parameter.defaultValue ?? ''}`).join(',');
+    return `${method.kind}|${method.name}|${params}|${method.returnType.type}`;
+}
+
+function synthesizeUnionConstructors(constructors: DocMethod[]): DocMethod[] {
+    const synthesized: DocMethod[] = [];
+    const seen = new Set(constructors.map(methodSignatureKey));
+
+    for (let i = 0; i < constructors.length; i++) {
+        for (let j = i + 1; j < constructors.length; j++) {
+            const merged = tryMergeConstructorPair(constructors[i], constructors[j]);
+            if (!merged) {
+                continue;
+            }
+
+            const key = methodSignatureKey(merged);
+            if (seen.has(key)) {
+                continue;
+            }
+
+            seen.add(key);
+            synthesized.push(merged);
+        }
+    }
+
+    return [...synthesized, ...constructors];
+}
+
+function tryMergeConstructorPair(a: DocMethod, b: DocMethod): DocMethod | null {
+    if (a.kind !== 'constructor' || b.kind !== 'constructor') {
+        return null;
+    }
+
+    if (a.parameters.length !== b.parameters.length) {
+        return null;
+    }
+
+    let differingIndex = -1;
+    const mergedParameters = a.parameters.map((parameter, index) => {
+        const other = b.parameters[index];
+        if (parameter.name === other.name &&
+            parameter.type.type === other.type.type &&
+            parameter.defaultValue === other.defaultValue) {
+            return parameter;
+        }
+
+        if (parameter.name !== other.name || parameter.defaultValue !== other.defaultValue) {
+            differingIndex = -2;
+            return parameter;
+        }
+
+        if (differingIndex !== -1) {
+            differingIndex = -2;
+            return parameter;
+        }
+
+        differingIndex = index;
+        return {
+            ...parameter,
+            type: {
+                type: `${parameter.type.type} | ${other.type.type}`,
+            },
+            description: parameter.description ?? other.description,
+        };
+    });
+
+    if (differingIndex < 0) {
+        return null;
+    }
+
+    return {
+        ...a,
+        parameters: mergedParameters,
+    };
 }
 
 function buildDeclareClassLine(className: string, extendsName: string): string {

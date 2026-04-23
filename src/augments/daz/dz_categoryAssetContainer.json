@@ -1,0 +1,77 @@
+{
+  "className": "DzCategoryAssetContainer",
+  "members": [
+    {
+      "name": "id",
+      "signature": "id: string;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "icon",
+      "signature": "icon: QObject;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "tooltip",
+      "signature": "tooltip: string;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "canCopyContainers",
+      "signature": "canCopyContainers: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "canInsertSubContainer",
+      "signature": "canInsertSubContainer: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "canDeleteContainer",
+      "signature": "canDeleteContainer: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "canRenameContainer",
+      "signature": "canRenameContainer: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "canModifyAssets",
+      "signature": "canModifyAssets: boolean;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "useCount",
+      "signature": "useCount: number;",
+      "kind": "property",
+      "paramCount": 0
+    },
+    {
+      "name": "updateChildren",
+      "signature": "updateChildren(): boolean;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getIconForStandardCategory",
+      "signature": "getIconForStandardCategory(folder: DzCategoryAssetContainer): DzPixmapPair;",
+      "kind": "method",
+      "paramCount": 1
+    },
+    {
+      "name": "getCategoryTable",
+      "signature": "getCategoryTable(): DzDBCategoriesTable;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}

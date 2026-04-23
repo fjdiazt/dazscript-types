@@ -1,0 +1,17 @@
+{
+  "className": "DzController",
+  "members": [
+    {
+      "name": "getProperty",
+      "signature": "getProperty(): DzNumericProperty;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "getCurrentProperty",
+      "signature": "getCurrentProperty(): DzNumericNodeProperty;",
+      "kind": "method",
+      "paramCount": 0
+    }
+  ]
+}
