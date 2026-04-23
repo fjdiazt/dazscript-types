@@ -21,7 +21,7 @@ export interface SyncSummary {
     unchangedFiles: number;
     skippedFiles: SyncSkip[];
     errors: SyncError[];
-    recoveredLegacyMembers: number;
+    appliedAugmentMembers: number;
 }
 
 export function createSummary(): SyncSummary {
@@ -32,7 +32,7 @@ export function createSummary(): SyncSummary {
         unchangedFiles: 0,
         skippedFiles: [],
         errors: [],
-        recoveredLegacyMembers: 0,
+        appliedAugmentMembers: 0,
     };
 }
 
@@ -45,7 +45,7 @@ export function formatSummary(summary: SyncSummary): string {
         `- Unchanged files: ${summary.unchangedFiles}`,
         `- Skipped files: ${summary.skippedFiles.length}`,
         `- Errors: ${summary.errors.length}`,
-        `- Recovered legacy members: ${summary.recoveredLegacyMembers}`,
+        `- Applied augment members: ${summary.appliedAugmentMembers}`,
     ];
 
     if (summary.skippedFiles.length > 0) {

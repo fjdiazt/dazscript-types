@@ -25,7 +25,7 @@ function isClassShapeMember(
  */
 export function buildClassRegistry(
     htmlModels: Iterable<DazClassModel>,
-    legacyClasses: Iterable<LegacyClassInfo>
+    legacyClasses: Iterable<LegacyClassInfo> = []
 ): ClassRegistry {
     const registry: ClassRegistry = new Map();
 

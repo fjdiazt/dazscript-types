@@ -12,6 +12,20 @@ function makeTempDir(): string {
     return dir;
 }
 
+function writeAugment(augmentDir: string, fileName: string, className: string, members: Array<{
+    kind: 'property' | 'method' | 'constructor';
+    name: string;
+    paramCount: number;
+    signature: string;
+}>): void {
+    fs.mkdirSync(augmentDir, { recursive: true });
+    fs.writeFileSync(
+        path.join(augmentDir, fileName),
+        JSON.stringify({ className, members }, null, 2),
+        'utf-8',
+    );
+}
+
 afterEach(() => {
     while (createdDirs.length > 0) {
         const dir = createdDirs.pop();
@@ -22,10 +36,12 @@ afterEach(() => {
 });
 
 describe('runSyncHtml', () => {
-    it('rebuilds mapped files, skips helpers, and reports summary', async () => {
+    it('rebuilds mapped files, skips helpers, and applies augment members', async () => {
         const root = makeTempDir();
         const typesDir = path.join(root, 'types');
         const htmlDir = path.join(root, 'html');
+        const augmentDir = path.join(root, 'augments');
+        const htmlModelsDir = path.join(root, '.generated', 'html-models');
         fs.mkdirSync(typesDir, { recursive: true });
         fs.mkdirSync(htmlDir, { recursive: true });
 
@@ -48,6 +64,28 @@ declare class DzTestClass extends DzWrongParent {
             'declare class DzParent extends QObject {\n    shared(): void;\n}\n',
             'utf-8'
         );
+        fs.writeFileSync(path.join(htmlDir, 'parent_dz.html'), `
+<!-- @docurl https://docs.example.test/DzParent -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>DzParent</h1>
+  <div class="level1">
+    <p>Parent class.</p>
+    <p><strong>Inherits :</strong></p>
+    <ul><li><a>QObject</a></li></ul>
+  </div>
+  <h2>Methods</h2>
+  <div class="level2"><table><tr><td>void</td><td><strong>shared</strong>()</td></tr></table></div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+  <h3>Methods</h3><div class="level3"><hr/><p>void : <strong><a name="shared">shared</a></strong>()</p><p>Shared method.</p></div>
+</div>
+</body>
+</html>`, 'utf-8');
+        writeAugment(augmentDir, 'dz_testClass.json', 'DzTestClass', [
+            { kind: 'method', name: 'legacyOnly', paramCount: 1, signature: 'legacyOnly(flag: boolean): void;' },
+        ]);
         fs.writeFileSync(path.join(htmlDir, 'testclass_dz.html'), `
 <!-- @docurl https://docs.example.test/DzTestClass -->
 <!DOCTYPE html>
@@ -71,7 +109,7 @@ declare class DzTestClass extends DzWrongParent {
 </body>
 </html>`, 'utf-8');
 
-        const summary = await runSyncHtml(typesDir, htmlDir);
+        const summary = await runSyncHtml(typesDir, htmlDir, { augmentDir, htmlModelsDir });
         const rebuilt = fs.readFileSync(path.join(typesDir, 'dz_testClass.d.ts'), 'utf-8');
 
         expect(rebuilt).toContain('declare class DzTestClass extends DzParent {');
@@ -80,8 +118,8 @@ declare class DzTestClass extends DzWrongParent {
         expect(rebuilt).toContain('ownMethod(): string;');
         expect(rebuilt).toContain('legacyOnly(flag: boolean): void;');
         expect(rebuilt).not.toContain('shared(): void;');
-        expect(summary).toContain('Rebuilt files: 1');
-        expect(summary).toContain('Recovered legacy members: 1');
+        expect(summary).toContain('Rebuilt files: 2');
+        expect(summary).toContain('Applied augment members: 1');
         expect(summary).toContain('dz_signals.d.ts: special-case support file');
     });
 
@@ -89,6 +127,8 @@ declare class DzTestClass extends DzWrongParent {
         const root = makeTempDir();
         const typesDir = path.join(root, 'types');
         const htmlDir = path.join(root, 'html');
+        const augmentDir = path.join(root, 'augments');
+        const htmlModelsDir = path.join(root, '.generated', 'html-models');
         fs.mkdirSync(typesDir, { recursive: true });
         fs.mkdirSync(htmlDir, { recursive: true });
 
@@ -124,7 +164,7 @@ declare class DzTestClass extends DzWrongParent {
 <h3>Methods</h3><div class="level3"><hr/><p>void : <strong><a name="betaMethod">betaMethod</a></strong>()</p><p>Beta method.</p></div>
 </div></body></html>`, 'utf-8');
 
-        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'DzAlpha' });
+        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'DzAlpha', augmentDir, htmlModelsDir });
         const alpha = fs.readFileSync(path.join(typesDir, 'dz_alpha.d.ts'), 'utf-8');
         const beta = fs.readFileSync(path.join(typesDir, 'dz_beta.d.ts'), 'utf-8');
 
@@ -140,6 +180,8 @@ declare class DzTestClass extends DzWrongParent {
         const root = makeTempDir();
         const typesDir = path.join(root, 'types');
         const htmlDir = path.join(root, 'html');
+        const augmentDir = path.join(root, 'augments');
+        const htmlModelsDir = path.join(root, '.generated', 'html-models');
         fs.mkdirSync(typesDir, { recursive: true });
         fs.mkdirSync(htmlDir, { recursive: true });
 
@@ -159,7 +201,7 @@ declare class DzTestClass extends DzWrongParent {
 <h3>Methods</h3><div class="level3"><hr/><p>void : <strong><a name="newMethod">newMethod</a></strong>()</p><p>New method.</p></div>
 </div></body></html>`, 'utf-8');
 
-        const summary = await runSyncHtml(typesDir, htmlDir);
+        const summary = await runSyncHtml(typesDir, htmlDir, { augmentDir, htmlModelsDir });
         const createdPath = path.join(typesDir, 'dz_newType.d.ts');
 
         expect(fs.existsSync(createdPath)).toBe(true);
@@ -173,6 +215,8 @@ declare class DzTestClass extends DzWrongParent {
         const root = makeTempDir();
         const typesDir = path.join(root, 'types');
         const htmlDir = path.join(root, 'html');
+        const augmentDir = path.join(root, 'augments');
+        const htmlModelsDir = path.join(root, '.generated', 'html-models');
         fs.mkdirSync(typesDir, { recursive: true });
         fs.mkdirSync(htmlDir, { recursive: true });
 
@@ -187,7 +231,7 @@ declare class DzTestClass extends DzWrongParent {
 <h3>Methods</h3><div class="level3"><hr/><p>Number : <strong><a name="width">width</a></strong>()</p><p>Gets width.</p><hr/><p>Image : <strong><a name="copy">copy</a></strong>( Image other )</p><p>Copies image.</p></div>
 </div></body></html>`, 'utf-8');
 
-        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'Image' });
+        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'Image', augmentDir, htmlModelsDir });
         const createdPath = path.join(typesDir, 'dz_image.d.ts');
 
         expect(fs.existsSync(createdPath)).toBe(true);
@@ -199,10 +243,12 @@ declare class DzTestClass extends DzWrongParent {
         expect(summary).toContain('Rebuilt files: 1');
     });
 
-    it('can replace an existing file without recovering legacy members', async () => {
+    it('replaces an existing file from HTML only when no augment exists', async () => {
         const root = makeTempDir();
         const typesDir = path.join(root, 'types');
         const htmlDir = path.join(root, 'html');
+        const augmentDir = path.join(root, 'augments');
+        const htmlModelsDir = path.join(root, '.generated', 'html-models');
         fs.mkdirSync(typesDir, { recursive: true });
         fs.mkdirSync(htmlDir, { recursive: true });
 
@@ -235,18 +281,20 @@ declare class DzTestClass extends DzWrongParent {
 </body>
 </html>`, 'utf-8');
 
-        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'DzTestClass', replace: true });
+        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'DzTestClass', augmentDir, htmlModelsDir });
         const rebuilt = fs.readFileSync(path.join(typesDir, 'dz_testClass.d.ts'), 'utf-8');
 
         expect(rebuilt).toContain('ownMethod(): string;');
         expect(rebuilt).not.toContain('legacyOnly(flag: boolean): void;');
-        expect(summary).toContain('Recovered legacy members: 0');
+        expect(summary).toContain('Applied augment members: 0');
     });
 
-    it('can replace an existing file even when it has unsafe top-level content', async () => {
+    it('replaces an existing file even when it has unsafe top-level content', async () => {
         const root = makeTempDir();
         const typesDir = path.join(root, 'types');
         const htmlDir = path.join(root, 'html');
+        const augmentDir = path.join(root, 'augments');
+        const htmlModelsDir = path.join(root, '.generated', 'html-models');
         fs.mkdirSync(typesDir, { recursive: true });
         fs.mkdirSync(htmlDir, { recursive: true });
 
@@ -279,12 +327,70 @@ declare class DzTestClass extends QObject {
 </body>
 </html>`, 'utf-8');
 
-        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'DzTestClass', replace: true });
+        const summary = await runSyncHtml(typesDir, htmlDir, { targetType: 'DzTestClass', augmentDir, htmlModelsDir });
         const rebuilt = fs.readFileSync(path.join(typesDir, 'dz_testClass.d.ts'), 'utf-8');
 
         expect(rebuilt).toContain('freshMethod(): void;');
         expect(rebuilt).not.toContain('legacyOnly(flag: boolean): void;');
         expect(summary).toContain('Rebuilt files: 1');
         expect(summary).not.toContain('unsafe top-level content in existing file');
+    });
+
+    it('can prune redundant augment members after sync when requested', async () => {
+        const root = makeTempDir();
+        const typesDir = path.join(root, 'types');
+        const htmlDir = path.join(root, 'html');
+        const augmentDir = path.join(root, 'augments');
+        const htmlModelsDir = path.join(root, '.generated', 'html-models');
+        const qtDir = path.join(typesDir, 'qt');
+        fs.mkdirSync(typesDir, { recursive: true });
+        fs.mkdirSync(htmlDir, { recursive: true });
+        fs.mkdirSync(qtDir, { recursive: true });
+
+        fs.writeFileSync(
+            path.join(qtDir, 'qt_object.d.ts'),
+            `declare class QObject {
+    deleteLater(): void;
+}
+`,
+            'utf-8'
+        );
+        fs.writeFileSync(
+            path.join(typesDir, 'dz_base.d.ts'),
+            'declare class DzBase extends QObject {\n}\n',
+            'utf-8'
+        );
+        fs.writeFileSync(
+            path.join(typesDir, 'dz_assetIOFilter.d.ts'),
+            'declare class DzAssetIOFilter extends DzWrongParent {\n}\n',
+            'utf-8'
+        );
+        writeAugment(augmentDir, 'dz_assetIOFilter.json', 'DzAssetIOFilter', [
+            { kind: 'method', name: 'deleteLater', paramCount: 0, signature: 'deleteLater(): void;' },
+        ]);
+        fs.writeFileSync(path.join(htmlDir, 'base_dz.html'), `
+<!-- @docurl https://docs.example.test/DzBase -->
+<!DOCTYPE html>
+<html><body><div class="page">
+<h1>DzBase</h1>
+<div class="level1"><p>Base.</p><p><strong>Inherits :</strong></p><ul><li><a>QObject</a></li></ul></div>
+<h2>Detailed Description</h2><div class="level2"></div>
+</div></body></html>`, 'utf-8');
+        fs.writeFileSync(path.join(htmlDir, 'assetiofilter_dz.html'), `
+<!-- @docurl https://docs.example.test/DzAssetIOFilter -->
+<!DOCTYPE html>
+<html><body><div class="page">
+<h1>DzAssetIOFilter</h1>
+<div class="level1"><p>Filter.</p><p><strong>Inherits :</strong></p><ul><li><a>QObject</a><ul><li><a>DzBase</a></li></ul></li></ul></div>
+<h2>Methods</h2><div class="level2"><table><tr><td>void</td><td><strong>doSave</strong>()</td></tr></table></div>
+<h2>Detailed Description</h2><div class="level2"></div>
+<h3>Methods</h3><div class="level3"><hr/><p>void : <strong><a name="doSave">doSave</a></strong>()</p><p>Save.</p></div>
+</div></body></html>`, 'utf-8');
+
+        const summary = await runSyncHtml(typesDir, htmlDir, { augmentDir, htmlModelsDir, pruneAugments: true });
+
+        expect(fs.existsSync(path.join(augmentDir, 'dz_assetIOFilter.json'))).toBe(false);
+        expect(summary).toContain('Augment Prune Summary');
+        expect(summary).toContain('removed deleteLater');
     });
 });

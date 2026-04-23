@@ -12,25 +12,29 @@
  * High-level flow:
  * 1. `buildHtmlIndex()` finds eligible `.d.ts` <-> HTML pairs.
  * 2. `parseHtmlFile()` converts saved docs into normalized class models.
- * 3. `parseLegacyClass()` reads existing `.d.ts` files for recovery data.
+ * 3. Transient HTML models are written for debugging/bootstrap extraction.
  * 4. `buildClassRegistry()` prepares ancestor lookups across known classes.
- * 5. `rebuildClassFile()` renders the final file content for each eligible class.
+ * 5. `rebuildClassFile()` renders the final file content using HTML + augments.
  * 6. `createSummary()` / `formatSummary()` report rebuilt, skipped, and failed files.
  */
 import * as fs from 'fs';
 import * as path from 'path';
 import { buildClassRegistry } from './ancestorRegistry';
+import { loadAugmentFile, writeHtmlModel } from './artifactStore';
 import { htmlFileToTypeFile, isSpecialCaseFile, typeFileToHtmlFile } from './htmlIndex';
 import { parseHtmlFile } from './htmlParser';
-import { parseLegacyClass } from './legacyReader';
 import { createSummary, formatSummary } from './report';
+import { runPruneAugments } from './pruneAugments';
 import { rebuildClassFile } from './rebuild';
-import { DazClassModel, LegacyClassInfo } from './typeModel';
+import { DazClassModel } from './typeModel';
 import { canonicalizeGeneratedClassName } from './typeRenames';
 
 export interface SyncHtmlOptions {
     targetType?: string;
     replace?: boolean;
+    htmlModelsDir?: string;
+    augmentDir?: string;
+    pruneAugments?: boolean;
 }
 
 /**
@@ -38,8 +42,10 @@ export interface SyncHtmlOptions {
  */
 export async function runSyncHtml(typesDir: string, htmlDir: string, options: SyncHtmlOptions = {}): Promise<string> {
     const targetTypeFile = options.targetType ? normalizeTargetTypeFile(options.targetType) : null;
-    const replace = options.replace ?? false;
     const summary = createSummary();
+    const htmlModelsDir = options.htmlModelsDir ?? path.join(process.cwd(), '.generated', 'html-models');
+    const augmentDir = options.augmentDir ?? path.join(process.cwd(), 'src', 'augments', 'daz');
+    const generatedTypesRoot = deriveGeneratedTypesRoot(typesDir);
     const discoveredTypeFiles = fs.readdirSync(typesDir, { withFileTypes: true })
         .filter(entry => entry.isFile() && entry.name.endsWith('.d.ts'))
         .map(entry => entry.name)
@@ -121,24 +127,14 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
     }
 
     const htmlModels = new Map<string, DazClassModel>();
-    const legacyClasses = new Map<string, LegacyClassInfo>();
 
     for (const entry of htmlEntries) {
-        htmlModels.set(entry.className, parseHtmlFile(entry.htmlPath));
+        const model = parseHtmlFile(entry.htmlPath);
+        htmlModels.set(entry.className, model);
+        writeHtmlModel(htmlModelsDir, model);
     }
 
-    for (const typeFile of discoveredTypeFiles) {
-        const typePath = path.join(typesDir, typeFile);
-        if (!fs.existsSync(typePath)) {
-            continue;
-        }
-        const parsed = parseLegacyClass(fs.readFileSync(typePath, 'utf-8'));
-        if (parsed) {
-            legacyClasses.set(parsed.className, parsed);
-        }
-    }
-
-    const registry = buildClassRegistry(htmlModels.values(), legacyClasses.values());
+    const registry = buildClassRegistry(htmlModels.values());
 
     for (const entry of htmlEntries) {
         const model = htmlModels.get(entry.className);
@@ -147,28 +143,14 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
         }
 
         try {
-            let legacyMembers: LegacyClassInfo['members'] = [];
+            const augmentMembers = loadAugmentFile(augmentDir, entry.className)?.members ?? [];
             let original = '';
 
             if (fs.existsSync(entry.typePath)) {
                 original = fs.readFileSync(entry.typePath, 'utf-8');
-                if (!replace) {
-                    const legacy = parseLegacyClass(original, entry.className);
-                    if (!legacy) {
-                        summary.errors.push({ file: entry.typeFile, error: 'failed to parse existing type file' });
-                        continue;
-                    }
-
-                    if (legacy.hasUnsafeTopLevelContent) {
-                        summary.skippedFiles.push({ file: entry.typeFile, reason: 'unsafe top-level content in existing file' });
-                        continue;
-                    }
-
-                    legacyMembers = legacy.members;
-                }
             }
 
-            const result = rebuildClassFile(model, legacyMembers, registry);
+            const result = rebuildClassFile(model, augmentMembers, registry);
             if (original === result.content) {
                 summary.unchangedFiles++;
                 continue;
@@ -176,7 +158,7 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
 
             fs.writeFileSync(entry.typePath, result.content, 'utf-8');
             summary.rebuiltFiles++;
-            summary.recoveredLegacyMembers += result.recoveredLegacyCount;
+            summary.appliedAugmentMembers += result.appliedAugmentCount;
         } catch (error) {
             summary.errors.push({
                 file: entry.typeFile,
@@ -185,21 +167,30 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
         }
     }
 
-    return formatSummary(summary);
+    const formattedSummary = formatSummary(summary);
+    if (!options.pruneAugments) {
+        return formattedSummary;
+    }
+
+    const pruneSummary = runPruneAugments(generatedTypesRoot, augmentDir, {
+        targetType: options.targetType,
+        htmlModelsDir,
+    });
+    return `${formattedSummary}\n\n${pruneSummary}`;
 }
 
 async function main() {
     const args = process.argv.slice(2);
     const positional: string[] = [];
     let targetType: string | undefined;
-    let replace = false;
+    let pruneAugments = false;
 
     for (let i = 0; i < args.length; i++) {
         if (args[i] === '--type') {
             targetType = args[i + 1];
             i++;
-        } else if (args[i] === '--replace') {
-            replace = true;
+        } else if (args[i] === '--prune-augments') {
+            pruneAugments = true;
         } else {
             positional.push(args[i]);
         }
@@ -207,7 +198,7 @@ async function main() {
 
     const targetDir = positional[0] ?? path.join(process.cwd(), 'src', 'types', 'daz');
     const htmlDir = positional[1] ?? path.join(process.cwd(), 'scripts', 'daz_api_html');
-    const summary = await runSyncHtml(targetDir, htmlDir, { targetType, replace });
+    const summary = await runSyncHtml(targetDir, htmlDir, { targetType, pruneAugments });
     console.log(summary);
 }
 
@@ -244,6 +235,15 @@ function normalizeTargetTypeFile(targetType: string): string {
     }
 
     return `${canonicalClassName.toLowerCase()}.d.ts`;
+}
+
+function deriveGeneratedTypesRoot(typesDir: string): string {
+    const normalized = path.basename(typesDir).toLowerCase();
+    if (normalized === 'daz' || normalized === 'qt' || normalized === 'common') {
+        return path.dirname(typesDir);
+    }
+
+    return typesDir;
 }
 
 if (require.main === module) {

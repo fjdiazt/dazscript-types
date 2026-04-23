@@ -2,3 +2,4 @@ node_modules
 dist/types/
 .claude
 scripts/daz_api_html/
+.generated/

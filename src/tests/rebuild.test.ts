@@ -63,7 +63,7 @@ describe('rebuildClassFile', () => {
         expect(result.content).toContain('legacyOnly(value: number): void;');
         expect(result.content).not.toContain('Inherited label.');
         expect(result.content).not.toContain('shared(): void;');
-        expect(result.recoveredLegacyCount).toBe(1);
+        expect(result.appliedAugmentCount).toBe(1);
     });
 
     it('renders enumeration values as documented static properties', () => {
@@ -130,7 +130,7 @@ describe('rebuildClassFile', () => {
 
         expect(result.content).toContain('aspectOnChanged: ISignal<boolean>;');
         expect(result.content).not.toContain('aspectOnChanged(onOff: boolean): void;');
-        expect(result.recoveredLegacyCount).toBe(0);
+        expect(result.appliedAugmentCount).toBe(0);
     });
 
     it('does not recover legacy methods when a documented signal with the same name changed arity', () => {
@@ -167,7 +167,7 @@ describe('rebuildClassFile', () => {
 
         expect(result.content).toContain('thirdsGuideOnChanged: ISignal<boolean>;');
         expect(result.content).not.toContain('thirdsGuideOnChanged(): any; // TODO ;');
-        expect(result.recoveredLegacyCount).toBe(0);
+        expect(result.appliedAugmentCount).toBe(0);
     });
 
   it('emits undocumented lowercase DAZ slug types as any with notes', () => {
@@ -203,7 +203,7 @@ describe('rebuildClassFile', () => {
     expect(result.content).toContain('getCameraCube(cube: any): any; // cameracube_dz; undocumented type');
   });
 
-  it('rewrites recovered legacy signatures for renamed generated types', () => {
+  it('rewrites augment signatures for renamed generated types', () => {
     const model: DazClassModel = {
       className: 'DzImageHost',
       docUrl: 'https://docs.example.test/DzImageHost',
@@ -269,7 +269,7 @@ describe('rebuildClassFile', () => {
 
     expect(result.content).toContain('removeAssetCausesDelete: boolean;');
     expect(result.content).not.toContain('removeAssetCausesDelete(): boolean;');
-    expect(result.recoveredLegacyCount).toBe(0);
+    expect(result.appliedAugmentCount).toBe(0);
   });
 
   it('comments a signal when its name conflicts with a documented property', () => {
@@ -336,7 +336,7 @@ describe('rebuildClassFile', () => {
 
     expect(result.content).toContain('/** @undocumented */');
     expect(result.content).toContain('constructor(name: string);');
-    expect(result.recoveredLegacyCount).toBe(1);
+    expect(result.appliedAugmentCount).toBe(1);
   });
 
   it('does not recover a legacy method when an ancestor already documents a signal property with the same name', () => {
@@ -387,7 +387,7 @@ describe('rebuildClassFile', () => {
     const result = rebuildClassFile(model, legacyMembers, registry);
 
     expect(result.content).not.toContain('nameChanged(p0: string): void;');
-    expect(result.recoveredLegacyCount).toBe(0);
+    expect(result.appliedAugmentCount).toBe(0);
   });
 
   it('emits sanitized reserved parameter names in method signatures and docs', () => {
@@ -472,7 +472,7 @@ describe('rebuildClassFile', () => {
     expect(result.content).not.toContain('itemRenamed: ISignal<DzListViewItem, number>;');
   });
 
-  it('does not recover legacy overloads for a documented method name', () => {
+  it('allows manual augment overloads for a documented method name', () => {
     const model: DazClassModel = {
       className: 'DzNumericProperty',
       docUrl: 'https://docs.example.test/DzNumericProperty',
@@ -508,7 +508,7 @@ describe('rebuildClassFile', () => {
     const result = rebuildClassFile(model, legacyMembers, registry);
 
     expect(result.content).toContain('setMax(max: number): void;');
-    expect(result.content).not.toContain('setMax(prop: DzProperty, max: number): void;');
-    expect(result.recoveredLegacyCount).toBe(0);
+    expect(result.content).toContain('setMax(prop: DzProperty, max: number): void;');
+    expect(result.appliedAugmentCount).toBe(1);
   });
 });

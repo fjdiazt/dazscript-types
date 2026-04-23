@@ -1,7 +1,7 @@
 /**
  * Renders the final `.d.ts` output for one class.
  *
- * This module turns normalized HTML data plus recovered legacy members into a
+ * This module turns normalized HTML data plus repo-tracked augment members into a
  * deterministic class declaration. Ancestor filtering decisions happen here,
  * while HTML parsing and legacy parsing stay in their own modules.
  */
@@ -18,7 +18,7 @@ import { canonicalizeLegacySignature } from './typeRenames';
 
 export interface RebuildResult {
     content: string;
-    recoveredLegacyCount: number;
+    appliedAugmentCount: number;
 }
 
 interface ConflictingSignal {
@@ -75,7 +75,7 @@ function signalMetadataScore(signal: DocSignal): number {
  */
 export function rebuildClassFile(
     model: DazClassModel,
-    legacyMembers: LegacyMember[],
+    augmentMembers: LegacyMember[],
     registry: ClassRegistry
 ): RebuildResult {
     const mergedSignals = mergeSignals(model.signals);
@@ -120,45 +120,17 @@ export function rebuildClassFile(
         ...model.properties.map(member => member.name),
         ...mergedSignals.map(member => member.name),
     ]);
-    const documentedMethodKeys = new Set([
-        ...model.staticMethods.map(member => methodKey(member.name, member.parameters.length)),
-        ...model.methods.map(member => methodKey(member.name, member.parameters.length)),
-        ...model.constructors.map(member => methodKey(member.name, member.parameters.length)),
-    ]);
-    const documentedMethodNames = new Set([
-        ...model.staticMethods.map(member => member.name),
-        ...model.methods.map(member => member.name),
-    ]);
-    const documentedSignalNames = new Set(mergedSignals.map(member => member.name));
-    const documentedSignalKeys = new Set(
-        mergedSignals.map(member => methodKey(member.name, member.parameters.length))
-    );
-
-    const recoveredLegacy = legacyMembers.filter(member => {
+    const augmentOutput = augmentMembers.filter(member => {
         if (member.kind === 'constructor') {
-            return !documentedMethodKeys.has(methodKey(member.name, member.paramCount));
+            return true;
         }
 
         if (member.kind === 'property') {
             return !documentedPropertyNames.has(member.name) &&
-                !documentedMethodKeys.has(methodKey(member.name, 0)) &&
-                !documentedSignalNames.has(member.name) &&
-                !hasAncestorProperty(member.name);
+                !findPropertyOrMethodNameConflict(member.name);
         }
 
-        if (documentedPropertyNames.has(member.name)) {
-            return false;
-        }
-
-        if (documentedMethodNames.has(member.name)) {
-            return false;
-        }
-
-        return !documentedMethodKeys.has(methodKey(member.name, member.paramCount)) &&
-            !documentedSignalNames.has(member.name) &&
-            !documentedSignalKeys.has(methodKey(member.name, member.paramCount)) &&
-            !hasAncestorProperty(member.name) &&
-            !hasAncestorMethod(member.name, member.paramCount);
+        return !documentedPropertyNames.has(member.name);
     });
 
     const lines: string[] = [];
@@ -177,10 +149,10 @@ export function rebuildClassFile(
     emitSection(lines, 'Signals', signals, emitSignal);
     emitSection(lines, 'Conflicting Signals', conflictingSignals, emitConflictingSignal);
 
-    if (recoveredLegacy.length > 0) {
+    if (augmentOutput.length > 0) {
         lines.push('');
-        lines.push('    /* Undocumented Legacy Members */');
-        for (const member of recoveredLegacy) {
+        lines.push('    /* Undocumented Augment Members */');
+        for (const member of augmentOutput) {
             lines.push('');
             lines.push('    /** @undocumented */');
             lines.push(`    ${canonicalizeLegacySignature(member.signature)}`);
@@ -192,7 +164,7 @@ export function rebuildClassFile(
 
     return {
         content: lines.join('\n'),
-        recoveredLegacyCount: recoveredLegacy.length,
+        appliedAugmentCount: augmentOutput.length,
     };
 }
 
@@ -408,8 +380,4 @@ function buildRawTypeComment(type: TypeRef): string {
     }
 
     return '';
-}
-
-function methodKey(name: string, paramCount: number): string {
-    return `${name}:::${paramCount}`;
 }
