@@ -104,6 +104,7 @@ export function rebuildClassFile(
         return !documentedMethodKeys.has(methodKey(member.name, member.paramCount)) &&
             !documentedSignalNames.has(member.name) &&
             !documentedSignalKeys.has(methodKey(member.name, member.paramCount)) &&
+            !hasAncestorProperty(member.name) &&
             !hasAncestorMethod(member.name, member.paramCount);
     });
 

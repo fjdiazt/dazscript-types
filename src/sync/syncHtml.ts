@@ -127,8 +127,11 @@ export async function runSyncHtml(typesDir: string, htmlDir: string, options: Sy
         htmlModels.set(entry.className, parseHtmlFile(entry.htmlPath));
     }
 
-    for (const typeFile of allTypeFiles) {
+    for (const typeFile of discoveredTypeFiles) {
         const typePath = path.join(typesDir, typeFile);
+        if (!fs.existsSync(typePath)) {
+            continue;
+        }
         const parsed = parseLegacyClass(fs.readFileSync(typePath, 'utf-8'));
         if (parsed) {
             legacyClasses.set(parsed.className, parsed);

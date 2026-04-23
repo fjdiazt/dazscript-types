@@ -338,4 +338,55 @@ describe('rebuildClassFile', () => {
     expect(result.content).toContain('constructor(name: string);');
     expect(result.recoveredLegacyCount).toBe(1);
   });
+
+  it('does not recover a legacy method when an ancestor already documents a signal property with the same name', () => {
+    const parent: DazClassModel = {
+      className: 'DzBase',
+      docUrl: 'https://docs.example.test/DzBase',
+      summary: 'Base class.',
+      extendsName: 'QObject',
+      enums: [],
+      properties: [],
+      constructors: [],
+      staticMethods: [],
+      methods: [],
+      signals: [
+        {
+          kind: 'signal',
+          name: 'nameChanged',
+          parameters: [{ name: 'name', type: { type: 'string' }, defaultValue: null }],
+          description: 'Name changed.',
+        },
+      ],
+    };
+    const model: DazClassModel = {
+      className: 'DzAppSettings',
+      docUrl: 'https://docs.example.test/DzAppSettings',
+      summary: 'Settings.',
+      extendsName: 'DzBase',
+      enums: [],
+      properties: [],
+      constructors: [],
+      staticMethods: [],
+      methods: [],
+      signals: [],
+    };
+    const registry = buildClassRegistry([parent, model], [
+      makeLegacy('QObject', '', []),
+      makeLegacy('DzBase', 'QObject', []),
+    ]);
+    const legacyMembers = [
+      {
+        kind: 'method' as const,
+        name: 'nameChanged',
+        paramCount: 1,
+        signature: 'nameChanged(p0: string): void;',
+      },
+    ];
+
+    const result = rebuildClassFile(model, legacyMembers, registry);
+
+    expect(result.content).not.toContain('nameChanged(p0: string): void;');
+    expect(result.recoveredLegacyCount).toBe(0);
+  });
 });

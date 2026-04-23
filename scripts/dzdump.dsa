@@ -1,0 +1,564 @@
+/*
+ * DAZ Studio runtime declaration dumper.
+ *
+ * Edit TARGETS and run this script inside DAZ Studio.
+ * Each target must return a live instance of the class you want to inspect.
+ *
+ * The script prints one declaration block per unique runtime class.
+ * Output is formatted to be easy to paste into the type files later.
+ */
+
+var TARGETS = [
+    {
+        label: "Primary Selection",
+        getObject: function () {
+            return Scene.getPrimarySelection();
+        }
+    }
+    //,
+    //{
+    //    label: "HBox Layout",
+    //    getObject: function () {
+    //        return new DzHBoxLayout();
+    //    }
+    //}
+];
+
+var dumpedClasses = {};
+var signalSuffixes = [
+    "Changed",
+    "Clicked",
+    "Collapsed",
+    "DoubleClicked",
+    "Expanded",
+    "Finished",
+    "Hidden",
+    "Pressed",
+    "Released",
+    "Renamed",
+    "Requested",
+    "Shown",
+    "Triggered",
+    "Updated"
+];
+
+function trim(value) {
+    return String(value).replace(/^\s+|\s+$/g, "");
+}
+
+function endsWith(value, suffix) {
+    if (value.length < suffix.length) {
+        return false;
+    }
+
+    return value.indexOf(suffix, value.length - suffix.length) !== -1;
+}
+
+function repeat(value, count) {
+    var result = "";
+    var i;
+    for (i = 0; i < count; i += 1) {
+        result += value;
+    }
+    return result;
+}
+
+function safeCall(fn, fallback) {
+    try {
+        return fn();
+    } catch (error) {
+        return fallback;
+    }
+}
+
+function safeString(value) {
+    return safeCall(function () {
+        return String(value);
+    }, "");
+}
+
+function getClassName(obj, fallbackName) {
+    if (!obj) {
+        return fallbackName || "UnknownRuntimeType";
+    }
+
+    if (typeof obj.className === "function") {
+        return safeCall(function () {
+            return trim(obj.className());
+        }, fallbackName || "UnknownRuntimeType");
+    }
+
+    return fallbackName || "UnknownRuntimeType";
+}
+
+function isSignalObject(value) {
+    if (!value || typeof value !== "object") {
+        return false;
+    }
+
+    return typeof value.connect === "function" &&
+        typeof value.scriptConnect === "function" &&
+        typeof value.disconnect === "function";
+}
+
+function looksLikeSignalName(name) {
+    var i;
+    for (i = 0; i < signalSuffixes.length; i += 1) {
+        if (endsWith(name, signalSuffixes[i])) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function inferTypeName(value) {
+    var typeName;
+
+    if (value === null || typeof value === "undefined") {
+        return "any";
+    }
+
+    if (isSignalObject(value)) {
+        return "ISignal<any>";
+    }
+
+    typeName = typeof value;
+    if (typeName === "string") {
+        return "string";
+    }
+    if (typeName === "number") {
+        return "number";
+    }
+    if (typeName === "boolean") {
+        return "boolean";
+    }
+    if (typeName === "function") {
+        return "Function";
+    }
+
+    if (value && typeof value.className === "function") {
+        return getClassName(value, "any");
+    }
+
+    if (value && typeof value.length === "number" && typeof value !== "string") {
+        return "any[]";
+    }
+
+    return "any";
+}
+
+function formatValuePreview(value) {
+    var preview;
+    var typeName = typeof value;
+
+    if (value === null) {
+        return "null";
+    }
+
+    if (typeof value === "undefined") {
+        return "undefined";
+    }
+
+    if (typeName === "string") {
+        preview = '"' + value.replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"';
+    } else if (typeName === "number" || typeName === "boolean") {
+        preview = String(value);
+    } else if (isSignalObject(value)) {
+        preview = "signal";
+    } else if (value && typeof value.className === "function") {
+        preview = getClassName(value, "object");
+    } else {
+        preview = trim(safeString(value));
+        if (!preview || preview === "[object Object]") {
+            preview = typeName;
+        }
+    }
+
+    if (preview.length > 80) {
+        preview = preview.substr(0, 77) + "...";
+    }
+
+    return preview;
+}
+
+function normalizeTypeName(typeName) {
+    var value = trim(typeName)
+        .replace(/\*/g, "")
+        .replace(/\bconst\b/g, "")
+        .replace(/\s+/g, " ");
+
+    if (!value) {
+        return "any";
+    }
+
+    if (value === "String" || value === "QString") {
+        return "string";
+    }
+    if (value === "Number" || value === "int" || value === "float" || value === "double" || value === "qreal") {
+        return "number";
+    }
+    if (value === "Boolean" || value === "bool") {
+        return "boolean";
+    }
+    if (value === "Array") {
+        return "any[]";
+    }
+    if (value === "void") {
+        return "void";
+    }
+
+    return value;
+}
+
+function splitParameters(rawParameters) {
+    var parts = [];
+    var current = "";
+    var depth = 0;
+    var i;
+    var charCode;
+    var char;
+
+    for (i = 0; i < rawParameters.length; i += 1) {
+        char = rawParameters.charAt(i);
+        charCode = rawParameters.charCodeAt(i);
+
+        if (char === "<" || char === "(" || char === "[") {
+            depth += 1;
+        } else if (char === ">" || char === ")" || char === "]") {
+            if (depth > 0) {
+                depth -= 1;
+            }
+        }
+
+        if (char === "," && depth === 0) {
+            if (trim(current)) {
+                parts.push(trim(current));
+            }
+            current = "";
+            continue;
+        }
+
+        current += String.fromCharCode(charCode);
+    }
+
+    if (trim(current)) {
+        parts.push(trim(current));
+    }
+
+    return parts;
+}
+
+function looksLikeTypeToken(token) {
+    if (!token) {
+        return false;
+    }
+
+    if (token === "string" || token === "number" || token === "boolean" || token === "void" || token === "any") {
+        return true;
+    }
+
+    return /^[A-Z]/.test(token) || /^(Dz|Q)/.test(token);
+}
+
+function formatParameterToken(token, index) {
+    var cleaned = trim(token);
+    var defaultIndex;
+    var pieces;
+    var paramName;
+    var typeName;
+
+    if (!cleaned) {
+        return "p" + index + ": any";
+    }
+
+    defaultIndex = cleaned.indexOf("=");
+    if (defaultIndex >= 0) {
+        cleaned = trim(cleaned.substr(0, defaultIndex));
+    }
+
+    pieces = cleaned.split(/\s+/);
+    if (pieces.length > 1 && !looksLikeTypeToken(pieces[pieces.length - 1])) {
+        paramName = pieces[pieces.length - 1];
+        typeName = normalizeTypeName(pieces.slice(0, pieces.length - 1).join(" "));
+    } else {
+        paramName = "p" + index;
+        typeName = normalizeTypeName(cleaned);
+    }
+
+    return paramName + ": " + typeName;
+}
+
+function parseCallableSignature(name, value) {
+    var raw = trim(safeString(value));
+    var normalized;
+    var match;
+    var rawParameters;
+    var params;
+    var i;
+    var formattedParams = [];
+    var returnType;
+
+    if (!raw) {
+        return {
+            raw: "",
+            signature: name + "(...args: any[]): any;"
+        };
+    }
+
+    normalized = raw
+        .replace(/\*/g, "")
+        .replace(/^function\s+/, "")
+        .replace(/^const\s+/, "")
+        .replace(/\s+/g, " ");
+
+    if (normalized.indexOf(name) !== 0) {
+        if (normalized.indexOf("(") >= 0) {
+            normalized = name + normalized.substr(normalized.indexOf("("));
+        } else {
+            normalized = name + "()";
+        }
+    }
+
+    normalized = normalized.replace(/\s*;\s*$/, "");
+    match = normalized.match(/^([A-Za-z_]\w*)\s*\((.*)\)\s*(?::\s*(.+))?$/);
+
+    if (!match) {
+        return {
+            raw: raw,
+            signature: name + "(...args: any[]): any;"
+        };
+    }
+
+    rawParameters = trim(match[2]);
+    params = rawParameters ? splitParameters(rawParameters) : [];
+    for (i = 0; i < params.length; i += 1) {
+        formattedParams.push(formatParameterToken(params[i], i));
+    }
+
+    returnType = normalizeTypeName(match[3] || "any");
+
+    return {
+        raw: raw,
+        signature: match[1] + "(" + formattedParams.join(", ") + "): " + returnType + ";",
+        paramTypes: params
+    };
+}
+
+function buildSignalType(name, value) {
+    var callable = parseCallableSignature(name, value);
+    var i;
+    var types = [];
+    var params;
+
+    if (!callable.paramTypes || callable.paramTypes.length === 0) {
+        return {
+            type: "ISignal<void>",
+            raw: callable.raw
+        };
+    }
+
+    params = callable.paramTypes;
+    for (i = 0; i < params.length; i += 1) {
+        types.push(normalizeTypeName(params[i].split(/\s+/)[0]));
+    }
+
+    return {
+        type: "ISignal<" + types.join(", ") + ">",
+        raw: callable.raw
+    };
+}
+
+function collectMembers(obj) {
+    var enums = [];
+    var properties = [];
+    var methods = [];
+    var signals = [];
+    var seen = {};
+    var name;
+    var value;
+    var callable;
+    var signal;
+
+    for (name in obj) {
+        if (seen[name]) {
+            continue;
+        }
+        seen[name] = true;
+
+        value = obj[name];
+
+        if (isSignalObject(value)) {
+            signals.push({
+                name: name,
+                type: "ISignal<any>",
+                raw: "runtime signal object"
+            });
+            continue;
+        }
+
+        if (typeof value === "function") {
+            if (looksLikeSignalName(name)) {
+                signal = buildSignalType(name, value);
+                signals.push({
+                    name: name,
+                    type: signal.type,
+                    raw: signal.raw
+                });
+            } else {
+                callable = parseCallableSignature(name, value);
+                methods.push({
+                    name: name,
+                    signature: callable.signature,
+                    raw: callable.raw
+                });
+            }
+            continue;
+        }
+
+        if (/^[A-Z]/.test(name)) {
+            enums.push({
+                name: name,
+                type: inferTypeName(value),
+                preview: formatValuePreview(value)
+            });
+            continue;
+        }
+
+        properties.push({
+            name: name,
+            type: inferTypeName(value),
+            preview: formatValuePreview(value)
+        });
+    }
+
+    enums.sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
+    properties.sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
+    methods.sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
+    signals.sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
+
+    return {
+        enums: enums,
+        properties: properties,
+        methods: methods,
+        signals: signals
+    };
+}
+
+function emitSection(lines, title, entries, emitter) {
+    var i;
+
+    if (!entries.length) {
+        return;
+    }
+
+    lines.push("");
+    lines.push("    /* " + title + " */");
+    for (i = 0; i < entries.length; i += 1) {
+        lines.push("");
+        emitter(lines, entries[i]);
+    }
+}
+
+function emitEnum(lines, entry) {
+    lines.push("    /**");
+    lines.push("     * Runtime-discovered enum-like static property.");
+    lines.push("     * @runtimeValue " + entry.preview);
+    lines.push("     */");
+    lines.push("    static " + entry.name + ": " + entry.type + ";");
+}
+
+function emitProperty(lines, entry) {
+    lines.push("    /**");
+    lines.push("     * Runtime-discovered property.");
+    lines.push("     * @runtimeValue " + entry.preview);
+    lines.push("     */");
+    lines.push("    " + entry.name + ": " + entry.type + ";");
+}
+
+function emitMethod(lines, entry) {
+    lines.push("    /**");
+    lines.push("     * Runtime-discovered method.");
+    if (entry.raw) {
+        lines.push("     * @runtimeSignature " + entry.raw.replace(/\*\//g, "* /"));
+    }
+    lines.push("     */");
+    lines.push("    " + entry.signature);
+}
+
+function emitSignal(lines, entry) {
+    lines.push("    /**");
+    lines.push("     * Runtime-discovered signal.");
+    if (entry.raw) {
+        lines.push("     * @runtimeSignature " + entry.raw.replace(/\*\//g, "* /"));
+    }
+    lines.push("     */");
+    lines.push("    " + entry.name + ": " + entry.type + ";");
+}
+
+function buildDeclaration(targetLabel, obj) {
+    var className = getClassName(obj, targetLabel.replace(/\s+/g, ""));
+    var members = collectMembers(obj);
+    var lines = [];
+
+    lines.push("/* ===== DZDUMP BEGIN " + className + " ===== */");
+    lines.push("/**");
+    lines.push(" * Runtime dump generated by script-types/scripts/dzdump.dsa");
+    lines.push(" * @runtimeTarget " + targetLabel);
+    lines.push(" */");
+    lines.push("declare class " + className + " {");
+
+    emitSection(lines, "Enumerations (Static Properties)", members.enums, emitEnum);
+    emitSection(lines, "Properties", members.properties, emitProperty);
+    emitSection(lines, "Methods", members.methods, emitMethod);
+    emitSection(lines, "Signals", members.signals, emitSignal);
+
+    lines.push("}");
+    lines.push("/* ===== DZDUMP END " + className + " ===== */");
+
+    return {
+        className: className,
+        content: lines.join("\n")
+    };
+}
+
+function dumpTarget(target) {
+    var obj;
+    var declaration;
+
+    obj = safeCall(function () {
+        return target.getObject();
+    }, null);
+
+    if (!obj) {
+        print("[dzdump] Skipped target \"" + target.label + "\" because it returned null.");
+        return;
+    }
+
+    declaration = buildDeclaration(target.label, obj);
+    if (dumpedClasses[declaration.className]) {
+        print("[dzdump] Skipped duplicate runtime class " + declaration.className + " from target \"" + target.label + "\".");
+        return;
+    }
+
+    dumpedClasses[declaration.className] = true;
+    print(declaration.content);
+    print("");
+}
+
+function runDump() {
+    var i;
+
+    print("[dzdump] Starting runtime declaration dump.");
+    print("[dzdump] Targets: " + TARGETS.length);
+    print("");
+
+    for (i = 0; i < TARGETS.length; i += 1) {
+        dumpTarget(TARGETS[i]);
+    }
+
+    print("[dzdump] Completed runtime declaration dump.");
+    App.flushLogBuffer();
+}
+
+runDump();

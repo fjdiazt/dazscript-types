@@ -175,4 +175,64 @@ describe('htmlParser', () => {
     expect(model.methods[0].parameters[1].type.type).toBe('number');
     expect(model.methods[0].parameters[1].type.rawType).toBe('int');
   });
+
+  it('parses one-column constructor tables', () => {
+    const html = `
+<!-- @docurl https://docs.example.test/DzAppSettings -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>DzAppSettings</h1>
+  <div class="level1">
+    <p>Settings test.</p>
+    <p><strong>Inherits :</strong></p>
+    <ul><li><a>DzBase</a></li></ul>
+  </div>
+  <h2>Constructors</h2>
+  <div class="level2">
+    <table>
+      <tr><td><strong>DzAppSettings</strong> <em>()</em></td></tr>
+      <tr><td><strong>DzAppSettings</strong> <em>( String startPath )</em></td></tr>
+    </table>
+  </div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+</div>
+</body>
+</html>`;
+
+    const model = parseHtml(html);
+
+    expect(model.constructors).toHaveLength(2);
+    expect(model.constructors[0].parameters).toHaveLength(0);
+    expect(model.constructors[1].parameters[0].name).toBe('startPath');
+    expect(model.constructors[1].parameters[0].type.type).toBe('string');
+  });
+
+  it('strips deprecated labels from class names and inheritance types', () => {
+    const html = `
+<!-- @docurl https://docs.example.test/DzRotateManip -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>DzRotateManip (deprecated)</h1>
+  <div class="level1">
+    <p>Rotate manip summary. (deprecated).</p>
+    <p><strong>Inherits :</strong></p>
+    <ul><li><a>DzImageManip (deprecated)</a></li></ul>
+  </div>
+  <h2>Methods</h2>
+  <div class="level2"><table><tr><td>void</td><td><strong>setRotation</strong>( Number rot )</td></tr></table></div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+</div>
+</body>
+</html>`;
+
+    const model = parseHtml(html);
+
+    expect(model.className).toBe('DzRotateManip');
+    expect(model.extendsName).toBe('DzImageManip');
+    expect(model.summary).toBe('Rotate manip summary. (deprecated).');
+  });
 });

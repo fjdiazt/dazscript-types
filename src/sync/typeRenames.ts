@@ -9,11 +9,13 @@ const REVERSE_HTML_GENERATED_CLASS_RENAMES = Object.fromEntries(
 );
 
 export function canonicalizeGeneratedClassName(className: string): string {
-    return HTML_GENERATED_CLASS_RENAMES[className] ?? className;
+    const normalized = stripDeprecatedSuffix(className);
+    return HTML_GENERATED_CLASS_RENAMES[normalized] ?? normalized;
 }
 
 export function getHtmlSourceClassName(className: string): string {
-    return REVERSE_HTML_GENERATED_CLASS_RENAMES[className] ?? className;
+    const normalized = stripDeprecatedSuffix(className);
+    return REVERSE_HTML_GENERATED_CLASS_RENAMES[normalized] ?? normalized;
 }
 
 export function canonicalizeTypeRef(typeRef: TypeRef): TypeRef {
@@ -40,4 +42,8 @@ export function canonicalizeLegacySignature(signature: string): string {
     }
 
     return rewritten;
+}
+
+function stripDeprecatedSuffix(name: string): string {
+    return name.replace(/\s+\(deprecated\)\s*$/i, '').trim();
 }

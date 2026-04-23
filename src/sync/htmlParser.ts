@@ -17,7 +17,7 @@ import {
 } from './typeModel';
 import { canonicalizeGeneratedClassName, canonicalizeTypeRef } from './typeRenames';
 
-type CheerioRoot = cheerio.CheerioAPI;
+type CheerioRoot = ReturnType<typeof cheerio.load>;
 
 interface DetailedEntry {
     name: string;
@@ -229,26 +229,39 @@ function extractMethodMembers(
 ): DocMethod[] {
     return findSectionRows($, sectionName).flatMap(row => {
         const cols = $(row).find('td');
+        if (kind === 'constructor') {
+            if (cols.length < 1) {
+                return [];
+            }
+
+            const constructorMember: DocMethod = {
+                kind,
+                name: 'constructor',
+                returnType: { type: 'void' },
+                parameters: extractParametersFromCell($, cols[0]),
+            };
+
+            return [constructorMember];
+        }
+
         if (cols.length < 2) {
             return [];
         }
 
-        const returnType = kind === 'constructor'
-            ? { type: 'void' }
-            : normalizeTypeCell($, cols[0]);
-        const name = kind === 'constructor'
-            ? 'constructor'
-            : $(cols[1]).find('strong').first().text().trim();
+        const returnType = normalizeTypeCell($, cols[0]);
+        const name = $(cols[1]).find('strong').first().text().trim();
         if (!name) {
             return [];
         }
 
-        return [{
+        const methodMember: DocMethod = {
             kind,
             name,
             returnType,
             parameters: extractParametersFromCell($, cols[1]),
-        }];
+        };
+
+        return [methodMember];
     });
 }
 
@@ -281,7 +294,8 @@ function findSectionRows($: CheerioRoot, title: string): any[] {
         }
 
         const section = $(el).next('.level2');
-        const rows = section.find('table tr').toArray().filter(row => $(row).find('td').length >= 2);
+        const minimumColumns = title === 'Constructors' ? 1 : 2;
+        const rows = section.find('table tr').toArray().filter(row => $(row).find('td').length >= minimumColumns);
         sectionRows = rows;
         return false;
     });
@@ -460,7 +474,8 @@ function parseDetailedSection($: CheerioRoot, sectionName: string): DetailedEntr
     const blocks: any[][] = [];
     let currentBlock: any[] = [];
     container.children().each((_, el) => {
-        if ((el.tagName || '').toLowerCase() === 'hr') {
+        const tagName = 'tagName' in el ? (el.tagName || '').toLowerCase() : '';
+        if (tagName === 'hr') {
             if (currentBlock.length > 0) {
                 blocks.push(currentBlock);
                 currentBlock = [];

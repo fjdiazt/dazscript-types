@@ -1,21 +1,4 @@
-/**
- * @deprecated use ISignal<T>
- */
-interface ISignal {
-    scriptConnect(action: DzAction | ((sender: any) => void), funcName?: QString): void;
-    scriptConnect(action: DzAction | ((sender: any, arg: any) => void), funcName?: QString): void;
-    /**
-     * @deprecated
-     */
-    connect(action: DzAction | ((sender: any) => void), funcName?: QString): void;
-    /**
-    * @deprecated
-    */
-    connect(action: DzAction | ((sender: any, arg: any) => void), funcName?: QString): void;
-    disconnect(): void;
-}
-
-interface ISignalT<T, T1 = any, T2 = any> {
+interface ISignal<T, T1 = any, T2 = any> {
     /**
      * @deprecated
      */
