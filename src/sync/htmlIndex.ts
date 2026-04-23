@@ -6,6 +6,7 @@
  * guessing.
  */
 import * as fs from 'fs';
+import * as path from 'path';
 import { canonicalizeGeneratedClassName, getHtmlSourceClassName } from './typeRenames';
 
 export interface HtmlIndexEntry {

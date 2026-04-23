@@ -38,9 +38,10 @@ When maintaining this package, update the types through the local sync pipeline 
 Recommended collaborator workflow:
 
 1. Refresh the saved DAZ HTML corpus.
-2. Run the HTML sync pipeline.
-3. Review the summary and the resulting diff together with any skipped files.
-4. Discuss any out-of-scope or unsafe skips before making manual follow-up edits.
+2. Bootstrap augments if needed.
+3. Run the HTML sync pipeline.
+4. Review the summary and the resulting diff.
+5. Recover missed undocumented members only if real consumer code proves they are needed.
 
 Commands:
 
@@ -54,36 +55,46 @@ node scripts/daz_scraper.mjs --type DzNode
 # Custom output directory if needed
 node scripts/daz_scraper.mjs path/to/daz_api_html --type DzNode
 
-# Rebuild eligible DAZ class files from the saved HTML
+# Bootstrap augment files from current legacy/generated types
+npm run sync:extract-augments
+
+# Rebuild eligible DAZ class files from saved HTML plus augments
 npm run sync:html
 
-# Replace eligible DAZ class files from HTML only, discarding legacy members
-npm run sync:html -- --replace
+# Rebuild and prune redundant augment members afterward
+npm run sync:html -- --prune-augments
 
 # Rebuild one type only
 npm run sync:html -- --type DzNode
 
-# Replace one type only from HTML only
-npm run sync:html -- --type DzNode --replace
+# Rebuild one type only and prune augments
+npm run sync:html -- --type DzNode --prune-augments
 
-# Run the current orchestrator
-npm run sync:all
+# Standalone augment prune pass
+npm run sync:prune-augments
 
-# Run the current orchestrator for one type only
-npm run sync:all -- --type DzNode
+# Recover candidate missing members from compiler errors
+npm run sync:recover-errors -- path/to/tsc-errors.txt
 ```
 
 What the pipeline does:
 
-- rebuilds eligible `src/types/daz/*.d.ts` files from local HTML
-- fixes class summaries, `extends`, properties, methods, and signals from the docs
-- removes members already inherited from ancestors
-- preserves old non-HTML members at the end of the file as `@undocumented`
-- leaves helper or non-mapped files untouched and reports them in the summary
+- writes transient HTML models to `.generated/html-models`
+- stores repo-tracked undocumented members in `src/augments/daz`
+- rebuilds generated declarations from `HTML + augments`
+- removes inherited members already covered by ancestry
+- can prune redundant augment members after generation
 
-With `--replace`, the pipeline skips legacy-member recovery and overwrites the matched file with HTML-derived output only.
+Recommended flows:
 
-If a file is skipped because it has no 1:1 HTML match or has unsafe top-level content, keep that discussion explicit in review instead of forcing it into the automated pass.
+- Bootstrap or rebuild augments:
+  1. `npm run sync:extract-augments`
+  2. `npm run sync:html -- --prune-augments`
+- Normal ongoing sync:
+  1. `npm run sync:html`
+  2. optionally `npm run sync:html -- --prune-augments`
+
+Detailed sync behavior, command reference, and cleanup workflow are documented in [src/sync/README.md](src/sync/README.md).
 
 ## Contributing
 
