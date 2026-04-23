@@ -251,6 +251,36 @@ describe('htmlParser', () => {
     expect(model.methods[0].parameters[1].name).toBe('args');
   });
 
+  it('keeps duplicate documented signals so rebuild can merge them later', () => {
+    const html = `
+<!-- @docurl https://docs.example.test/DzListView -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>DzListView</h1>
+  <div class="level1">
+    <p>List view.</p>
+    <p><strong>Inherits :</strong></p>
+    <ul><li><a>DzWidget</a></li></ul>
+  </div>
+  <h2>Signals</h2>
+  <div class="level2">
+    <table>
+      <tr><td>void</td><td><strong>itemRenamed</strong>( DzListViewItem item, Number col, String text )</td></tr>
+      <tr><td>void</td><td><strong>itemRenamed</strong>( DzListViewItem item, Number col )</td></tr>
+    </table>
+  </div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+</div>
+</body>
+</html>`;
+
+    const model = parseHtml(html);
+
+    expect(model.signals.filter(signal => signal.name === 'itemRenamed')).toHaveLength(2);
+  });
+
   it('strips deprecated labels from class names and inheritance types', () => {
     const html = `
 <!-- @docurl https://docs.example.test/DzRotateManip -->

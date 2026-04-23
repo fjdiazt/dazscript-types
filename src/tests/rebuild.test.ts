@@ -425,4 +425,90 @@ describe('rebuildClassFile', () => {
     expect(result.content).toContain('call(func: string, args: any[]): boolean;');
     expect(result.content).not.toContain('call(function: string, args: any[]): boolean;');
   });
+
+  it('merges duplicate documented signals by name using the widest signature', () => {
+    const model: DazClassModel = {
+      className: 'DzListView',
+      docUrl: 'https://docs.example.test/DzListView',
+      summary: 'List view.',
+      extendsName: 'DzWidget',
+      enums: [],
+      properties: [],
+      constructors: [],
+      staticMethods: [],
+      methods: [],
+      signals: [
+        {
+          kind: 'signal',
+          name: 'itemRenamed',
+          parameters: [
+            { name: 'item', type: { type: 'DzListViewItem' }, defaultValue: null, description: 'The item renamed' },
+            { name: 'col', type: { type: 'number' }, defaultValue: null, description: 'The column in which the renaming occurred' },
+            { name: 'text', type: { type: 'string' }, defaultValue: null, description: 'The new text for item' },
+          ],
+          description: 'Emitted when an item is renamed',
+        },
+        {
+          kind: 'signal',
+          name: 'itemRenamed',
+          parameters: [
+            { name: 'item', type: { type: 'DzListViewItem' }, defaultValue: null, description: 'The item renamed' },
+            { name: 'col', type: { type: 'number' }, defaultValue: null, description: 'The column in which the renaming occurred' },
+          ],
+          description: 'Emitted when an item is renamed',
+        },
+      ],
+    };
+    const registry = buildClassRegistry([model], [
+      makeLegacy('QObject', '', []),
+      makeLegacy('DzWidget', 'QObject', []),
+    ]);
+
+    const result = rebuildClassFile(model, [], registry);
+    const matches = result.content.match(/itemRenamed: ISignal/g) ?? [];
+
+    expect(matches).toHaveLength(1);
+    expect(result.content).toContain('itemRenamed: ISignal<DzListViewItem, number, string>;');
+    expect(result.content).not.toContain('itemRenamed: ISignal<DzListViewItem, number>;');
+  });
+
+  it('does not recover legacy overloads for a documented method name', () => {
+    const model: DazClassModel = {
+      className: 'DzNumericProperty',
+      docUrl: 'https://docs.example.test/DzNumericProperty',
+      summary: 'Numeric property.',
+      extendsName: 'DzProperty',
+      enums: [],
+      properties: [],
+      constructors: [],
+      staticMethods: [],
+      methods: [
+        {
+          kind: 'method',
+          name: 'setMax',
+          returnType: { type: 'void' },
+          parameters: [{ name: 'max', type: { type: 'number' }, defaultValue: null }],
+        },
+      ],
+      signals: [],
+    };
+    const registry = buildClassRegistry([model], [
+      makeLegacy('QObject', '', []),
+      makeLegacy('DzProperty', 'QObject', []),
+    ]);
+    const legacyMembers = [
+      {
+        kind: 'method' as const,
+        name: 'setMax',
+        paramCount: 2,
+        signature: 'setMax(prop: DzProperty, max: number): void;',
+      },
+    ];
+
+    const result = rebuildClassFile(model, legacyMembers, registry);
+
+    expect(result.content).toContain('setMax(max: number): void;');
+    expect(result.content).not.toContain('setMax(prop: DzProperty, max: number): void;');
+    expect(result.recoveredLegacyCount).toBe(0);
+  });
 });

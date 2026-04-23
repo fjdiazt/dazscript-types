@@ -26,6 +26,50 @@ interface ConflictingSignal {
     conflictKind: 'property' | 'method';
 }
 
+function mergeSignals(signals: DocSignal[]): DocSignal[] {
+    const merged = new Map<string, DocSignal>();
+
+    for (const signal of signals) {
+        const existing = merged.get(signal.name);
+        if (!existing) {
+            merged.set(signal.name, signal);
+            continue;
+        }
+
+        merged.set(signal.name, pickPreferredSignal(existing, signal));
+    }
+
+    return [...merged.values()];
+}
+
+function pickPreferredSignal(a: DocSignal, b: DocSignal): DocSignal {
+    if (b.parameters.length > a.parameters.length) {
+        return mergeSignalMetadata(a, b);
+    }
+
+    if (a.parameters.length > b.parameters.length) {
+        return mergeSignalMetadata(b, a);
+    }
+
+    return signalMetadataScore(b) > signalMetadataScore(a)
+        ? mergeSignalMetadata(a, b)
+        : mergeSignalMetadata(b, a);
+}
+
+function mergeSignalMetadata(fallback: DocSignal, preferred: DocSignal): DocSignal {
+    return {
+        ...preferred,
+        description: preferred.description ?? fallback.description,
+        since: preferred.since ?? fallback.since,
+    };
+}
+
+function signalMetadataScore(signal: DocSignal): number {
+    return (signal.description ? 1 : 0) +
+        (signal.since ? 1 : 0) +
+        signal.parameters.filter(parameter => parameter.description).length;
+}
+
 /**
  * Rebuild one class file from normalized inputs.
  */
@@ -34,6 +78,7 @@ export function rebuildClassFile(
     legacyMembers: LegacyMember[],
     registry: ClassRegistry
 ): RebuildResult {
+    const mergedSignals = mergeSignals(model.signals);
     const ancestorMembers = resolveAncestorMembers(model.className, registry);
     const hasAncestorProperty = (name: string) =>
         ancestorMembers.some(member => member.kind === 'property' && member.name === name);
@@ -57,11 +102,11 @@ export function rebuildClassFile(
 
         return null;
     };
-    const signals = model.signals.filter(member =>
+    const signals = mergedSignals.filter(member =>
         !hasAncestorProperty(member.name) &&
         !findPropertyOrMethodNameConflict(member.name, member.parameters.length)
     );
-    const conflictingSignals = model.signals.flatMap(member => {
+    const conflictingSignals = mergedSignals.flatMap(member => {
         if (hasAncestorProperty(member.name)) {
             return [];
         }
@@ -73,16 +118,20 @@ export function rebuildClassFile(
     const documentedPropertyNames = new Set([
         ...model.enums.map(member => member.name),
         ...model.properties.map(member => member.name),
-        ...model.signals.map(member => member.name),
+        ...mergedSignals.map(member => member.name),
     ]);
     const documentedMethodKeys = new Set([
         ...model.staticMethods.map(member => methodKey(member.name, member.parameters.length)),
         ...model.methods.map(member => methodKey(member.name, member.parameters.length)),
         ...model.constructors.map(member => methodKey(member.name, member.parameters.length)),
     ]);
-    const documentedSignalNames = new Set(model.signals.map(member => member.name));
+    const documentedMethodNames = new Set([
+        ...model.staticMethods.map(member => member.name),
+        ...model.methods.map(member => member.name),
+    ]);
+    const documentedSignalNames = new Set(mergedSignals.map(member => member.name));
     const documentedSignalKeys = new Set(
-        model.signals.map(member => methodKey(member.name, member.parameters.length))
+        mergedSignals.map(member => methodKey(member.name, member.parameters.length))
     );
 
     const recoveredLegacy = legacyMembers.filter(member => {
@@ -98,6 +147,10 @@ export function rebuildClassFile(
         }
 
         if (documentedPropertyNames.has(member.name)) {
+            return false;
+        }
+
+        if (documentedMethodNames.has(member.name)) {
             return false;
         }
 
