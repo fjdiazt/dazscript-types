@@ -240,6 +240,9 @@ declare class Dz3DViewport extends QWidget {
      */
     pickOnFacet(pnt: Point): number; // Number
 
+    /** @undocumented */
+    pickOnFacet(pnt: Point, node: DzNode): number;
+
     /**
      * Performs a gizmo picking operation through this viewport. View tools (see DzViewTool) can draw a 'gizmo' in the viewport for the user to interact with. The tool can assign different parts of the gizmo to specific indices, so as to tell what part of the gizmo was clicked by the user.
      * @param pnt Point - The point in the viewport to pick on.
@@ -268,6 +271,9 @@ declare class Dz3DViewport extends QWidget {
      * @returns DzNode The node that was hit (if any), otherwise null.
      */
     pickOnNode(pnt: Point, useSelectionMaps: boolean): DzNode;
+
+    /** @undocumented */
+    pickOnNode(pnt: Point, useSelectionMaps: boolean, region: DzGeometryRegion): DzNode;
 
     /**
      * Performs a quick render of the scene suitable for a thumbnail image.
@@ -642,13 +648,16 @@ declare class Dz3DViewport extends QWidget {
     updateMicroFocus(): any; // TODO ;
 
     /** @undocumented */
-    pickNodes(area: QPolygonF, nodes: DzNode[], useSelectionMaps: boolean): void;
+    pickNodes(area: QPolygonF, nodes: DzNode[]): void;
 
     /** @undocumented */
     pickNodes(area: QPolygonF, nodes: DzNode[], useSelectionMaps: boolean): void;
 
     /** @undocumented */
     pickMaterials(area: QPolygonF, mats: DzMaterial[]): void;
+
+    /** @undocumented */
+    pickFacets(area: QPolygonF, facets: number[]): void;
 
     /** @undocumented */
     pickFacets(area: QPolygonF, facets: number[], facetNode: DzNode): void;
@@ -661,6 +670,12 @@ declare class Dz3DViewport extends QWidget {
 
     /** @undocumented */
     updateGLOptions(): void;
+
+    /** @undocumented */
+    updateGL(): void;
+
+    /** @undocumented */
+    updateOverlayGL(): void;
 
     /** @undocumented */
     updateView(): void;

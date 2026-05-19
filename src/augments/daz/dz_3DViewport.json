@@ -477,9 +477,9 @@
     },
     {
       "name": "pickNodes",
-      "signature": "pickNodes(area: QPolygonF, nodes: DzNode[], useSelectionMaps: boolean): void;",
+      "signature": "pickNodes(area: QPolygonF, nodes: DzNode[]): void;",
       "kind": "method",
-      "paramCount": 3
+      "paramCount": 2
     },
     {
       "name": "pickNodes",
@@ -490,6 +490,12 @@
     {
       "name": "pickMaterials",
       "signature": "pickMaterials(area: QPolygonF, mats: DzMaterial[]): void;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "pickFacets",
+      "signature": "pickFacets(area: QPolygonF, facets: number[]): void;",
       "kind": "method",
       "paramCount": 2
     },
@@ -506,6 +512,18 @@
       "paramCount": 2
     },
     {
+      "name": "pickOnFacet",
+      "signature": "pickOnFacet(pnt: Point, node: DzNode): number;",
+      "kind": "method",
+      "paramCount": 2
+    },
+    {
+      "name": "pickOnNode",
+      "signature": "pickOnNode(pnt: Point, useSelectionMaps: boolean, region: DzGeometryRegion): DzNode;",
+      "kind": "method",
+      "paramCount": 3
+    },
+    {
       "name": "appendHoverCursor",
       "signature": "appendHoverCursor(cursor: QCursor): void;",
       "kind": "method",
@@ -514,6 +532,18 @@
     {
       "name": "updateGLOptions",
       "signature": "updateGLOptions(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateGL",
+      "signature": "updateGL(): void;",
+      "kind": "method",
+      "paramCount": 0
+    },
+    {
+      "name": "updateOverlayGL",
+      "signature": "updateOverlayGL(): void;",
       "kind": "method",
       "paramCount": 0
     },
