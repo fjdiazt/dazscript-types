@@ -1,1 +1,3 @@
-declare type QImage = typeof Image;
+declare class Image extends DzImage {}
+
+declare type QImage = Image;
