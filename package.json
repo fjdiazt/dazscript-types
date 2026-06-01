@@ -16,6 +16,7 @@
     "sync:all": "npm run sync:html --",
     "scaffold": "ts-node src/sync/scaffold.ts",
     "test": "vitest run",
+    "test:daz-image-types": "tsc --noEmit --project tsconfig.daz-image-smoke.json",
     "test:watch": "vitest"
   },
   "files": [

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES6",
+    "module": "CommonJS",
+    "lib": ["ES6"],
+    "types": [],
+    "skipLibCheck": true
+  },
+  "files": [
+    "src/types/qt/qt_object.d.ts",
+    "src/types/daz/dz_image.d.ts",
+    "src/types/qt/qt_image.d.ts",
+    "src/tests/types/daz-image-smoke.ts"
+  ]
+}
