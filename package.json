@@ -35,7 +35,6 @@
     "url": "git+https://github.com/fjdiazt/dazscript-types.git"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.35",
     "@types/node": "^22.10.7",
     "axios": "^1.16.1",
     "cheerio": "^1.0.0",
