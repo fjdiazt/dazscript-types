@@ -19,6 +19,13 @@ import { canonicalizeGeneratedClassName, canonicalizeTypeRef, sanitizeParameterN
 
 type CheerioRoot = ReturnType<typeof cheerio.load>;
 
+const KNOWN_NUMERIC_ENUM_TYPES = new Set([
+    'InterpolationType',
+    'MapType',
+    'ProductInstallStates',
+    'SortType',
+]);
+
 interface DetailedEntry {
     name: string;
     paramCount: number;
@@ -190,7 +197,8 @@ function normalizeClassLocalEnumRefs(
 }
 
 function normalizeClassLocalEnumType(type: TypeRef, enumTypeNames: Set<string>): TypeRef {
-    if (!enumTypeNames.has(type.type)) {
+    const enumAliases = expandEnumTypeNames(enumTypeNames);
+    if (!enumAliases.has(type.type)) {
         return type;
     }
 
@@ -198,6 +206,22 @@ function normalizeClassLocalEnumType(type: TypeRef, enumTypeNames: Set<string>):
         type: 'number',
         rawType: type.rawType ?? type.type,
     };
+}
+
+function expandEnumTypeNames(enumTypeNames: Set<string>): Set<string> {
+    const expanded = new Set<string>();
+    for (const enumTypeName of enumTypeNames) {
+        expanded.add(enumTypeName);
+        expanded.add(`${enumTypeName}s`);
+
+        if (enumTypeName.endsWith('Flag')) {
+            const withoutFlag = enumTypeName.slice(0, -'Flag'.length);
+            expanded.add(withoutFlag);
+            expanded.add(`${withoutFlag}Flags`);
+        }
+    }
+
+    return expanded;
 }
 
 function extractPropertyMembers($: CheerioRoot): DocProperty[] {
@@ -386,15 +410,21 @@ function normalizeType(rawType: string, options: { undocumentedLink?: boolean } 
             return { type: 'string', rawType: compact };
         case 'Number':
         case 'int':
+        case 'float':
             return { type: 'number', rawType: compact };
         case 'Boolean':
         case 'bool':
             return { type: 'boolean', rawType: compact };
         case 'Array':
             return { type: 'any[]', rawType: compact };
+        case 'DateTime':
+            return { type: 'QDateTime', rawType: compact };
         case 'void':
             return { type: 'void' };
         default:
+            if (KNOWN_NUMERIC_ENUM_TYPES.has(compact)) {
+                return { type: 'number', rawType: compact };
+            }
             if (options.undocumentedLink || isUndocumentedDazSlugType(compact)) {
                 return { type: 'any', rawType: compact, undocumented: true };
             }

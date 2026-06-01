@@ -132,10 +132,10 @@ declare class DzMaterial extends DzRefCountedItem {
     getIndex(): number; // Number
 
     /**
-     * @returns float The current line end width.
+     * @returns number The current line end width.
      * @since 4.11.0.76
      */
-    getLineEndWidth(): float;
+    getLineEndWidth(): number; // float
 
     /**
      * @returns DzFloatProperty The property that controls the desired end width of a line.
@@ -156,10 +156,10 @@ declare class DzMaterial extends DzRefCountedItem {
     getLinePreviewColorControl(): DzColorProperty;
 
     /**
-     * @returns float The current line start width.
+     * @returns number The current line start width.
      * @since 4.11.0.76
      */
-    getLineStartWidth(): float;
+    getLineStartWidth(): number; // float
 
     /**
      * @returns DzFloatProperty The property that controls the desired start width of a line.
@@ -168,10 +168,10 @@ declare class DzMaterial extends DzRefCountedItem {
     getLineStartWidthControl(): DzFloatProperty;
 
     /**
-     * @returns float The current line UV width.
+     * @returns number The current line UV width.
      * @since 4.11.0.109
      */
-    getLineUVWidth(): float;
+    getLineUVWidth(): number; // float
 
     /**
      * @returns DzFloatProperty The property that controls the desired UV width of a line.

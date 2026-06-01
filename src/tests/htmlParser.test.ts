@@ -70,13 +70,18 @@ describe('htmlParser', () => {
     <ul><li><a>QObject</a></li></ul>
   </div>
   <h2>Enumerations</h2>
-  <div class="level2"><table><tr><td>Mode</td><td><strong><a>Foo</a>, <a>Bar</a></strong></td></tr></table></div>
+  <div class="level2">
+    <table>
+      <tr><td>Mode</td><td><strong><a>Foo</a>, <a>Bar</a></strong></td></tr>
+      <tr><td>OpenModeFlag</td><td><strong><a>ReadOnly</a>, <a>WriteOnly</a></strong></td></tr>
+    </table>
+  </div>
   <h2>Properties</h2>
   <div class="level2"><table><tr><td>Mode</td><td><strong>currentMode</strong></td></tr></table></div>
   <h2>Static Methods</h2>
   <div class="level2"><table><tr><td>String</td><td><strong>makeName</strong>( Number count, Boolean simple=false )</td></tr></table></div>
   <h2>Methods</h2>
-  <div class="level2"><table><tr><td>Mode</td><td><strong>getMode</strong>()</td></tr><tr><td>void</td><td><strong>setMode</strong>( Mode mode )</td></tr></table></div>
+  <div class="level2"><table><tr><td>Mode</td><td><strong>getMode</strong>()</td></tr><tr><td>void</td><td><strong>setMode</strong>( Modes mode, OpenMode openMode )</td></tr></table></div>
   <h2>Signals</h2>
   <div class="level2"><table><tr><td>void</td><td><strong>modeChanged</strong>( Mode mode )</td></tr></table></div>
   <h2>Detailed Description</h2><div class="level2"></div>
@@ -95,8 +100,8 @@ describe('htmlParser', () => {
 </html>`;
     const model = parseHtml(html);
     expect(model.docUrl).toBe('https://docs.example.test/DzStaticTest');
-    expect(model.enums.map(member => member.name)).toEqual(['Foo', 'Bar']);
-    expect(model.enums.map(member => member.enumName)).toEqual(['Mode', 'Mode']);
+    expect(model.enums.map(member => member.name)).toEqual(['Foo', 'Bar', 'ReadOnly', 'WriteOnly']);
+    expect(model.enums.map(member => member.enumName)).toEqual(['Mode', 'Mode', 'OpenModeFlag', 'OpenModeFlag']);
     expect(model.properties[0].type.type).toBe('number');
     expect(model.properties[0].type.rawType).toBe('Mode');
     expect(model.staticMethods).toHaveLength(1);
@@ -106,7 +111,9 @@ describe('htmlParser', () => {
     expect(model.methods[0].returnType.type).toBe('number');
     expect(model.methods[0].returnType.rawType).toBe('Mode');
     expect(model.methods[1].parameters[0].type.type).toBe('number');
-    expect(model.methods[1].parameters[0].type.rawType).toBe('Mode');
+    expect(model.methods[1].parameters[0].type.rawType).toBe('Modes');
+    expect(model.methods[1].parameters[1].type.type).toBe('number');
+    expect(model.methods[1].parameters[1].type.rawType).toBe('OpenMode');
     expect(model.signals[0].parameters[0].type.type).toBe('number');
     expect(model.signals[0].parameters[0].type.rawType).toBe('Mode');
   });
@@ -146,7 +153,7 @@ describe('htmlParser', () => {
     expect(model.methods[1].parameters[0].type.undocumented).toBe(true);
   });
 
-  it('normalizes int and bool spellings to TypeScript primitives', () => {
+  it('normalizes lowercase primitive spellings to TypeScript primitives', () => {
     const html = `
 <!-- @docurl https://docs.example.test/Image -->
 <!DOCTYPE html>
@@ -158,7 +165,7 @@ describe('htmlParser', () => {
   <h2>Methods</h2>
   <div class="level2">
     <table>
-      <tr><td>Image</td><td><strong>mirror</strong>( bool horizontal, int x )</td></tr>
+      <tr><td>Image</td><td><strong>mirror</strong>( bool horizontal, int x, float opacity )</td></tr>
     </table>
   </div>
   <h2>Detailed Description</h2><div class="level2"></div>
@@ -174,6 +181,63 @@ describe('htmlParser', () => {
     expect(model.methods[0].parameters[0].type.rawType).toBe('bool');
     expect(model.methods[0].parameters[1].type.type).toBe('number');
     expect(model.methods[0].parameters[1].type.rawType).toBe('int');
+    expect(model.methods[0].parameters[2].type.type).toBe('number');
+    expect(model.methods[0].parameters[2].type.rawType).toBe('float');
+  });
+
+  it('normalizes DAZ DateTime labels to QDateTime', () => {
+    const html = `
+<!-- @docurl https://docs.example.test/DzDateTimeEdit -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>DzDateTimeEdit</h1>
+  <div class="level1"><p>Date time test.</p></div>
+  <h2>Properties</h2>
+  <div class="level2"><table><tr><td>DateTime</td><td><strong>dateTime</strong></td></tr></table></div>
+  <h2>Signals</h2>
+  <div class="level2"><table><tr><td>void</td><td><strong>valueChanged</strong>( DateTime dateTime )</td></tr></table></div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+</div>
+</body>
+</html>`;
+
+    const model = parseHtml(html);
+
+    expect(model.properties[0].type.type).toBe('QDateTime');
+    expect(model.properties[0].type.rawType).toBe('DateTime');
+    expect(model.signals[0].parameters[0].type.type).toBe('QDateTime');
+    expect(model.signals[0].parameters[0].type.rawType).toBe('DateTime');
+  });
+
+  it('normalizes known DAZ enum labels to numbers', () => {
+    const html = `
+<!-- @docurl https://docs.example.test/DzKnownEnumHost -->
+<!DOCTYPE html>
+<html>
+<body>
+<div class="page">
+  <h1>DzKnownEnumHost</h1>
+  <div class="level1"><p>Known enum test.</p></div>
+  <h2>Methods</h2>
+  <div class="level2">
+    <table>
+      <tr><td>MapType</td><td><strong>getMapType</strong>()</td></tr>
+      <tr><td>void</td><td><strong>setInterpolation</strong>( InterpolationType interpolation, ProductInstallStates states, SortType sorting )</td></tr>
+    </table>
+  </div>
+  <h2>Detailed Description</h2><div class="level2"></div>
+</div>
+</body>
+</html>`;
+
+    const model = parseHtml(html);
+
+    expect(model.methods[0].returnType.type).toBe('number');
+    expect(model.methods[0].returnType.rawType).toBe('MapType');
+    expect(model.methods[1].parameters.map(parameter => parameter.type.type)).toEqual(['number', 'number', 'number']);
+    expect(model.methods[1].parameters.map(parameter => parameter.type.rawType)).toEqual(['InterpolationType', 'ProductInstallStates', 'SortType']);
   });
 
   it('parses one-column constructor tables', () => {

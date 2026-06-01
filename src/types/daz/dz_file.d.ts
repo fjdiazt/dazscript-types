@@ -180,16 +180,16 @@ declare class DzFile extends DzFileInfo {
 
     /**
      * Opens the file and sets its openMode() to mode.
-     * @param mode OpenMode - The access mode to open with.
+     * @param mode number - The access mode to open with.
      * @returns boolean true if the file was opened successfully, otherwise false.
      */
-    open(mode: OpenMode): boolean; // Boolean
+    open(mode: number): boolean; // Boolean
 
     /**
-     * @returns OpenMode The mode in which the device has been opened.
+     * @returns number The mode in which the device has been opened.
      * @since 4.9.3.35
      */
-    openMode(): OpenMode;
+    openMode(): number; // OpenMode
 
     /**
      * Peeks at most maxSize bytes from the file, without side effects (i.e., if you read after you peek, you will get the same data).

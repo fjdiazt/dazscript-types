@@ -224,8 +224,8 @@ declare class DzUri extends Object {
     toString(): string; // String
 
     /**
-     * @param flags PartFlags
+     * @param flags number
      * @returns string A string representation of the URI containing the parts specified by flags.
      */
-    toString(flags: PartFlags): string; // String
+    toString(flags: number): string; // String
 }

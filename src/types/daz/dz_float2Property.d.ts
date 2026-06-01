@@ -122,20 +122,20 @@ declare class DzFloat2Property extends DzFloatProperty {
      * Sets the value for this property at the given time; or the default value if this property is not animatable.
      * @param tm DzTime - The scene time to set the value at.
      * @param val DzVec2 - The value to set the property to.
-     * @param interp InterpolationType - The type of interpolation to perform between this keyframe and the next. Parameters for interpolation are set to defaults.
+     * @param interp number - The type of interpolation to perform between this keyframe and the next. Parameters for interpolation are set to defaults.
      */
-    setFloat2Value(tm: DzTime, val: DzVec2, interp: InterpolationType): void;
+    setFloat2Value(tm: DzTime, val: DzVec2, interp: number): void;
 
     /**
      * Sets the value for this property at the given time; or the default value if this property is not animatable.
      * @param tm DzTime - The scene time to set the value at.
      * @param valIn DzVec2 - The value to set the property to.
-     * @param interp InterpolationType - The type of interpolation to perform between this keyframe and the next.
+     * @param interp number - The type of interpolation to perform between this keyframe and the next.
      * @param param0 number - The parameter 0 for key interpolation: T value for TCB interpolation, starting slope value for Hermite interpolation.
      * @param param1 number - The parameter 1 for key interpolation: C value for TCB interpolation, ending slope value for Hermite interpolation.
      * @param param2 number - The parameter 2 for key interpolation: B value for TCB interpolation
      */
-    setFloat2Value(tm: DzTime, valIn: DzVec2, interp: InterpolationType, param0: number, param1: number, param2: number): void;
+    setFloat2Value(tm: DzTime, valIn: DzVec2, interp: number, param0: number, param1: number, param2: number): void;
 
     /**
      * Sets the value of the i'th key.

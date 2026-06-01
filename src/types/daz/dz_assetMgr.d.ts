@@ -570,11 +570,11 @@ declare class DzAssetMgr extends DzBase {
 
     /**
      * @param includeHeader boolean - If true (default), the first list in the return value will contain descriptors for the values in all subsequent lists.
-     * @param dataType MetadataTypes - The type of data to retrieve.
+     * @param dataType number - The type of data to retrieve.
      * @returns any[] A two dimensional list of the raw data that defines categories.
      * @since 4.15.0.16
      */
-    getCategoryData(includeHeader?: boolean, dataType?: MetadataTypes): any[]; // Array
+    getCategoryData(includeHeader?: boolean, dataType?: number): any[]; // Array
 
     /**
      * @param id number - The 64-bit integer used to identify the category.
@@ -609,12 +609,12 @@ declare class DzAssetMgr extends DzBase {
 
     /**
      * @param includeHeader boolean - If true (default), the first list in the return value will contain descriptors for the values in all subsequent lists.
-     * @param baseType CompatibilityBaseTypes - The type of compatibility bases to retrieve.
-     * @param dataType MetadataTypes - The type of data to retrieve.
+     * @param baseType number - The type of compatibility bases to retrieve.
+     * @param dataType number - The type of data to retrieve.
      * @returns any[] A two dimensional list of the raw data that defines compatibility bases.
      * @since 4.15.0.16
      */
-    getCompatibilityBaseData(includeHeader?: boolean, baseType?: CompatibilityBaseTypes, dataType?: MetadataTypes): any[]; // Array
+    getCompatibilityBaseData(includeHeader?: boolean, baseType?: number, dataType?: number): any[]; // Array
 
     /**
      * @param includeFilters boolean - If true (default), child containers for filters (filter) will be included.
@@ -984,7 +984,7 @@ declare class DzAssetMgr extends DzBase {
      * @param asset DzAsset - The context asset; the asset to find addons for.
      * @param filterText string - The text to use for filtering the results.
      * @param categories any[] - A list of category paths to use for filtering the results.
-     * @param sorting SortType - The sorting filter index to use for ordering the results.
+     * @param sorting number - The sorting filter index to use for ordering the results.
     
      0 = None,
     
@@ -1008,7 +1008,7 @@ declare class DzAssetMgr extends DzBase {
      * @returns DzSearchContainer A container consisting of any DzAsset instances found during the search.
      * @since 4.9.0.32
      */
-    searchForAssetAddOns(asset: DzAsset, filterText: string, categories: any[], sorting: SortType): DzSearchContainer;
+    searchForAssetAddOns(asset: DzAsset, filterText: string, categories: any[], sorting: number): DzSearchContainer;
 
     /**
      * Performs a user-facing asset search on the content database.
@@ -1016,7 +1016,7 @@ declare class DzAssetMgr extends DzBase {
      * @param categories any[] - A list of category paths to use for filtering the results.
      * @param compatibilityBases any[] - A list of compatibility bases to use for filtering the results.
      * @param contentTypes any[] - A list of content types to use for filtering the results.
-     * @param sorting SortType - The sorting filter index to use for ordering the results.
+     * @param sorting number - The sorting filter index to use for ordering the results.
     
      0 = None,
     
@@ -1040,13 +1040,13 @@ declare class DzAssetMgr extends DzBase {
      * @returns DzSearchContainer A container consisting of any DzAsset instances found during the search.
      * @since 4.9.0.32
      */
-    searchForAssets(filterText: string, categories: any[], compatibilityBases: any[], contentTypes: any[], sorting: SortType): DzSearchContainer;
+    searchForAssets(filterText: string, categories: any[], compatibilityBases: any[], contentTypes: any[], sorting: number): DzSearchContainer;
 
     /**
      * Performs a user-facing asset search on the content database.
      * @param keywords string - The keywords to use for filtering the results.
      * @param options number - A bitwise OR of the options to use for filtering the results.
-     * @param sorting SortType - The sorting filter index to use for ordering the results.
+     * @param sorting number - The sorting filter index to use for ordering the results.
     
      0 = None,
     
@@ -1070,7 +1070,7 @@ declare class DzAssetMgr extends DzBase {
      * @returns DzSearchContainer A container consisting of any DzAsset instances found during the search.
      * @since 4.9.0.32
      */
-    searchForAssetsByKeywords(keywords: string, options: number, sorting: SortType): DzSearchContainer;
+    searchForAssetsByKeywords(keywords: string, options: number, sorting: number): DzSearchContainer;
 
     /**
      * @param categoryPath string - The full path of the category to search for assets.
@@ -1086,7 +1086,7 @@ declare class DzAssetMgr extends DzBase {
      * @param asset DzAsset - The context asset; the asset to find targets for.
      * @param filterText string - The text to use for filtering the results.
      * @param categories any[] - A list of category paths to use for filtering the results.
-     * @param sorting SortType - The sorting filter index to use for ordering the results.
+     * @param sorting number - The sorting filter index to use for ordering the results.
     
      0 = None,
     
@@ -1110,7 +1110,7 @@ declare class DzAssetMgr extends DzBase {
      * @returns DzSearchContainer A container consisting of any DzAsset instances found during the search.
      * @since 4.9.0.32
      */
-    searchForAssetTargets(asset: DzAsset, filterText: string, categories: any[], sorting: SortType): DzSearchContainer;
+    searchForAssetTargets(asset: DzAsset, filterText: string, categories: any[], sorting: number): DzSearchContainer;
 
     /**
      * Performs a user-facing asset search on the content database, where the results are confined to a specified product.
@@ -1119,7 +1119,7 @@ declare class DzAssetMgr extends DzBase {
      * @param categories any[] - A list of category paths to use for filtering the results.
      * @param compatibilityBases any[] - A list of compatibility bases to use for filtering the results.
      * @param contentTypes any[] - A list of content types to use for filtering the results.
-     * @param sorting SortType - The sorting filter index to use for ordering the results.
+     * @param sorting number - The sorting filter index to use for ordering the results.
     
      0 = None,
     
@@ -1143,14 +1143,14 @@ declare class DzAssetMgr extends DzBase {
      * @returns DzSearchContainer A container consisting of any DzAsset instances found during the search.
      * @since 4.9.0.32
      */
-    searchForProductAssets(product: DzProductAssetContainer, filterText: string, categories: any[], compatibilityBases: any[], contentTypes: any[], sorting: SortType): DzSearchContainer;
+    searchForProductAssets(product: DzProductAssetContainer, filterText: string, categories: any[], compatibilityBases: any[], contentTypes: any[], sorting: number): DzSearchContainer;
 
     /**
      * @param filterText string - The text to use for filtering the results.
      * @param categories any[] - A list of category paths to use for filtering the results.
      * @param compatibilityBases any[] - A list of compatibility bases to use for filtering the results.
      * @param contentTypes any[] - A list of content types to use for filtering the results.
-     * @param installStateFlags ProductInstallStates - The install state flags to use for filtering the results.
+     * @param installStateFlags number - The install state flags to use for filtering the results.
     
      None = 0x0,
     
@@ -1165,7 +1165,7 @@ declare class DzAssetMgr extends DzBase {
      Pending = 0x10,
     
      Any = Installed | NotInstalled | Damaged | NeedsUpdate | Pending
-     * @param sorting SortType - The sorting filter index to use for ordering the results.
+     * @param sorting number - The sorting filter index to use for ordering the results.
     
      0 = None,
     
@@ -1189,7 +1189,7 @@ declare class DzAssetMgr extends DzBase {
      * @returns DzProductHolderContainer An asset container where child containers are the DzProductAssetContainer instances found during the search. DzTopLevelAssetContainer::getState() should be called, in a while loop, on the return value and compared for equality with the DzTopLevelAssetContainer::csBusy state. While the state is busy, results of the search are still being added.
      * @since 4.9.0.32
      */
-    searchForProducts(filterText: string, categories: any[], compatibilityBases: any[], contentTypes: any[], installStateFlags: ProductInstallStates, sorting: SortType): DzProductHolderContainer;
+    searchForProducts(filterText: string, categories: any[], compatibilityBases: any[], contentTypes: any[], installStateFlags: number, sorting: number): DzProductHolderContainer;
 
     /**
      * Presents the user with a category selection dialog.

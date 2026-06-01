@@ -24,7 +24,7 @@ declare class DzDateTimeEdit extends DzWidget {
     /**
      * Holds the date and time represented by the widget.
      */
-    dateTime: DateTime;
+    dateTime: QDateTime; // DateTime
 
     displayFormat: string; // String
 
@@ -64,7 +64,7 @@ declare class DzDateTimeEdit extends DzWidget {
 
     /**
      * Emitted when the date/time in the widget has changed, passes the new date/time.
-     * @param dateTime DateTime
+     * @param dateTime QDateTime
      */
-    valueChanged: ISignal<DateTime>;
+    valueChanged: ISignal<QDateTime>;
 }

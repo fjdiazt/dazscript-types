@@ -7,9 +7,9 @@ declare class DzVertexMap extends DzRefCountedItem {
     /* Constructors */
 
     /**
-     * @param mapType MapType
+     * @param mapType number
      */
-    constructor(mapType?: MapType);
+    constructor(mapType?: number);
 
     /* Methods */
 
